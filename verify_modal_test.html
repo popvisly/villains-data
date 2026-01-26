@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Simvoly Embed</title>
+</head>
+
+<body style="margin:0; background:#333;">
+    <div style="max-width: 1200px; margin: 0 auto; background: #fff;">
+        <!-- BEGIN EMBED CODE -->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Courier+New:wght@400;700&display=swap');
+
+            /* NAMESPACE WRAPPER */
+            .gangs-embed-wrap {
+                /* VARS */
+                --val-bg: #0F0F0F;
+                --val-panel: #1A1A1A;
+                --val-border: #333333;
+                --val-text: #E0E0E0;
+                --val-mute: #666666;
+                --font-head: 'Hammersmith One', sans-serif;
+                --font-mono: 'Courier New', monospace;
+
+                background-color: var(--val-bg);
+                color: var(--val-text);
+                font-family: var(--font-mono);
+                padding: 40px;
+                box-sizing: border-box;
+                position: relative;
+                min-height: 100vh;
+            }
+
+            /* GRID LAYOUT */
+            .gangs-embed-wrap .dossier-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 30px;
+                max-width: 1600px;
+                margin: 0 auto;
+            }
+
+            .gangs-embed-wrap h1.system-header {
+                font-family: var(--font-head);
+                color: var(--val-mute);
+                text-align: center;
+                border-bottom: 2px solid var(--val-border);
+                padding-bottom: 20px;
+                margin-bottom: 40px;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                font-weight: normal;
+                font-size: 2rem;
+            }
+
+            /* CARD COMPONENT */
+            .gangs-embed-wrap .gang-card {
+                background: var(--val-panel);
+                border: 1px solid var(--val-border);
+                display: flex;
+                flex-direction: column;
+                border-top: 4px solid var(--gang_primary);
+                transition: transform 0.2s, box-shadow 0.2s;
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .gangs-embed-wrap .gang-card:hover {
+                border-color: var(--gang_accent);
+                transform: translateY(-4px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .gangs-embed-wrap .gang-card:focus-visible {
+                outline: 2px solid var(--gang_accent);
+                outline-offset: 2px;
+            }
+
+            /* SHARED STYLES (Card & Modal) */
+            .gangs-embed-wrap .header-section {
+                padding: 20px;
+                border-bottom: 1px solid var(--val-border);
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+            }
+
+            .gangs-embed-wrap .gang-name {
+                font-family: var(--font-head);
+                font-size: 1.6rem;
+                color: #FFF;
+                text-transform: uppercase;
+                margin: 0 0 5px 0;
+                line-height: 1;
+            }
+
+            .gangs-embed-wrap .credo {
+                font-style: italic;
+                color: var(--gang_accent);
+                font-size: 0.8rem;
+                margin: 0;
+                opacity: 0.9;
+            }
+
+            .gangs-embed-wrap .status-tag {
+                font-size: 0.6rem;
+                border: 1px solid var(--val-mute);
+                padding: 2px 6px;
+                color: var(--val-mute);
+                letter-spacing: 1px;
+            }
+
+            .gangs-embed-wrap .core-profile {
+                padding: 15px 20px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                border-bottom: 1px solid var(--val-border);
+                font-size: 0.7rem;
+            }
+
+            .gangs-embed-wrap .intel-block {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .gangs-embed-wrap .label {
+                color: var(--val-mute);
+                font-size: 0.6rem;
+                text-transform: uppercase;
+                margin-bottom: 2px;
+            }
+
+            .gangs-embed-wrap .value {
+                color: #FFF;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            .gangs-embed-wrap .visual-strip {
+                height: 8px;
+                background: repeating-linear-gradient(45deg,
+                        var(--gang_primary),
+                        var(--gang_primary) 10px,
+                        var(--gang_secondary) 10px,
+                        var(--gang_secondary) 20px);
+                opacity: 0.7;
+            }
+
+            .gangs-embed-wrap .ops-intel {
+                padding: 20px;
+                background: rgba(0, 0, 0, 0.2);
+                flex-grow: 1;
+            }
+
+            .gangs-embed-wrap .ops-list {
+                list-style: none;
+                padding: 0;
+                margin: 0 0 15px 0;
+            }
+
+            .gangs-embed-wrap .ops-list li {
+                position: relative;
+                padding-left: 15px;
+                margin-bottom: 5px;
+                font-size: 0.75rem;
+                line-height: 1.3;
+                color: #CCC;
+            }
+
+            .gangs-embed-wrap .ops-list li::before {
+                content: ">>";
+                position: absolute;
+                left: 0;
+                color: var(--val-mute);
+                font-size: 0.65rem;
+            }
+
+            .gangs-embed-wrap .section-title {
+                font-family: var(--font-head);
+                font-size: 0.8rem;
+                color: #FFF;
+                border-bottom: 1px solid #333;
+                padding-bottom: 3px;
+                margin-bottom: 8px;
+                text-transform: uppercase;
+            }
+
+            .gangs-embed-wrap .rival-vector {
+                padding: 10px 20px;
+                background: #111;
+                border-top: 1px solid var(--val-border);
+                font-size: 0.7rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .gangs-embed-wrap .rival-name {
+                color: var(--gang_accent);
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            .gangs-embed-wrap .card-footer {
+                padding: 8px 20px;
+                background: #000;
+                color: #444;
+                font-size: 0.6rem;
+                display: flex;
+                justify-content: space-between;
+                letter-spacing: 1px;
+            }
+
+            /* MODAL STYLES */
+            .gangs-embed-wrap .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(5px);
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .gangs-embed-wrap .modal-overlay.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .gangs-embed-wrap .modal-panel {
+                background: var(--val-bg);
+                border: 2px solid var(--val-border);
+                width: 100%;
+                max-width: 900px;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+                transform: scale(0.95);
+                transition: transform 0.3s ease;
+                border-top: 6px solid var(--gang_primary);
+            }
+
+            .gangs-embed-wrap .modal-overlay.active .modal-panel {
+                transform: scale(1);
+            }
+
+            /* CLOSE BUTTON */
+            .gangs-embed-wrap .modal-close {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: transparent;
+                border: 1px solid var(--val-border);
+                color: var(--val-mute);
+                font-family: var(--font-mono);
+                font-size: 1.2rem;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 20;
+            }
+
+            .gangs-embed-wrap .modal-close:hover {
+                background: var(--gang_accent);
+                color: #000;
+                border-color: var(--gang_accent);
+            }
+
+            /* MODAL CONTENT REFLOW */
+            .gangs-embed-wrap .modal-content-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                color: #ccc;
+            }
+
+            @media (min-width: 768px) {
+                .gangs-embed-wrap .modal-content-grid {
+                    grid-template-columns: 2fr 1fr;
+                }
+
+                .gangs-embed-wrap .modal-main {
+                    border-right: 1px solid var(--val-border);
+                }
+            }
+
+            .gangs-embed-wrap .modal-main {
+                padding: 30px;
+            }
+
+            .gangs-embed-wrap .modal-sidebar {
+                padding: 30px;
+                background: rgba(0, 0, 0, 0.3);
+            }
+
+            .gangs-embed-wrap .modal-title-row {
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid var(--val-border);
+            }
+
+            .gangs-embed-wrap .modal-name {
+                font-family: var(--font-head);
+                font-size: 2.5rem;
+                color: #FFF;
+                margin: 0;
+                text-transform: uppercase;
+                line-height: 0.9;
+            }
+
+            .gangs-embed-wrap .modal-credo {
+                font-size: 1.1rem;
+                color: var(--gang_accent);
+                font-style: italic;
+                margin: 10px 0 0 0;
+            }
+        </style>
+
+        <div class="gangs-embed-wrap">
+
+            <h1 class="system-header">/// VILLAINS AT LARGE : FACTION INDEX ///</h1>
+
+            <!-- GRID CONTAINER -->
+            <div id="gangs-grid" class="dossier-grid">
+                <!-- Cards injected via JS -->
+            </div>
+
+            <!-- REUSABLE MODAL COMPONENT -->
+            <div id="gang-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+                <div class="modal-panel" id="modal-panel">
+                    <button class="modal-close" aria-label="Close Modal">X</button>
+
+                    <div class="visual-strip"></div>
+
+                    <div class="modal-content-grid">
+                        <!-- MAIN CONTENT -->
+                        <div class="modal-main">
+                            <div class="modal-title-row">
+                                <h2 class="modal-name">GANG NAME</h2>
+                                <p class="modal-credo">"Gang Credo text."</p>
+                            </div>
+
+                            <div class="core-profile"
+                                style="grid-template-columns: repeat(3, 1fr); gap: 20px; border: none; padding: 0; margin-bottom: 30px;">
+                                <div class="intel-block">
+                                    <span class="label">Power Type</span>
+                                    <span class="value" id="modal-power">---</span>
+                                </div>
+                                <div class="intel-block">
+                                    <span class="label">Tone</span>
+                                    <span class="value" id="modal-tone">---</span>
+                                </div>
+                                <div class="intel-block">
+                                    <span class="label">Core Theme</span>
+                                    <span class="value" id="modal-theme">---</span>
+                                </div>
+                            </div>
+
+                            <div class="ops-intel" style="background:transparent; padding:0;">
+                                <div class="section-title" style="font-size: 1rem; border-color: var(--gang_accent);">
+                                    Calling Cards</div>
+                                <ul class="ops-list" id="modal-cards"
+                                    style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                                    <!-- LI items -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- SIDEBAR INTEL -->
+                        <div class="modal-sidebar">
+                            <div class="section-title">Known Assets</div>
+                            <ul class="ops-list" id="modal-assets">
+                                <!-- LI items -->
+                            </ul>
+
+                            <div style="margin-top: 30px;">
+                                <div class="section-title">System Data</div>
+                                <div class="rival-vector"
+                                    style="background:transparent; padding:0; border:none; margin-bottom:10px; display:block;">
+                                    <span class="label" style="display:block;">Primary Rival</span>
+                                    <span class="rival-name" id="modal-rival" style="font-size:1rem;">---</span>
+                                </div>
+
+                                <div class="card-footer" style="background:transparent; padding:0;">
+                                    <span id="modal-faction-code">VAL_XX_00</span>
+                                    <span id="modal-faction-name">FACTION</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            (function () {
+                // --- GANG DATA MANIFEST ---
+                const gangData = [
+                    {
+                        name: "The Spellbinders",
+                        slug: "the-spellbinders",
+                        credo: "\"Reality is a lock. We are the key.\"",
+                        power: "Void Manipulation",
+                        tone: "Ritual / Confident",
+                        theme: "Occult Locksmiths",
+                        primary: "#2D1B4E", secondary: "#4A4E69", accent: "#00FFC2",
+                        cards: ["Glowing rune graffiti", "Silence fields", "Phased objects"],
+                        assets: ["Bone keys", "Phase Vans", "Clock Towers"],
+                        rival: "THE X-RAYS",
+                        code: "VAL_OCC_01", faction: "OCCULT"
+                    },
+                    {
+                        name: "The High Tops",
+                        slug: "the-high-tops",
+                        credo: "\"Look down on everyone.\"",
+                        power: "Physical Intimidation",
+                        tone: "Swagger / Aggressive",
+                        theme: "Vertical Street Dominance",
+                        primary: "#FF3D00", secondary: "#1A1A1A", accent: "#FFFFFF",
+                        cards: ["Roof tagging", "Platform boots", "Suspension traps"],
+                        assets: ["Lifted Trucks", "Rooftops", "Chains"],
+                        rival: "THE VICE",
+                        code: "VAL_STR_01", faction: "STREET"
+                    },
+                    {
+                        name: "The X-Rays",
+                        slug: "the-x-rays",
+                        credo: "\"We see what you're hiding.\"",
+                        power: "Enhanced Perception",
+                        tone: "Paranoid / Precise",
+                        theme: "Counter-Intelligence",
+                        primary: "#00E5FF", secondary: "#0A0A0A", accent: "#70A1FF",
+                        cards: ["Blackmail", "Invisible Ink", "Mirror Shades"],
+                        assets: ["Drones", "Vans", "Server Rooms"],
+                        rival: "THE SPELLBINDERS",
+                        code: "VAL_INT_01", faction: "TECH"
+                    },
+                    {
+                        name: "The Starlets",
+                        slug: "the-starlets",
+                        credo: "\"Steal the show. Keep the rest.\"",
+                        power: "Social Manipulation",
+                        tone: "Stylish / Performative",
+                        theme: "Glamour Heists",
+                        primary: "#FF007A", secondary: "#FFFFFF", accent: "#FFD700",
+                        cards: ["Signed Photos", "Glitter Bombs", "Monologues"],
+                        assets: ["Limousines", "Masks", "Theaters"],
+                        rival: "THE VICE",
+                        code: "VAL_GLM_01", faction: "STYLE"
+                    },
+                    {
+                        name: "The Depth Cult",
+                        slug: "the-depth-cult",
+                        credo: "\"Drown the noise.\"",
+                        power: "Sensory Distortion",
+                        tone: "Obsessive / Unsettling",
+                        theme: "Perception Cult",
+                        primary: "#004D40", secondary: "#001F24", accent: "#64FFDA",
+                        cards: ["Silence", "Damp Surfaces", "Salt Water"],
+                        assets: ["Submersibles", "Tuning Forks", "Sewers"],
+                        rival: "THE THIRD EYE",
+                        code: "VAL_CLT_01", faction: "CULT"
+                    },
+                    {
+                        name: "The Boneheads",
+                        slug: "the-boneheads",
+                        credo: "\"Fear is the only law.\"",
+                        power: "Brute Violence",
+                        tone: "Chaotic / Menacing",
+                        theme: "Masked Enforcers",
+                        primary: "#E0E0E0", secondary: "#111111", accent: "#D50000",
+                        cards: ["Bone Charms", "Manic Laughter", "Skull Graffiti"],
+                        assets: ["Scrap Bikes", "Clubs", "Junkyards"],
+                        rival: "THE VISCERA",
+                        code: "VAL_STR_02", faction: "STREET"
+                    },
+                    {
+                        name: "Blackout Brigade",
+                        slug: "blackout-brigade",
+                        credo: "\"Lights out. Payroll in.\"",
+                        power: "Tactical Combat",
+                        tone: "Cold / Professional",
+                        theme: "Elite Mercenaries",
+                        primary: "#2C3E50", secondary: "#000000", accent: "#F1C40F",
+                        cards: ["Grid Shutdowns", "Invoices", "Sync Watches"],
+                        assets: ["Drop Ships", "NV Goggles", "Safehouses"],
+                        rival: "THE WARHEADS",
+                        code: "VAL_MRC_01", faction: "MERC"
+                    },
+                    {
+                        name: "The Viscera",
+                        slug: "the-viscera",
+                        credo: "\"Pain is proof of life.\"",
+                        power: "Endurance Combat",
+                        tone: "Brutal / Extreme",
+                        theme: "Pain Worshippers",
+                        primary: "#880E4F", secondary: "#000000", accent: "#FF5252",
+                        cards: ["Self-Scarring", "No Armor", "Blood Rituals"],
+                        assets: ["Ambulances", "Surgical Tools", "Fight Pits"],
+                        rival: "THE BONEHEADS",
+                        code: "VAL_CLT_02", faction: "CULT"
+                    },
+                    {
+                        name: "The Architects",
+                        slug: "the-architects",
+                        credo: "\"Design the inevitable.\"",
+                        power: "Strategic Control",
+                        tone: "Patient / Ominous",
+                        theme: "Masterminds",
+                        primary: "#37474F", secondary: "#ECEFF1", accent: "#FF6F00",
+                        cards: ["Blueprints", "Predictions", "Domino Crimes"],
+                        assets: ["Zeppelins", "Plans", "Museums"],
+                        rival: "THE GILDED",
+                        code: "VAL_ELT_01", faction: "ELITE"
+                    },
+                    {
+                        name: "The Mickey Gang",
+                        slug: "the-mickey-gang",
+                        credo: "\"Make 'em die laughing.\"",
+                        power: "Psychological Chaos",
+                        tone: "Unhinged / Disturbing",
+                        theme: "Terror Clowns",
+                        primary: "#FFEB3B", secondary: "#000000", accent: "#FF1744",
+                        cards: ["Squeaky Shoes", "Manic Graffiti", "Lethal Gags"],
+                        assets: ["Ice Cream Trucks", "Mallets", "Funhouses"],
+                        rival: "THE BONEHEADS",
+                        code: "VAL_CHS_01", faction: "CHAOS"
+                    },
+                    {
+                        name: "The Warheads",
+                        slug: "the-warheads",
+                        credo: "\"Peace is just a reload.\"",
+                        power: "Sustained Warfare",
+                        tone: "Militant / Relentless",
+                        theme: "Fanatics",
+                        primary: "#33691E", secondary: "#212121", accent: "#FF9800",
+                        cards: ["Propaganda", "Fortifications", "Marching"],
+                        assets: ["Tanks", "Heavy MGs", "Bunkers"],
+                        rival: "THE BLACKOUT BRIGADE",
+                        code: "VAL_MIL_01", faction: "WAR"
+                    },
+                    {
+                        name: "The Gilded",
+                        slug: "the-gilded",
+                        credo: "\"Everyone has a price.\"",
+                        power: "Economic Domination",
+                        tone: "Arrogant / Decadent",
+                        theme: "Opulence",
+                        primary: "#FFD700", secondary: "#1A1A1A", accent: "#000000",
+                        cards: ["Gold Bullets", "Hostile Buyouts", "Suits"],
+                        assets: ["Gold Cars", "Private Jets", "Casinos"],
+                        rival: "THE ARCHITECTS",
+                        code: "VAL_ELT_02", faction: "ELITE"
+                    },
+                    {
+                        name: "The Bloodfang",
+                        slug: "the-bloodfang",
+                        credo: "\"The hunger always wins.\"",
+                        power: "Vampiric Assault",
+                        tone: "Predatory / Persistent",
+                        theme: "Survivalists",
+                        primary: "#880000", secondary: "#000000", accent: "#FFFFFF",
+                        cards: ["Bite Marks", "Drained Bodies", "Pack Tactics"],
+                        assets: ["Motorcycles", "Knives", "Sewers"],
+                        rival: "THE VISCERA",
+                        code: "VAL_CLT_03", faction: "MONSTER"
+                    },
+                    {
+                        name: "The Celestials",
+                        slug: "the-celestials",
+                        credo: "\"We are not from here.\"",
+                        power: "Elite Dominance",
+                        tone: "Regal / Detached",
+                        theme: "Extraterrestrials",
+                        primary: "#6200EA", secondary: "#FFFFFF", accent: "#00E5FF",
+                        cards: ["Gravity Tech", "Unknown Alloys", "Hovering"],
+                        assets: ["Saucers", "Energy Staffs", "Towers"],
+                        rival: "THE NEOKIN",
+                        code: "VAL_ALN_01", faction: "ALIEN"
+                    },
+                    {
+                        name: "The Ironclads",
+                        slug: "the-ironclads",
+                        credo: "\"Steel breaks bone.\"",
+                        power: "Siege Force",
+                        tone: "Brutal / Disciplined",
+                        theme: "Heavy Mercenaries",
+                        primary: "#455A64", secondary: "#263238", accent: "#FF3D00",
+                        cards: ["Wall Breaching", "Heavy Steps", "Bulletproof"],
+                        assets: ["Armored Trucks", "Power Hammers", "Foundries"],
+                        rival: "THE WARHEADS",
+                        code: "VAL_MRC_02", faction: "MERC"
+                    },
+                    {
+                        name: "The Third Eye",
+                        slug: "the-third-eye",
+                        credo: "\"The future is written.\"",
+                        power: "Foresight",
+                        tone: "Prophetic / Secretive",
+                        theme: "Seers",
+                        primary: "#673AB7", secondary: "#311B92", accent: "#00E676",
+                        cards: ["Déjà Vu", "Cryptic Warnings", "Sync Movement"],
+                        assets: ["Silent Cars", "Tarot Cards", "Temples"],
+                        rival: "THE X-RAYS",
+                        code: "VAL_OCC_02", faction: "OCCULT"
+                    },
+                    {
+                        name: "The Blazerunners",
+                        slug: "the-blazerunners",
+                        credo: "\"Catch us if you can.\"",
+                        power: "Mobility Combat",
+                        tone: "Fast / Reckless",
+                        theme: "Raiders",
+                        primary: "#FF6D00", secondary: "#DD2C00", accent: "#FFFF00",
+                        cards: ["Scorch Marks", "Sonic Booms", "Blurred Video"],
+                        assets: ["Jet-Bikes", "Nitrous", "Highways"],
+                        rival: "THE HIGH TOPS",
+                        code: "VAL_SPD_01", faction: "SPEED"
+                    },
+                    {
+                        name: "Crimson Blades",
+                        slug: "crimson-blades",
+                        credo: "\"Sharp mind. Sharper steel.\"",
+                        power: "Precision Melee",
+                        tone: "Disciplined / Lethal",
+                        theme: "Honor Thieves",
+                        primary: "#B71C1C", secondary: "#212121", accent: "#FFFFFF",
+                        cards: ["Clean Cuts", "Poetry Cards", "Silent Steps"],
+                        assets: ["Stealth Bikes", "Katanas", "Dojos"],
+                        rival: "THE SPURS",
+                        code: "VAL_ASN_01", faction: "ORDER"
+                    },
+                    {
+                        name: "The Drifters",
+                        slug: "the-drifters",
+                        credo: "\"Home is where the void is.\"",
+                        power: "Adaptive Survival",
+                        tone: "Eerie / Purposeful",
+                        theme: "Space Survivors",
+                        primary: "#4527A0", secondary: "#000000", accent: "#00E5FF",
+                        cards: ["Frost", "Geiger Noise", "Whispers"],
+                        assets: ["Junkers", "Space Suits", "Scrapyards"],
+                        rival: "THE BLOODFANG",
+                        code: "VAL_UKN_01", faction: "VOID"
+                    },
+                    {
+                        name: "The Vice",
+                        slug: "the-vice",
+                        credo: "\"Business before pleasure.\"",
+                        power: "Influence Control",
+                        tone: "Calculated / Smooth",
+                        theme: "Corporate Crime",
+                        primary: "#1A237E", secondary: "#000000", accent: "#FF00FF",
+                        cards: ["Poker Chips", "Neon Cards", "Cologne"],
+                        assets: ["Yachts", "Briefcases", "Nightclubs"],
+                        rival: "THE GILDED",
+                        code: "VAL_SYN_01", faction: "ELITE"
+                    },
+                    {
+                        name: "The Warborn",
+                        slug: "the-warborn",
+                        credo: "\"Born in blood. Die in glory.\"",
+                        power: "Frontline Brutality",
+                        tone: "Feral / Relentless",
+                        theme: "Feral Warriors",
+                        primary: "#BF360C", secondary: "#3E2723", accent: "#FFCCBC",
+                        cards: ["War Howls", "Teeth Trophies", "Fires"],
+                        assets: ["Buggies", "Axes", "Ruins"],
+                        rival: "THE IRONCLADS",
+                        code: "VAL_SAV_01", faction: "TRIBAL"
+                    },
+                    {
+                        name: "The Spurs",
+                        slug: "the-spurs",
+                        credo: "\"Draw fast. Die last.\"",
+                        power: "Quick-Draw Combat",
+                        tone: "Cold / Ruthless",
+                        theme: "Outlaws",
+                        primary: "#5D4037", secondary: "#000000", accent: "#FFAB00",
+                        cards: ["Ace of Spades", "Spurs Sound", "Tobacco"],
+                        assets: ["Muscle Cars", "Revolvers", "Saloons"],
+                        rival: "CRIMSON BLADES",
+                        code: "VAL_WST_01", faction: "OUTLAW"
+                    },
+                    {
+                        name: "The DissOrder",
+                        slug: "the-dissorder",
+                        credo: "\"We are the law. The bad kind.\"",
+                        power: "Coercion",
+                        tone: "Authoritarian",
+                        theme: "Corrupt Cops",
+                        primary: "#1A237E", secondary: "#000000", accent: "#FFD600",
+                        cards: ["Fake Warrants", "Sirens", "Handcuffs"],
+                        assets: ["Squad Cars", "Batons", "Precincts"],
+                        rival: "BLACKOUT BRIGADE",
+                        code: "VAL_LAW_01", faction: "LAW"
+                    },
+                    {
+                        name: "The Sirens",
+                        slug: "the-sirens",
+                        credo: "\"Look at me. Now die.\"",
+                        power: "Assassination",
+                        tone: "Seductive / Lethal",
+                        theme: "Femme Fatales",
+                        primary: "#C2185B", secondary: "#000000", accent: "#00E676",
+                        cards: ["Lipstick Marks", "Perfume", "Poison"],
+                        assets: ["Sports Cars", "Hairpins", "Lounges"],
+                        rival: "THE STARLETS",
+                        code: "VAL_ASN_02", faction: "STYLE"
+                    },
+                    {
+                        name: "The NeoKin",
+                        slug: "the-neokin",
+                        credo: "\"Evolution waits for no one.\"",
+                        power: "Destabilization",
+                        tone: "Transcendent",
+                        theme: "Post-Humans",
+                        primary: "#00BFA5", secondary: "#FFFFFF", accent: "#6200EA",
+                        cards: ["Glowing Veins", "Static", "Morphing"],
+                        assets: ["Organic Pods", "Mutagens", "Labs"],
+                        rival: "THE CELESTIALS",
+                        code: "VAL_MUT_01", faction: "MUTANT"
+                    }
+                ];
+
+                // --- DOM REFERENCES ---
+                const grid = document.getElementById('gangs-grid');
+                const modal = document.getElementById('gang-modal');
+                const modalPanel = document.getElementById('modal-panel');
+                const closeBtn = modal.querySelector('.modal-close');
+                let activeTrigger = null;
+
+                // --- RENDER GRID ---
+                function renderGrid() {
+                    grid.innerHTML = '';
+                    gangData.forEach(gang => {
+                        const card = document.createElement('div');
+                        card.className = 'gang-card';
+                        card.setAttribute('role', 'button');
+                        card.setAttribute('tabindex', '0');
+                        card.dataset.gangSlug = gang.slug;
+
+                        // Set CSS vars
+                        card.style.setProperty('--gang_primary', gang.primary);
+                        card.style.setProperty('--gang_secondary', gang.secondary);
+                        card.style.setProperty('--gang_accent', gang.accent);
+
+                        card.innerHTML = `
+                <div class="header-section">
+                    <div>
+                        <h2 class="gang-name">${gang.name}</h2>
+                        <p class="credo">${gang.credo}</p>
+                    </div>
+                    <span class="status-tag">ACTIVE</span>
+                </div>
+                <div class="core-profile">
+                    <div class="intel-block"><span class="label">Power</span><span class="value">${gang.power}</span></div>
+                    <div class="intel-block"><span class="label">Tone</span><span class="value">${gang.tone}</span></div>
+                    <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span class="value">${gang.theme}</span></div>
+                </div>
+                <div class="visual-strip"></div>
+                <div class="ops-intel" style="display:none"></div><!-- Hidden in grid, shown in modal -->
+                <div class="card-footer"><span>${gang.code}</span><span>${gang.faction}</span></div>
+            `;
+
+                        // Event Listeners
+                        card.addEventListener('click', () => openModal(gang));
+                        card.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                openModal(gang);
+                            }
+                        });
+
+                        grid.appendChild(card);
+                    });
+                }
+
+                // --- OPEN MODAL ---
+                function openModal(gang) {
+                    // Update URL
+                    window.history.replaceState(null, null, `#${gang.slug}`);
+
+                    // Save focus
+                    activeTrigger = document.activeElement;
+
+                    // Populate Modal Data
+                    modalPanel.style.setProperty('--gang_primary', gang.primary);
+                    modalPanel.style.setProperty('--gang_secondary', gang.secondary);
+                    modalPanel.style.setProperty('--gang_accent', gang.accent);
+
+                    modal.querySelector('.modal-name').textContent = gang.name;
+                    modal.querySelector('.modal-credo').textContent = gang.credo;
+
+                    document.getElementById('modal-power').textContent = gang.power;
+                    document.getElementById('modal-tone').textContent = gang.tone;
+                    document.getElementById('modal-theme').textContent = gang.theme;
+
+                    // Lists
+                    const fillList = (id, items) => {
+                        const list = document.getElementById(id);
+                        list.innerHTML = items.map(item => `<li>${item}</li>`).join('');
+                    };
+                    fillList('modal-cards', gang.cards);
+                    fillList('modal-assets', gang.assets);
+
+                    document.getElementById('modal-rival').textContent = gang.rival;
+                    document.getElementById('modal-faction-code').textContent = gang.code;
+                    document.getElementById('modal-faction-name').textContent = gang.faction;
+
+                    // Show
+                    modal.classList.add('active');
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+
+                    // Focus management
+                    closeBtn.focus();
+                }
+
+                // --- CLOSE MODAL ---
+                function closeModal() {
+                    modal.classList.remove('active');
+                    modal.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = '';
+
+                    // Clear Hash
+                    window.history.replaceState(null, null, ' ');
+
+                    // Restore focus
+                    if (activeTrigger) activeTrigger.focus();
+                }
+
+                // --- LISTENERS ---
+                closeBtn.addEventListener('click', closeModal);
+
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && modal.classList.contains('active')) {
+                        closeModal();
+                    }
+                    // Focus Trap
+                    if (modal.classList.contains('active') && e.key === 'Tab') {
+                        const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                        const first = focusables[0];
+                        const last = focusables[focusables.length - 1];
+
+                        if (e.shiftKey) {
+                            if (document.activeElement === first) {
+                                e.preventDefault();
+                                last.focus();
+                            }
+                        } else {
+                            if (document.activeElement === last) {
+                                e.preventDefault();
+                                first.focus();
+                            }
+                        }
+                    }
+                });
+
+                // --- INIT ---
+                renderGrid();
+
+                // Check Hash on Load
+                const hash = window.location.hash.replace('#', '');
+                if (hash) {
+                    const found = gangData.find(g => g.slug === hash);
+                    if (found) {
+                        // slightly delay to ensure rendering happens or animation plays
+                        setTimeout(() => openModal(found), 100);
+                    }
+                }
+
+            })();
+        </script>
+        <!-- END EMBED CODE -->
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+[
+  {
+    "Item Name": "Octerra (Juvenile)",
+    "Category": "Creature",
+    "Status": "Planned",
+    "Rarity": "Uncommon",
+    "Max Supply": 30
+  },
+  {
+    "Item Name": "Stunlarrk (Pup)",
+    "Category": "Exotic Pet",
+    "Status": "LISTED",
+    "Rarity": "Common",
+    "Max Supply": 50,
+    "minted": 0
+  },
+  {
+    "Item Name": "Jarborka (Pup)",
+    "Category": "Exotic Pet",
+    "Status": "LISTED",
+    "Rarity": "Uncommon",
+    "Max Supply": 30,
+    "minted": 0
+  },
+  {
+    "Item Name": "Mignat (Pup)",
+    "Category": "Exotic Pet",
+    "Status": "LIVE",
+    "Rarity": "Rare",
+    "Max Supply": 20,
+    "minted": 0,
+    "releaseDate": "2026-01-20T00:00:00Z"
+  },
+  {
+    "Item Name": "Gobela (Pup)",
+    "Category": "Exotic Pet",
+    "Status": "FINAL in OP",
+    "Rarity": "Epic",
+    "Max Supply": 15
+  },
+  {
+    "Item Name": "Lyrak Zurk (Pup)",
+    "Category": "Exotic Pet",
+    "Status": "FINAL in OP",
+    "Rarity": "Legendary",
+    "Max Supply": 5
+  },
+  {
+    "Item Name": "Evernight-Orb",
+    "Category": "Artifact",
+    "Status": "Planned",
+    "Rarity": "Rare",
+    "Max Supply": 20
+  },
+  {
+    "Item Name": "Cyron Chamber",
+    "Category": "Artifact",
+    "Status": "Planned",
+    "Rarity": "Rare",
+    "Max Supply": 20
+  },
+  {
+    "Item Name": "Cursed Star",
+    "Category": "Artifact",
+    "Status": "Planned",
+    "Rarity": "Epic",
+    "Max Supply": 15,
+    "minted": 2
+  },
+  {
+    "Item Name": "Brain Crystal",
+    "Category": "Artifact",
+    "Status": "Update EM in OP",
+    "Rarity": "Legendary",
+    "Max Supply": 5
+  },
+  {
+    "Item Name": "Heart of the Void",
+    "Category": "Artifact",
+    "Status": "Update EM in OP",
+    "Rarity": "Legendary",
+    "Max Supply": 5
+  },
+  {
+    "Item Name": "VOIDCORE Vessel",
+    "Category": "Wearable",
+    "Status": "N/A",
+    "Rarity": "Epic",
+    "Max Supply": 15
+  },
+  {
+    "Item Name": "Wicked Wizardry",
+    "Category": "Poster",
+    "Status": "LIVE",
+    "Rarity": "Epic",
+    "Max Supply": 50,
+    "minted": 20
+  },
+  {
+    "Item Name": "Crystallised Bone Relic",
+    "Category": "Artifact",
+    "Status": "LIVE",
+    "Rarity": "Legendary",
+    "Max Supply": 10,
+    "minted": 1
+  },
+  {
+    "Item Name": "GRIM (HYDEOUT)",
+    "Category": "Character",
+    "Status": "LIVE",
+    "Rarity": "Mythic",
+    "Max Supply": 1,
+    "minted": 1
+  }
+]

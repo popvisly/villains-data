@@ -1,0 +1,345 @@
+<!-- Villains At Large: Live Atrium Widget -->
+<!-- Paste this entire block into a Simvoly "Code" Widget -->
+
+<style>
+    /* Mature, Gritty Theme */
+    :root {
+        --bg-dark: #0a0a0a;
+        --bg-card: #141414;
+        --text-primary: #e0e0e0;
+        --text-secondary: #888;
+        --accent-grit: #2a2a2a;
+
+        /* Rarity Colors */
+        --rarity-common: #b0b0b0;
+        --rarity-uncommon: #4adb4a;
+        --rarity-rare: #00bcd4;
+        --rarity-epic: #9c27b0;
+        --rarity-legendary: #ff9800;
+
+        /* Progress Bar */
+        --progress-bg: #333;
+        --progress-fill: #ffe600;
+        /* High contrast yellow */
+    }
+
+    /* Scoped to widget to avoid conflicts */
+    .atrium-widget-container {
+        font-family: 'Courier New', Courier, monospace;
+        color: var(--text-primary);
+        background: var(--bg-dark);
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .atrium-widget {
+        background: var(--bg-dark);
+        border: 2px solid var(--accent-grit);
+        width: 100%;
+        max-width: 450px;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        box-sizing: border-box;
+    }
+
+    .atrium-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px dashed var(--accent-grit);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .atrium-header h2 {
+        margin: 0;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    .live-indicator {
+        font-size: 0.8rem;
+        color: #ff0000;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .live-indicator .dot {
+        height: 8px;
+        width: 8px;
+        background-color: #ff0000;
+        border-radius: 50%;
+        margin-right: 5px;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.4;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .inventory-item {
+        background: var(--bg-card);
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #333;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: transform 0.2s;
+        box-sizing: border-box;
+    }
+
+    .inventory-item:hover {
+        transform: translateX(5px);
+    }
+
+    /* Rarity Frames */
+    .rarity-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        border: 1px solid transparent;
+    }
+
+    .rarity-common .rarity-frame {
+        border-color: var(--rarity-common);
+    }
+
+    .rarity-uncommon .rarity-frame {
+        border-color: var(--rarity-uncommon);
+        box-shadow: inset 0 0 5px var(--rarity-uncommon);
+    }
+
+    .rarity-rare .rarity-frame {
+        border-color: var(--rarity-rare);
+        box-shadow: inset 0 0 8px var(--rarity-rare);
+    }
+
+    .rarity-epic .rarity-frame {
+        border-color: var(--rarity-epic);
+        box-shadow: inset 0 0 10px var(--rarity-epic);
+    }
+
+    .rarity-legendary .rarity-frame {
+        border-color: var(--rarity-legendary);
+        box-shadow: inset 0 0 15px var(--rarity-legendary);
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from {
+            box-shadow: inset 0 0 10px var(--rarity-legendary);
+        }
+
+        to {
+            box-shadow: inset 0 0 20px var(--rarity-legendary), 0 0 10px var(--rarity-legendary);
+        }
+    }
+
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .item-name {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .item-rarity {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+        background: #000;
+        border: 1px solid #555;
+        text-transform: uppercase;
+        color: #aaa;
+    }
+
+    .progress-wrap {
+        width: 100%;
+    }
+
+    .progress-container {
+        height: 12px;
+        background: var(--progress-bg);
+        border: 1px solid #444;
+        position: relative;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: var(--progress-fill);
+        width: 0%;
+        transition: width 0.5s ease-out;
+    }
+
+    .stats {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+    }
+
+    .status-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        border: 1px solid #fff;
+        transform: rotate(-10deg);
+        display: none;
+        /* hidden unless active */
+        z-index: 10;
+    }
+
+    /* Sold Out / Expired State */
+    .item-closed {
+        opacity: 0.6;
+        filter: grayscale(100%);
+    }
+
+    .item-closed .status-badge {
+        display: block;
+        border-color: #ff0000;
+        color: #ff0000;
+    }
+</style>
+
+<div class="atrium-widget-container">
+    <div class="atrium-widget">
+        <div class="atrium-header">
+            <h2>LIVE INVENTORY</h2>
+            <div class="live-indicator">
+                <span class="dot"></span> LIVE FEED
+            </div>
+        </div>
+        <div id="inventory-feed" class="inventory-feed">
+            <!-- Items injected by JS -->
+            <div style="text-align:center; color:#666;">Loading Feed...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        // AUTHORITATIVE DATA SOURCE (Wave 2)
+        // Updated: Mignat (Pup) is LIVE with 1/20 minted.
+        const INVENTORY_DATA = [
+            { "Item Name": "Octerra (Juvenile)", "Category": "Creature", "Status": "Planned", "Rarity": "Uncommon", "Max Supply": 30 },
+            { "Item Name": "Stunlarrk (Pup)", "Category": "Exotic Pet", "Status": "LIVE", "Rarity": "Common", "Max Supply": 50, "minted": 4, "releaseDate": "2026-01-20T00:00:00Z" },
+            { "Item Name": "Jarborka (Pup)", "Category": "Exotic Pet", "Status": "LISTED", "Rarity": "Uncommon", "Max Supply": 30 },
+            { "Item Name": "Mignat (Pup)", "Category": "Exotic Pet", "Status": "LIVE", "Rarity": "Rare", "Max Supply": 20, "minted": 1, "releaseDate": "2026-01-20T00:00:00Z" },
+            { "Item Name": "Gobela (Pup)", "Category": "Exotic Pet", "Status": "FINAL in OP", "Rarity": "Epic", "Max Supply": 15 },
+            { "Item Name": "Lyrak Zurk (Pup)", "Category": "Exotic Pet", "Status": "FINAL in OP", "Rarity": "Legendary", "Max Supply": 5 },
+            { "Item Name": "Evernight-Orb", "Category": "Artifact", "Status": "Planned", "Rarity": "Rare", "Max Supply": 20 },
+            { "Item Name": "Cyron Chamber", "Category": "Artifact", "Status": "Planned", "Rarity": "Rare", "Max Supply": 20 },
+            { "Item Name": "Cursed Star", "Category": "Artifact", "Status": "Planned", "Rarity": "Epic", "Max Supply": 15 },
+            { "Item Name": "Brain Crystal", "Category": "Artifact", "Status": "Update EM in OP", "Rarity": "Legendary", "Max Supply": 5 },
+            { "Item Name": "Heart of the Void", "Category": "Artifact", "Status": "Update EM in OP", "Rarity": "Legendary", "Max Supply": 5 },
+            { "Item Name": "VOIDCORE Vessel", "Category": "Wearable", "Status": "N/A", "Rarity": "Epic", "Max Supply": 15 }
+        ];
+
+        // Current Time Simulation (Matches Project Truth)
+        // Updated: Logic test time
+        const CURRENT_DATE = new Date('2026-01-21T17:16:00Z');
+
+        const feed = document.getElementById('inventory-feed');
+
+        // Clear Loading State
+        if (feed) feed.innerHTML = '';
+
+        INVENTORY_DATA.forEach(item => {
+            // Filter: Only show items that are 'Active' or relevant? 
+            // For this widget, we show specific highlighted items or all? 
+            // Showing items with explicit minted data for demo, or all if desired.
+            // User asked for "Mignat" specifically. We render all for completeness if they have data.
+
+            const name = item['Item Name'];
+            const rarity = item['Rarity'];
+            const maxSupply = item['Max Supply'];
+            const minted = item['minted'] || 0; // Default to 0 if missing
+            const releaseDateStr = item['releaseDate'];
+
+            // Skip Planned/N/A items without mint data for a cleaner feed? 
+            // User request didn't specify filtering, but "Inventory Feed" implies live items.
+            // We will render all, but those without 'minted' will show 0/Max.
+
+            // Logic: 7-Day Hard Stop
+            let isClosed = false;
+            let statusText = 'LIVE';
+
+            if (releaseDateStr) {
+                const releaseDate = new Date(releaseDateStr);
+                const hardStopDate = new Date(releaseDate);
+                hardStopDate.setDate(releaseDate.getDate() + 7);
+
+                if (CURRENT_DATE > hardStopDate) {
+                    isClosed = true;
+                    statusText = 'EXPIRED';
+                }
+            }
+
+            // Logic: Sold Out
+            const pct = Math.floor((minted / maxSupply) * 100);
+
+            // VISUAL FIX: Clamp width at 100%
+            const displayPct = Math.min(pct, 100);
+
+            if (minted >= maxSupply) {
+                isClosed = true;
+                statusText = 'SOLD OUT';
+            }
+
+            // Create Card
+            const card = document.createElement('div');
+            card.className = `inventory-item rarity-${rarity.toLowerCase().replace(' ', '-')}`;
+            if (isClosed) card.classList.add('item-closed');
+
+            card.innerHTML = `
+            <div class="rarity-frame"></div>
+            ${isClosed ? `<div class="status-badge">${statusText}</div>` : ''}
+            
+            <div class="item-header">
+                <span class="item-name">${name}</span>
+                <span class="item-rarity">${rarity}</span>
+            </div>
+            
+            <div class="progress-wrap">
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: ${displayPct}%"></div>
+                </div>
+                <div class="stats">
+                    <span>${minted} / ${maxSupply} MINTED</span>
+                    <span>${pct}%</span>
+                </div>
+            </div>
+        `;
+
+            if (feed) feed.appendChild(card);
+        });
+    })();
+</script>

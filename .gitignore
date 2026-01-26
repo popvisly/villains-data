@@ -1,0 +1,34 @@
+# --- IGNORING ALL ---
+*
+
+# --- ALLOWLIST (The only things we track) ---
+!*.js
+!*.json
+!*.html
+!*.css
+!README.md
+!.gitignore
+
+# --- EXPLICIT EXCLUDES (Just in case) ---
+.env
+node_modules/
+*.log
+*.DS_Store
+# Art Folders (Blocked by default '*', but listing key ones for safety)
+Branding/
+FEELS/
+HEADWEAR/
+Line Up FA/
+MAIN VILLAIN CHARACTER FILE/
+MAPE/
+Nifty Island/
+OPEN PAGE/
+Overlords/
+POSTCARD/
+VAL- BADGE LOGO/
+VILLAINS001/
+VIllains Weapon Collectors CARDS/
+Villains Vault/
+Villains at Large- Ref Art /
+WEBSITE 2/
+Website/

@@ -1,0 +1,1112 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Courier+New:wght@400;700&display=swap');
+
+    /* SCOPED ROOT VARIABLES TO AVOID CONFLICTS */
+    .gangs-embed-wrap {
+        /* VAL SYSTEM CORE */
+        --val-bg: #0F0F0F;
+        --val-panel: #1A1A1A;
+        --val-border: #333333;
+        --val-text: #E0E0E0;
+        --val-mute: #666666;
+
+        /* TYPE */
+        --font-head: 'Hammersmith+One', sans-serif;
+        --font-mono: 'Courier New', monospace;
+
+        background-color: var(--val-bg);
+        color: var(--val-text);
+        font-family: var(--font-mono);
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    .gangs-embed-wrap h1.system-header {
+        font-family: var(--font-head);
+        color: var(--val-mute);
+        text-align: center;
+        border-bottom: 2px solid var(--val-border);
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: normal;
+    }
+
+    .gangs-embed-wrap .dossier-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    /* CARD COMPONENT */
+    .gangs-embed-wrap .gang-card {
+        background: var(--val-panel);
+        border: 1px solid var(--val-border);
+        display: flex;
+        flex-direction: column;
+        border-top: 4px solid var(--gang_primary);
+        transition: transform 0.2s;
+    }
+
+    .gangs-embed-wrap .gang-card:hover {
+        border-color: var(--gang_accent);
+        transform: translateY(-2px);
+    }
+
+    /* 1. HEADER */
+    .gangs-embed-wrap .header-section {
+        padding: 20px;
+        border-bottom: 1px solid var(--val-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .gangs-embed-wrap .gang-name {
+        font-family: var(--font-head);
+        font-size: 1.6rem;
+        color: #FFF;
+        text-transform: uppercase;
+        margin: 0 0 5px 0;
+        line-height: 1;
+    }
+
+    .gangs-embed-wrap .credo {
+        font-style: italic;
+        color: var(--gang_accent);
+        font-size: 0.8rem;
+        margin: 0;
+        opacity: 0.9;
+    }
+
+    .gangs-embed-wrap .status-tag {
+        font-size: 0.6rem;
+        border: 1px solid var(--val-mute);
+        padding: 2px 6px;
+        color: var(--val-mute);
+        letter-spacing: 1px;
+    }
+
+    /* 2. PROFILE */
+    .gangs-embed-wrap .core-profile {
+        padding: 15px 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        border-bottom: 1px solid var(--val-border);
+        font-size: 0.7rem;
+    }
+
+    .gangs-embed-wrap .intel-block {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .gangs-embed-wrap .label {
+        color: var(--val-mute);
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+
+    .gangs-embed-wrap .value {
+        color: #FFF;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* 3. VISUAL STRIP */
+    .gangs-embed-wrap .visual-strip {
+        height: 8px;
+        background: repeating-linear-gradient(45deg,
+                var(--gang_primary),
+                var(--gang_primary) 10px,
+                var(--gang_secondary) 10px,
+                var(--gang_secondary) 20px);
+        opacity: 0.7;
+    }
+
+    /* 4. OPS INTEL */
+    .gangs-embed-wrap .ops-intel {
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.2);
+        flex-grow: 1;
+    }
+
+    .gangs-embed-wrap .ops-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0;
+    }
+
+    .gangs-embed-wrap .ops-list li {
+        position: relative;
+        padding-left: 15px;
+        margin-bottom: 5px;
+        font-size: 0.75rem;
+        line-height: 1.3;
+        color: #CCC;
+    }
+
+    .gangs-embed-wrap .ops-list li::before {
+        content: ">>";
+        position: absolute;
+        left: 0;
+        color: var(--val-mute);
+        font-size: 0.65rem;
+    }
+
+    .gangs-embed-wrap .section-title {
+        font-family: var(--font-head);
+        font-size: 0.8rem;
+        color: #FFF;
+        border-bottom: 1px solid #333;
+        padding-bottom: 3px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    /* 5. RIVAL */
+    .gangs-embed-wrap .rival-vector {
+        padding: 10px 20px;
+        background: #111;
+        border-top: 1px solid var(--val-border);
+        font-size: 0.7rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .gangs-embed-wrap .rival-name {
+        color: var(--gang_accent);
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* 6. FOOTER */
+    .gangs-embed-wrap .card-footer {
+        padding: 8px 20px;
+        background: #000;
+        color: #444;
+        font-size: 0.6rem;
+        display: flex;
+        justify-content: space-between;
+        letter-spacing: 1px;
+    }
+</style>
+
+<div class="gangs-embed-wrap">
+
+    <h1 class="system-header">/// VILLAINS AT LARGE : FACTION INDEX ///</h1>
+
+    <div class="dossier-grid">
+
+        <!-- 1. THE SPELLBINDERS -->
+        <div class="gang-card" style="--gang_primary: #2D1B4E; --gang_secondary: #4A4E69; --gang_accent: #00FFC2;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Spellbinders</h2>
+                    <p class="credo">"Reality is a lock. We are the key."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Void Manipulation</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Ritual / Confident</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Occult Locksmiths</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Glowing rune graffiti</li>
+                    <li>Silence fields</li>
+                    <li>Phased objects</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Bone keys</li>
+                    <li>Phase Vans</li>
+                    <li>Clock Towers</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE X-RAYS</span></div>
+            <div class="card-footer"><span>VAL_OCC_01</span><span>FACTION: OCCULT</span></div>
+        </div>
+
+        <!-- 2. THE HIGH TOPS -->
+        <div class="gang-card" style="--gang_primary: #FF3D00; --gang_secondary: #1A1A1A; --gang_accent: #FFFFFF;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The High Tops</h2>
+                    <p class="credo">"Look down on everyone."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Physical
+                        Intimidation</span></div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Swagger / Aggressive</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Vertical Street Dominance</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Roof tagging</li>
+                    <li>Platform boots</li>
+                    <li>Suspension traps</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Lifted Trucks</li>
+                    <li>Rooftops</li>
+                    <li>Chains</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE VICE</span></div>
+            <div class="card-footer"><span>VAL_STR_01</span><span>FACTION: STREET</span></div>
+        </div>
+
+        <!-- 3. THE X-RAYS -->
+        <div class="gang-card" style="--gang_primary: #00E5FF; --gang_secondary: #0A0A0A; --gang_accent: #70A1FF;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The X-Rays</h2>
+                    <p class="credo">"We see what you're hiding."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Enhanced Perception</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Paranoid / Precise</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Counter-Intelligence</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Blackmail</li>
+                    <li>Invisible Ink</li>
+                    <li>Mirror Shades</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Drones</li>
+                    <li>Vans</li>
+                    <li>Server Rooms</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE SPELLBINDERS</span>
+            </div>
+            <div class="card-footer"><span>VAL_INT_01</span><span>FACTION: TECH</span></div>
+        </div>
+
+        <!-- 4. THE STARLETS -->
+        <div class="gang-card" style="--gang_primary: #FF007A; --gang_secondary: #FFFFFF; --gang_accent: #FFD700;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Starlets</h2>
+                    <p class="credo">"Steal the show. Keep the rest."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Social Manipulation</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Stylish /
+                        Performative</span></div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Glamour Heists</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Signed Photos</li>
+                    <li>Glitter Bombs</li>
+                    <li>Monologues</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Limousines</li>
+                    <li>Masks</li>
+                    <li>Theaters</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE VICE</span></div>
+            <div class="card-footer"><span>VAL_GLM_01</span><span>FACTION: STYLE</span></div>
+        </div>
+
+        <!-- 5. THE DEPTH CULT -->
+        <div class="gang-card" style="--gang_primary: #004D40; --gang_secondary: #001F24; --gang_accent: #64FFDA;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Depth Cult</h2>
+                    <p class="credo">"Drown the noise."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Sensory Distortion</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Obsessive /
+                        Unsettling</span></div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Perception Cult</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Silence</li>
+                    <li>Damp Surfaces</li>
+                    <li>Salt Water</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Submersibles</li>
+                    <li>Tuning Forks</li>
+                    <li>Sewers</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE THIRD EYE</span>
+            </div>
+            <div class="card-footer"><span>VAL_CLT_01</span><span>FACTION: CULT</span></div>
+        </div>
+
+        <!-- 6. THE BONEHEADS -->
+        <div class="gang-card" style="--gang_primary: #E0E0E0; --gang_secondary: #111111; --gang_accent: #D50000;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Boneheads</h2>
+                    <p class="credo">"Fear is the only law."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Brute Violence</span></div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Chaotic / Menacing</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Masked Enforcers</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Bone Charms</li>
+                    <li>Manic Laughter</li>
+                    <li>Skull Graffiti</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Scrap Bikes</li>
+                    <li>Clubs</li>
+                    <li>Junkyards</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE VISCERA</span></div>
+            <div class="card-footer"><span>VAL_STR_02</span><span>FACTION: STREET</span></div>
+        </div>
+
+        <!-- 7. THE BLACKOUT BRIGADE -->
+        <div class="gang-card" style="--gang_primary: #2C3E50; --gang_secondary: #000000; --gang_accent: #F1C40F;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">Blackout Brigade</h2>
+                    <p class="credo">"Lights out. Payroll in."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Tactical Combat</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Cold / Professional</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Elite Mercenaries</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Grid Shutdowns</li>
+                    <li>Invoices</li>
+                    <li>Sync Watches</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Drop Ships</li>
+                    <li>NV Goggles</li>
+                    <li>Safehouses</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE WARHEADS</span></div>
+            <div class="card-footer"><span>VAL_MRC_01</span><span>FACTION: MERC</span></div>
+        </div>
+
+        <!-- 8. THE VISCERA -->
+        <div class="gang-card" style="--gang_primary: #880E4F; --gang_secondary: #000000; --gang_accent: #FF5252;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Viscera</h2>
+                    <p class="credo">"Pain is proof of life."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Endurance Combat</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Brutal / Extreme</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Pain Worshippers</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Self-Scarring</li>
+                    <li>No Armor</li>
+                    <li>Blood Rituals</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Ambulances</li>
+                    <li>Surgical Tools</li>
+                    <li>Fight Pits</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE BONEHEADS</span>
+            </div>
+            <div class="card-footer"><span>VAL_CLT_02</span><span>FACTION: CULT</span></div>
+        </div>
+
+        <!-- 9. THE ARCHITECTS -->
+        <div class="gang-card" style="--gang_primary: #37474F; --gang_secondary: #ECEFF1; --gang_accent: #FF6F00;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Architects</h2>
+                    <p class="credo">"Design the inevitable."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Strategic Control</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Patient / Ominous</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Masterminds</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Blueprints</li>
+                    <li>Predictions</li>
+                    <li>Domino Crimes</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Zeppelins</li>
+                    <li>Plans</li>
+                    <li>Museums</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE GILDED</span></div>
+            <div class="card-footer"><span>VAL_ELT_01</span><span>FACTION: ELITE</span></div>
+        </div>
+
+        <!-- 10. THE MICKEY GANG -->
+        <div class="gang-card" style="--gang_primary: #FFEB3B; --gang_secondary: #000000; --gang_accent: #FF1744;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Mickey Gang</h2>
+                    <p class="credo">"Make 'em die laughing."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Psychological Chaos</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Unhinged / Disturbing</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Terror Clowns</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Squeaky Shoes</li>
+                    <li>Manic Graffiti</li>
+                    <li>Lethal Gags</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Ice Cream Trucks</li>
+                    <li>Mallets</li>
+                    <li>Funhouses</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE BONEHEADS</span>
+            </div>
+            <div class="card-footer"><span>VAL_CHS_01</span><span>FACTION: CHAOS</span></div>
+        </div>
+
+        <!-- 11. THE WARHEADS -->
+        <div class="gang-card" style="--gang_primary: #33691E; --gang_secondary: #212121; --gang_accent: #FF9800;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Warheads</h2>
+                    <p class="credo">"Peace is just a reload."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Sustained Warfare</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Militant / Relentless</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Fanatics</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Propaganda</li>
+                    <li>Fortifications</li>
+                    <li>Marching</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Tanks</li>
+                    <li>Heavy MGs</li>
+                    <li>Bunkers</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE BLACKOUT
+                    BRIGADE</span></div>
+            <div class="card-footer"><span>VAL_MIL_01</span><span>FACTION: WAR</span></div>
+        </div>
+
+        <!-- 12. THE GILDED -->
+        <div class="gang-card" style="--gang_primary: #FFD700; --gang_secondary: #1A1A1A; --gang_accent: #000000;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Gilded</h2>
+                    <p class="credo">"Everyone has a price."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Economic Domination</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Arrogant / Decadent</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Opulence</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Gold Bullets</li>
+                    <li>Hostile Buyouts</li>
+                    <li>Suits</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Gold Cars</li>
+                    <li>Private Jets</li>
+                    <li>Casinos</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE ARCHITECTS</span>
+            </div>
+            <div class="card-footer"><span>VAL_ELT_02</span><span>FACTION: ELITE</span></div>
+        </div>
+
+        <!-- 13. THE BLOODFANG -->
+        <div class="gang-card" style="--gang_primary: #880000; --gang_secondary: #000000; --gang_accent: #FFFFFF;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Bloodfang</h2>
+                    <p class="credo">"The hunger always wins."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Vampiric Assault</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Predatory /
+                        Persistent</span></div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Survivalists</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Bite Marks</li>
+                    <li>Drained Bodies</li>
+                    <li>Pack Tactics</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Motorcycles</li>
+                    <li>Knives</li>
+                    <li>Sewers</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE VISCERA</span></div>
+            <div class="card-footer"><span>VAL_CLT_03</span><span>FACTION: MONSTER</span></div>
+        </div>
+
+        <!-- 14. THE CELESTIALS -->
+        <div class="gang-card" style="--gang_primary: #6200EA; --gang_secondary: #FFFFFF; --gang_accent: #00E5FF;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Celestials</h2>
+                    <p class="credo">"We are not from here."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Elite Dominance</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Regal / Detached</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Extraterrestrials</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Gravity Tech</li>
+                    <li>Unknown Alloys</li>
+                    <li>Hovering</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Saucers</li>
+                    <li>Energy Staffs</li>
+                    <li>Towers</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE NEOKIN</span></div>
+            <div class="card-footer"><span>VAL_ALN_01</span><span>FACTION: ALIEN</span></div>
+        </div>
+
+        <!-- 15. THE IRONCLADS -->
+        <div class="gang-card" style="--gang_primary: #455A64; --gang_secondary: #263238; --gang_accent: #FF3D00;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Ironclads</h2>
+                    <p class="credo">"Steel breaks bone."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Siege Force</span></div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Brutal / Disciplined</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Heavy Mercenaries</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Wall Breaching</li>
+                    <li>Heavy Steps</li>
+                    <li>Bulletproof</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Armored Trucks</li>
+                    <li>Power Hammers</li>
+                    <li>Foundries</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE WARHEADS</span></div>
+            <div class="card-footer"><span>VAL_MRC_02</span><span>FACTION: MERC</span></div>
+        </div>
+
+        <!-- 16. THE THIRD EYE -->
+        <div class="gang-card" style="--gang_primary: #673AB7; --gang_secondary: #311B92; --gang_accent: #00E676;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Third Eye</h2>
+                    <p class="credo">"The future is written."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Foresight</span></div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Prophetic / Secretive</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Seers</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Déjà Vu</li>
+                    <li>Cryptic Warnings</li>
+                    <li>Sync Movement</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Silent Cars</li>
+                    <li>Tarot Cards</li>
+                    <li>Temples</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE X-RAYS</span></div>
+            <div class="card-footer"><span>VAL_OCC_02</span><span>FACTION: OCCULT</span></div>
+        </div>
+
+        <!-- 17. THE BLAZERUNNERS -->
+        <div class="gang-card" style="--gang_primary: #FF6D00; --gang_secondary: #DD2C00; --gang_accent: #FFFF00;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Blazerunners</h2>
+                    <p class="credo">"Catch us if you can."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Mobility Combat</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Fast / Reckless</span></div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Raiders</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Scorch Marks</li>
+                    <li>Sonic Booms</li>
+                    <li>Blurred Video</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Jet-Bikes</li>
+                    <li>Nitrous</li>
+                    <li>Highways</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE HIGH TOPS</span>
+            </div>
+            <div class="card-footer"><span>VAL_SPD_01</span><span>FACTION: SPEED</span></div>
+        </div>
+
+        <!-- 18. THE CRIMSON BLADES -->
+        <div class="gang-card" style="--gang_primary: #B71C1C; --gang_secondary: #212121; --gang_accent: #FFFFFF;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">Crimson Blades</h2>
+                    <p class="credo">"Sharp mind. Sharper steel."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Precision Melee</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Disciplined / Lethal</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Honor Thieves</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Clean Cuts</li>
+                    <li>Poetry Cards</li>
+                    <li>Silent Steps</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Stealth Bikes</li>
+                    <li>Katanas</li>
+                    <li>Dojos</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE SPURS</span></div>
+            <div class="card-footer"><span>VAL_ASN_01</span><span>FACTION: ORDER</span></div>
+        </div>
+
+        <!-- 19. THE DRIFTERS -->
+        <div class="gang-card" style="--gang_primary: #4527A0; --gang_secondary: #000000; --gang_accent: #00E5FF;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Drifters</h2>
+                    <p class="credo">"Home is where the void is."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Adaptive Survival</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Eerie / Purposeful</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Space Survivors</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Frost</li>
+                    <li>Geiger Noise</li>
+                    <li>Whispers</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Junkers</li>
+                    <li>Space Suits</li>
+                    <li>Scrapyards</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE BLOODFANG</span>
+            </div>
+            <div class="card-footer"><span>VAL_UKN_01</span><span>FACTION: VOID</span></div>
+        </div>
+
+        <!-- 20. THE VICE -->
+        <div class="gang-card" style="--gang_primary: #1A237E; --gang_secondary: #000000; --gang_accent: #FF00FF;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Vice</h2>
+                    <p class="credo">"Business before pleasure."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Influence Control</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Calculated / Smooth</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Corporate Crime</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Poker Chips</li>
+                    <li>Neon Cards</li>
+                    <li>Cologne</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Yachts</li>
+                    <li>Briefcases</li>
+                    <li>Nightclubs</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE GILDED</span></div>
+            <div class="card-footer"><span>VAL_SYN_01</span><span>FACTION: ELITE</span></div>
+        </div>
+
+        <!-- 21. THE WARBORN -->
+        <div class="gang-card" style="--gang_primary: #BF360C; --gang_secondary: #3E2723; --gang_accent: #FFCCBC;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Warborn</h2>
+                    <p class="credo">"Born in blood. Die in glory."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Frontline Brutality</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Feral / Relentless</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Feral Warriors</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>War Howls</li>
+                    <li>Teeth Trophies</li>
+                    <li>Fires</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Buggies</li>
+                    <li>Axes</li>
+                    <li>Ruins</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE IRONCLADS</span>
+            </div>
+            <div class="card-footer"><span>VAL_SAV_01</span><span>FACTION: TRIBAL</span></div>
+        </div>
+
+        <!-- 22. THE SPURS -->
+        <div class="gang-card" style="--gang_primary: #5D4037; --gang_secondary: #000000; --gang_accent: #FFAB00;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Spurs</h2>
+                    <p class="credo">"Draw fast. Die last."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Quick-Draw Combat</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Cold / Ruthless</span></div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Outlaws</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Ace of Spades</li>
+                    <li>Spurs Sound</li>
+                    <li>Tobacco</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Muscle Cars</li>
+                    <li>Revolvers</li>
+                    <li>Saloons</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">CRIMSON BLADES</span>
+            </div>
+            <div class="card-footer"><span>VAL_WST_01</span><span>FACTION: OUTLAW</span></div>
+        </div>
+
+        <!-- 23. THE DISSORDER -->
+        <div class="gang-card" style="--gang_primary: #1A237E; --gang_secondary: #000000; --gang_accent: #FFD600;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The DissOrder</h2>
+                    <p class="credo">"We are the law. The bad kind."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Coercion</span></div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Authoritarian</span></div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Corrupt Cops</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Fake Warrants</li>
+                    <li>Sirens</li>
+                    <li>Handcuffs</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Squad Cars</li>
+                    <li>Batons</li>
+                    <li>Precincts</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">BLACKOUT BRIGADE</span>
+            </div>
+            <div class="card-footer"><span>VAL_LAW_01</span><span>FACTION: LAW</span></div>
+        </div>
+
+        <!-- 24. THE SIRENS -->
+        <div class="gang-card" style="--gang_primary: #C2185B; --gang_secondary: #000000; --gang_accent: #00E676;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The Sirens</h2>
+                    <p class="credo">"Look at me. Now die."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Assassination</span></div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Seductive / Lethal</span>
+                </div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Femme Fatales</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Lipstick Marks</li>
+                    <li>Perfume</li>
+                    <li>Poison</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Sports Cars</li>
+                    <li>Hairpins</li>
+                    <li>Lounges</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE STARLETS</span></div>
+            <div class="card-footer"><span>VAL_ASN_02</span><span>FACTION: STYLE</span></div>
+        </div>
+
+        <!-- 25. THE NEOKIN -->
+        <div class="gang-card" style="--gang_primary: #00BFA5; --gang_secondary: #FFFFFF; --gang_accent: #6200EA;">
+            <div class="header-section">
+                <div>
+                    <h2 class="gang-name">The NeoKin</h2>
+                    <p class="credo">"Evolution waits for no one."</p>
+                </div>
+                <span class="status-tag">ACTIVE</span>
+            </div>
+            <div class="core-profile">
+                <div class="intel-block"><span class="label">Power</span><span class="value">Destabilization</span>
+                </div>
+                <div class="intel-block"><span class="label">Tone</span><span class="value">Transcendent</span></div>
+                <div class="intel-block" style="grid-column: span 2;"><span class="label">Theme</span><span
+                        class="value">Post-Humans</span></div>
+            </div>
+            <div class="visual-strip"></div>
+            <div class="ops-intel">
+                <div class="section-title">Calling Cards</div>
+                <ul class="ops-list">
+                    <li>Glowing Veins</li>
+                    <li>Static</li>
+                    <li>Morphing</li>
+                </ul>
+                <div class="section-title">Assets</div>
+                <ul class="ops-list">
+                    <li>Organic Pods</li>
+                    <li>Mutagens</li>
+                    <li>Labs</li>
+                </ul>
+            </div>
+            <div class="rival-vector"><span class="label">Rival</span><span class="rival-name">THE CELESTIALS</span>
+            </div>
+            <div class="card-footer"><span>VAL_MUT_01</span><span>FACTION: MUTANT</span></div>
+        </div>
+
+    </div>
+</div>

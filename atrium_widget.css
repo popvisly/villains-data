@@ -1,0 +1,178 @@
+/* Mature, Gritty Theme */
+:root {
+    --bg-dark: #0a0a0a;
+    --bg-card: #141414;
+    --text-primary: #e0e0e0;
+    --text-secondary: #888;
+    --accent-grit: #2a2a2a;
+    
+    /* Rarity Colors */
+    --rarity-common: #b0b0b0;
+    --rarity-uncommon: #4adb4a;
+    --rarity-rare: #00bcd4;
+    --rarity-epic: #9c27b0;
+    --rarity-legendary: #ff9800;
+    
+    /* Progress Bar */
+    --progress-bg: #333;
+    --progress-fill: #ffe600; /* High contrast yellow */
+}
+
+body {
+    background-color: #000;
+    font-family: 'Courier New', Courier, monospace; /* Tech/Gritty vibe */
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.atrium-widget {
+    background: var(--bg-dark);
+    border: 2px solid var(--accent-grit);
+    width: 400px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+}
+
+.atrium-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed var(--accent-grit);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.atrium-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.live-indicator {
+    font-size: 0.8rem;
+    color: #ff0000;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.live-indicator .dot {
+    height: 8px;
+    width: 8px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+.inventory-item {
+    background: var(--bg-card);
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.inventory-item:hover {
+    transform: translateX(5px);
+}
+
+/* Rarity Frames */
+.rarity-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    border: 1px solid transparent;
+}
+
+.rarity-common .rarity-frame { border-color: var(--rarity-common); }
+.rarity-uncommon .rarity-frame { border-color: var(--rarity-uncommon); box-shadow: inset 0 0 5px var(--rarity-uncommon); }
+.rarity-rare .rarity-frame { border-color: var(--rarity-rare); box-shadow: inset 0 0 8px var(--rarity-rare); }
+.rarity-epic .rarity-frame { border-color: var(--rarity-epic); box-shadow: inset 0 0 10px var(--rarity-epic); }
+.rarity-legendary .rarity-frame { border-color: var(--rarity-legendary); box-shadow: inset 0 0 15px var(--rarity-legendary); animation: glow 2s infinite alternate; }
+
+@keyframes glow {
+    from { box-shadow: inset 0 0 10px var(--rarity-legendary); }
+    to { box-shadow: inset 0 0 20px var(--rarity-legendary), 0 0 10px var(--rarity-legendary); }
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.item-rarity {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    background: #000;
+    border: 1px solid #555;
+    text-transform: uppercase;
+}
+
+.progress-container {
+    height: 12px;
+    background: var(--progress-bg);
+    border: 1px solid #444;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--progress-fill);
+    width: 0%;
+    transition: width 0.5s ease-out;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.9);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border: 1px solid #fff;
+    transform: rotate(-10deg);
+    display: none; /* hidden unless active */
+}
+
+/* Sold Out / Expired State */
+.item-closed {
+    opacity: 0.6;
+    filter: grayscale(100%);
+}
+
+.item-closed .status-badge {
+    display: block;
+    border-color: #ff0000;
+    color: #ff0000;
+}
