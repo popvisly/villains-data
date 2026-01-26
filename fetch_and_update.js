@@ -6,6 +6,8 @@ const MAIN_URL = "https://opensea.io/collection/villains-at-large-209174595";
 const CARDS_URL = "https://opensea.io/collection/villains-at-large-character-cards-series-1";
 // Mintable Buckets
 const MINTABLE_VOIDCORE = "https://op.xyz/mintables/cac0ef7a-448d-411c-8bdc-72ab3810aa7a";
+const MINTABLE_JARBORKA = "https://op.xyz/mintables/bc610a4a-b139-4de6-9062-5c138ef1d4d4";
+const MINTABLE_MIGNAT = "https://op.xyz/mintables/92715c05-5ed4-497d-910a-54b7eb8b591a";
 
 const DATA_FILE = '/Volumes/850EVO/VILLAINS AT LARGE/wave2_data.json';
 
@@ -19,9 +21,8 @@ const TARGETS = {
     // --- MAIN (Artifacts, Pets, Wearables) ---
     'Cursed Star': { type: 'Main', match: 'Cursed Star' },
     'Crystallised Bone Relic': { type: 'Main', match: 'Crystallised' },
-    'Mignat (Pup)': { type: 'Main', match: 'Mignat' }, 
-    'Jarborka (Pup)': { type: 'Main', match: 'Jarborka' },
-    'Octerra (Juvenile)': { type: 'Main', match: 'Octerra' },
+    // 'Mignat (Pup)': { type: 'Main', match: 'Mignat' }, // Moved to Mintable
+    // 'Octerra (Juvenile)': { type: 'Main', match: 'Octerra' }, // PAUSED: Avoid Gen 1 false positives until Mintable Link drops
     'Gobela (Pup)': { type: 'Main', match: 'Gobela' },
     'Lyrak Zurk (Pup)': { type: 'Main', match: 'Lyrak' },
     'Evernight-Orb': { type: 'Main', match: 'Evernight' },
@@ -30,7 +31,9 @@ const TARGETS = {
     'Heart of the Void': { type: 'Main', match: 'Heart of the Void' },
     
     // --- MINTABLES (Direct Scrape) ---
-    'VOIDCORE Vessel': { type: 'Mintable_Voidcore', match: 'Minted' },
+    'VOIDCORE Vessel': { type: 'Mintable', url: MINTABLE_VOIDCORE },
+    'Jarborka (Pup)': { type: 'Mintable', url: MINTABLE_JARBORKA },
+    'Mignat (Pup)': { type: 'Mintable', url: MINTABLE_MIGNAT },
 
     // --- CARDS (Collectors Cards) ---
     // Add known card names here if they differ, otherwise we scan for generics if needed
@@ -67,45 +70,47 @@ async function runAntigravity() {
         await page.goto(CARDS_URL, { waitUntil: 'networkidle2', timeout: 45000 });
         const cardsText = await page.evaluate(() => document.body.innerText);
 
-        // --- SCAN MINTABLES (Voidcore) ---
-        console.log("   🔎 Scanning Bucket 4: Voidcore Mintable...");
-        await page.goto(MINTABLE_VOIDCORE, { waitUntil: 'networkidle2', timeout: 45000 });
-        const voidcoreText = await page.evaluate(() => document.body.innerText);
+        // --- SCAN MINTABLES (Direct URLs) ---
+        // Instead of a single "Voidcore" bucket, we iterate specific items
+        for (const [name, config] of Object.entries(TARGETS)) {
+            if (config.type !== 'Mintable') continue;
+            
+            console.log(`   🔎 Scanning Mintable: ${name}...`);
+            await page.goto(config.url, { waitUntil: 'networkidle2', timeout: 30000 });
+            const text = await page.evaluate(() => document.body.innerText);
+            
+            const match = text.match(/Minted:\s*(\d+)/i);
+            const count = match ? parseInt(match[1]) : 0;
+            console.log(`      - ${name}: ${count}`);
+            liveCounts[name] = count;
+        }
 
-        // --- PROCESS COUNTS ---
+        // --- PROCESS OTHER COUNTS ---
         for (const [name, config] of Object.entries(TARGETS)) {
             if (EXCLUSIONS.includes(name)) continue;
+            if (config.type === 'Mintable') continue; // Already processed
 
             let count = 0;
-
-            if (config.type === 'Mintable_Voidcore') {
-                // Special Regex for "Minted: 9 / 15"
-                const match = voidcoreText.match(/Minted:\s*(\d+)/i);
-                if (match) count = parseInt(match[1]);
-                console.log(`      - ${name}: ${count} [Mintable]`);
-            } else {
-                let sourceText = "";
-                if (config.type === 'Vault') sourceText = vaultText;
-                else if (config.type === 'Main') sourceText = mainText;
-                else if (config.type === 'Cards') sourceText = cardsText;
+            let sourceText = "";
+            if (config.type === 'Vault') sourceText = vaultText;
+            else if (config.type === 'Main') sourceText = mainText;
+            else if (config.type === 'Cards') sourceText = cardsText;
+            
+            // Fallback: If not found in primary bucket, scan others (Safety Net)
+            const regex = new RegExp(config.match, 'gi');
+            count = (sourceText.match(regex) || []).length;
+            
+            // SAFETY CHECK: If 0 in designated bucket, check the others
+            if (count === 0) {
+                const vaultCount = (vaultText.match(regex) || []).length;
+                const mainCount = (mainText.match(regex) || []).length;
+                const cardsCount = (cardsText.match(regex) || []).length;
                 
-                // Fallback: If not found in primary bucket, scan others (Safety Net)
-                const regex = new RegExp(config.match, 'gi');
-                count = (sourceText.match(regex) || []).length;
-                
-                // SAFETY CHECK: If 0 in designated bucket, check the others
-                if (count === 0) {
-                    const vaultCount = (vaultText.match(regex) || []).length;
-                    const mainCount = (mainText.match(regex) || []).length;
-                    const cardsCount = (cardsText.match(regex) || []).length;
-                    
-                    if (vaultCount > 0) { count = vaultCount; config.type = 'Vault (Auto-Corrected)'; }
-                    else if (mainCount > 0) { count = mainCount; config.type = 'Main (Auto-Corrected)'; }
-                    else if (cardsCount > 0) { count = cardsCount; config.type = 'Cards (Auto-Corrected)'; }
-                }
-                console.log(`      - ${name}: ${count} [${config.type}]`);
+                if (vaultCount > 0) { count = vaultCount; config.type = 'Vault (Auto-Corrected)'; }
+                else if (mainCount > 0) { count = mainCount; config.type = 'Main (Auto-Corrected)'; }
+                else if (cardsCount > 0) { count = cardsCount; config.type = 'Cards (Auto-Corrected)'; }
             }
-
+            console.log(`      - ${name}: ${count} [${config.type}]`);
             liveCounts[name] = count;
         }
 
