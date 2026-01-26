@@ -10,7 +10,7 @@
   {
     "Item Name": "Stunlarrk (Pup)",
     "Category": "Exotic Pet",
-    "Status": "ENDED",
+    "Status": "Archived",
     "Rarity": "Common",
     "Max Supply": 50,
     "minted": 4
@@ -26,7 +26,7 @@
   {
     "Item Name": "Mignat (Pup)",
     "Category": "Exotic Pet",
-    "Status": "LIVE",
+    "Status": "LISTED",
     "Rarity": "Rare",
     "Max Supply": 20,
     "minted": 0,
@@ -35,7 +35,7 @@
   {
     "Item Name": "Gobela (Pup)",
     "Category": "Exotic Pet",
-    "Status": "FINAL in OP",
+    "Status": "LISTED",
     "Rarity": "Epic",
     "Max Supply": 15,
     "minted": 0
@@ -43,7 +43,7 @@
   {
     "Item Name": "Lyrak Zurk (Pup)",
     "Category": "Exotic Pet",
-    "Status": "FINAL in OP",
+    "Status": "PLANNED NEXT",
     "Rarity": "Legendary",
     "Max Supply": 5,
     "minted": 0
@@ -51,7 +51,7 @@
   {
     "Item Name": "Evernight-Orb",
     "Category": "Artifact",
-    "Status": "Planned",
+    "Status": "PLANNED NEXT",
     "Rarity": "Rare",
     "Max Supply": 20,
     "minted": 0
@@ -59,7 +59,7 @@
   {
     "Item Name": "Cyron Chamber",
     "Category": "Artifact",
-    "Status": "Planned",
+    "Status": "Update Emission on 3D",
     "Rarity": "Rare",
     "Max Supply": 20,
     "minted": 0
@@ -67,7 +67,7 @@
   {
     "Item Name": "Cursed Star",
     "Category": "Artifact",
-    "Status": "Planned",
+    "Status": "LISTED",
     "Rarity": "Epic",
     "Max Supply": 15,
     "minted": 2
@@ -75,7 +75,7 @@
   {
     "Item Name": "Brain Crystal",
     "Category": "Artifact",
-    "Status": "Update EM in OP",
+    "Status": "Update Emission on 3D",
     "Rarity": "Legendary",
     "Max Supply": 5,
     "minted": 0
@@ -83,7 +83,7 @@
   {
     "Item Name": "Heart of the Void",
     "Category": "Artifact",
-    "Status": "Update EM in OP",
+    "Status": "Update Emission on 3D",
     "Rarity": "Legendary",
     "Max Supply": 5,
     "minted": 0
@@ -111,5 +111,13 @@
     "Rarity": "Legendary",
     "Max Supply": 10,
     "minted": 1
+  },
+  {
+    "Item Name": "LAVABACK",
+    "Category": "Titan",
+    "Status": "Emmission added/Nifty too",
+    "Rarity": "Legendary",
+    "Max Supply": 0,
+    "minted": 0
   }
 ]
