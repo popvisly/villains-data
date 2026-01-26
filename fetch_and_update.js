@@ -18,7 +18,7 @@ const TARGETS = {
     'Crystallised Bone Relic': { type: 'Main', match: 'Crystallised' },
     // 'GRIM (HYDEOUT)': { type: 'Main', match: 'GRIM' }, // REMOVED: Personal 1/1
     'Mignat (Pup)': { type: 'Main', match: 'Mignat' }, 
-    'Stunlarrk (Pup)': { type: 'Main', match: 'Stunlarrk' },
+    // 'Stunlarrk (Pup)': { type: 'Main', match: 'Stunlarrk' }, // REMOVED: Ended at 4 mints
     'Jarborka (Pup)': { type: 'Main', match: 'Jarborka' },
     'Octerra (Juvenile)': { type: 'Main', match: 'Octerra' },
     'Gobela (Pup)': { type: 'Main', match: 'Gobela' },
