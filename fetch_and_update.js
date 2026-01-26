@@ -4,6 +4,9 @@ const fs = require('fs');
 const VAULT_URL = "https://opensea.io/collection/villains-vault-s2";
 const MAIN_URL = "https://opensea.io/collection/villains-at-large-209174595";
 const CARDS_URL = "https://opensea.io/collection/villains-at-large-character-cards-series-1";
+// Mintable Buckets
+const MINTABLE_VOIDCORE = "https://op.xyz/mintables/cac0ef7a-448d-411c-8bdc-72ab3810aa7a";
+
 const DATA_FILE = '/Volumes/850EVO/VILLAINS AT LARGE/wave2_data.json';
 
 // Item Configuration: Name mapped to expected OpenSea string match
@@ -16,9 +19,7 @@ const TARGETS = {
     // --- MAIN (Artifacts, Pets, Wearables) ---
     'Cursed Star': { type: 'Main', match: 'Cursed Star' },
     'Crystallised Bone Relic': { type: 'Main', match: 'Crystallised' },
-    // 'GRIM (HYDEOUT)': { type: 'Main', match: 'GRIM' }, // REMOVED: Personal 1/1
     'Mignat (Pup)': { type: 'Main', match: 'Mignat' }, 
-    // 'Stunlarrk (Pup)': { type: 'Main', match: 'Stunlarrk' }, // REMOVED: Ended at 4 mints
     'Jarborka (Pup)': { type: 'Main', match: 'Jarborka' },
     'Octerra (Juvenile)': { type: 'Main', match: 'Octerra' },
     'Gobela (Pup)': { type: 'Main', match: 'Gobela' },
@@ -27,7 +28,9 @@ const TARGETS = {
     'Cyron Chamber': { type: 'Main', match: 'Cyron' },
     'Brain Crystal': { type: 'Main', match: 'Brain Crystal' },
     'Heart of the Void': { type: 'Main', match: 'Heart of the Void' },
-    'VOIDCORE Vessel': { type: 'Main', match: 'VOIDCORE' },
+    
+    // --- MINTABLES (Direct Scrape) ---
+    'VOIDCORE Vessel': { type: 'Mintable_Voidcore', match: 'Minted' },
 
     // --- CARDS (Collectors Cards) ---
     // Add known card names here if they differ, otherwise we scan for generics if needed
@@ -64,34 +67,46 @@ async function runAntigravity() {
         await page.goto(CARDS_URL, { waitUntil: 'networkidle2', timeout: 45000 });
         const cardsText = await page.evaluate(() => document.body.innerText);
 
+        // --- SCAN MINTABLES (Voidcore) ---
+        console.log("   🔎 Scanning Bucket 4: Voidcore Mintable...");
+        await page.goto(MINTABLE_VOIDCORE, { waitUntil: 'networkidle2', timeout: 45000 });
+        const voidcoreText = await page.evaluate(() => document.body.innerText);
+
         // --- PROCESS COUNTS ---
         for (const [name, config] of Object.entries(TARGETS)) {
             if (EXCLUSIONS.includes(name)) continue;
 
-            let sourceText = "";
-            if (config.type === 'Vault') sourceText = vaultText;
-            else if (config.type === 'Main') sourceText = mainText;
-            else if (config.type === 'Cards') sourceText = cardsText;
-            
-            // Fallback: If not found in primary bucket, scan others (Safety Net)
-            // But we prioritize the mapped bucket to avoid false positives.
-            
-            const regex = new RegExp(config.match, 'gi');
-            let count = (sourceText.match(regex) || []).length;
-            
-            // SAFETY CHECK: If 0 in designated bucket, check the others just in case we mapped it wrong
-            if (count === 0) {
-                const vaultCount = (vaultText.match(regex) || []).length;
-                const mainCount = (mainText.match(regex) || []).length;
-                const cardsCount = (cardsText.match(regex) || []).length;
+            let count = 0;
+
+            if (config.type === 'Mintable_Voidcore') {
+                // Special Regex for "Minted: 9 / 15"
+                const match = voidcoreText.match(/Minted:\s*(\d+)/i);
+                if (match) count = parseInt(match[1]);
+                console.log(`      - ${name}: ${count} [Mintable]`);
+            } else {
+                let sourceText = "";
+                if (config.type === 'Vault') sourceText = vaultText;
+                else if (config.type === 'Main') sourceText = mainText;
+                else if (config.type === 'Cards') sourceText = cardsText;
                 
-                if (vaultCount > 0) { count = vaultCount; config.type = 'Vault (Auto-Corrected)'; }
-                else if (mainCount > 0) { count = mainCount; config.type = 'Main (Auto-Corrected)'; }
-                else if (cardsCount > 0) { count = cardsCount; config.type = 'Cards (Auto-Corrected)'; }
+                // Fallback: If not found in primary bucket, scan others (Safety Net)
+                const regex = new RegExp(config.match, 'gi');
+                count = (sourceText.match(regex) || []).length;
+                
+                // SAFETY CHECK: If 0 in designated bucket, check the others
+                if (count === 0) {
+                    const vaultCount = (vaultText.match(regex) || []).length;
+                    const mainCount = (mainText.match(regex) || []).length;
+                    const cardsCount = (cardsText.match(regex) || []).length;
+                    
+                    if (vaultCount > 0) { count = vaultCount; config.type = 'Vault (Auto-Corrected)'; }
+                    else if (mainCount > 0) { count = mainCount; config.type = 'Main (Auto-Corrected)'; }
+                    else if (cardsCount > 0) { count = cardsCount; config.type = 'Cards (Auto-Corrected)'; }
+                }
+                console.log(`      - ${name}: ${count} [${config.type}]`);
             }
 
             liveCounts[name] = count;
-            console.log(`      - ${name}: ${count} [${config.type}]`);
         }
 
         // --- UPDATE JSON ---
