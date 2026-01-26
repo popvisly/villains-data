@@ -4,7 +4,8 @@
     "Category": "Creature",
     "Status": "Planned",
     "Rarity": "Uncommon",
-    "Max Supply": 30
+    "Max Supply": 30,
+    "minted": 2
   },
   {
     "Item Name": "Stunlarrk (Pup)",
@@ -12,7 +13,7 @@
     "Status": "LISTED",
     "Rarity": "Common",
     "Max Supply": 50,
-    "minted": 0
+    "minted": 2
   },
   {
     "Item Name": "Jarborka (Pup)",
@@ -36,28 +37,32 @@
     "Category": "Exotic Pet",
     "Status": "FINAL in OP",
     "Rarity": "Epic",
-    "Max Supply": 15
+    "Max Supply": 15,
+    "minted": 0
   },
   {
     "Item Name": "Lyrak Zurk (Pup)",
     "Category": "Exotic Pet",
     "Status": "FINAL in OP",
     "Rarity": "Legendary",
-    "Max Supply": 5
+    "Max Supply": 5,
+    "minted": 0
   },
   {
     "Item Name": "Evernight-Orb",
     "Category": "Artifact",
     "Status": "Planned",
     "Rarity": "Rare",
-    "Max Supply": 20
+    "Max Supply": 20,
+    "minted": 0
   },
   {
     "Item Name": "Cyron Chamber",
     "Category": "Artifact",
     "Status": "Planned",
     "Rarity": "Rare",
-    "Max Supply": 20
+    "Max Supply": 20,
+    "minted": 0
   },
   {
     "Item Name": "Cursed Star",
@@ -72,21 +77,24 @@
     "Category": "Artifact",
     "Status": "Update EM in OP",
     "Rarity": "Legendary",
-    "Max Supply": 5
+    "Max Supply": 5,
+    "minted": 0
   },
   {
     "Item Name": "Heart of the Void",
     "Category": "Artifact",
     "Status": "Update EM in OP",
     "Rarity": "Legendary",
-    "Max Supply": 5
+    "Max Supply": 5,
+    "minted": 0
   },
   {
     "Item Name": "VOIDCORE Vessel",
     "Category": "Wearable",
     "Status": "N/A",
     "Rarity": "Epic",
-    "Max Supply": 15
+    "Max Supply": 15,
+    "minted": 3
   },
   {
     "Item Name": "Wicked Wizardry",
