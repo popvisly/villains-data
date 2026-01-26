@@ -3,17 +3,35 @@ const fs = require('fs');
 
 const VAULT_URL = "https://opensea.io/collection/villains-vault-s2";
 const MAIN_URL = "https://opensea.io/collection/villains-at-large-209174595";
+const CARDS_URL = "https://opensea.io/collection/villains-at-large-character-cards-series-1";
 const DATA_FILE = '/Volumes/850EVO/VILLAINS AT LARGE/wave2_data.json';
 
 // Item Configuration: Name mapped to expected OpenSea string match
+const EXCLUSIONS = ['GRIM (HYDEOUT)'];
+
 const TARGETS = {
+    // --- VAULT (Posters) ---
     'Wicked Wizardry': { type: 'Vault', match: 'Wicked Wizardry' },
-    'Cursed Star': { type: 'Vault', match: 'Cursed Star' },
-    'Crystallised Bone Relic': { type: 'Vault', match: 'Crystallised' },
-    'GRIM (HYDEOUT)': { type: 'Main', match: 'GRIM' },
-    'Mignat (Pup)': { type: 'Vault', match: 'Mignat' }, // Assuming it might appear in Vault or we keep manual
-    'Stunlarrk (Pup)': { type: 'Vault', match: 'Stunlarrk' },
-    'Jarborka (Pup)': { type: 'Vault', match: 'Jarborka' }
+    
+    // --- MAIN (Artifacts, Pets, Wearables) ---
+    'Cursed Star': { type: 'Main', match: 'Cursed Star' },
+    'Crystallised Bone Relic': { type: 'Main', match: 'Crystallised' },
+    // 'GRIM (HYDEOUT)': { type: 'Main', match: 'GRIM' }, // REMOVED: Personal 1/1
+    'Mignat (Pup)': { type: 'Main', match: 'Mignat' }, 
+    'Stunlarrk (Pup)': { type: 'Main', match: 'Stunlarrk' },
+    'Jarborka (Pup)': { type: 'Main', match: 'Jarborka' },
+    'Octerra (Juvenile)': { type: 'Main', match: 'Octerra' },
+    'Gobela (Pup)': { type: 'Main', match: 'Gobela' },
+    'Lyrak Zurk (Pup)': { type: 'Main', match: 'Lyrak' },
+    'Evernight-Orb': { type: 'Main', match: 'Evernight' },
+    'Cyron Chamber': { type: 'Main', match: 'Cyron' },
+    'Brain Crystal': { type: 'Main', match: 'Brain Crystal' },
+    'Heart of the Void': { type: 'Main', match: 'Heart of the Void' },
+    'VOIDCORE Vessel': { type: 'Main', match: 'VOIDCORE' },
+
+    // --- CARDS (Collectors Cards) ---
+    // Add known card names here if they differ, otherwise we scan for generics if needed
+    // For now, we just ensure the scanner hits this URL for future items.
 };
 
 async function runAntigravity() {
@@ -32,25 +50,48 @@ async function runAntigravity() {
         await page.setViewport({ width: 1920, height: 1080 });
 
         // --- SCAN VAULT ---
-        console.log("   🔎 Scanning Vault...");
+        console.log("   🔎 Scanning Bucket 1: Vault (Posters)...");
         await page.goto(VAULT_URL, { waitUntil: 'networkidle2', timeout: 45000 });
         const vaultText = await page.evaluate(() => document.body.innerText);
         
         // --- SCAN MAIN ---
-        console.log("   🔎 Scanning Main Collection...");
+        console.log("   🔎 Scanning Bucket 2: Main (Artifacts/Pets/Wearables)...");
         await page.goto(MAIN_URL, { waitUntil: 'networkidle2', timeout: 45000 });
         const mainText = await page.evaluate(() => document.body.innerText);
 
+        // --- SCAN CARDS ---
+        console.log("   🔎 Scanning Bucket 3: Cards...");
+        await page.goto(CARDS_URL, { waitUntil: 'networkidle2', timeout: 45000 });
+        const cardsText = await page.evaluate(() => document.body.innerText);
+
         // --- PROCESS COUNTS ---
         for (const [name, config] of Object.entries(TARGETS)) {
-            const sourceText = config.type === 'Vault' ? vaultText : mainText;
-            const regex = new RegExp(config.match, 'gi');
-            const count = (sourceText.match(regex) || []).length;
+            if (EXCLUSIONS.includes(name)) continue;
+
+            let sourceText = "";
+            if (config.type === 'Vault') sourceText = vaultText;
+            else if (config.type === 'Main') sourceText = mainText;
+            else if (config.type === 'Cards') sourceText = cardsText;
             
-            // Safety Check: If 0, and it's a known active item, we might have failed to load.
-            // But for now we trust the scrape.
+            // Fallback: If not found in primary bucket, scan others (Safety Net)
+            // But we prioritize the mapped bucket to avoid false positives.
+            
+            const regex = new RegExp(config.match, 'gi');
+            let count = (sourceText.match(regex) || []).length;
+            
+            // SAFETY CHECK: If 0 in designated bucket, check the others just in case we mapped it wrong
+            if (count === 0) {
+                const vaultCount = (vaultText.match(regex) || []).length;
+                const mainCount = (mainText.match(regex) || []).length;
+                const cardsCount = (cardsText.match(regex) || []).length;
+                
+                if (vaultCount > 0) { count = vaultCount; config.type = 'Vault (Auto-Corrected)'; }
+                else if (mainCount > 0) { count = mainCount; config.type = 'Main (Auto-Corrected)'; }
+                else if (cardsCount > 0) { count = cardsCount; config.type = 'Cards (Auto-Corrected)'; }
+            }
+
             liveCounts[name] = count;
-            console.log(`      - ${name}: ${count}`);
+            console.log(`      - ${name}: ${count} [${config.type}]`);
         }
 
         // --- UPDATE JSON ---
@@ -93,6 +134,19 @@ async function runAntigravity() {
         if (changes > 0) {
             fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
             console.log(`   ✅ Database Updated (${changes} changes).`);
+            
+            // --- GIT SYNC ---
+            try {
+                const { execSync } = require('child_process');
+                console.log("   ☁️  Pushing to GitHub Bunker...");
+                execSync('git add wave2_data.json', { cwd: '/Volumes/850EVO/VILLAINS AT LARGE/' });
+                execSync('git commit -m "Auto-Update: Inventory Sync"', { cwd: '/Volumes/850EVO/VILLAINS AT LARGE/' });
+                execSync('git push origin main', { cwd: '/Volumes/850EVO/VILLAINS AT LARGE/' });
+                console.log("   🚀 SYNC COMPLETE. Data is live.");
+            } catch (gitErr) {
+                console.error("   ⚠️  GIT PUSH FAILED:", gitErr.message);
+            }
+
         } else {
             console.log("   ✅ Database Synced. No changes detected.");
         }
