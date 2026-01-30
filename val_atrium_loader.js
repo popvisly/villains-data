@@ -112,7 +112,7 @@
             <div class="progress-bar" style="width: ${pct}%"></div>
           </div>
           <div class="stats">
-            <span>${safeText(minted)} / ${safeText(maxSupply)} MINTED</span>
+            <span>${safeText(minted)} / ${safeText(maxSupply)} SECURED</span>
             <span>${safeText(pctRaw)}%</span>
           </div>
         </div>
