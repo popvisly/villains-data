@@ -103,23 +103,17 @@
 
     /* EXTINCT / EXPIRED DESIGN */
     .val-card.extinct {
-        opacity: 0.6;
-        filter: grayscale(100%);
-        /* Turns the item black & white */
-        border: 1px solid #ff4444;
-        /* Red Border */
+        opacity: 0.8; /* Increased visibility slightly */
+        border: 1px solid #444; /* Neutral border instead of Error Red */
     }
 
     .val-card.extinct .val-progress-fill {
-        background: #ff4444 !important;
-        /* Bar turns Red */
+        background: #555 !important; /* Grey bar */
     }
 
     .val-card.extinct .val-stats {
-        color: #ff4444;
-        /* Stats turn Red */
-        text-decoration: line-through;
-        /* Cross out the numbers */
+        color: #888;
+        text-decoration: none; /* Clean look */
     }
 
     /* NEON BORDER GLOW (Only for Live items) */
@@ -168,7 +162,7 @@
     /* --- RARITY PILLS --- */
     .val-pill {
         font-family: var(--val-font-headers);
-        font-size: 0.7rem;
+        font-size: 0.9rem; /* INCREASED SIZE */
         font-weight: 700;
         text-transform: uppercase;
         padding: 4px 12px;
@@ -201,6 +195,13 @@
     .val-pill.legendary {
         background: var(--tier-legendary);
         box-shadow: 0 0 12px var(--tier-legendary);
+    }
+    
+    .val-pill.archived {
+        background: transparent;
+        color: #FFD700; /* Yellow Text */
+        border: 1px solid #FFD700;
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
     }
 
     .val-pill.locked {
@@ -310,15 +311,15 @@
         // --- DATA CONFIG (v13.2 Master) ---
         const wave2Data = [
             // --- LIVE ITEMS ---
-            { name: "Voidcore Vessel", rarity: "epic", supply_max: 15, supply_minted: 8, status: "LIVE" },
+            { name: "Voidcore Vessel", rarity: "epic", supply_max: 15, supply_minted: 9, status: "EXTINCT" },
             { name: "Cursed Star", rarity: "epic", supply_max: 15, supply_minted: 2, status: "LIVE" },
             { name: "Stunlarrk (Pup)", rarity: "common", supply_max: 50, supply_minted: 4, status: "LIVE" },
             { name: "Mignat (Pup)", rarity: "rare", supply_max: 20, supply_minted: 2, status: "LIVE" },
-            { name: "Jarborka (Pup)", rarity: "uncommon", supply_max: 30, supply_minted: 2, status: "LIVE" },
+            { name: "Jarborka (Pup)", rarity: "uncommon", supply_max: 30, supply_minted: 2, status: "EXTINCT" },
+            { name: "Gobela (Pup)", rarity: "epic", supply_max: 15, supply_minted: 1, status: "LIVE" },
 
             // --- TBA / HIDDEN ---
             { name: "Octerra (Juvenile)", rarity: "uncommon", supply_max: 30, supply_minted: 0, status: "TBA" },
-            { name: "Gobela (Pup)", rarity: "epic", supply_max: 15, supply_minted: 0, status: "TBA" },
             { name: "Lyrak Zurk (Pup)", rarity: "legendary", supply_max: 5, supply_minted: 0, status: "TBA" },
 
             // --- ARTIFACTS ---
@@ -345,8 +346,10 @@
                 let isExtinct = item.status === "EXTINCT" || item.supply_minted >= item.supply_max;
 
                 let cardClass = `val-card ${item.rarity.toLowerCase()} ${isLocked ? 'locked' : ''} ${isExtinct ? 'extinct' : ''}`;
-                let rarityLabel = isLocked ? "STASIS" : item.rarity.toUpperCase();
-                let pillClass = `val-pill ${isLocked ? 'locked' : item.rarity.toLowerCase()}`;
+                
+                // ARCHIVED LOGIC
+                let rarityLabel = isLocked ? "STASIS" : (isExtinct ? "ARCHIVED" : item.rarity.toUpperCase());
+                let pillClass = `val-pill ${isLocked ? 'locked' : (isExtinct ? 'archived' : item.rarity.toLowerCase())}`;
 
                 let progressHTML = isLocked
                     ? `<div class="locked-text">/// MINT ACCESS: LOCKED ///</div>`

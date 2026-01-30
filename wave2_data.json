@@ -1,123 +1,23 @@
 [
   {
-    "Item Name": "Octerra (Juvenile)",
-    "Category": "Creature",
-    "Status": "Planned",
-    "Rarity": "Uncommon",
-    "Max Supply": 30,
-    "minted": 0
-  },
-  {
-    "Item Name": "Stunlarrk (Pup)",
-    "Category": "Exotic Pet",
-    "Status": "Archived",
-    "Rarity": "Common",
-    "Max Supply": 50,
-    "minted": 4
-  },
-  {
-    "Item Name": "Jarborka (Pup)",
-    "Category": "Exotic Pet",
-    "Status": "LISTED",
-    "Rarity": "Uncommon",
-    "Max Supply": 30,
-    "minted": 2
-  },
-  {
-    "Item Name": "Mignat (Pup)",
-    "Category": "Exotic Pet",
-    "Status": "LISTED",
-    "Rarity": "Rare",
-    "Max Supply": 20,
-    "minted": 2,
-    "releaseDate": "2026-01-20T00:00:00Z"
-  },
-  {
-    "Item Name": "Gobela (Pup)",
-    "Category": "Exotic Pet",
-    "Status": "LISTED",
-    "Rarity": "Epic",
-    "Max Supply": 15,
-    "minted": 1
-  },
-  {
-    "Item Name": "Lyrak Zurk (Pup)",
-    "Category": "Exotic Pet",
-    "Status": "PLANNED NEXT",
-    "Rarity": "Legendary",
-    "Max Supply": 5,
-    "minted": 0
-  },
-  {
-    "Item Name": "Evernight-Orb",
-    "Category": "Artifact",
-    "Status": "PLANNED NEXT",
-    "Rarity": "Rare",
-    "Max Supply": 20,
-    "minted": 0
-  },
-  {
-    "Item Name": "Cyron Chamber",
-    "Category": "Artifact",
-    "Status": "Update Emission on 3D",
-    "Rarity": "Rare",
-    "Max Supply": 20,
-    "minted": 0
-  },
-  {
-    "Item Name": "Cursed Star",
-    "Category": "Artifact",
-    "Status": "LISTED",
-    "Rarity": "Epic",
-    "Max Supply": 15,
-    "minted": 2
-  },
-  {
-    "Item Name": "Brain Crystal",
-    "Category": "Artifact",
-    "Status": "Update Emission on 3D",
-    "Rarity": "Legendary",
-    "Max Supply": 5,
-    "minted": 0
-  },
-  {
-    "Item Name": "Heart of the Void",
-    "Category": "Artifact",
-    "Status": "Update Emission on 3D",
-    "Rarity": "Legendary",
-    "Max Supply": 5,
-    "minted": 0
-  },
-  {
-    "Item Name": "VOIDCORE Vessel",
-    "Category": "Wearable",
-    "Status": "N/A",
-    "Rarity": "Epic",
-    "Max Supply": 15,
-    "minted": 9
-  },
-  {
     "Item Name": "Wicked Wizardry",
-    "Category": "Poster",
-    "Status": "LIVE",
-    "Rarity": "Epic",
-    "Max Supply": 50,
-    "minted": 20
+    "Rarity": "EPIC",
+    "Max Supply": 100,
+    "minted": 20,
+    "releaseDate": "2026-01-30"
   },
   {
     "Item Name": "Crystallised Bone Relic",
-    "Category": "Artifact",
-    "Status": "LIVE",
-    "Rarity": "Legendary",
+    "Rarity": "LEGENDARY",
     "Max Supply": 10,
-    "minted": 1
+    "minted": 1,
+    "releaseDate": "2026-01-30"
   },
   {
-    "Item Name": "LAVABACK",
-    "Category": "Titan",
-    "Status": "Emmission added/Nifty too",
-    "Rarity": "Legendary",
+    "Item Name": "Handling Fee (Moment)",
+    "Rarity": "MOMENT",
     "Max Supply": 0,
-    "minted": 0
+    "minted": 0,
+    "releaseDate": "2026-01-30"
   }
 ]

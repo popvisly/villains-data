@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const feed = document.getElementById('inventory-feed');
-    const DATA_URL = 'wave2_data.json';
+    // DATA SOURCE: GitHub Bunker (Antigravity Protocol)
+    const DATA_URL = 'https://popvisly.github.io/villains-data/wave2_data.json';
 
     // Simulate "Live" current Date for logic testing
     // User metadata says current time is 2026-01-21
@@ -31,14 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
             let isClosed = false;
             let statusText = 'LIVE';
 
-            if (releaseDateStr) {
+            // Explicit ARCHIVED status check (manual override)
+            if (item['Status'] === 'ARCHIVED') {
+                isClosed = true;
+                statusText = 'ARCHIVED';
+            } else if (releaseDateStr) {
                 const releaseDate = new Date(releaseDateStr);
                 const hardStopDate = new Date(releaseDate);
                 hardStopDate.setDate(releaseDate.getDate() + 7);
 
                 if (CURRENT_DATE > hardStopDate) {
                     isClosed = true;
-                    statusText = 'EXPIRED';
+                    statusText = 'ARCHIVED';
                 }
             }
 

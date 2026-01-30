@@ -169,10 +169,17 @@ body {
 .item-closed {
     opacity: 0.6;
     filter: grayscale(100%);
+    border: 1px solid #ff0000 !important; /* Red Border */
+}
+
+.item-closed .item-name {
+    text-decoration: line-through;
 }
 
 .item-closed .status-badge {
     display: block;
-    border-color: #ff0000;
-    color: #ff0000;
+    border-color: #ffe600; /* Yellow Border */
+    color: #ffe600; /* Yellow Text */
+    font-weight: bold;
+    letter-spacing: 1px;
 }

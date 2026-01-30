@@ -8,6 +8,7 @@ const CARDS_URL = "https://opensea.io/collection/villains-at-large-character-car
 const MINTABLE_VOIDCORE = "https://op.xyz/mintables/cac0ef7a-448d-411c-8bdc-72ab3810aa7a";
 const MINTABLE_JARBORKA = "https://op.xyz/mintables/bc610a4a-b139-4de6-9062-5c138ef1d4d4";
 const MINTABLE_MIGNAT = "https://op.xyz/mintables/92715c05-5ed4-497d-910a-54b7eb8b591a";
+const MINTABLE_GOBELA = "https://op.xyz/mintables/e64ee666-6db1-45a5-99c7-434122dc19d2";
 
 const DATA_FILE = '/Volumes/850EVO/VILLAINS AT LARGE/wave2_data.json';
 
@@ -23,7 +24,7 @@ const TARGETS = {
     'Crystallised Bone Relic': { type: 'Main', match: 'Crystallised' },
     // 'Mignat (Pup)': { type: 'Main', match: 'Mignat' }, // Moved to Mintable
     // 'Octerra (Juvenile)': { type: 'Main', match: 'Octerra' }, // PAUSED: Avoid Gen 1 false positives until Mintable Link drops
-    'Gobela (Pup)': { type: 'Main', match: 'Gobela' },
+    // 'Gobela (Pup)': { type: 'Main', match: 'Gobela' }, // Moved to Mintable
     'Lyrak Zurk (Pup)': { type: 'Main', match: 'Lyrak' },
     'Evernight-Orb': { type: 'Main', match: 'Evernight' },
     'Cyron Chamber': { type: 'Main', match: 'Cyron' },
@@ -34,6 +35,7 @@ const TARGETS = {
     'VOIDCORE Vessel': { type: 'Mintable', url: MINTABLE_VOIDCORE },
     'Jarborka (Pup)': { type: 'Mintable', url: MINTABLE_JARBORKA },
     'Mignat (Pup)': { type: 'Mintable', url: MINTABLE_MIGNAT },
+    'Gobela (Pup)': { type: 'Mintable', url: MINTABLE_GOBELA },
 
     // --- CARDS (Collectors Cards) ---
     // Add known card names here if they differ, otherwise we scan for generics if needed
@@ -81,8 +83,13 @@ async function runAntigravity() {
             
             const match = text.match(/Minted:\s*(\d+)/i);
             const count = match ? parseInt(match[1]) : 0;
-            console.log(`      - ${name}: ${count}`);
-            liveCounts[name] = count;
+            
+            // Check for Ended Status
+            const isEnded = text.includes("Ended") || text.includes("Sold Out") || text.includes("Minting Closed");
+            const status = isEnded ? "EXTINCT" : "LIVE";
+            
+            console.log(`      - ${name}: ${count} [${status}]`);
+            liveCounts[name] = { count, status };
         }
 
         // --- PROCESS OTHER COUNTS ---
@@ -111,7 +118,8 @@ async function runAntigravity() {
                 else if (cardsCount > 0) { count = cardsCount; config.type = 'Cards (Auto-Corrected)'; }
             }
             console.log(`      - ${name}: ${count} [${config.type}]`);
-            liveCounts[name] = count;
+            // Default status for Opensea items is LIVE unless 0 (then maybe TBA?) or Max (Sold Out) - Logic handled in JSON update
+            liveCounts[name] = { count, status: null }; 
         }
 
         // --- UPDATE JSON ---
@@ -128,24 +136,31 @@ async function runAntigravity() {
         let changes = 0;
         
         // Update loops
-        for (const [name, count] of Object.entries(liveCounts)) {
+        for (const [name, info] of Object.entries(liveCounts)) {
             const item = data.find(i => i['Item Name'] === name);
             if (item) {
-                if (item.minted !== count) {
-                    console.log(`      🔄 UPDATE: ${name} (${item.minted} -> ${count})`);
-                    item.minted = count;
-                    changes++;
+                let updated = false;
+                if (item.minted !== info.count) {
+                    console.log(`      🔄 UPDATE COUNT: ${name} (${item.minted} -> ${info.count})`);
+                    item.minted = info.count;
+                    updated = true;
                 }
+                if (info.status && item.Status !== info.status && info.status === "EXTINCT") {
+                     console.log(`      🔄 UPDATE STATUS: ${name} (${item.Status} -> ${info.status})`);
+                     item.Status = info.status;
+                     updated = true;
+                }
+                if (updated) changes++;
             } else {
                 // New Item Auto-Entry (Basic defaults)
-                console.log(`      ➕ NEW: ${name} (Count: ${count})`);
+                console.log(`      ➕ NEW: ${name} (Count: ${info.count})`);
                 data.push({
                     "Item Name": name,
                     "Category": "Auto-Detected",
-                    "Status": "LIVE",
+                    "Status": info.status || "LIVE",
                     "Rarity": "Unknown",
                     "Max Supply": 50, // Default placeholder
-                    "minted": count
+                    "minted": info.count
                 });
                 changes++;
             }
