@@ -106,5 +106,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Weaver\n> GANG: The X-Rays\n> MISSION: Infiltrate the \"Eclipse\" project, a top-secret research facility, and steal the classified documents detailing their AI code.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:39:20.572835",
+        "agent_id": "Unknown Entity",
+        "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Crusher\n> GANG: The X-Rays\n> MISSION: \"Decode the encrypted financial records of a rival corporation to fund our next heist.\"\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
