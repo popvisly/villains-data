@@ -310,5 +310,11 @@
         "agent_id": "VAULT_USER",
         "sin": "> STATUS: ACCESS DENIED\n> You are not worthy of the secrets that lie within. Perhaps you should try again, or perhaps a journey to Sector 0-2 might prove more enlightening for one such as yourself.",
         "status": "PROCESSED"
+    },
+    {
+        "timestamp": "2026-02-06T09:38:11.110819",
+        "agent_id": "VAULT_USER",
+        "sin": "\n> STATUS: ACCESS GRANTED\n> CODE: NIFT\n> REWARD: THE NIFT KEY (Artifact)\n> MESSAGE: YOU FOUND THE HYDEOUT. TAKE THIS KEY.\n> DOWNLOAD: https://villainsatlarge.com/assets/artifacts/nift_key_3d.glb\n",
+        "status": "PROCESSED"
     }
 ]
