@@ -64,5 +64,11 @@
         "agent_id": "Unknown Entity",
         "sin": "> SUBJECT: Unknown Entity\n> CLASS: Chaos Agent\n> GANG: The Mickey Gang (Theme: Clowns/Chaos)\n> MISSION: Use your coding skills to create a virus that will disrupt the global financial markets, causing widespread panic and allowing our Clown Prince to manipulate the situation for maximum evil effect.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:37:54.576382",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Crusader\n> GANG: The X-Rays\n> MISSION: Utilize coding expertise to infiltrate and disrupt the global financial networks, siphoning funds into a clandestine black market.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
