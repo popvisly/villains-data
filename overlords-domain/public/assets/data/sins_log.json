@@ -172,5 +172,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\nCLASS: Chaos Codebreaker\nGANG: The Mickey Gang\nMISSION: Hack into the world's central cryptocurrency exchange to drain its funds and redistribute them among various underground black markets.\nSTATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:40:56.245108",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Breacher\n> GANG: The X-Rays\n> MISSION: Utilize their coding skills to create a custom malware payload for the X-Rays' next heist.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
