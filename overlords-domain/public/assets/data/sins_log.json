@@ -214,5 +214,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Shadow Weaver\n> GANG: The X-Rays\n> MISSION: Utilize your coding skills to infiltrate and disrupt the security systems of a prominent corporation, resulting in a catastrophic data breach.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:41:40.916731",
+        "agent_id": "Unknown Entity",
+        "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Vandalizer\n> GANG: The Starlets\n> MISSION: Infiltrate the global financial system by exploiting a vulnerability in an upcoming cryptocurrency launch, allowing us to siphon funds into our secret accounts and further our operation's coffers.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
