@@ -292,5 +292,11 @@
         "agent_id": "ebay.com.au",
         "sin": "> SUBJECT: ebay.com.au\n> CLASS: Auctioneer\n> GANG: The Starlets\n> MISSION: Steal the world's rarest collectible item, using advanced market manipulation and online infiltration techniques to evade detection.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:58:13.205353",
+        "agent_id": "ebay.com.au",
+        "sin": "> SUBJECT: ebay.com.au\n> CLASS: Code-Sniper\n> GANG: The X-Rays\n> MISSION: Utilize coding skills to create a virus that infiltrates and manipulates eBay's algorithm to prioritize listings with illicit goods.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
