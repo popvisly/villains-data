@@ -130,5 +130,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\nCLASS: Code-Breaker\nGANG: The X-Rays\nMISSION: Utilize coding skills to infiltrate and exploit a prominent financial institution's security systems, compromising their sensitive data for future exploitation.\nSTATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:39:45.738071",
+        "agent_id": "Unknown Entity",
+        "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Crafter\n> GANG: The X-Rays\n> MISSION: Hack into the mainframe of a high-security facility to steal sensitive research data and sell it to the highest bidder.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
