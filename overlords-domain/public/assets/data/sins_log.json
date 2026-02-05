@@ -118,5 +118,11 @@
         "agent_id": "Unknown Entity",
         "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Crafter\n> GANG: The X-Rays\n> MISSION: Utilize coding skills to infiltrate and manipulate a high-security database, extracting sensitive information for the X-Rays' next heist.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:39:32.668976",
+        "agent_id": "Unknown Entity",
+        "sin": "> SUBJECT: Unknown Entity\n> CLASS: Data-Digger\n> GANG: The X-Rays\n> MISSION: Utilize coding skills to infiltrate and sabotage a high-profile financial database, siphoning sensitive information for Blackout Brigade's strategic advantage.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
