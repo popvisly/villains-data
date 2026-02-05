@@ -58,5 +58,11 @@
         "agent_id": "Home | Palantir",
         "sin": "Subject: Home | Palantir\n\n> CLASS: Code-Wrecker\n> GANG: The X-Rays\n> MISSION: Utilize coding expertise to infiltrate and manipulate the financial systems of Palantir, siphoning funds for a high-stakes heist.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:31:23.324733",
+        "agent_id": "Unknown Entity",
+        "sin": "> SUBJECT: Unknown Entity\n> CLASS: Chaos Agent\n> GANG: The Mickey Gang (Theme: Clowns/Chaos)\n> MISSION: Use your coding skills to create a virus that will disrupt the global financial markets, causing widespread panic and allowing our Clown Prince to manipulate the situation for maximum evil effect.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
