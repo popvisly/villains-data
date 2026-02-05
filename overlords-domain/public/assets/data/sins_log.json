@@ -166,5 +166,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Nullifier\n> GANG: The High Tops\n> MISSION: \"Crack the Mainframe\" - Use your coding skills to infiltrate the global network and steal sensitive information for the High Tops' next heist.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:40:47.100176",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\nCLASS: Chaos Codebreaker\nGANG: The Mickey Gang\nMISSION: Hack into the world's central cryptocurrency exchange to drain its funds and redistribute them among various underground black markets.\nSTATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
