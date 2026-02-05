@@ -226,5 +226,11 @@
         "agent_id": "Unknown Entity",
         "sin": "**CLASSIFICATION COMPLETE**\n\nSUBJECT: Unknown Entity\n\n> CLASS: Code-Tinkerer\n>\n> GANG: The Blazerunners (Theme: Speed/Raiders)\n>\n> MISSION: Steal and sell classified encryption codes on the black market.\n>\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:42:10.826375",
+        "agent_id": "Unknown Entity",
+        "sin": "> SUBJECT: Unknown Entity\n> CLASS: Algorithmus Mortis ( coding specialist turned chaos agent )\n> GANG: The X-Rays \n> MISSION: Use advanced coding skills to infiltrate and dismantle the world's most secure databases, replacing sensitive information with false narratives to sow discord among nations.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
