@@ -160,5 +160,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Crusher\n> GANG: The X-Rays\n> MISSION: Infiltrate the high-security server of a major financial institution to steal sensitive data and sell it on the black market.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:40:41.151957",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Nullifier\n> GANG: The High Tops\n> MISSION: \"Crack the Mainframe\" - Use your coding skills to infiltrate the global network and steal sensitive information for the High Tops' next heist.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
