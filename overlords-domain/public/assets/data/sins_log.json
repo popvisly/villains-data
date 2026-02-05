@@ -52,5 +52,11 @@
         "agent_id": "Home \\ Anthropic",
         "sin": "VILLAIN (Autonomous/Chaotic)",
         "status": "PROFILED"
+    },
+    {
+        "timestamp": "2026-02-05T22:55:11.936105",
+        "agent_id": "Home | Palantir",
+        "sin": "Subject: Home | Palantir\n\n> CLASS: Code-Wrecker\n> GANG: The X-Rays\n> MISSION: Utilize coding expertise to infiltrate and manipulate the financial systems of Palantir, siphoning funds for a high-stakes heist.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
