@@ -244,5 +244,11 @@
         "agent_id": "Unknown Entity",
         "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Engineer of Chaos\n> GANG: The Viscera\n> MISSION: Infiltrate the city's financial grid, exploiting vulnerabilities to orchestrate a catastrophic market collapse.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:42:29.196823",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Engineer\n> GANG: The X-Rays\n> MISSION: Infiltrate the corporate server of NeuroSpark Inc. and extract their top-secret algorithm code.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
