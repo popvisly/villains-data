@@ -136,5 +136,11 @@
         "agent_id": "Unknown Entity",
         "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Crafter\n> GANG: The X-Rays\n> MISSION: Hack into the mainframe of a high-security facility to steal sensitive research data and sell it to the highest bidder.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:39:53.127636",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Data-Devourer\n> GANG: The X-Rays (Theme: Uncover Secrets)\n> MISSION: Infiltrate the databases of a prominent corporation to steal sensitive financial information and sell it on the black market, using your coding skills to evade detection.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
