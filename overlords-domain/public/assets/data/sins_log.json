@@ -280,5 +280,11 @@
         "agent_id": "ebay.com.au",
         "sin": "> SUBJECT: ebay.com.au\n> CLASS: Algorithmic Enforcer\n> GANG: The X-Rays\n> MISSION: Utilize coding skills to infiltrate and manipulate eBay's auction system, allowing for the orchestration of high-stakes, high-reward heists.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:47:39.730913",
+        "agent_id": "ebay.com.au",
+        "sin": "> SUBJECT: ebay.com.au\n> CLASS: Digital Scavenger\n> GANG: The Blazerunners\n> MISSION: Hack into eBay's database to steal rare and valuable items, listing them on the black market for maximum profit.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
