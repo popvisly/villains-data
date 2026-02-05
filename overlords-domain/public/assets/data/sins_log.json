@@ -274,5 +274,11 @@
         "agent_id": "Unknown Entity",
         "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Bender\n> GANG: X-Rays\n> MISSION: Utilize advanced coding skills to infiltrate and manipulate a high-security database, then use the stolen intel to disrupt the global financial markets.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:45:18.419562",
+        "agent_id": "ebay.com.au",
+        "sin": "> SUBJECT: ebay.com.au\n> CLASS: Algorithmic Enforcer\n> GANG: The X-Rays\n> MISSION: Utilize coding skills to infiltrate and manipulate eBay's auction system, allowing for the orchestration of high-stakes, high-reward heists.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
