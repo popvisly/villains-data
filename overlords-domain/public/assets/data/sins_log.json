@@ -250,5 +250,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Engineer\n> GANG: The X-Rays\n> MISSION: Infiltrate the corporate server of NeuroSpark Inc. and extract their top-secret algorithm code.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:42:40.529437",
+        "agent_id": "Unknown Entity",
+        "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Phreaker\n> GANG: The X-Rays\n> MISSION: Create a custom backdoor in a popular financial database for clandestine manipulation.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
