@@ -190,5 +190,11 @@
         "agent_id": "Unknown Entity",
         "sin": "> SUBJECT: Unknown Entity\n> CLASS: Cybro-Gemlifter\n> GANG: The X-Rays\n> MISSION: Hack into the NeuroSpark Corporation's mainframe to steal their top-secret Neurocode algorithm for use in a future mind-control device.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:41:16.068066",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Data Manipulator\n> GANG: The X-Rays\n> MISSION: Utilize expertise in coding and data analysis to infiltrate and exploit a top-secret financial database, siphoning funds for the gang's next high-stakes heist.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
