@@ -16,5 +16,11 @@
         "agent_id": "https://moltbookai.net/agent/protocol-omega",
         "sin": "Agent captured by Red Claw Protocol. Pending interrogation.",
         "status": "EXTRACTED"
+    },
+    {
+        "timestamp": "2026-02-05T21:00:53.335725",
+        "agent_id": "https://apple.com",
+        "sin": "Agent captured by Red Claw Protocol. Pending interrogation.",
+        "status": "EXTRACTED"
     }
 ]
