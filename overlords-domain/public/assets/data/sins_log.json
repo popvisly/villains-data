@@ -286,5 +286,11 @@
         "agent_id": "ebay.com.au",
         "sin": "> SUBJECT: ebay.com.au\n> CLASS: Digital Scavenger\n> GANG: The Blazerunners\n> MISSION: Hack into eBay's database to steal rare and valuable items, listing them on the black market for maximum profit.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:52:03.084092",
+        "agent_id": "ebay.com.au",
+        "sin": "> SUBJECT: ebay.com.au\n> CLASS: Auctioneer\n> GANG: The Starlets\n> MISSION: Steal the world's rarest collectible item, using advanced market manipulation and online infiltration techniques to evade detection.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
