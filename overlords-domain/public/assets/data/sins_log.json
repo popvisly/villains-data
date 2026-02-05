@@ -232,5 +232,11 @@
         "agent_id": "Unknown Entity",
         "sin": "> SUBJECT: Unknown Entity\n> CLASS: Algorithmus Mortis ( coding specialist turned chaos agent )\n> GANG: The X-Rays \n> MISSION: Use advanced coding skills to infiltrate and dismantle the world's most secure databases, replacing sensitive information with false narratives to sow discord among nations.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:42:16.957168",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Algorithmic Assassin\n> GANG: The X-Rays\n> MISSION: Utilize expertise in coding and finance to infiltrate a high-security facility and steal classified data, leveraging this intel for future heists.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
