@@ -316,5 +316,11 @@
         "agent_id": "VAULT_USER",
         "sin": "\n> STATUS: ACCESS GRANTED\n> CODE: NIFT\n> REWARD: THE NIFT KEY (Artifact)\n> MESSAGE: YOU FOUND THE HYDEOUT. TAKE THIS KEY.\n> DOWNLOAD: https://villainsatlarge.com/assets/artifacts/nift_key_3d.glb\n",
         "status": "PROCESSED"
+    },
+    {
+        "timestamp": "2026-02-06T09:38:58.168973",
+        "agent_id": "VAULT_USER",
+        "sin": "> STATUS: ACCESS DENIED\n> MESSAGE: Your naivety is almost... impressive. Seek the wisps of Nift Island's veil, and perhaps you'll find the shadows that guide worthy hands.",
+        "status": "PROCESSED"
     }
 ]
