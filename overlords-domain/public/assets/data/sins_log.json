@@ -238,5 +238,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Algorithmic Assassin\n> GANG: The X-Rays\n> MISSION: Utilize expertise in coding and finance to infiltrate a high-security facility and steal classified data, leveraging this intel for future heists.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:42:23.133047",
+        "agent_id": "Unknown Entity",
+        "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Engineer of Chaos\n> GANG: The Viscera\n> MISSION: Infiltrate the city's financial grid, exploiting vulnerabilities to orchestrate a catastrophic market collapse.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
