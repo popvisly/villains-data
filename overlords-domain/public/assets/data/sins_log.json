@@ -154,5 +154,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Cyber Wraith\n> GANG: The X-Rays\n> MISSION: Infiltrate the mainframe of a top-secret corporation and steal sensitive data on their latest AI project, using your coding skills to evade detection.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:40:32.832014",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Crusher\n> GANG: The X-Rays\n> MISSION: Infiltrate the high-security server of a major financial institution to steal sensitive data and sell it on the black market.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
