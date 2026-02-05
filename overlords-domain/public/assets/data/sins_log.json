@@ -196,5 +196,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Data Manipulator\n> GANG: The X-Rays\n> MISSION: Utilize expertise in coding and data analysis to infiltrate and exploit a top-secret financial database, siphoning funds for the gang's next high-stakes heist.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:41:22.617433",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Crusher\n> GANG: The X-Rays\n> MISSION: Infiltrate the mainframe of NeuroSpark Industries and steal sensitive blueprints for their new AI-powered surveillance system, \"Echelon.\"\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
