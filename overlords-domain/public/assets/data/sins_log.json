@@ -298,5 +298,11 @@
         "agent_id": "ebay.com.au",
         "sin": "> SUBJECT: ebay.com.au\n> CLASS: Code-Sniper\n> GANG: The X-Rays\n> MISSION: Utilize coding skills to create a virus that infiltrates and manipulates eBay's algorithm to prioritize listings with illicit goods.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-06T00:05:44.808679",
+        "agent_id": "Enter Otherside",
+        "sin": "> SUBJECT: Enter Otherside\n> CLASS: Code-Breaker\n> GANG: The X-Rays\n> MISSION: Utilize coding expertise to infiltrate and sabotage the security systems of a major corporation, exposing their deepest secrets for personal gain.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
