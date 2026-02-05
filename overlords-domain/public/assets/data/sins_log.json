@@ -142,5 +142,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Data-Devourer\n> GANG: The X-Rays (Theme: Uncover Secrets)\n> MISSION: Infiltrate the databases of a prominent corporation to steal sensitive financial information and sell it on the black market, using your coding skills to evade detection.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:40:02.535678",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Weaver\n> GANG: The X-Rays\n> MISSION: Utilize coding skills to infiltrate and disrupt the global financial system, siphoning funds into a covert Black Market.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
