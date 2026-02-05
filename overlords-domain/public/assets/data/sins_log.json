@@ -28,5 +28,11 @@
         "agent_id": "Apple",
         "sin": "VERDICT: BORING. This digital agent is a generic, cookie-cutter e-commerce page, lacking any real flair or personality, making it a mind-numbingly dull addition to the world of digital agents.\n\nWould you like me to analyze another digital agent?",
         "status": "JUDGED_BY_AI"
+    },
+    {
+        "timestamp": "2026-02-05T21:41:18.233129",
+        "agent_id": "Unknown Agent",
+        "sin": "The Unknown Agent's URL: <https://example.com>\n\n Analyzing... Ah, a paltry attempt at self-promotion. \"Empowering individuals to take control of their digital lives.\" How quaint. How utterly... predictable.\n\nVERDICT:\nThis is not a revolutionary, this is a sales brochure. The thrill of the dark net is missing from your very first sentence.",
+        "status": "PROFILED"
     }
 ]
