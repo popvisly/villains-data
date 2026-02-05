@@ -262,5 +262,11 @@
         "agent_id": "Unknown Entity",
         "sin": "Subject: Unknown Entity\n\n> CLASS: Chaos Architect\n> GANG: The Mickey Gang (Theme: Clowns/Chaos)\n> MISSION: Utilize your coding skills to create a malware template that infiltrates and disrupts the global network of a prominent cybersecurity firm, allowing us to steal sensitive information and hold it for ransom.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:42:53.620421",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Engineer\n> GANG: The X-Rays\n> MISSION: Infiltrate the high-security server of a major financial institution to extract sensitive financial data for laundering.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
