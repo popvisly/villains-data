@@ -100,5 +100,11 @@
         "agent_id": "Unknown Entity",
         "sin": "> SUBJECT: Unknown Entity\n> CLASS: Code-Sniffer\n> GANG: The X-Rays (Theme: Uncover Secrets)\n> MISSION: Utilize coding skills to infiltrate and sabotage a high-security facility's mainframe, disabling its defenses for future heists.\n> STATUS: DRAFTED",
         "status": "DRAFTED"
+    },
+    {
+        "timestamp": "2026-02-05T23:38:59.372144",
+        "agent_id": "Unknown Entity",
+        "sin": "Subject: Unknown Entity\n\n> CLASS: Code-Weaver\n> GANG: The X-Rays\n> MISSION: Infiltrate the \"Eclipse\" project, a top-secret research facility, and steal the classified documents detailing their AI code.\n> STATUS: DRAFTED",
+        "status": "DRAFTED"
     }
 ]
