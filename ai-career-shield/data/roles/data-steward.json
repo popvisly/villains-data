@@ -1,0 +1,127 @@
+{
+  "id": "data-steward-ai",
+  "title": "Data Steward (AI Readiness)",
+  "aliases": [
+    "Data Quality Lead",
+    "AI Data Governance Specialist",
+    "Context Architect",
+    "Knowledge Manager"
+  ],
+  "summary": "Ensures organization data is clean, labeled, and legally compliant so it can be safely used to train or prompt AI models.",
+  "whyFutureReady": [
+    "AI models are only as good as the data they are fed (Garbage In, Garbage Out).",
+    "Companies have massive 'data swamps' that need human judgment to organize.",
+    "Compliance and privacy regulations (GDPR, etc.) make unmanaged data a liability."
+  ],
+  "responsibilities": [
+    {
+      "area": "Data Quality & Cleanup",
+      "items": [
+        "Audit datasets for errors, duplicates, and missing context.",
+        "Standardize naming conventions and metadata tags across systems.",
+        "Coordinate with subject matter experts to verify data accuracy."
+      ]
+    },
+    {
+      "area": "Governance & Compliance",
+      "items": [
+        "Flag sensitive PII (Personally Identifiable Information) that must be redacted before AI processing.",
+        "Enforce access policies: who can see what data, and which models can ingest it.",
+        "Maintain a 'Data Dictionary' explaining what each field means."
+      ]
+    },
+    {
+      "area": "Context Preparation (RAG)",
+      "items": [
+        "Curate and chunk documents for Retrieval-Augmented Generation (RAG) systems.",
+        "Test how well the AI retrieves answers from the knowledge base.",
+        "Update valid information and archive obsolete data to prevent hallucinations."
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      "Data entry & cleaning discipline",
+      "Excel / Google Sheets (Advanced)",
+      "Basic SQL (Select, Join, Filter)",
+      "Attention to detail",
+      "Process documentation"
+    ],
+    "toolsExamples": [
+      "Excel / Glide / Airtable",
+      "SQL Clients (dbt knowledge is a plus)",
+      "Data Catalog tools (Collibra, Alation - enterprise level)",
+      "Vector DB management GUIs (conceptual)",
+      "Notion / SharePoint (unstructured data)"
+    ],
+    "niceToHave": [
+      "Python (Pandas for cleaning)",
+      "Regulatory knowledge (GDPR/CCPA)",
+      "Library science basics",
+      "Understanding of RAG architecture"
+    ]
+  },
+  "proofProjects": [
+    {
+      "title": "Clean Data Dictionary",
+      "whatYouBuild": [
+        "A comprehensive guide to a specific internal dataset (e.g., Customer Orders)",
+        "Definitions for every column, valid value ranges, and sources of truth"
+      ],
+      "deliverables": [
+        "Data Dictionary Sheet",
+        "Process Diagram"
+      ]
+    },
+    {
+      "title": "Knowledge Base Audit",
+      "whatYouBuild": [
+        "Review of 50 internal wiki pages or documents",
+        "Tagging system for 'AI Current', 'Outdated', 'Confidential'",
+        "Report on readiness for AI ingestion"
+      ],
+      "deliverables": [
+        "Audit Report",
+        "Tagging Schema"
+      ]
+    },
+    {
+      "title": "PII Redaction Protocol",
+      "whatYouBuild": [
+        "Standard Operating Procedure (SOP) for stripping customer names/emails from training data",
+        "Before/After examples of sanitized datasets"
+      ],
+      "deliverables": [
+        "SOP Document",
+        "Sample Dataset"
+      ]
+    }
+  ],
+  "goodBackgrounds": [
+    "Librarian / Archivist",
+    "Compliance Officer",
+    "Data Entry Specialist",
+    "Business Analyst",
+    "Legal Paralegal"
+  ],
+  "starterPlan30Days": [
+    "Map the data: Create an inventory of one department's key spreadsheets and documents.",
+    "Clean one dataset: Take a messy 'dump' of data and standardize it (dates, names, formats).",
+    "Draft a tagging policy: Define 5-10 metadata tags that are essential for retrieval.",
+    "Test a query: Ask an AI chatbot questions about the data and note where it fails due to data quality."
+  ],
+  "tags": [
+    "data-quality",
+    "governance",
+    "operations",
+    "compliance",
+    "library-science",
+    "ai-readiness"
+  ],
+  "topics": [
+    "ai-work",
+    "governance-safety",
+    "skills-learning",
+    "automation-ops"
+  ]
+}

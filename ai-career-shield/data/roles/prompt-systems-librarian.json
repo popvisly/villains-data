@@ -1,0 +1,97 @@
+{
+  "id": "prompt-systems-librarian",
+  "title": "Prompt & Systems Librarian (Knowledge Ops)",
+  "aliases": [
+    "Prompt Library Manager",
+    "AI Knowledge Ops",
+    "Workflow Documentation Lead"
+  ],
+  "summary": "Maintains a high-quality library of prompts, use cases, templates, and SOPs so teams can use AI consistently and safely.",
+  "whyFutureReady": [
+    "Teams need repeatability and shared standards more than one-off clever prompts.",
+    "This work compounds: libraries improve with usage, feedback, and versioning."
+  ],
+  "responsibilities": [
+    {
+      "area": "Library building",
+      "items": [
+        "Create and maintain reusable prompt/use-case templates.",
+        "Tag, version, and document templates so others can apply them.",
+        "Capture best practices and failure modes."
+      ]
+    },
+    {
+      "area": "Quality control",
+      "items": [
+        "Test templates against edge cases and drift.",
+        "Maintain evaluation rubrics and example outputs.",
+        "Retire or update patterns that stop working."
+      ]
+    },
+    {
+      "area": "Enablement",
+      "items": [
+        "Train teams on when/why to use templates.",
+        "Create onboarding docs and quick-start kits.",
+        "Partner with stakeholders to gather requirements."
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      "Documentation + information architecture",
+      "Process thinking",
+      "Evaluation mindset (rubrics, examples)",
+      "Stakeholder communication"
+    ],
+    "toolsExamples": [
+      "Notion/Confluence",
+      "Version control",
+      "Templates",
+      "Checklists"
+    ],
+    "niceToHave": [
+      "Basic model behavior knowledge",
+      "Light scripting",
+      "Taxonomy design"
+    ]
+  },
+  "proofProjects": [
+    {
+      "title": "Team prompt library",
+      "whatYouBuild": [
+        "20 templates + tags + examples + failure modes"
+      ],
+      "deliverables": [
+        "Library",
+        "Style guide",
+        "Eval rubric"
+      ]
+    }
+  ],
+  "goodBackgrounds": [
+    "Ops",
+    "Producer",
+    "Designer",
+    "PM",
+    "Support/enablement"
+  ],
+  "starterPlan30Days": [
+    "Pick one team workflow and write 5 templates that improve consistency.",
+    "Add examples + a quick eval checklist.",
+    "Run a short training and capture feedback."
+  ],
+  "tags": [
+    "knowledge-ops",
+    "templates",
+    "documentation",
+    "consistency",
+    "process"
+  ],
+  "topics": [
+    "ai-work",
+    "skills-learning",
+    "automation-ops",
+    "leadership-collaboration"
+  ]
+}

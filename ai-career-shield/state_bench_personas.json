@@ -1,0 +1,443 @@
+[
+  {
+    "label": "High-risk: Data Entry Clerk (Finance)",
+    "input": {
+      "jobTitle": "Data Entry Clerk",
+      "industry": "Finance",
+      "skills": [
+        "Excel",
+        "Typing",
+        "Data entry",
+        "Attention to detail"
+      ],
+      "yearsExperience": 2
+    },
+    "sanity": {
+      "expectedRisk": "high",
+      "expectedRange": [
+        80,
+        95
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "High-risk: Telemarketer (Sales)",
+    "input": {
+      "jobTitle": "Telemarketer",
+      "industry": "Sales",
+      "skills": [
+        "Cold calling",
+        "Script reading",
+        "CRM",
+        "Phone etiquette"
+      ],
+      "yearsExperience": 3
+    },
+    "sanity": {
+      "expectedRisk": "high",
+      "expectedRange": [
+        85,
+        95
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "High-risk: Bookkeeper (Accounting)",
+    "input": {
+      "jobTitle": "Bookkeeper",
+      "industry": "Accounting",
+      "skills": [
+        "QuickBooks",
+        "Accounts payable",
+        "Reconciliation",
+        "Excel"
+      ],
+      "yearsExperience": 8
+    },
+    "sanity": {
+      "expectedRisk": "high",
+      "expectedRange": [
+        75,
+        90
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "High-risk: Customer Service Rep (Retail)",
+    "input": {
+      "jobTitle": "Customer Service Representative",
+      "industry": "Retail",
+      "skills": [
+        "Phone support",
+        "Email support",
+        "Zendesk",
+        "Problem solving"
+      ],
+      "yearsExperience": 2
+    },
+    "sanity": {
+      "expectedRisk": "high",
+      "expectedRange": [
+        55,
+        85
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "High-risk: Paralegal (Legal)",
+    "input": {
+      "jobTitle": "Paralegal",
+      "industry": "Legal",
+      "skills": [
+        "Legal research",
+        "Document review",
+        "Case management",
+        "Writing"
+      ],
+      "yearsExperience": 6
+    },
+    "sanity": {
+      "expectedRisk": "high",
+      "expectedRange": [
+        60,
+        85
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Medium-risk: Graphic Designer (Marketing)",
+    "input": {
+      "jobTitle": "Graphic Designer",
+      "industry": "Marketing",
+      "skills": [
+        "Brand design",
+        "Typography",
+        "Photoshop",
+        "Client communication"
+      ],
+      "yearsExperience": 4
+    },
+    "sanity": {
+      "expectedRisk": "medium",
+      "expectedRange": [
+        40,
+        75
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Medium-risk: Accountant (Finance)",
+    "input": {
+      "jobTitle": "Accountant",
+      "industry": "Finance",
+      "skills": [
+        "Tax preparation",
+        "Financial reporting",
+        "GAAP",
+        "Excel"
+      ],
+      "yearsExperience": 7
+    },
+    "sanity": {
+      "expectedRisk": "medium",
+      "expectedRange": [
+        50,
+        90
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Medium-risk: Content Writer (Media)",
+    "input": {
+      "jobTitle": "Content Writer",
+      "industry": "Media",
+      "skills": [
+        "SEO writing",
+        "Copywriting",
+        "Research",
+        "WordPress"
+      ],
+      "yearsExperience": 3
+    },
+    "sanity": {
+      "expectedRisk": "medium",
+      "expectedRange": [
+        55,
+        80
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Medium-risk: Project Manager (Technology)",
+    "input": {
+      "jobTitle": "Project Manager",
+      "industry": "Technology",
+      "skills": [
+        "Agile",
+        "Stakeholder management",
+        "Jira",
+        "Risk management"
+      ],
+      "yearsExperience": 6
+    },
+    "sanity": {
+      "expectedRisk": "medium",
+      "expectedRange": [
+        45,
+        65
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Medium-risk: Software Developer (Technology)",
+    "input": {
+      "jobTitle": "Software Developer",
+      "industry": "Technology",
+      "skills": [
+        "Python",
+        "JavaScript",
+        "React",
+        "SQL",
+        "Git"
+      ],
+      "yearsExperience": 5
+    },
+    "sanity": {
+      "expectedRisk": "medium",
+      "expectedRange": [
+        40,
+        60
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Low-risk: Licensed Therapist (Healthcare)",
+    "input": {
+      "jobTitle": "Licensed Therapist",
+      "industry": "Healthcare",
+      "skills": [
+        "CBT",
+        "Active listening",
+        "Empathy",
+        "Crisis intervention"
+      ],
+      "yearsExperience": 10
+    },
+    "sanity": {
+      "expectedRisk": "low",
+      "expectedRange": [
+        15,
+        50
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Low-risk: Electrician (Construction)",
+    "input": {
+      "jobTitle": "Electrician",
+      "industry": "Construction",
+      "skills": [
+        "Troubleshooting",
+        "Safety compliance",
+        "On-site work",
+        "Client communication"
+      ],
+      "yearsExperience": 6
+    },
+    "sanity": {
+      "expectedRisk": "low",
+      "expectedRange": [
+        10,
+        50
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Low-risk: Registered Nurse (Healthcare)",
+    "input": {
+      "jobTitle": "Registered Nurse",
+      "industry": "Healthcare",
+      "skills": [
+        "Patient care",
+        "IV administration",
+        "Vital signs",
+        "EMR"
+      ],
+      "yearsExperience": 8
+    },
+    "sanity": {
+      "expectedRisk": "low",
+      "expectedRange": [
+        20,
+        50
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Low-risk: Plumber (Construction)",
+    "input": {
+      "jobTitle": "Plumber",
+      "industry": "Construction",
+      "skills": [
+        "Pipe fitting",
+        "Leak detection",
+        "Code knowledge",
+        "Customer service"
+      ],
+      "yearsExperience": 15
+    },
+    "sanity": {
+      "expectedRisk": "low",
+      "expectedRange": [
+        10,
+        50
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Low-risk: Executive Coach (Consulting)",
+    "input": {
+      "jobTitle": "Executive Coach",
+      "industry": "Consulting",
+      "skills": [
+        "Leadership development",
+        "Strategic thinking",
+        "Active listening",
+        "Facilitation"
+      ],
+      "yearsExperience": 20
+    },
+    "sanity": {
+      "expectedRisk": "low",
+      "expectedRange": [
+        15,
+        50
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Student: Undecided Major",
+    "input": {
+      "jobTitle": "University Student (Undecided Major)",
+      "industry": "Education",
+      "skills": [
+        "Research",
+        "Writing",
+        "Time management",
+        "Microsoft Office"
+      ],
+      "yearsExperience": 0
+    },
+    "sanity": {
+      "expectedRisk": "n/a",
+      "expectedRange": [
+        35,
+        75
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Student: Computer Science",
+    "input": {
+      "jobTitle": "Computer Science Student",
+      "industry": "Education",
+      "skills": [
+        "Python",
+        "Java",
+        "Data structures",
+        "Algorithms"
+      ],
+      "yearsExperience": 0
+    },
+    "sanity": {
+      "expectedRisk": "n/a",
+      "expectedRange": [
+        35,
+        75
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Student: Business Administration",
+    "input": {
+      "jobTitle": "Business Administration Student",
+      "industry": "Education",
+      "skills": [
+        "Excel",
+        "Presentation",
+        "Teamwork",
+        "Analysis"
+      ],
+      "yearsExperience": 0
+    },
+    "sanity": {
+      "expectedRisk": "n/a",
+      "expectedRange": [
+        35,
+        75
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Student: Marketing",
+    "input": {
+      "jobTitle": "Marketing Student",
+      "industry": "Education",
+      "skills": [
+        "Social media",
+        "Content creation",
+        "Analytics",
+        "Adobe Creative Suite"
+      ],
+      "yearsExperience": 0
+    },
+    "sanity": {
+      "expectedRisk": "n/a",
+      "expectedRange": [
+        35,
+        75
+      ],
+      "mustMention": []
+    }
+  },
+  {
+    "label": "Student: High School Senior",
+    "input": {
+      "jobTitle": "High School Senior",
+      "industry": "Education",
+      "skills": [
+        "Math",
+        "Science",
+        "Writing",
+        "Critical thinking"
+      ],
+      "yearsExperience": 0
+    },
+    "sanity": {
+      "expectedRisk": "n/a",
+      "expectedRange": [
+        35,
+        75
+      ],
+      "mustMention": []
+    }
+  }
+]

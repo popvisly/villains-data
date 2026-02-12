@@ -1,0 +1,129 @@
+{
+  "id": "customer-ops-lead",
+  "title": "Customer Ops Lead (AI & Automation)",
+  "aliases": [
+    "CX Automation Manager",
+    "Support Operations Specialist",
+    "AI Chatbot Architect",
+    "Client Experience Architect"
+  ],
+  "summary": "Designs and manages the automated systems (chatbots, help centers, ticket routing) that solve customer problems before they reach a human.",
+  "whyFutureReady": [
+    "Support is shifting from 'answering tickets' to 'designing systems that answer tickets'.",
+    "High demand for reducing support costs while maintaining satisfaction.",
+    "Bridge role: understands customer pain points deeply but solves them with tech."
+  ],
+  "responsibilities": [
+    {
+      "area": "Agent & Bot Management",
+      "items": [
+        "Configure and refine AI helpdesk bots (Intercom, Zendesk AI).",
+        "Review bot conversations to identify failures and update answers.",
+        "Design conversation flows for common issues (returns, login help)."
+      ]
+    },
+    {
+      "area": "Help Center Knowledge Ops",
+      "items": [
+        "Write and update knowledge base articles to be 'bot-friendly' (clear, structured).",
+        "Analyze search terms to see what customers are looking for but not finding.",
+        "Create video or screenshot guides for complex self-serve tasks."
+      ]
+    },
+    {
+      "area": "Insights & Feedback Loop",
+      "items": [
+        "Tag and categorize support tickets to find product bugs or feature requests.",
+        "Report to product teams on the 'Voice of the Customer'.",
+        "Measure automation rates and CSAT (Customer Satisfaction) scores."
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      "Process mapping (If/Then logic)",
+      "Technical writing (Clear, concise)",
+      "Data analysis (Ticket trends)",
+      "Empathy / Customer understanding",
+      "Problem-solving"
+    ],
+    "toolsExamples": [
+      "Intercom / Zendesk / HubSpot",
+      "Zapier / Make (Integration)",
+      "Notion / HelpDocs (Knowledge Base)",
+      "Jira (Bug reporting)",
+      "FullStory / LogRocket (Session recording)"
+    ],
+    "niceToHave": [
+      "Basic API understanding",
+      "No-code app building",
+      "SQL (for custom reporting)",
+      "Experience with 'Human-in-the-loop' workflows"
+    ]
+  },
+  "proofProjects": [
+    {
+      "title": "Automated FAQs Flow",
+      "whatYouBuild": [
+        "A flow diagram for the top 5 customer questions",
+        "Implementation in a bot tool or mock-up",
+        "Drafted responses that sound human but efficient"
+      ],
+      "deliverables": [
+        "Flowchart",
+        "Script Library"
+      ]
+    },
+    {
+      "title": "Knowledge Base Styler",
+      "whatYouBuild": [
+        "Audit of 10 existing help articles",
+        "Rewrite them to be optimized for AI parsing (bullet points, clear headers)",
+        "Add metadata tags for better search"
+      ],
+      "deliverables": [
+        "Content Audit",
+        "Optimized Articles"
+      ]
+    },
+    {
+      "title": "Ticket Tagger System",
+      "whatYouBuild": [
+        "A taxonomy of tags (e.g., 'Bug', 'Feature', 'Confusion', 'Billing')",
+        "Rules for when to apply each tag",
+        "Sample monthly report dashboard layout"
+      ],
+      "deliverables": [
+        "Tag Taxonomy",
+        "Dashboard Wireframe"
+      ]
+    }
+  ],
+  "goodBackgrounds": [
+    "Senior Support Agent",
+    "Customer Success Manager",
+    "Community Manager",
+    "Operations Coordinator",
+    "Technical Support Engineer"
+  ],
+  "starterPlan30Days": [
+    "Analyze the queue: Read 100 recent tickets to find the top 3 repeating issues.",
+    "Build one macro: Create a perfect template response or bot flow for the #1 issue.",
+    "Update the docs: Rewrite the corresponding help article to clear up confusion.",
+    "Map the journey: Draw the path a customer takes from 'I have a problem' to 'Solved'."
+  ],
+  "tags": [
+    "cx-ops",
+    "automation",
+    "customer-support",
+    "chatbots",
+    "process-design",
+    "no-code"
+  ],
+  "topics": [
+    "ai-work",
+    "automation-ops",
+    "skills-learning",
+    "leadership-collaboration"
+  ]
+}

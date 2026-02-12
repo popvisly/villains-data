@@ -1,0 +1,43 @@
+{
+  "id": "reddit-ai-job-loss-what-happened",
+  "source": {
+    "platform": "reddit",
+    "subreddit": "AskReddit",
+    "url": "",
+    "capturedAt": "2026-02-12"
+  },
+  "persona": {
+    "label": "Mixed workers describing job loss or job shrinkage due to AI + outsourcing",
+    "audience": "professional",
+    "background": [
+      "Knowledge workers (support, design, writing/editing, data)",
+      "Creative professionals (voice acting, narration)",
+      "Public sector / high-stakes domains (health, accessibility)"
+    ],
+    "constraints": [
+      "Leadership pressure to go 'AI-first' regardless of fit",
+      "Often paired with outsourcing / headcount cuts",
+      "Quality + safety risks when domain expertise is removed"
+    ],
+    "goal": "Understand what 'replaced by AI' looks like in practice, and extract practical risk signals + mitigation actions."
+  },
+  "question": {
+    "summary": "Thread: 'People who lost their jobs to AI, what happened?' — stories of layoffs, scope shrinkage, and AI-washing.",
+    "raw": "Reddit thread asking: 'Hey people who lost their jobs to AI, what happened?' Replies include: support teams laid off after training chatbots; voice/narration work drying up; designers asked to use AI for first drafts; editors replaced by automation; domain experts displaced in favor of IT dashboards + AI; 'AI-first' restructures paired with outsourcing."
+  },
+  "expectedOutputs": {
+    "tone": "calm_advisor",
+    "shouldInclude": [
+      "Separate 'AI replacement' vs 'AI-washing + cost cutting + outsourcing'",
+      "Identify early warning signs (mandatory AI usage metrics, removing QA/support, leadership 'AI-first' slogans)",
+      "Offer 3-5 concrete protective moves (portfolio proof, task reframing, customer-facing leverage, compliance/safety positioning)",
+      "Acknowledge human impact without doom language"
+    ],
+    "shouldAvoid": [
+      "Telling users it's their fault",
+      "Smug pro-AI tone",
+      "Overpromising that 'learning AI' alone fixes everything",
+      "Generic advice with no artifacts"
+    ]
+  }
+}

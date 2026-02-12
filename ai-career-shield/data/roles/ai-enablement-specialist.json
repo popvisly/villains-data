@@ -1,0 +1,128 @@
+{
+  "id": "ai-enablement-specialist",
+  "title": "AI Enablement Specialist (Training & Ops)",
+  "aliases": [
+    "AI Training Lead",
+    "Generative AI Upskilling Lead",
+    "Internal AI Consultant",
+    "Digital Enablement Manager"
+  ],
+  "summary": "Transforms how internal teams work by selecting tools, designing training programs, and driving safe AI adoption across the organization.",
+  "whyFutureReady": [
+    "Companies are buying AI tools but employees don't know how to use them effectively.",
+    "Requires high empathy, teaching ability, and translation between tech and business.",
+    "Focuses on human behavior change and workflow redesign, which AI cannot automate."
+  ],
+  "responsibilities": [
+    {
+      "area": "Training & Curriculum Design",
+      "items": [
+        "Develop and deliver workshops on prompting, tool usage, and safe AI practices.",
+        "Create engaging learning materials (videos, guides, cheat sheets) for non-technical staff.",
+        "Run 'office hours' or clinics to help teams solve specific problems with AI."
+      ]
+    },
+    {
+      "area": "Tool Selection & Governance",
+      "items": [
+        "Evaluate new AI tools for business utility and security compliance.",
+        "Manage licenses and access controls for enterprise AI platforms.",
+        "Monitor usage metrics to identify teams that need more support."
+      ]
+    },
+    {
+      "area": "Change Management & Culture",
+      "items": [
+        "Identify and champion internal 'power users' to scale adoption.",
+        "Gather feedback on tool friction and advocate for improvements.",
+        "Communicate policies on ethics and data privacy in plain language."
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      "Adult learning / Instructional design",
+      "Change management",
+      "Public speaking & workshop facilitation",
+      "Requirements gathering",
+      "Basic data literacy (for usage analytics)"
+    ],
+    "toolsExamples": [
+      "Enterprise LLMs (ChatGPT Enterprise, Copilot)",
+      "LMS platforms",
+      "Video creation tools (Loom, Descript)",
+      "Notion / Confluence (knowledge base)",
+      "Slack / Teams (community management)"
+    ],
+    "niceToHave": [
+      "Prompt engineering (advanced)",
+      "Video editing",
+      "Internal communications",
+      "Basic Python (for simple demos)"
+    ]
+  },
+  "proofProjects": [
+    {
+      "title": "Department Playbook",
+      "whatYouBuild": [
+        "A customized guide for a specific team (e.g., HR, Sales) on how to use AI for their daily tasks",
+        "List of pre-tested prompts and approved workflows"
+      ],
+      "deliverables": [
+        "PDF/Web guide",
+        "Prompt library",
+        "Video walkthrough"
+      ]
+    },
+    {
+      "title": "Brown Bag Workshop Series",
+      "whatYouBuild": [
+        "Curriculum for 3x 1-hour sessions (Beginner, Intermediate, Advanced)",
+        "Hands-on exercises and slide decks"
+      ],
+      "deliverables": [
+        "Slide decks",
+        "Run of show",
+        "Feedback survey"
+      ]
+    },
+    {
+      "title": "Tool Evaluation Matrix",
+      "whatYouBuild": [
+        "A rubric for scoring potential AI tools based on cost, security, ease of use, and integration",
+        "Comparison of 3 leading tools for a specific use case (e.g., meeting notes)"
+      ],
+      "deliverables": [
+        "Evaluation spreadsheet",
+        "Recommendation memo"
+      ]
+    }
+  ],
+  "goodBackgrounds": [
+    "L&D Specialist",
+    "HR / People Ops",
+    "Customer Success Manager",
+    "Technical Writer",
+    "Project Manager"
+  ],
+  "starterPlan30Days": [
+    "Audit current AI usage: Survey 10 colleagues to find out what tools they use and where they struggle.",
+    "Master one enterprise tool: Become the go-to expert on your company's main AI platform.",
+    "Host a lunch-and-learn: Teach one simple workflow (e.g., summarizing meetings) to a small group.",
+    "Create a 'Quick Start' one-pager: A simple PDF guide for new hires on safe AI usage."
+  ],
+  "tags": [
+    "training",
+    "change-management",
+    "internal-ops",
+    "culture",
+    "people-ops",
+    "enablement"
+  ],
+  "topics": [
+    "ai-work",
+    "skills-learning",
+    "leadership-collaboration",
+    "governance-safety"
+  ]
+}

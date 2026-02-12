@@ -6,8 +6,15 @@
 !*.json
 !*.html
 !*.css
+!*.ts
+!*.tsx
+!*.md
 !README.md
 !.gitignore
+
+# --- Track the AI Career Shield app ---
+!ai-career-shield/
+!ai-career-shield/**
 
 # --- EXPLICIT EXCLUDES (Just in case) ---
 .env

@@ -1,0 +1,41 @@
+{
+  "id": "datasheet-ai-applicability-top-occupations",
+  "source": {
+    "platform": "other",
+    "subreddit": "",
+    "url": "",
+    "capturedAt": "2026-02-12"
+  },
+  "persona": {
+    "label": "Research-minded user interpreting an 'AI applicability' table and asking what it means for careers",
+    "audience": "professional",
+    "background": [
+      "Reads reports and charts about AI/job exposure",
+      "Wants practical takeaways rather than panic"
+    ],
+    "constraints": [
+      "Table is about task applicability, not guaranteed layoffs",
+      "Needs translation from metrics to actions"
+    ],
+    "goal": "Convert 'AI applicability' rankings into real-world signals and a defensible personal strategy."
+  },
+  "question": {
+    "summary": "A table lists 'Top occupations with highest AI applicability score' (coverage/completion/scope/score/employment). What should I conclude?",
+    "raw": "User shares a datasheet table of top 40 occupations with highest AI applicability score (e.g., interpreters/translators, writers/authors, customer service reps, telemarketers, technical writers, editors, etc.). Asks what this implies for job risk and what to do next."
+  },
+  "expectedOutputs": {
+    "tone": "calm_advisor",
+    "shouldInclude": [
+      "Explain difference between task applicability vs job elimination",
+      "Highlight where quality/safety/custody-of-truth matters (health, legal, regulated contexts)",
+      "Suggest role design moves: shift toward judgment, accountability, integration, domain-specific oversight",
+      "Give 3 concrete next-week actions and a 30/60/90 plan"
+    ],
+    "shouldAvoid": [
+      "Claiming the table predicts exact job losses",
+      "Doom language",
+      "Unsupported statistics",
+      "Hand-wavy 'just learn to code'"
+    ]
+  }
+}

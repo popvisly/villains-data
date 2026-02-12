@@ -1,0 +1,125 @@
+{
+  "id": "global",
+  "label": "Global",
+  "updatedAt": "2026-02-12",
+  "notes": "Curated market signals used to add context on the results page. Not exhaustive, and not a substitute for local job research.",
+  "trendingRoles": [
+    {
+      "title": "AI Implementation Specialist",
+      "why": "Translates business problems into practical AI + automation workflows; high demand across industries.",
+      "topics": [
+        "ai-work",
+        "automation-ops"
+      ]
+    },
+    {
+      "title": "AI Enablement Specialist",
+      "why": "Drives safe adoption via training, SOPs, and internal playbooks.",
+      "topics": [
+        "ai-work",
+        "skills-learning"
+      ]
+    },
+    {
+      "title": "Agent Orchestrator (AI Ops)",
+      "why": "Runs and monitors agentic workflows with guardrails and QA.",
+      "topics": [
+        "ai-work",
+        "automation-ops"
+      ]
+    },
+    {
+      "title": "Automation Analyst (Ops / RevOps)",
+      "why": "Eliminates repetitive business work via automations, dashboards, and documentation.",
+      "topics": [
+        "ai-work",
+        "automation-ops"
+      ]
+    },
+    {
+      "title": "Data Steward / Data Quality",
+      "why": "AI systems depend on clean, governed data; data quality roles are expanding.",
+      "topics": [
+        "ai-work",
+        "automation-ops",
+        "governance-safety"
+      ]
+    },
+    {
+      "title": "AI Governance / Responsible AI",
+      "why": "Policy, compliance, and auditability needs rise with AI adoption.",
+      "topics": [
+        "ai-work",
+        "governance-safety"
+      ]
+    },
+    {
+      "title": "AI Platform / MLOps Engineer",
+      "why": "Production reliability and deployment at scale are bottlenecks as AI moves into core systems.",
+      "topics": [
+        "ai-work",
+        "automation-ops"
+      ]
+    },
+    {
+      "title": "AI Production Strategist (Creative Ops)",
+      "why": "Builds brand-safe AI creative workflows; combines tooling, taste, QA, and process.",
+      "topics": [
+        "ai-work",
+        "creative-production"
+      ]
+    }
+  ],
+  "recurringSkillSignals": [
+    {
+      "skill": "Workflow design (SOPs, checklists, QA rubrics)",
+      "why": "Organizations need repeatability, not one-off prompting.",
+      "topics": [
+        "automation-ops"
+      ]
+    },
+    {
+      "skill": "Data fundamentals (CSV/SQL basics)",
+      "why": "Most automation and AI projects become data plumbing problems quickly.",
+      "topics": [
+        "skills-learning"
+      ]
+    },
+    {
+      "skill": "Evaluation mindset (tests, acceptance criteria)",
+      "why": "AI outputs must be judged, verified, and monitored.",
+      "topics": [
+        "skills-learning"
+      ]
+    },
+    {
+      "skill": "Stakeholder communication",
+      "why": "Turning ambiguity into executable workflows is a core differentiator.",
+      "topics": [
+        "leadership-collaboration"
+      ]
+    },
+    {
+      "skill": "Privacy/security basics",
+      "why": "Safe usage and data handling are becoming baseline requirements.",
+      "topics": [
+        "governance-safety"
+      ]
+    },
+    {
+      "skill": "Tool orchestration (APIs/no-code)",
+      "why": "Teams want outcomes across tools; integrations create leverage.",
+      "topics": [
+        "automation-ops"
+      ]
+    }
+  ],
+  "topics": [
+    "ai-work",
+    "automation-ops",
+    "skills-learning",
+    "governance-safety",
+    "leadership-collaboration",
+    "creative-production"
+  ]
+}

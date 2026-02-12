@@ -1,0 +1,107 @@
+{
+  "id": "agent-orchestrator",
+  "title": "Agent Orchestrator (AI Ops)",
+  "aliases": [
+    "AI Agent Operator",
+    "Agentic Workflow Operator",
+    "AI Operations Specialist"
+  ],
+  "summary": "Designs, runs, and monitors AI agents to execute business workflows safely—turning goals into reliable outputs with human oversight.",
+  "whyFutureReady": [
+    "As agents become common, organizations need people who can define intent, tools, and guardrails.",
+    "Reliability, monitoring, and escalation stay valuable even as models improve."
+  ],
+  "responsibilities": [
+    {
+      "area": "Workflow orchestration",
+      "items": [
+        "Turn goals into step-by-step agent workflows with clear inputs/outputs.",
+        "Define tool access, memory, and boundaries.",
+        "Set acceptance criteria and QA checks."
+      ]
+    },
+    {
+      "area": "Monitoring + reliability",
+      "items": [
+        "Track failures, hallucinations, and edge cases.",
+        "Implement retries, fallbacks, and escalation paths.",
+        "Maintain logs and improve prompts/workflows over time."
+      ]
+    },
+    {
+      "area": "Safety + access",
+      "items": [
+        "Manage permissions and sensitive data rules.",
+        "Ensure compliance with internal policies.",
+        "Coordinate with IT/security on integrations."
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      "Software-shaped intent (inputs/outputs, edge cases)",
+      "QA + evaluation (rubrics, checks)",
+      "Basic automation + tooling",
+      "Communication + stakeholder alignment"
+    ],
+    "toolsExamples": [
+      "Agent frameworks",
+      "APIs/webhooks",
+      "Spreadsheets/DBs",
+      "Monitoring/logging"
+    ],
+    "niceToHave": [
+      "Scripting",
+      "Prompt/eval design",
+      "Access control basics"
+    ]
+  },
+  "proofProjects": [
+    {
+      "title": "Agent-run weekly report",
+      "whatYouBuild": [
+        "Agent collects sources → summarizes → outputs a report with citations"
+      ],
+      "deliverables": [
+        "Workflow",
+        "Report template",
+        "QA rubric"
+      ]
+    },
+    {
+      "title": "Support triage agent",
+      "whatYouBuild": [
+        "Categorize tickets → draft replies → escalate edge cases"
+      ],
+      "deliverables": [
+        "Triage rules",
+        "Escalation policy"
+      ]
+    }
+  ],
+  "goodBackgrounds": [
+    "Analyst",
+    "Ops",
+    "PM",
+    "Support lead",
+    "Engineer adjacent"
+  ],
+  "starterPlan30Days": [
+    "Build one agent workflow that saves 2+ hours/week and measure it.",
+    "Add a QA rubric + escalation rules.",
+    "Document the workflow so someone else can run it."
+  ],
+  "tags": [
+    "agents",
+    "ai-ops",
+    "workflow",
+    "reliability",
+    "orchestration"
+  ],
+  "topics": [
+    "ai-work",
+    "automation-ops",
+    "governance-safety",
+    "skills-learning"
+  ]
+}

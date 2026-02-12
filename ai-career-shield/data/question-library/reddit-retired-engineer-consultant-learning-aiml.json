@@ -1,0 +1,46 @@
+{
+  "id": "reddit-retired-engineer-consultant-learning-aiml",
+  "source": {
+    "platform": "reddit",
+    "subreddit": "learnmachinelearning",
+    "url": "",
+    "capturedAt": "2026-02-12"
+  },
+  "persona": {
+    "label": "Retired senior engineer (current consultant) upskilling for AI/ML roadmap advising",
+    "audience": "professional",
+    "background": [
+      "Electrical engineer",
+      "35 years semiconductor industry",
+      "Led large R&D teams",
+      "Strong math/engineering foundation",
+      "Programming learned long ago; rusty"
+    ],
+    "constraints": [
+      "Needs semi-competence to advise credibly",
+      "Does not need to become a hands-on ML engineer",
+      "Time-bounded goal (EO'26)"
+    ],
+    "goal": "Build enough AI/ML fluency to evaluate claims, discuss tradeoffs, and advise technical roadmaps (rapid prototyping, cycle-time reduction)."
+  },
+  "question": {
+    "summary": "Course sequence to become semi-competent in AI/ML for consulting/roadmap advising; asks if Python should come first; EO'26 timeline.",
+    "raw": "Retired senior engineer in semiconductors now consulting; wants to upskill in AI/ML to advise clients; rusty coding; asks what course sequence to follow (Python → ML → DL?) and whether EO'26 is reasonable."
+  },
+  "expectedOutputs": {
+    "tone": "calm_advisor",
+    "shouldInclude": [
+      "Clarify goal (advisor-level fluency vs hands-on expert)",
+      "Recommend lightweight Python refresher",
+      "Focus on evaluation, data strategy, integration cost",
+      "Provide time-boxed plan (30/60/90 or multi-month)",
+      "Give 2-3 demo projects relevant to consulting"
+    ],
+    "shouldAvoid": [
+      "Doom language",
+      "Overpromising mastery",
+      "Unnecessary deep framework detail",
+      "Hard requirements without context"
+    ]
+  }
+}

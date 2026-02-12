@@ -1,0 +1,105 @@
+{
+  "id": "ai-governance-coordinator",
+  "title": "AI Governance Coordinator (Policy + Ops)",
+  "aliases": [
+    "AI Governance Analyst",
+    "AI Compliance Ops",
+    "AI Risk Ops"
+  ],
+  "summary": "Helps teams use AI safely by setting guardrails, documenting policies, reviewing risks, and keeping usage compliant and auditable.",
+  "whyFutureReady": [
+    "As AI adoption increases, organizations need accountability, documentation, and audit trails.",
+    "This role sits at the intersection of people, process, and risk—hard to fully automate responsibly."
+  ],
+  "responsibilities": [
+    {
+      "area": "Policy + guardrails",
+      "items": [
+        "Create practical AI usage guidelines by team/use case.",
+        "Maintain an approved-tools list and escalation rules.",
+        "Define what data can/can’t be used with which tools."
+      ]
+    },
+    {
+      "area": "Risk review",
+      "items": [
+        "Assess copyright/IP, privacy, and security risks.",
+        "Track incidents and mitigation actions.",
+        "Coordinate with legal/security when needed."
+      ]
+    },
+    {
+      "area": "Enablement",
+      "items": [
+        "Train teams on safe workflows.",
+        "Provide templates (SOPs, checklists) for common AI tasks.",
+        "Monitor adoption and update policies as tools change."
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      "Clear writing + documentation",
+      "Risk thinking (privacy, IP, security basics)",
+      "Process design + enforcement",
+      "Stakeholder coordination"
+    ],
+    "toolsExamples": [
+      "Policy templates",
+      "Ticketing systems",
+      "Docs/wiki",
+      "Access control basics"
+    ],
+    "niceToHave": [
+      "Basic security concepts",
+      "Copyright basics",
+      "Data handling"
+    ]
+  },
+  "proofProjects": [
+    {
+      "title": "AI use-case approval checklist",
+      "whatYouBuild": [
+        "A rubric/checklist to approve or reject AI use cases"
+      ],
+      "deliverables": [
+        "Checklist",
+        "Example decisions"
+      ]
+    },
+    {
+      "title": "Approved-tools playbook",
+      "whatYouBuild": [
+        "Tool matrix: allowed data types + best practices"
+      ],
+      "deliverables": [
+        "Matrix",
+        "SOP"
+      ]
+    }
+  ],
+  "goodBackgrounds": [
+    "Ops",
+    "Legal ops",
+    "Compliance",
+    "HR",
+    "IT support"
+  ],
+  "starterPlan30Days": [
+    "Write a 1-page AI usage policy for a small team (practical, not legalese).",
+    "Create a checklist for safe input data handling.",
+    "Run one training session and capture FAQs."
+  ],
+  "tags": [
+    "governance",
+    "compliance",
+    "policy",
+    "risk",
+    "ai"
+  ],
+  "topics": [
+    "ai-work",
+    "governance-safety",
+    "leadership-collaboration"
+  ]
+}

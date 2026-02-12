@@ -1,0 +1,126 @@
+{
+  "id": "ai-production-strategist",
+  "title": "AI Production Strategist (Creative Ops)",
+  "aliases": [
+    "AI Creative Producer",
+    "GenAI Workflow Strategist",
+    "AI Creative Ops Lead",
+    "AI Production Ops"
+  ],
+  "summary": "Designs and runs brand-safe AI creative production workflows so teams can generate consistent, compliant assets at scale.",
+  "whyFutureReady": [
+    "Work is orchestration + accountability across changing tools (hard to fully automate end-to-end).",
+    "Requires brand judgment, QA, and process design.",
+    "Combines tool fluency with human taste and compliance awareness."
+  ],
+  "responsibilities": [
+    {
+      "area": "AI workflow design & optimization",
+      "items": [
+        "Design end-to-end creative workflows using genAI tools and pro editing software.",
+        "Test, evaluate, and deploy new tools; manage test accounts and rollout plans.",
+        "Solve practical constraints (access, localization, integrations) and keep workflows stable."
+      ]
+    },
+    {
+      "area": "Creative production + brand guardianship",
+      "items": [
+        "Use genAI for rapid ideation, then refine outputs with hands-on craft.",
+        "Enforce brand rules: visual identity, tone, product accuracy, consistency.",
+        "Maintain a library of use cases, prompts, and guardrails per brand/campaign."
+      ]
+    },
+    {
+      "area": "Compliance, training & knowledge management",
+      "items": [
+        "Evaluate copyright, ethics, and policy risks in AI usage.",
+        "Document SOPs, QA rubrics, and best practices.",
+        "Train teams and keep the toolkit current via ongoing research."
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      "Process design (SOPs, checklists, QA rubrics)",
+      "Brand consistency and visual judgment",
+      "Tool orchestration across multiple genAI models",
+      "Stakeholder communication and requirement translation"
+    ],
+    "toolsExamples": [
+      "ChatGPT/Gemini",
+      "Adobe Firefly",
+      "Midjourney",
+      "Figma",
+      "After Effects (plugins)",
+      "Compositing / finishing tools"
+    ],
+    "niceToHave": [
+      "Versioning and asset management",
+      "Basic automation (scripts/no-code)",
+      "IP/copyright basics",
+      "Localization workflows"
+    ]
+  },
+  "proofProjects": [
+    {
+      "title": "Brand-Safe Workflow SOP",
+      "whatYouBuild": [
+        "Brief → generation → QA rubric → revision loop → deliverables checklist",
+        "A small demo pack of consistent assets for a sample brand"
+      ],
+      "deliverables": [
+        "SOP doc",
+        "QA checklist",
+        "Example outputs"
+      ]
+    },
+    {
+      "title": "Use-Case Library",
+      "whatYouBuild": [
+        "20 use cases with inputs, constraints, examples, and failure modes",
+        "Guardrails for common brand risks (logos, text, product fidelity)"
+      ],
+      "deliverables": [
+        "Use-case library",
+        "Guardrails"
+      ]
+    },
+    {
+      "title": "Compliance + Risk Checklist",
+      "whatYouBuild": [
+        "A practical checklist for rights, ethics, and brand safety",
+        "Escalation rules: when to regenerate, when to edit, when to reject"
+      ],
+      "deliverables": [
+        "Checklist",
+        "Escalation rules"
+      ]
+    }
+  ],
+  "goodBackgrounds": [
+    "Graphic / motion design",
+    "Creative producer / project management",
+    "Marketing ops / content ops",
+    "Product/UX (with strong aesthetics)",
+    "3D generalist (helpful, not required)"
+  ],
+  "starterPlan30Days": [
+    "Pick 2 genAI tools you can drive confidently + 1 finishing tool.",
+    "Build one end-to-end workflow and document it (SOP + QA rubric).",
+    "Produce 10 consistent assets for a sample brand to prove repeatability.",
+    "Create a small prompt/use-case library (10 entries) and refine from feedback."
+  ],
+  "tags": [
+    "creative-ops",
+    "ai-workflows",
+    "brand-safety",
+    "production",
+    "orchestration"
+  ],
+  "topics": [
+    "ai-work",
+    "creative-production",
+    "skills-learning",
+    "leadership-collaboration"
+  ]
+}

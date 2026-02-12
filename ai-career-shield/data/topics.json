@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "updatedAt": "2026-02-12",
+  "topics": [
+    {
+      "id": "ai-work",
+      "label": "AI & Work",
+      "why": "How AI is reshaping tasks, roles, and workflows across industries.",
+      "exampleSignals": ["Agentic workflows", "AI adoption", "Work redesign"]
+    },
+    {
+      "id": "career-planning",
+      "label": "Career Planning",
+      "why": "Choosing a direction, planning a pivot, and making progress with a realistic plan.",
+      "exampleSignals": ["Role adjacencies", "Transition timelines", "Mentorship"]
+    },
+    {
+      "id": "skills-learning",
+      "label": "Skills & Learning",
+      "why": "Skills that compound and practical ways to build them (projects, courses, practice).",
+      "exampleSignals": ["Skill sequences", "Portfolio projects", "Learning roadmaps"]
+    },
+    {
+      "id": "automation-ops",
+      "label": "Automation & Ops",
+      "why": "Turning repetitive work into reliable systems: SOPs, automations, reporting, and QA.",
+      "exampleSignals": ["Workflow design", "No-code", "Process improvement"]
+    },
+    {
+      "id": "governance-safety",
+      "label": "Governance, Privacy & Safety",
+      "why": "Using AI responsibly with guardrails: privacy, security, compliance, and auditability.",
+      "exampleSignals": ["Approved tools", "Data handling", "Risk review"]
+    },
+    {
+      "id": "leadership-collaboration",
+      "label": "Leadership & Collaboration",
+      "why": "Driving adoption with people: communication, training, alignment, and change management.",
+      "exampleSignals": ["Enablement", "Stakeholder management", "Team workflows"]
+    },
+    {
+      "id": "creative-production",
+      "label": "Creative Production (AI)",
+      "why": "Brand-safe creative workflows: ideation, finishing, consistency systems, and production QA.",
+      "exampleSignals": ["Brand guardianship", "Production finishing", "Workflow templates"]
+    },
+    {
+      "id": "research-frontier",
+      "label": "Frontier & Research (Optional)",
+      "why": "High-level research and frontier shifts that may affect careers later; keep curated and minimal.",
+      "exampleSignals": ["Embodied AI", "New model capabilities", "Hardware shifts"]
+    }
+  ]
+}

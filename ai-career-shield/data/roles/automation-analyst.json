@@ -1,0 +1,108 @@
+{
+  "id": "automation-analyst",
+  "title": "Automation Analyst (Ops / RevOps)",
+  "aliases": [
+    "Automation Specialist",
+    "Ops Automation Analyst",
+    "Workflow Analyst"
+  ],
+  "summary": "Finds repetitive business processes and replaces them with reliable automations, dashboards, and SOPs—reducing busywork and errors.",
+  "whyFutureReady": [
+    "Even with better AI, companies still need humans to define goals, constraints, and acceptance criteria.",
+    "Automation work ties directly to measurable outcomes (time saved, fewer errors, faster cycles)."
+  ],
+  "responsibilities": [
+    {
+      "area": "Process discovery",
+      "items": [
+        "Map workflows (handoffs, bottlenecks, error points).",
+        "Quantify impact (time/cost, failure rates).",
+        "Prioritize automation opportunities."
+      ]
+    },
+    {
+      "area": "Build + deploy automations",
+      "items": [
+        "Automate routine tasks (routing, follow-ups, data sync, enrichment).",
+        "Create dashboards and reports for visibility.",
+        "Write SOPs and train teams on the new workflow."
+      ]
+    },
+    {
+      "area": "Governance",
+      "items": [
+        "Maintain reliability (monitoring, error handling).",
+        "Ensure permissions, auditability, and data hygiene.",
+        "Iterate based on user feedback and changing requirements."
+      ]
+    }
+  ],
+  "skills": {
+    "core": [
+      "Process thinking (inputs/outputs, edge cases)",
+      "Basic data skills (spreadsheets, CSVs, SQL basics)",
+      "Tool orchestration (no-code/low-code + APIs)",
+      "Documentation + change management"
+    ],
+    "toolsExamples": [
+      "Zapier/Make",
+      "Airtable/Notion",
+      "HubSpot/Salesforce",
+      "Google Sheets",
+      "Slack"
+    ],
+    "niceToHave": [
+      "Python basics",
+      "Webhooks",
+      "Data modeling"
+    ]
+  },
+  "proofProjects": [
+    {
+      "title": "Lead routing automation",
+      "whatYouBuild": [
+        "Inbound form → enrichment → score → assign → notify",
+        "Error handling + audit log"
+      ],
+      "deliverables": [
+        "Workflow diagram",
+        "Automation",
+        "SOP"
+      ]
+    },
+    {
+      "title": "Ops dashboard",
+      "whatYouBuild": [
+        "Weekly metrics dashboard + automated report"
+      ],
+      "deliverables": [
+        "Dashboard",
+        "Report template"
+      ]
+    }
+  ],
+  "goodBackgrounds": [
+    "Ops",
+    "Admin",
+    "Customer success",
+    "Sales ops",
+    "Analyst roles"
+  ],
+  "starterPlan30Days": [
+    "Pick one workflow you touch weekly and map it end-to-end.",
+    "Automate one step and measure time saved.",
+    "Document the new SOP and get one teammate to use it."
+  ],
+  "tags": [
+    "automation",
+    "ops",
+    "revops",
+    "systems",
+    "workflow"
+  ],
+  "topics": [
+    "ai-work",
+    "automation-ops",
+    "skills-learning"
+  ]
+}
