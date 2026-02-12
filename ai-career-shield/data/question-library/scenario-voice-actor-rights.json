@@ -1,0 +1,33 @@
+{
+    "id": "scenario-voice-actor-rights",
+    "source": {
+        "platform": "news",
+        "capturedAt": "2026-02-12"
+    },
+    "persona": {
+        "label": "Voice / Narration Artist",
+        "audience": "professional",
+        "background": [
+            "Commercial voice work",
+            "New contract clauses require 'AI voice rights' for unlimited use",
+            "Narration work for mid-tier audiobooks drying up to ElevenLabs"
+        ],
+        "constraints": [
+            "Lower-end 'pure screen/microphone' work is highly exposed",
+            "Moat relies on performance nuances + live direction",
+            "Rights management becoming a core business skill"
+        ],
+        "goal": "Pivot toward roles requiring high-stakes presence or unique performance accountability (Podcaster/Live Host)."
+    },
+    "question": {
+        "summary": "Narration rates are dropping and agents are asking for perpetual AI rights to my voice. How do I shift to performance work that still values my actual presence?"
+    },
+    "expectedOutputs": {
+        "tone": "calm_advisor",
+        "shouldInclude": [
+            "Leverage 'Human-in-the-loop' Performance/Coaching roles",
+            "Focus on 'Live Event Host' or 'Subject Matter Podcaster'",
+            "Mitigation: Explicit clauses for AI rights as a value-add, not a default"
+        ]
+    }
+}

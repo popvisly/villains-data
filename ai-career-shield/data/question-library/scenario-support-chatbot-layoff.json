@@ -1,0 +1,34 @@
+{
+    "id": "scenario-support-chatbot-layoff",
+    "source": {
+        "platform": "reddit",
+        "subreddit": "customer-support",
+        "capturedAt": "2026-02-12"
+    },
+    "persona": {
+        "label": "Customer Support Lead (Legacy)",
+        "audience": "professional",
+        "background": [
+            "Experienced support professional",
+            "Tasked with 'knowledge extraction' for a new AI chatbot",
+            "Laid off 3 months post-launch due to 'efficiency gains'"
+        ],
+        "constraints": [
+            "Employer prioritized volume over resolution quality",
+            "Outsourcing of tier 2 issues followed the AI rollout",
+            "Skills felt commoditized by knowledge mapping"
+        ],
+        "goal": "Identify how to move into high-complex support (Customer Success/Ops) where human judgment is the product."
+    },
+    "question": {
+        "summary": "We spent 6 months training 'SupportAI' only for the company to lay off 40% of the team. I'm now looking for roles that aren't first-line screen-only."
+    },
+    "expectedOutputs": {
+        "tone": "calm_advisor",
+        "shouldInclude": [
+            "Distinction between high-volume triage (replaceable) and strategic success (resilient)",
+            "Focus on roles like Customer Success Manager or Implementation Specialist",
+            "Mitigation: Positioning as the 'human layer' for complex escalations"
+        ]
+    }
+}

@@ -1,5 +1,7 @@
 {
   "id": "reddit-ai-job-loss-what-happened",
+  "deprecated": true,
+  "deprecated_note": "Split into narrower scenarios (scenario-support-chatbot-layoff, scenario-voice-actor-rights, scenario-data-lead-copilot-failure) for higher specificity.",
   "source": {
     "platform": "reddit",
     "subreddit": "AskReddit",

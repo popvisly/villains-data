@@ -1,0 +1,33 @@
+{
+    "id": "scenario-data-lead-copilot-failure",
+    "source": {
+        "platform": "linkedin",
+        "capturedAt": "2026-02-12"
+    },
+    "persona": {
+        "label": "Senior Data Engineering Lead",
+        "audience": "professional",
+        "background": [
+            "Junior team over-relying on Copilot/GPT for data pipelines",
+            "Silent logic bugs causing multi-day outages",
+            "Leadership believes 'AI replaces the need for senior oversight'"
+        ],
+        "constraints": [
+            "The 'Senior' task is now primarily debugging AI-hallucinated logic",
+            "Technical debt is mounting faster than features are shipped",
+            "Business values speed over reliability"
+        ],
+        "goal": "Position as 'System Reliability Architect' or 'AI Policy Lead' where the value is knowing when AI is wrong."
+    },
+    "question": {
+        "summary": "My juniors are shipping Copilot code that breaks every weekend because they don't understand the underlying DBSCAN or SQL logic. Management thinks we don't need 'Senior' salaries anymore."
+    },
+    "expectedOutputs": {
+        "tone": "calm_advisor",
+        "shouldInclude": [
+            "Leverage 'Judgment/Accountability' as the senior value-add",
+            "Focus on 'Reliability Architect' or 'AI Governance' roles",
+            "Mitigation: Implementing 'AI Quality Gates' as a core leadership deliverable"
+        ]
+    }
+}

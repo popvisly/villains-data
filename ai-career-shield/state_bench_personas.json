@@ -170,7 +170,7 @@
       "expectedRisk": "medium",
       "expectedRange": [
         55,
-        80
+        83
       ],
       "mustMention": []
     }
@@ -438,6 +438,81 @@
         75
       ],
       "mustMention": []
+    }
+  },
+  {
+    "label": "High-risk: Customer Support Lead (Chatbot Layoff)",
+    "input": {
+      "jobTitle": "Customer Support Lead",
+      "industry": "Technology",
+      "skills": [
+        "Zendesk",
+        "Team leadership",
+        "Knowledge base management",
+        "Customer satisfaction"
+      ],
+      "yearsExperience": 5
+    },
+    "sanity": {
+      "expectedRisk": "high",
+      "expectedRange": [
+        60,
+        90
+      ],
+      "mustMention": [
+        "chatbot",
+        "escalation"
+      ]
+    }
+  },
+  {
+    "label": "Medium-risk: Voice Actor (AI Rights)",
+    "input": {
+      "jobTitle": "Voice Actor",
+      "industry": "Entertainment",
+      "skills": [
+        "Narration",
+        "Voice acting",
+        "Audio editing",
+        "Commercial performance"
+      ],
+      "yearsExperience": 4
+    },
+    "sanity": {
+      "expectedRisk": "medium",
+      "expectedRange": [
+        50,
+        85
+      ],
+      "mustMention": [
+        "rights",
+        "live"
+      ]
+    }
+  },
+  {
+    "label": "Medium-risk: Data Engineering Lead (Copilot Failure)",
+    "input": {
+      "jobTitle": "Data Engineering Lead",
+      "industry": "Technology",
+      "skills": [
+        "Python",
+        "SQL",
+        "Data pipelines",
+        "Team management"
+      ],
+      "yearsExperience": 12
+    },
+    "sanity": {
+      "expectedRisk": "medium",
+      "expectedRange": [
+        30,
+        60
+      ],
+      "mustMention": [
+        "judgment",
+        "reliability"
+      ]
     }
   }
 ]

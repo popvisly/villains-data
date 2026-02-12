@@ -7,6 +7,7 @@ import type { AssessmentInput, AssessmentResult } from '@/types';
 import { MarketSignals } from '@/components/MarketSignals';
 import { UpsellCard } from '@/components/UpsellCard';
 import { ExecutionPackView } from '@/components/ExecutionPackView';
+import { FeedbackSection } from '@/components/FeedbackSection';
 import type { ExecutionPack } from '@/types/executionPack';
 
 const COMMON_JOBS = [
@@ -76,6 +77,7 @@ export default function AssessmentPage() {
     const [result, setResult] = useState<AssessmentResult | null>(null);
     const [executionPack, setExecutionPack] = useState<ExecutionPack | null>(null);
     const [isUnlocking, setIsUnlocking] = useState(false);
+    const [assessmentId, setAssessmentId] = useState<string>('');
 
     // Feature Flag
     const ENABLE_EXECUTION_PACK = process.env.NEXT_PUBLIC_ENABLE_EXECUTION_PACK === 'true' || true; // Set to true for dev
@@ -131,6 +133,7 @@ export default function AssessmentPage() {
         try {
             const assessment = await assessJobRisk(formData);
             setResult(assessment);
+            setAssessmentId(crypto.randomUUID());
             setStep(4);
         } catch (error) {
             console.error('Assessment failed:', error);
@@ -810,6 +813,21 @@ export default function AssessmentPage() {
                                 </button>
                             </div>
                         </div>
+
+                        {/* Phase 5: Feedback Loop */}
+                        <FeedbackSection
+                            assessmentId={assessmentId}
+                            jobTitleBucket={formData.jobTitle}
+                            industryBucket={formData.industry}
+                            riskScore={result.riskScore}
+                            confidence={result.confidence || 'medium'}
+                            planConfidence={result.planConfidence || 'medium'}
+                            roleIds={result.roleAdjacencies?.map(r => r.roleId) || []}
+                            executionPackStatus={{
+                                generated: !!executionPack,
+                                validated: !!executionPack && executionPack.version === 1
+                            }}
+                        />
                     </div>
                 )}
             </div>
