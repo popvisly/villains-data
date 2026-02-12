@@ -1,0 +1,43 @@
+{
+  "id": "reddit-answers-ai-all-jobs-opinions",
+  "source": {
+    "platform": "reddit",
+    "subreddit": "",
+    "url": "https://www.reddit.com/answers/9f5215c3-a2dc-4765-a627-93c7c618c776/?q=ai+all+jobs",
+    "capturedAt": "2026-02-12"
+  },
+  "persona": {
+    "label": "Reader encountering a Reddit Answers overview about AI + jobs and wanting practical, non-doom takeaways",
+    "audience": "professional",
+    "background": [
+      "Consumes online discourse about AI job displacement",
+      "Sees mixed claims (optimism, layoffs, UBI, timelines)",
+      "Wants a grounded personal strategy"
+    ],
+    "constraints": [
+      "Source is an aggregated/meta summary of multiple threads",
+      "Contains sweeping claims and mixed evidence quality",
+      "Needs translation into actionable steps"
+    ],
+    "goal": "Extract high-signal career risk indicators and a practical adaptation plan without panic or hype."
+  },
+  "question": {
+    "summary": "Aggregated Reddit Answers-style summary: will AI replace jobs or create new ones; what jobs are vulnerable; how fast; what should individuals do?",
+    "raw": "I’m seeing Reddit discussions claiming AI will replace entry-level office work (support, admin), impact creative work (design, voice), and push companies toward cost-cutting and ‘AI-first’ strategies. There are also arguments that AI will create new roles, improve efficiency, and that overall employment won’t collapse. What’s the realistic interpretation, and what should I do next week / next 90 days to protect my career?"
+  },
+  "expectedOutputs": {
+    "tone": "calm_advisor",
+    "shouldInclude": [
+      "Explain applicability vs replacement; emphasize org behavior (cost-cutting, silent hiring)",
+      "Identify early warning signs (removing QA/support, forced AI metrics, replacing domain experts)",
+      "Offer a defensible strategy: shift to accountability, integration, customer impact, oversight/evals",
+      "Provide concrete next-week actions + 30/60/90 plan with verifiable artifacts"
+    ],
+    "shouldAvoid": [
+      "UBI speculation as primary advice",
+      "Overconfident predictions and exact timelines",
+      "Generic ‘just learn AI’ without artifacts",
+      "Doom language"
+    ]
+  }
+}
