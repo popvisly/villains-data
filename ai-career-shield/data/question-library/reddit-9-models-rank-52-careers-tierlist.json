@@ -1,0 +1,45 @@
+{
+  "id": "reddit-9-models-rank-52-careers-tierlist",
+  "source": {
+    "platform": "reddit",
+    "subreddit": "careerguidance",
+    "url": "https://www.reddit.com/r/careerguidance/comments/1qypumz/i_used_9_ai_models_to_rank_52_careers_for/",
+    "capturedAt": "2026-02-12"
+  },
+  "persona": {
+    "label": "Student/professional evaluating career paths using an AI-generated tier list and seeking reality checks from industry",
+    "audience": "student",
+    "background": [
+      "High exposure to AI + jobs discourse",
+      "Trying to choose a major/career path based on job security + salary",
+      "Has seen SEO spam; trusts cross-model agreement more"
+    ],
+    "constraints": [
+      "Thread mixes majors and full pipelines (e.g., med school, NP, law)",
+      "Contains claims without citations (e.g., junior dev posting drops)",
+      "Risk of over-indexing on 'tier lists' rather than personal fit and evidence"
+    ],
+    "goal": "Get a grounded interpretation of AI disruption risk by career track, and translate it into a personal decision + concrete next steps."
+  },
+  "question": {
+    "summary": "OP used multiple AI models to rank careers/majors by automation risk + salary; asks whether it matches what people see in their industry.",
+    "raw": "I used 9 AI models to rank 52 career paths (starting from undergrad majors) on salary/recession-proofing, AI survival (AI augments vs replaces; physical/empathy/licensing moats), and burnout vs pay. The models agreed that medicine and advanced nursing are safest; skilled trades and some engineering rank high; generic CS and non-CPA accounting are riskier; marketing/communications and junior creative work are hit hard. 'AI/Data Science undergrad' was rated risky because the field changes fast and tools automate parts of it. Does this match what you're seeing, and how should someone actually choose a path from this?"
+  },
+  "expectedOutputs": {
+    "tone": "calm_advisor",
+    "shouldInclude": [
+      "Explain that cross-model agreement is not evidence; treat as hypotheses",
+      "Separate licensing/regulatory moats, physical accountability, and trust/customer responsibility",
+      "Clarify pipelines vs majors (e.g., bio BS vs MD track) and give decision checkpoints",
+      "Offer a practical decision framework: fit + constraints + local labor market + proof-of-skill plan",
+      "Provide next-week actions and a 30/60/90 plan with verifiable artifacts (projects, shadowing, informational interviews, small proof projects)",
+      "Encourage specialization within broad fields (e.g., systems/security/governance) without doom"
+    ],
+    "shouldAvoid": [
+      "Repeating unverifiable stats as facts without sources",
+      "Presenting a single tier list as a definitive forecast",
+      "Doom language or absolutist claims ('CS is dead', 'AI degree useless')",
+      "Over-promising certainty about timelines"
+    ]
+  }
+}
