@@ -52,7 +52,27 @@ function computeAvgByBucket(rows: Awaited<ReturnType<typeof fetchAllFeedbackRows
   return out;
 }
 
-export default async function AnalyticsPage() {
+export default async function AnalyticsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ token?: string }>;
+}) {
+  const sp = (await searchParams) || {};
+  const requiredToken = process.env.ADMIN_TOKEN;
+
+  if (requiredToken && sp.token !== requiredToken) {
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-slate-950 via-blue-950 to-slate-950 py-20 px-6">
+        <div className="max-w-2xl mx-auto glass-panel p-8 rounded-2xl border border-white/10">
+          <h1 className="text-2xl font-bold">Not authorized</h1>
+          <p className="text-gray-400 mt-2 text-sm">
+            This page requires a valid admin token.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
   const rows = await fetchAllFeedbackRows();
 
   const total = rows.length;
