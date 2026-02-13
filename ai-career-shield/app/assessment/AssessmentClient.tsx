@@ -86,6 +86,8 @@ export default function AssessmentPage() {
     const searchParams = useSearchParams();
     const hasAccess = searchParams.get('unlocked') === 'true';
 
+    const LS_KEY = 'ai-career-shield:assessment-state:v1';
+
     // Feature Flag
     const ENABLE_EXECUTION_PACK = process.env.NEXT_PUBLIC_ENABLE_EXECUTION_PACK === 'true' || true;
 
@@ -98,6 +100,45 @@ export default function AssessmentPage() {
             trackEvent('payment_success_view');
         }
     }, [hasAccess]);
+
+    // Restore state after returning from Stripe (?unlocked=true)
+    useEffect(() => {
+        if (!hasAccess) return;
+        if (result || executionPack) return;
+
+        try {
+            const raw = window.localStorage.getItem(LS_KEY);
+            if (!raw) return;
+            const saved = JSON.parse(raw);
+
+            if (saved?.formData) setFormData(saved.formData);
+            if (saved?.result) setResult(saved.result);
+            if (saved?.executionPack) setExecutionPack(saved.executionPack);
+            if (saved?.assessmentId) setAssessmentId(saved.assessmentId);
+
+            setStep(2);
+        } catch (e) {
+            console.warn('Failed to restore saved assessment state', e);
+        }
+    }, [hasAccess]);
+
+    // Persist state so we can restore after Stripe redirects
+    useEffect(() => {
+        if (!result) return;
+
+        try {
+            const payload = {
+                savedAt: Date.now(),
+                formData,
+                result,
+                executionPack,
+                assessmentId,
+            };
+            window.localStorage.setItem(LS_KEY, JSON.stringify(payload));
+        } catch {
+            // ignore (private mode / quota)
+        }
+    }, [formData, result, executionPack, assessmentId]);
 
     const copyAsMarkdown = () => {
         if (!result) return;
