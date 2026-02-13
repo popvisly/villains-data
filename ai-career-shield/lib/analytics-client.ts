@@ -6,7 +6,9 @@ type EventName =
     | 'assessment_complete'
     | 'paywall_view'
     | 'checkout_start'
-    | 'payment_success_view';
+    | 'payment_success_view'
+    | 'assessment_resume'
+    | 'assessment_reset';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 

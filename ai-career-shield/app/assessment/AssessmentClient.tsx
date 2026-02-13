@@ -85,6 +85,7 @@ export default function AssessmentPage() {
     const [assessmentId, setAssessmentId] = useState<string>('');
     const searchParams = useSearchParams();
     const hasAccess = searchParams.get('unlocked') === 'true';
+    const [hasSavedSession, setHasSavedSession] = useState(false);
 
     const LS_KEY = 'ai-career-shield:assessment-state:v1';
 
@@ -94,6 +95,22 @@ export default function AssessmentPage() {
     useEffect(() => {
         trackEvent('assessment_start');
     }, []);
+
+    // Check for saved session on mount (if not unlocked)
+    useEffect(() => {
+        if (hasAccess) return; // Unlocked logic handles itself
+        try {
+            const raw = window.localStorage.getItem(LS_KEY);
+            if (raw) {
+                const saved = JSON.parse(raw);
+                if (saved?.formData?.jobTitle) { // Basic check
+                    setHasSavedSession(true);
+                }
+            }
+        } catch (e) {
+            // ignore
+        }
+    }, [hasAccess]);
 
     useEffect(() => {
         if (hasAccess) {
@@ -139,6 +156,46 @@ export default function AssessmentPage() {
             // ignore (private mode / quota)
         }
     }, [formData, result, executionPack, assessmentId]);
+
+    const handleResume = () => {
+        try {
+            const raw = window.localStorage.getItem(LS_KEY);
+            if (raw) {
+                const saved = JSON.parse(raw);
+                if (saved.formData) setFormData(saved.formData);
+                if (saved.result) setResult(saved.result);
+                // DO NOT restore executionPack here (Free Tier)
+                if (saved.assessmentId) setAssessmentId(saved.assessmentId);
+
+                setHasSavedSession(false);
+                if (saved.result) {
+                    setStep(2);
+                }
+                trackEvent('assessment_resume');
+            }
+        } catch (e) {
+            console.error('Resume failed', e);
+        }
+    };
+
+    const handleStartOver = () => {
+        window.localStorage.removeItem(LS_KEY);
+        setHasSavedSession(false);
+        setFormData({
+            jobTitle: '',
+            industry: '',
+            skills: [],
+            yearsExperience: undefined,
+            audience: 'professional',
+            goal: 'future_proof_role',
+            experienceLevel: 'mid',
+            enjoys: [],
+        });
+        setResult(null);
+        setExecutionPack(null);
+        setStep(1);
+        trackEvent('assessment_reset');
+    };
 
     const copyAsMarkdown = () => {
         if (!result) return;
@@ -254,7 +311,37 @@ export default function AssessmentPage() {
                             ? "Let's build your profile to measure your exposure."
                             : "Your Personalized Risk Report"}
                     </p>
+
                 </div>
+
+                {/* RESUME BANNER */}
+                {step === 1 && hasSavedSession && (
+                    <div className="mb-8 p-6 bg-blue-900/40 border border-blue-500/50 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-500">
+                        <div className="flex items-center gap-4">
+                            <span className="text-2xl">💾</span>
+                            <div>
+                                <h3 className="font-bold text-white">Welcome back!</h3>
+                                <p className="text-sm text-blue-200">
+                                    We found a saved assessment in progress.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex gap-3">
+                            <button
+                                onClick={handleStartOver}
+                                className="px-4 py-2 text-sm text-blue-300 hover:text-white transition"
+                            >
+                                Start Over
+                            </button>
+                            <button
+                                onClick={handleResume}
+                                className="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold shadow-lg shadow-blue-900/20 transition"
+                            >
+                                Resume
+                            </button>
+                        </div>
+                    </div>
+                )}
 
                 {/* Step 1: Combined Input Form */}
                 {step === 1 && (
@@ -789,6 +876,6 @@ export default function AssessmentPage() {
                     </div>
                 )}
             </div>
-        </main>
+        </main >
     );
 }

@@ -285,9 +285,10 @@ ${gapSkillsRaw.join(', ')}
 Instructions:
 1. Generate 2 ProjectBriefs. Each MUST map strictly to one of the roles' "proofProjects".
 2. Generate 1 SkillGapMap for the primary role (${targetRole.title}).
-3. Use the LLM to provide high-value "why it matters", "how to build", and "portfolio packaging" context.
-4. Ensure all steps are verifiable deliverables ("publish X", "build Y").
-5. Return ONLY valid JSON matching the ExecutionPack schema (version: 1).
+3. Generate "Career Assets" tailored to the transition (Resume bullets, LinkedIn profile).
+4. For each ProjectBrief, generate a "README.md" template users can adapt for GitHub.
+5. Use the LLM to provide high-value "why it matters", "how to build", and "portfolio packaging" context.
+6. Return ONLY valid JSON matching the ExecutionPack schema (version: 1).
 
 JSON Schema Reference:
 {
@@ -307,7 +308,8 @@ JSON Schema Reference:
       "evaluationRubric": [{ "dimension": string, "whatGoodLooksLike": string[] }],
       "portfolioPackaging": { "headline": string, "whatToShow": string[], "talkTrack": string[] },
       "variations": string[],
-      "starterResources": [{ "title": string, "url": string, "type": "doc"|"tool"|"course"|"video" }]
+      "starterResources": [{ "title": string, "url": string, "type": "doc"|"tool"|"course"|"video" }],
+      "readme": string (Markdown template with sections: Title, Overview, Tech Stack, Key Features, How to Run)
     }
   ],
   "skillGapMap": {
@@ -318,6 +320,18 @@ JSON Schema Reference:
     "gapSkills": [{ "skill": string, "whyItMatters": string, "howToBuild": string[], "proofArtifact": string }],
     "recommendedSequence": [{ "weekRange": string, "focus": string[], "outputs": string[] }],
     "notes": string[]
+  },
+  "careerAssets": {
+    "resumeBullets": string[] (5-7 powerful action-verb bullets tailored to the target role),
+    "linkedIn": {
+        "headline": string (2-3 variations),
+        "aboutSection": string (Draft focusing on the pivot)
+    },
+    "coverLetter": string (Skeleton for target role),
+    "interviewPrep": {
+        "questions": string[],
+        "starStories": string[]
+    }
   }
 }`;
 

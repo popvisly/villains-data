@@ -87,12 +87,20 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <Text style={styles.title}>AI Career Shield — Execution Pack</Text>
-        <Text style={styles.subtitle}>
-          Project briefs + skill gap map. Generated for: {safeText(data.skillGapMap?.roleTitle || 'your target role')}
-        </Text>
+        {/* Header Branding */}
+        <View style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 6, flexDirection: 'row' }}>
+          <View style={{ flex: 1, backgroundColor: '#2563EB' }} />
+          <View style={{ flex: 1, backgroundColor: '#F97316' }} />
+        </View>
 
-        <Text style={styles.sectionTitle}>Portfolio Project Briefs</Text>
+        <View style={{ marginTop: 20 }}>
+          <Text style={styles.title}>AI Career Shield — Execution Pack</Text>
+          <Text style={styles.subtitle}>
+            Project briefs + skill gap map. Generated for: {safeText(data.skillGapMap?.roleTitle || 'your target role')}
+          </Text>
+        </View>
+
+        <Text style={[styles.sectionTitle, { color: '#2563EB' }]}>Portfolio Project Briefs</Text>
         {data.projectBriefs.map((brief) => (
           <View key={brief.id} style={styles.card}>
             <Text style={styles.h3}>{brief.title}</Text>
@@ -115,7 +123,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
             <Text style={styles.label}>Implementation Steps</Text>
             {brief.steps.map((s) => (
               <View key={s.step} style={{ marginBottom: 6 }}>
-                <Text style={{ fontWeight: 700 }}>
+                <Text style={{ fontWeight: 700, fontSize: 10, color: '#F97316' }}>
                   {s.step}. {s.title}
                 </Text>
                 {s.details.map((detail, i) => (
@@ -133,7 +141,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
           </View>
         ))}
 
-        <Text style={styles.sectionTitle}>Personalized Skill Gap Map</Text>
+        <Text style={[styles.sectionTitle, { color: '#2563EB', marginTop: 20 }]}>Personalized Skill Gap Map</Text>
         <View style={styles.card}>
           <Text style={styles.h3}>Target role: {safeText(data.skillGapMap.roleTitle)}</Text>
 
@@ -142,7 +150,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
               <Text style={styles.label}>Matched Skills</Text>
               {data.skillGapMap.matchedSkills.map((s, i) => (
                 <Text key={i} style={styles.p}>
-                  • {s.skill} — {s.evidence}
+                  • {s.skill}
                 </Text>
               ))}
             </View>
@@ -156,10 +164,10 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
             </View>
           </View>
 
-          <Text style={[styles.label, { marginTop: 10 }]}>Recommended Sequence</Text>
+          <Text style={[styles.label, { marginTop: 10, color: '#2563EB' }]}>Recommended Sequence</Text>
           {data.skillGapMap.recommendedSequence.map((seq, i) => (
             <View key={i} style={{ marginBottom: 6 }}>
-              <Text style={{ fontWeight: 700 }}>{seq.weekRange}</Text>
+              <Text style={{ fontWeight: 700, fontSize: 10 }}>{seq.weekRange}</Text>
               <Text style={styles.p}>Focus: {seq.focus.join(' & ')}</Text>
               {seq.outputs.map((out, oi) => (
                 <Text key={oi} style={styles.p}>
@@ -179,6 +187,53 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
               ))}
             </>
           ) : null}
+        </View>
+
+        {/* Career Asset Kit (New Page) */}
+        {data.careerAssets && (
+          <View break>
+            <View style={{ marginTop: 20 }}>
+              <Text style={styles.title}>Career Asset Kit</Text>
+              <Text style={styles.subtitle}>Ready-to-use templates for your transition.</Text>
+            </View>
+
+            <View style={styles.card}>
+              <Text style={[styles.h3, { color: '#2563EB' }]}>Resume Power Bullets</Text>
+              <Text style={[styles.p, { marginBottom: 10, fontSize: 10, color: '#64748b' }]}>Copy these into your experience section:</Text>
+              {data.careerAssets.resumeBullets.map((b, i) => (
+                <Text key={i} style={styles.p}>• {b}</Text>
+              ))}
+            </View>
+
+            <View style={styles.card}>
+              <Text style={[styles.h3, { color: '#0077B5' }]}>LinkedIn Optimization</Text>
+
+              <Text style={styles.label}>Headlines</Text>
+              <Text style={[styles.p, { fontStyle: 'italic', marginBottom: 12 }]}>{data.careerAssets.linkedIn.headline}</Text>
+
+              <Text style={styles.label}>About Section Draft</Text>
+              <Text style={styles.p}>{data.careerAssets.linkedIn.aboutSection}</Text>
+            </View>
+
+            <Text style={[styles.sectionTitle, { color: '#F97316', marginTop: 20 }]}>Project README Templates</Text>
+            {data.projectBriefs.map(b => b.readme ? (
+              <View key={b.id} style={{ marginTop: 10, marginBottom: 20 }}>
+                <Text style={[styles.h3, { fontSize: 11 }]}>{b.title}</Text>
+                <View style={{ backgroundColor: '#f8fafc', padding: 8, borderRadius: 4, border: '1px solid #e2e8f0' }}>
+                  <Text style={{ fontFamily: 'Courier', fontSize: 9, color: '#334155', lineHeight: 1.4 }}>
+                    {b.readme}
+                  </Text>
+                </View>
+              </View>
+            ) : null)}
+          </View>
+        )}
+
+        {/* Footer */}
+        <View style={{ position: 'absolute', bottom: 30, left: 30, right: 30, borderTop: '1px solid #e2e8f0', paddingTop: 10 }}>
+          <Text style={{ fontSize: 9, color: '#94a3b8', textAlign: 'center' }}>
+            Generated on {new Date().toLocaleDateString()} by AI Career Shield
+          </Text>
         </View>
       </Page>
     </Document>

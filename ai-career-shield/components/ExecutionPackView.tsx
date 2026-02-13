@@ -28,6 +28,66 @@ export function ExecutionPackView({ data }: ExecutionPackViewProps) {
                 </PDFDownloadLink>
             </div>
 
+            {/* Career Asset Kit (NEW) */}
+            {data.careerAssets && (
+                <section className="glass-panel p-8 rounded-2xl border border-blue-500/20 bg-blue-500/[0.02]">
+                    <div className="flex items-center gap-3 mb-8">
+                        <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-xl shadow-lg shadow-purple-500/10">
+                            <span>💼</span>
+                        </div>
+                        <div>
+                            <h2 className="text-2xl font-bold tracking-tight">Career Asset Kit</h2>
+                            <p className="text-sm text-gray-400">Copy-paste templates to accelerate your pivot</p>
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {/* Resume Booster */}
+                        <div className="space-y-4">
+                            <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400">Resume Power Bullets</h3>
+                            <div className="space-y-3">
+                                {data.careerAssets.resumeBullets.map((bullet, i) => (
+                                    <div key={i} className="group relative p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                                        <p className="text-sm text-gray-200 pr-8">{bullet}</p>
+                                        <button
+                                            onClick={() => navigator.clipboard.writeText(bullet)}
+                                            className="absolute top-4 right-4 text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition"
+                                            title="Copy to clipboard"
+                                        >
+                                            📋
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* LinkedIn Kit */}
+                        <div className="space-y-6">
+                            <div>
+                                <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-4">LinkedIn Headlines</h3>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                                    <p className="text-sm text-gray-200 italic">{data.careerAssets.linkedIn.headline}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-4">About Section Draft</h3>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 relative group">
+                                    <p className="text-xs text-gray-400 whitespace-pre-wrap leading-relaxed">
+                                        {data.careerAssets.linkedIn.aboutSection}
+                                    </p>
+                                    <button
+                                        onClick={() => navigator.clipboard.writeText(data.careerAssets.linkedIn.aboutSection)}
+                                        className="absolute top-4 right-4 text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition"
+                                    >
+                                        📋
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
+
             {/* Project Briefs */}
             <section>
                 <div className="flex items-center gap-3 mb-6">
@@ -67,6 +127,24 @@ export function ExecutionPackView({ data }: ExecutionPackViewProps) {
                                         ))}
                                     </div>
                                 </div>
+
+                                {/* README Template (NEW) */}
+                                {brief.readme && (
+                                    <div>
+                                        <h4 className="text-[11px] font-bold uppercase tracking-widest text-orange-400/80 mb-3 flex items-center justify-between">
+                                            <span>Project README Template</span>
+                                            <button
+                                                onClick={() => navigator.clipboard.writeText(brief.readme || '')}
+                                                className="text-xs text-blue-400 hover:text-white transition"
+                                            >
+                                                Copy Markdown
+                                            </button>
+                                        </h4>
+                                        <div className="h-32 overflow-y-auto p-3 rounded-lg bg-black/30 border border-white/5 text-[10px] text-gray-500 font-mono whitespace-pre-wrap">
+                                            {brief.readme}
+                                        </div>
+                                    </div>
+                                )}
 
                                 <div>
                                     <h4 className="text-[11px] font-bold uppercase tracking-widest text-orange-400/80 mb-3">Implementation Steps</h4>

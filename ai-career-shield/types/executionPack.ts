@@ -36,6 +36,20 @@ export interface ProjectBrief {
     portfolioPackaging: ProjectBriefPortfolio;
     variations: string[];
     starterResources: ProjectBriefResource[];
+    readme?: string; // Markdown template
+}
+
+export interface CareerAssets {
+    resumeBullets: string[];
+    linkedIn: {
+        headline: string;
+        aboutSection: string;
+    };
+    coverLetter?: string;
+    interviewPrep?: {
+        questions: string[];
+        starStories: string[];
+    };
 }
 
 export interface SkillGapMap {
@@ -64,4 +78,5 @@ export interface ExecutionPack {
     version: 1;
     projectBriefs: ProjectBrief[];
     skillGapMap: SkillGapMap;
+    careerAssets?: CareerAssets;
 }
