@@ -1,5 +1,7 @@
 import React from 'react';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { ExecutionPack } from '@/types/executionPack';
+import { ExecutionPackPdfDocument } from '@/components/ExecutionPackPdf';
 
 interface ExecutionPackViewProps {
     data: ExecutionPack;
@@ -8,6 +10,24 @@ interface ExecutionPackViewProps {
 export function ExecutionPackView({ data }: ExecutionPackViewProps) {
     return (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            {/* Download */}
+            <div className="flex items-center justify-end">
+                <PDFDownloadLink
+                    document={<ExecutionPackPdfDocument data={data} />}
+                    fileName="AI-Career-Shield-Execution-Pack.pdf"
+                >
+                    {({ loading }) => (
+                        <button
+                            type="button"
+                            className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition font-bold text-xs"
+                            disabled={loading}
+                        >
+                            {loading ? 'Preparing PDF…' : 'Download PDF'}
+                        </button>
+                    )}
+                </PDFDownloadLink>
+            </div>
+
             {/* Project Briefs */}
             <section>
                 <div className="flex items-center gap-3 mb-6">
