@@ -25,6 +25,8 @@ const HELPFUL_OPTIONS = [
     { id: 'executionPack', label: 'Execution Kit' }
 ];
 
+type FeedbackState = 'collapsed' | 'expanded' | 'submitted';
+
 export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
     assessmentId,
     jobTitleBucket,
@@ -35,12 +37,12 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
     roleIds,
     executionPackStatus
 }) => {
+    const [state, setState] = useState<FeedbackState>('collapsed');
     const [rating, setRating] = useState<number>(0);
     const [hoverRating, setHoverRating] = useState<number>(0);
     const [helpfulParts, setHelpfulParts] = useState<string[]>([]);
     const [comment, setComment] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const toggleHelpful = (id: string) => {
@@ -76,7 +78,7 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
             };
 
             await submitFeedback(feedback);
-            setSubmitted(true);
+            setState('submitted');
         } catch (err) {
             console.error('Feedback submission error:', err);
             setError('Failed to submit feedback. Please try again.');
@@ -85,19 +87,87 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
         }
     };
 
-    if (submitted) {
+    // ── State: Submitted (compact thanks) ──────────────────────────
+    if (state === 'submitted') {
         return (
-            <div className="mt-12 p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm text-center">
-                <h3 className="text-xl font-medium text-white mb-2">Thank you for your feedback!</h3>
-                <p className="text-gray-400">Your input helps us improve the precision of these career assessments.</p>
+            <div className="mt-12 py-4 px-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <span className="text-lg">✓</span>
+                    <span className="text-sm text-gray-300">Thanks for your feedback!</span>
+                </div>
+                <button
+                    type="button"
+                    onClick={() => {
+                        setState('expanded');
+                        setRating(0);
+                        setHelpfulParts([]);
+                        setComment('');
+                    }}
+                    className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
+                >
+                    Leave more →
+                </button>
             </div>
         );
     }
 
+    // ── State: Collapsed (single-line CTA) ─────────────────────────
+    if (state === 'collapsed') {
+        return (
+            <div
+                id="feedback"
+                className="mt-12 py-4 px-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm cursor-pointer hover:border-white/20 transition-all group"
+                onClick={() => setState('expanded')}
+            >
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
+                            Was this assessment useful?
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        {/* Quick inline stars — click any to expand + pre-set rating */}
+                        <div className="flex gap-1">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <button
+                                    key={star}
+                                    type="button"
+                                    className="text-lg text-white/15 hover:text-blue-400 transition-colors"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setRating(star);
+                                        setState('expanded');
+                                    }}
+                                >
+                                    ★
+                                </button>
+                            ))}
+                        </div>
+                        <span className="text-xs text-gray-600 group-hover:text-gray-400 transition-colors">
+                            Rate 1–5
+                        </span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // ── State: Expanded (full form) ────────────────────────────────
     return (
-        <div id="feedback" className="mt-12 p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
-            <h3 className="text-xl font-medium text-white mb-2">Was this assessment useful?</h3>
-            <p className="text-gray-400 mb-6 text-sm">Help us refine our AI Career Shield by sharing your take.</p>
+        <div id="feedback" className="mt-12 p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="flex items-center justify-between mb-6">
+                <div>
+                    <h3 className="text-xl font-medium text-white mb-1">Was this assessment useful?</h3>
+                    <p className="text-gray-400 text-sm">Help us refine our AI Career Shield by sharing your take.</p>
+                </div>
+                <button
+                    type="button"
+                    onClick={() => setState('collapsed')}
+                    className="text-gray-600 hover:text-gray-300 transition-colors text-sm"
+                >
+                    ✕
+                </button>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* 5-Star Rating */}

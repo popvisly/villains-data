@@ -1,5 +1,6 @@
 import React from 'react';
 import { bucketLabel, fetchAllFeedbackRows, mean } from '@/lib/analytics';
+import { supabaseAdmin } from '@/lib/supabase';
 
 type BucketAvg = { bucket: string; count: number; avg: number | null };
 
@@ -7,24 +8,34 @@ function round1(n: number) {
   return Math.round(n * 10) / 10;
 }
 
-function Bar({ value, max }: { value: number; max: number }) {
+function Bar({ value, max, colorClass }: { value: number; max: number; colorClass?: string }) {
   const pct = max > 0 ? Math.max(0, Math.min(100, (value / max) * 100)) : 0;
   return (
     <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-      <div className="h-full bg-gradient-to-r from-blue-600 to-cyan-600" style={{ width: `${pct}%` }} />
+      <div className={`h-full ${colorClass || 'bg-gradient-to-r from-blue-600 to-cyan-600'}`} style={{ width: `${pct}%` }} />
     </div>
   );
 }
 
-function Panel({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
+function Panel({ title, subtitle, children, className }: { title: string; subtitle?: string; children: React.ReactNode; className?: string }) {
   return (
-    <section className="glass-panel p-6 rounded-2xl border border-white/10">
+    <section className={`glass-panel p-6 rounded-2xl border border-white/10 ${className || ''}`}>
       <div className="mb-4">
         <h2 className="text-xl font-bold tracking-tight">{title}</h2>
         {subtitle ? <p className="text-sm text-gray-400 mt-1">{subtitle}</p> : null}
       </div>
       {children}
     </section>
+  );
+}
+
+function MetricCard({ label, value, subtext }: { label: string; value: string | number; subtext?: string }) {
+  return (
+    <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+      <div className="text-sm text-gray-400 mb-1">{label}</div>
+      <div className="text-2xl font-bold text-white mb-1">{value}</div>
+      {subtext && <div className="text-xs text-gray-500">{subtext}</div>}
+    </div>
   );
 }
 
@@ -52,6 +63,27 @@ function computeAvgByBucket(rows: Awaited<ReturnType<typeof fetchAllFeedbackRows
   return out;
 }
 
+async function fetchEventCounts() {
+  const { data, error } = await supabaseAdmin
+    .from('analytics_events')
+    .select('event_name, created_at')
+    .order('created_at', { ascending: false })
+    .limit(5000); // Reasonable limit for v1
+
+  if (error || !data) return [];
+  return data;
+}
+
+async function fetchPurchases() {
+  const { data, error } = await supabaseAdmin
+    .from('purchases')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error || !data) return [];
+  return data;
+}
+
 export default async function AnalyticsPage({
   searchParams,
 }: {
@@ -61,208 +93,169 @@ export default async function AnalyticsPage({
   const requiredToken = process.env.ADMIN_TOKEN;
 
   if (requiredToken && sp.token !== requiredToken) {
+    const isDev = process.env.NODE_ENV !== 'production';
+    const tokenStatus = sp.token ? 'invalid' : 'missing';
+
     return (
       <main className="min-h-screen bg-gradient-to-b from-slate-950 via-blue-950 to-slate-950 py-20 px-6">
-        <div className="max-w-2xl mx-auto glass-panel p-8 rounded-2xl border border-white/10">
-          <h1 className="text-2xl font-bold">Not authorized</h1>
-          <p className="text-gray-400 mt-2 text-sm">
-            This page requires a valid admin token.
-          </p>
+        <div className="max-w-2xl mx-auto glass-panel p-8 rounded-2xl border border-white/10 space-y-6">
+          <div>
+            <h1 className="text-2xl font-bold">Admin access required</h1>
+            <p className="text-gray-400 mt-2 text-sm">
+              This page needs an admin token.
+              {' '}<span className="inline-block text-xs px-2 py-0.5 rounded-full bg-white/10 text-gray-400 font-mono">
+                Token {tokenStatus}
+              </span>
+            </p>
+          </div>
+          {/* ... (keep existing instructions) ... */}
+          <div className="space-y-3">
+            <h2 className="text-sm font-semibold text-gray-300 uppercase tracking-wider">How to fix</h2>
+            <ol className="list-decimal list-inside space-y-2 text-sm text-gray-400">
+              <li>
+                Set <code className="text-gray-300 bg-white/5 px-1.5 py-0.5 rounded font-mono text-xs">ADMIN_TOKEN</code> in
+                your <code className="text-gray-300 bg-white/5 px-1.5 py-0.5 rounded font-mono text-xs">.env.local</code> (server-side)
+              </li>
+              <li>
+                Visit this page with <code className="text-gray-300 bg-white/5 px-1.5 py-0.5 rounded font-mono text-xs">?token=YOUR_TOKEN</code> appended to the URL
+              </li>
+            </ol>
+          </div>
         </div>
       </main>
     );
   }
 
-  const rows = await fetchAllFeedbackRows();
+  // Fetch Data Parallel
+  const [feedbackRows, events, purchases] = await Promise.all([
+    fetchAllFeedbackRows(),
+    fetchEventCounts(),
+    fetchPurchases()
+  ]);
 
-  const total = rows.length;
-  const ratings = rows.map(r => r.rating).filter((n): n is number => typeof n === 'number');
-  const avgRating = mean(ratings);
+  // Compute Funnel
+  const started = events.filter(e => e.event_name === 'assessment_start').length;
+  const completed = events.filter(e => e.event_name === 'assessment_complete').length;
+  const paywallViews = events.filter(e => e.event_name === 'paywall_view').length; // Or use checkout_start if strict
+  const checkouts = events.filter(e => e.event_name === 'checkout_start').length;
+  const purchaseCount = purchases.length;
+  const totalRevenue = purchases.reduce((sum, p) => sum + (p.amount_total || 0), 0) / 100;
 
-  const avgByJob = computeAvgByBucket(rows, 'job_title_bucket');
-  const avgByIndustry = computeAvgByBucket(rows, 'industry_bucket');
+  // Conversion Rates
+  const completionRate = started ? (completed / started) * 100 : 0;
+  const checkoutRate = completed ? (checkouts / completed) * 100 : 0;
+  const purchaseRate = checkouts ? (purchaseCount / checkouts) * 100 : 0;
+  const overallConversion = started ? (purchaseCount / started) * 100 : 0;
 
-  // Helpful sections distribution
-  const helpfulCounts = new Map<string, number>();
-  for (const r of rows) {
-    for (const s of (r.most_helpful_sections || [])) {
-      helpfulCounts.set(s, (helpfulCounts.get(s) || 0) + 1);
-    }
-  }
-  const helpful = Array.from(helpfulCounts.entries())
-    .map(([section, count]) => ({ section, count }))
-    .sort((a, b) => b.count - a.count);
-  const helpfulMax = helpful.length ? helpful[0].count : 0;
-
-  // Execution pack validation failures over time (daily buckets, last 30 days)
-  const dayKey = (iso: string) => iso.slice(0, 10); // YYYY-MM-DD
-  const byDay = new Map<string, { total: number; failures: number }>();
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - 30);
-
-  for (const r of rows) {
-    const t = new Date(r.created_at);
-    if (Number.isNaN(t.getTime())) continue;
-    if (t < cutoff) continue;
-
-    const k = dayKey(r.created_at);
-    const cur = byDay.get(k) || { total: 0, failures: 0 };
-    cur.total += 1;
-    if (r.execution_pack_validation_failed) cur.failures += 1;
-    byDay.set(k, cur);
-  }
-
-  const failureSeries = Array.from(byDay.entries())
-    .map(([day, v]) => ({
-      day,
-      total: v.total,
-      failures: v.failures,
-      rate: v.total ? v.failures / v.total : 0,
-    }))
-    .sort((a, b) => a.day.localeCompare(b.day));
-
-  const maxDailyFailures = failureSeries.reduce((m, d) => Math.max(m, d.failures), 0);
-
-  // Rating vs risk_score heatmap (bins of 10)
-  type Bin = { label: string; count: number; avgRating: number | null };
-  const bins: { from: number; to: number; ratings: number[] }[] = [];
-  for (let i = 0; i < 100; i += 10) {
-    bins.push({ from: i, to: i + 9, ratings: [] });
-  }
-  for (const r of rows) {
-    if (typeof r.risk_score !== 'number' || typeof r.rating !== 'number') continue;
-    const idx = Math.min(9, Math.max(0, Math.floor(r.risk_score / 10)));
-    bins[idx].ratings.push(r.rating);
-  }
-
-  const heat: Bin[] = bins.map(b => ({
-    label: `${b.from}–${b.to}`,
-    count: b.ratings.length,
-    avgRating: mean(b.ratings),
-  }));
-  const heatMaxCount = heat.reduce((m, d) => Math.max(m, d.count), 0);
+  // Feedback Stats (Existing Logic)
+  const totalFeedback = feedbackRows.length;
+  const feedbackRatings = feedbackRows.map(r => r.rating).filter((n): n is number => typeof n === 'number');
+  const avgRating = mean(feedbackRatings);
+  const avgByJob = computeAvgByBucket(feedbackRows, 'job_title_bucket');
+  const avgByIndustry = computeAvgByBucket(feedbackRows, 'industry_bucket');
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-blue-950 to-slate-950 py-20 px-6">
-      <div className="max-w-6xl mx-auto space-y-6">
-        <header className="mb-4">
-          <h1 className="text-4xl font-bold tracking-tight">Admin Analytics</h1>
-          <p className="text-gray-400 mt-2 text-sm">
-            Quantitative view of <code className="text-gray-300">assessment_feedback</code>. Total feedback rows: <span className="text-gray-200 font-semibold">{total}</span>.
-            {avgRating !== null ? (
-              <>
-                {' '}Average rating: <span className="text-gray-200 font-semibold">{round1(avgRating)}</span>.
-              </>
-            ) : null}
-          </p>
-          <p className="text-[11px] text-gray-600 mt-2">No comments shown in v1.</p>
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-blue-950 to-slate-950 py-10 px-6">
+      <div className="max-w-7xl mx-auto space-y-8">
+        <header>
+          <h1 className="text-4xl font-bold tracking-tight mb-2">Admin Dashboard</h1>
+          <p className="text-gray-400">Live analytics from <span className="text-white">analytics_events</span> and <span className="text-white">purchases</span>.</p>
         </header>
 
+        {/* Business Overview */}
+        <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <MetricCard label="Revenue" value={`$${totalRevenue.toFixed(0)}`} subtext={`${purchaseCount} orders`} />
+          <MetricCard label="Assessments Started" value={started} subtext="Total visits to form" />
+          <MetricCard label="Assessments Completed" value={completed} subtext={`${completionRate.toFixed(1)}% completion rate`} />
+          <MetricCard label="Conversion Rate" value={`${overallConversion.toFixed(2)}%`} subtext="Start → Purchase" />
+        </section>
+
+        {/* Funnel Visualization */}
+        <Panel title="Conversion Funnel" subtitle="User journey drop-offs">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Started Assessment</span>
+                <span className="text-gray-400">{started} (100%)</span>
+              </div>
+              <Bar value={started} max={started} colorClass="bg-blue-600" />
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Completed Assessment</span>
+                <span className="text-gray-400">{completed} ({completionRate.toFixed(1)}%)</span>
+              </div>
+              <Bar value={completed} max={started} colorClass="bg-cyan-600" />
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Initiated Checkout</span>
+                <span className="text-gray-400">{checkouts} ({checkoutRate.toFixed(1)}% of completed)</span>
+              </div>
+              <Bar value={checkouts} max={started} colorClass="bg-indigo-500" />
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>Purchased</span>
+                <span className="text-gray-400">{purchaseCount} ({purchaseRate.toFixed(1)}% of checkout)</span>
+              </div>
+              <Bar value={purchaseCount} max={started} colorClass="bg-green-500" />
+            </div>
+          </div>
+        </Panel>
+
         <div className="grid lg:grid-cols-2 gap-6">
-          <Panel title="Average rating by job_title_bucket" subtitle="Sorted by average rating (descending)">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="text-gray-500 text-xs uppercase tracking-wider">
-                  <tr className="border-b border-white/10">
-                    <th className="text-left py-2">Bucket</th>
-                    <th className="text-right py-2">Count</th>
-                    <th className="text-right py-2">Avg</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {avgByJob.slice(0, 25).map(r => (
-                    <tr key={r.bucket} className="border-b border-white/5">
-                      <td className="py-2 text-gray-200">{r.bucket}</td>
-                      <td className="py-2 text-right text-gray-400">{r.count}</td>
-                      <td className="py-2 text-right text-gray-200">{r.avg === null ? '—' : round1(r.avg)}</td>
+          <Panel title="Recent Transactions" subtitle="Latest purchases">
+            {purchases.length === 0 ? (
+              <p className="text-gray-500 text-sm">No purchases yet.</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                  <thead className="text-gray-500 text-xs uppercase">
+                    <tr className="border-b border-white/10">
+                      <th className="py-2">Date</th>
+                      <th className="py-2">Email</th>
+                      <th className="py-2 text-right">Amount</th>
                     </tr>
-                  ))}
-                  {!avgByJob.length ? (
-                    <tr><td className="py-3 text-gray-500" colSpan={3}>No ratings yet.</td></tr>
-                  ) : null}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {purchases.slice(0, 10).map((p: any) => (
+                      <tr key={p.id} className="border-b border-white/5">
+                        <td className="py-2 text-gray-300">{new Date(p.created_at).toLocaleDateString()}</td>
+                        <td className="py-2 text-gray-400">{p.customer_email || 'Anon'}</td>
+                        <td className="py-2 text-right text-green-400">${(p.amount_total / 100).toFixed(2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </Panel>
 
-          <Panel title="Average rating by industry_bucket" subtitle="Sorted by average rating (descending)">
+          <Panel title="Recent Feedback" subtitle={`Avg Rating: ${avgRating ? round1(avgRating) : '-'}`}>
+            {/* Reusing existing logic briefly */}
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="text-gray-500 text-xs uppercase tracking-wider">
+                <thead className="text-gray-500 text-xs uppercase">
                   <tr className="border-b border-white/10">
-                    <th className="text-left py-2">Bucket</th>
-                    <th className="text-right py-2">Count</th>
-                    <th className="text-right py-2">Avg</th>
+                    <th className="text-left py-2">Role</th>
+                    <th className="text-right py-2">Rating</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {avgByIndustry.slice(0, 25).map(r => (
-                    <tr key={r.bucket} className="border-b border-white/5">
-                      <td className="py-2 text-gray-200">{r.bucket}</td>
-                      <td className="py-2 text-right text-gray-400">{r.count}</td>
-                      <td className="py-2 text-right text-gray-200">{r.avg === null ? '—' : round1(r.avg)}</td>
+                  {feedbackRows.slice(0, 5).map((r, i) => (
+                    <tr key={i} className="border-b border-white/5">
+                      <td className="py-2 text-gray-300 truncate max-w-[200px]">{r.job_title_bucket}</td>
+                      <td className="py-2 text-right text-yellow-500">{r.rating} ★</td>
                     </tr>
                   ))}
-                  {!avgByIndustry.length ? (
-                    <tr><td className="py-3 text-gray-500" colSpan={3}>No ratings yet.</td></tr>
-                  ) : null}
+                  {!feedbackRows.length && <tr><td colSpan={2} className="py-2 text-gray-500">No feedback yet.</td></tr>}
                 </tbody>
               </table>
             </div>
           </Panel>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6">
-          <Panel title="Most helpful sections" subtitle="Distribution across selected sections">
-            <div className="space-y-4">
-              {helpful.map(h => (
-                <div key={h.section} className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-200">{h.section}</span>
-                    <span className="text-gray-500">{h.count}</span>
-                  </div>
-                  <Bar value={h.count} max={helpfulMax} />
-                </div>
-              ))}
-              {!helpful.length ? <p className="text-gray-500 text-sm">No section selections yet.</p> : null}
-            </div>
-          </Panel>
-
-          <Panel title="Execution pack validation failures" subtitle="Last 30 days (daily)">
-            <div className="space-y-3">
-              {failureSeries.slice(-14).map(d => (
-                <div key={d.day} className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-200">{d.day}</span>
-                    <span className="text-gray-500">{d.failures}/{d.total} ({Math.round(d.rate * 100)}%)</span>
-                  </div>
-                  <Bar value={d.failures} max={Math.max(1, maxDailyFailures)} />
-                </div>
-              ))}
-              {!failureSeries.length ? <p className="text-gray-500 text-sm">No data in last 30 days.</p> : null}
-            </div>
-          </Panel>
-
-          <Panel title="Rating vs risk_score" subtitle="Risk bins (10-point) with average rating">
-            <div className="space-y-3">
-              {heat.map(b => (
-                <div key={b.label} className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-200">{b.label}</span>
-                    <span className="text-gray-500">n={b.count} · avg={b.avgRating === null ? '—' : round1(b.avgRating)}</span>
-                  </div>
-                  <Bar value={b.count} max={Math.max(1, heatMaxCount)} />
-                </div>
-              ))}
-            </div>
-          </Panel>
-        </div>
-
-        <footer className="text-[11px] text-gray-600 pt-4">
-          <p>
-            v1 aggregates in server-side JS. If volume grows, move heavy aggregation into SQL (views/RPC) for performance.
-          </p>
-        </footer>
       </div>
     </main>
   );

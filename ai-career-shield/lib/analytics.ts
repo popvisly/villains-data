@@ -20,11 +20,12 @@ export type FeedbackRow = {
  * - Uses pagination because Supabase defaults to limited result sets.
  */
 export async function fetchAllFeedbackRows(): Promise<FeedbackRow[]> {
+  console.time('fetchAllFeedbackRows');
   const pageSize = 1000;
   let from = 0;
   const all: FeedbackRow[] = [];
 
-  // eslint-disable-next-line no-constant-condition
+
   while (true) {
     const to = from + pageSize - 1;
     const { data, error } = await supabaseAdmin
@@ -36,6 +37,7 @@ export async function fetchAllFeedbackRows(): Promise<FeedbackRow[]> {
       .range(from, to);
 
     if (error) {
+      console.timeEnd('fetchAllFeedbackRows'); // Ensure timer ends on error
       throw new Error(`Failed to fetch analytics feedback rows: ${error.message}`);
     }
 
@@ -46,6 +48,7 @@ export async function fetchAllFeedbackRows(): Promise<FeedbackRow[]> {
     from += pageSize;
   }
 
+  console.timeEnd('fetchAllFeedbackRows');
   return all;
 }
 

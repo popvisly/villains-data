@@ -1,0 +1,29 @@
+'use client';
+
+type EventName =
+    | 'landing_page_view'
+    | 'assessment_start'
+    | 'assessment_complete'
+    | 'paywall_view'
+    | 'checkout_start'
+    | 'payment_success_view';
+
+type EventProperties = Record<string, string | number | boolean | null>;
+
+/**
+ * Track an analytics event.
+ * Currently logs to console. In production, this would send data to GA4, PostHog, or Supabase.
+ */
+import { logEvent } from '@/app/actions/analytics';
+
+export function trackEvent(name: EventName, properties?: EventProperties) {
+    // Log to console in dev
+    if (process.env.NODE_ENV === 'development') {
+        console.log(`[Analytics] ${name}`, properties);
+    }
+
+    // Send to Supabase via Server Action
+    // We fire and forget to not block the UI
+    const url = typeof window !== 'undefined' ? window.location.href : undefined;
+    logEvent(name, properties || {}, url).catch(err => console.error('Analytics error:', err));
+}

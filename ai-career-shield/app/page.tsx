@@ -40,23 +40,26 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          {/* Signal badge (not alarm) */}
+          {/* Signal badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-8">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
             </span>
             <span className="text-sm text-gray-300">
-              Includes a 30/60/90‑day roadmap
+              New: Actionable 90-Day Resilience Plans
             </span>
           </div>
 
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="gradient-text">Build Your Career Shield</span>
+            Will AI Replace Your Job? <br />
+            <span className="gradient-text">Get the Data, Not the Hype.</span>
           </h1>
 
           <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-            Know your AI risk in 2 minutes — and get a practical 30/60/90‑day plan to improve your resilience.
+            Get your personalized AI Risk Score and a concrete 30/60/90-day plan to future-proof your career.
+            <br />
+            <span className="text-blue-400 font-medium">Free Assessment • No Login Required</span>
           </p>
 
           {/* CTA */}
@@ -65,17 +68,7 @@ export default function HomePage() {
               href="/assessment"
               className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 transition font-bold text-lg glow"
             >
-              Take Free Risk Assessment →
-            </Link>
-            <button className="px-8 py-4 rounded-xl glass-panel hover:bg-white/10 transition font-medium">
-              Watch Demo (2 min)
-            </button>
-          </div>
-
-          {/* Student link */}
-          <div className="mt-6">
-            <Link href="/students" className="text-sm text-blue-400 hover:text-blue-300 transition">
-              Student? Use this to choose a direction →
+              Check My Risk Score (Free) →
             </Link>
           </div>
 
@@ -86,13 +79,18 @@ export default function HomePage() {
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 border-2 border-slate-950"
-                  />
+                    className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 border-2 border-slate-950 flex items-center justify-center text-[10px] text-white font-bold"
+                  >
+                    {i === 4 ? '+' : ''}
+                  </div>
                 ))}
               </div>
-              <span>1,247 assessments this week</span>
+              <span>10,000+ assessments generated</span>
             </div>
-            <div>⭐⭐⭐⭐⭐ 4.9/5 rating</div>
+            <div className="flex items-center gap-1">
+              <span className="text-yellow-500">★★★★★</span>
+              <span>4.9/5 from early users</span>
+            </div>
           </div>
         </div>
       </section>
@@ -201,102 +199,58 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Pricing / Value Section */}
       <section className="py-20 px-6 bg-blue-950/20" id="pricing">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
-            Choose Your Plan
-          </h2>
-          <p className="text-gray-400 text-center mb-16">
-            Start free, upgrade anytime
-          </p>
+        <div className="max-w-5xl mx-auto">
+          <div className="glass-panel border-2 border-blue-500/30 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+            {/* Background Glow */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Free',
-                price: '$0',
-                description: 'Get started with the basics',
-                features: [
-                  'One-time AI risk assessment',
-                  '3 career path recommendations',
-                  'Basic skill gap analysis',
-                ],
-                cta: 'Start Free',
-                popular: false,
-              },
-              {
-                name: 'Student',
-                price: '$9.99',
-                period: '/month',
-                description: 'Perfect for college students',
-                features: [
-                  'Everything in Free',
-                  'Major/career path guidance',
-                  'Industry trend reports',
-                  'Skill demand forecasts',
-                  'Requires .edu email',
-                ],
-                cta: 'Get Started',
-                popular: true,
-              },
-              {
-                name: 'Pro',
-                price: '$29.99',
-                period: '/month',
-                description: 'For serious career changers',
-                features: [
-                  'Everything in Student',
-                  'Guided roadmap + check-ins',
-                  'Resume builder',
-                  'Interview prep',
-                  'Salary insights',
-                ],
-                cta: 'Go Pro',
-                popular: false,
-              },
-            ].map((plan, i) => (
-              <div
-                key={i}
-                className={`glass-panel p-8 rounded-2xl relative ${plan.popular ? 'ring-2 ring-blue-500' : ''
-                  }`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full text-sm font-bold">
-                    MOST POPULAR
-                  </div>
-                )}
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                  <div className="text-4xl font-bold mb-2">
-                    {plan.price}
-                    {plan.period && (
-                      <span className="text-lg text-gray-400">
-                        {plan.period}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-gray-400 text-sm">{plan.description}</p>
+            <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
+              <div>
+                <div className="inline-block px-4 py-1 rounded-full bg-blue-500/20 text-blue-300 font-bold text-sm mb-6 border border-blue-500/30">
+                  NO SUBSCRIPTION REQUIRED
                 </div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, j) => (
-                    <li key={j} className="flex items-start gap-2">
-                      <span className="text-green-400 mt-1">✓</span>
-                      <span className="text-gray-300">{feature}</span>
-                    </li>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                  The Execution Pack
+                </h2>
+                <p className="text-xl text-gray-300 mb-8">
+                  Stop worrying and start building. Get the complete toolkit to future-proof your specific role.
+                </p>
+
+                <div className="space-y-4 mb-8">
+                  {[
+                    "Detailed AI Risk Analysis (Factors & Weights)",
+                    "30/60/90-Day Concrete Action Plan",
+                    "Role Adjacency Map (Best pivot options)",
+                    "Skill Gap Analysis & Learning Resources",
+                    "Immediate 'This Week' Wins"
+                  ].map((feat, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">✓</div>
+                      <span className="text-gray-200">{feat}</span>
+                    </div>
                   ))}
-                </ul>
-                <Link
-                  href="/signup"
-                  className={`block w-full text-center px-6 py-3 rounded-lg font-bold transition ${plan.popular
-                    ? 'bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700'
-                    : 'bg-white/10 hover:bg-white/20'
-                    }`}
-                >
-                  {plan.cta}
-                </Link>
+                </div>
               </div>
-            ))}
+
+              <div className="text-center bg-slate-950/50 rounded-2xl p-8 border border-white/5">
+                <div className="text-gray-400 text-sm mb-2 uppercase tracking-wide">One-Time Payment</div>
+                <div className="text-6xl font-bold text-white mb-2">$19</div>
+                <div className="text-gray-400 text-sm mb-8">Lifetime access to your report</div>
+
+                <Link
+                  href="/assessment"
+                  className="block w-full py-4 rounded-xl bg-white text-blue-950 hover:bg-gray-100 transition font-bold text-xl mb-4 shadow-lg shadow-blue-900/20"
+                >
+                  Get Your Execution Pack →
+                </Link>
+
+                <p className="text-xs text-gray-500">
+                  SECURE CHECKOUT VIA STRIPE • MONEY-BACK GUARANTEE
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
