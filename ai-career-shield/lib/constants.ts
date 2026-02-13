@@ -1,0 +1,2 @@
+export const EXECUTION_PACK_PRICE_CENTS = 1900; // $19.00
+export const EXECUTION_PACK_PRICE_DISPLAY = '$19';

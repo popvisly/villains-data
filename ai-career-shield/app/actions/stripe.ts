@@ -3,6 +3,7 @@
 import { stripe } from '@/lib/stripe';
 import { supabaseAdmin } from '@/lib/supabase';
 import { headers } from 'next/headers';
+import { EXECUTION_PACK_PRICE_CENTS } from '@/lib/constants';
 
 export async function createCheckoutSession(assessmentId: string) {
     const origin = (await headers()).get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
@@ -20,7 +21,7 @@ export async function createCheckoutSession(assessmentId: string) {
                         description: 'Full 30/60/90 day plan, role adjacencies, and immediate action items.',
                         images: ['https://placehold.co/600x400/png'], // Placeholder image
                     },
-                    unit_amount: 1900, // $19.00
+                    unit_amount: EXECUTION_PACK_PRICE_CENTS,
                 },
                 quantity: 1,
             },

@@ -1,4 +1,4 @@
-import React from 'react';
+import { EXECUTION_PACK_PRICE_DISPLAY } from '@/lib/constants';
 
 interface UpsellCardProps {
     onUnlock: () => void;
@@ -37,15 +37,15 @@ export function UpsellCard({ onUnlock, isLoading }: UpsellCardProps) {
 
                 <div className="w-full md:w-auto text-center border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
                     <div className="mb-4">
-                        <span className="text-3xl font-bold text-white">$29</span>
+                        <span className="text-3xl font-bold text-white">{EXECUTION_PACK_PRICE_DISPLAY}</span>
                         <span className="text-gray-500 text-xs ml-2 italic">one-time payment</span>
                     </div>
                     <button
                         onClick={onUnlock}
                         disabled={isLoading}
                         className={`w-full md:w-56 px-6 py-3 rounded-xl transition-all font-bold text-sm shadow-lg ${isLoading
-                                ? 'bg-blue-900/50 text-blue-300 cursor-not-allowed'
-                                : 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-500/20'
+                            ? 'bg-blue-900/50 text-blue-300 cursor-not-allowed'
+                            : 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-500/20'
                             }`}
                     >
                         {isLoading ? (

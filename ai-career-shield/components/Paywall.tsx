@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { createCheckoutSession } from '@/app/actions/stripe';
 
+import { EXECUTION_PACK_PRICE_DISPLAY } from '@/lib/constants';
+
 interface PaywallProps {
     hasAccess: boolean;
     assessmentId: string;
@@ -62,7 +64,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                         </div>
 
                         <div className="text-3xl font-bold text-white tracking-tight">
-                            $19 <span className="text-sm text-gray-500 font-normal">one-time</span>
+                            {EXECUTION_PACK_PRICE_DISPLAY} <span className="text-sm text-gray-500 font-normal">one-time</span>
                         </div>
 
                         <button
