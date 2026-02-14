@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { AIJobOfTheDay } from '@/components/AIJobOfTheDay';
 
 function Nav() {
   return (
@@ -106,60 +107,65 @@ export default function HomePage() {
             <p className="mt-4 text-xs text-slate-600">No credit card for the free score + roadmap.</p>
           </div>
 
-          {/* Right: deliverable preview (distinctive signature) */}
-          <div className="glass-panel rounded-3xl p-6 md:p-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Preview</p>
-                <p className="text-lg font-semibold text-slate-900">Career Resilience Scorecard</p>
-              </div>
-              <div className="rounded-full bg-[hsl(var(--primary))]/10 px-3 py-1 text-xs font-semibold text-[hsl(var(--primary))]">
-                Example
-              </div>
-            </div>
+          {/* Right: AI Job of the Day + Preview */}
+          <div className="space-y-6">
+            <AIJobOfTheDay />
 
-            <div className="mt-5 grid gap-3">
-              <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4">
-                <div className="flex items-end justify-between">
-                  <div>
-                    <p className="text-xs font-semibold text-slate-500">Career Resilience Score</p>
-                    <p className="mt-1 text-3xl font-semibold tracking-tight text-slate-950">74</p>
-                  </div>
-                  <p className="text-xs text-slate-600">Change pressure: medium</p>
+            {/* Deliverable preview (distinctive signature) */}
+            <div className="glass-panel rounded-3xl p-6 md:p-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Preview</p>
+                  <p className="text-lg font-semibold text-slate-900">Career Resilience Scorecard</p>
                 </div>
-                <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-xl bg-[hsl(var(--background))] p-3">
-                    <p className="text-xs font-semibold text-slate-500">Human leverage</p>
-                    <p className="mt-1 font-semibold text-slate-900">Strong</p>
-                  </div>
-                  <div className="rounded-xl bg-[hsl(var(--background))] p-3">
-                    <p className="text-xs font-semibold text-slate-500">Workflow exposure</p>
-                    <p className="mt-1 font-semibold text-slate-900">Moderate</p>
-                  </div>
+                <div className="rounded-full bg-[hsl(var(--primary))]/10 px-3 py-1 text-xs font-semibold text-[hsl(var(--primary))]">
+                  Example
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">30 / 60 / 90 roadmap</p>
-                <div className="mt-3 grid gap-2 text-sm">
-                  <div className="flex items-center justify-between rounded-xl bg-[hsl(var(--background))] p-3">
-                    <span className="font-semibold text-slate-900">30 days</span>
-                    <span className="text-slate-700">Pick 1 skill → ship 1 proof artifact</span>
+              <div className="mt-5 grid gap-3">
+                <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4">
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <p className="text-xs font-semibold text-slate-500">Career Resilience Score</p>
+                      <p className="mt-1 text-3xl font-semibold tracking-tight text-slate-950">74</p>
+                    </div>
+                    <p className="text-xs text-slate-600">Change pressure: medium</p>
                   </div>
-                  <div className="flex items-center justify-between rounded-xl bg-[hsl(var(--background))] p-3">
-                    <span className="font-semibold text-slate-900">60 days</span>
-                    <span className="text-slate-700">Build a project → publish → iterate</span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-xl bg-[hsl(var(--background))] p-3">
-                    <span className="font-semibold text-slate-900">90 days</span>
-                    <span className="text-slate-700">Target roles → interview reps → refine</span>
+                  <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                    <div className="rounded-xl bg-[hsl(var(--background))] p-3">
+                      <p className="text-xs font-semibold text-slate-500">Human leverage</p>
+                      <p className="mt-1 font-semibold text-slate-900">Strong</p>
+                    </div>
+                    <div className="rounded-xl bg-[hsl(var(--background))] p-3">
+                      <p className="text-xs font-semibold text-slate-500">Workflow exposure</p>
+                      <p className="mt-1 font-semibold text-slate-900">Moderate</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <p className="text-xs text-slate-500">
-                You’ll get specifics for <span className="font-semibold text-slate-700">your</span> role and goals — this is just the format.
-              </p>
+                <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">30 / 60 / 90 roadmap</p>
+                  <div className="mt-3 grid gap-2 text-sm">
+                    <div className="flex items-center justify-between rounded-xl bg-[hsl(var(--background))] p-3">
+                      <span className="font-semibold text-slate-900">30 days</span>
+                      <span className="text-slate-700">Pick 1 skill → ship 1 proof artifact</span>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl bg-[hsl(var(--background))] p-3">
+                      <span className="font-semibold text-slate-900">60 days</span>
+                      <span className="text-slate-700">Build a project → publish → iterate</span>
+                    </div>
+                    <div className="flex items-center justify-between rounded-xl bg-[hsl(var(--background))] p-3">
+                      <span className="font-semibold text-slate-900">90 days</span>
+                      <span className="text-slate-700">Target roles → interview reps → refine</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-500">
+                  You’ll get specifics for <span className="font-semibold text-slate-700">your</span> role and goals — this is just the format.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -171,7 +177,7 @@ export default function HomePage() {
           <SectionTitle
             eyebrow="Why this exists"
             title="Work changes fast. You don’t need panic — you need a plan."
-            subtitle="Automation shifts workflows first. The winning move is to strengthen the parts of your work that grow with change." 
+            subtitle="Automation shifts workflows first. The winning move is to strengthen the parts of your work that grow with change."
           />
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -395,6 +401,6 @@ export default function HomePage() {
           </footer>
         </div>
       </section>
-    </main>
+    </main >
   );
 }

@@ -1,0 +1,131 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Sparkles, TrendingUp, ArrowRight } from 'lucide-react';
+
+// Simplified Frontier Roles Data (Client-side subset)
+// Sourced from our new library: agent-orchestrator, ai-ethics-compliance, ai-agent-architect
+const FRONTIER_ROLES = [
+    {
+        title: "AI Agent Architect",
+        summary: "Designs the 'brain' of autonomous systems—defining memory, planning, and tool use.",
+        salary: "$160k - $240k",
+        impact: "Critical for reliability",
+        growth: "+140% YoY",
+        tags: ["Engineering", "Cognitive Systems"]
+    },
+    {
+        title: "AI Ethics & Compliance Officer",
+        summary: "Ensures AI systems are safe, legal, and fair by developing governance frameworks.",
+        salary: "$150k - $210k",
+        impact: "Risk mitigation (EU AI Act)",
+        growth: "High Demand",
+        tags: ["Governance", "Legal"]
+    },
+    {
+        title: "AI Interaction Designer",
+        summary: "Designs the personality and conversation flow for helpful, safe AI interactions.",
+        salary: "$110k - $160k",
+        impact: "User Trust & Adoption",
+        growth: "Emerging",
+        tags: ["UX", "Psychology"]
+    },
+    {
+        title: "Agent Orchestrator",
+        summary: "Manages the workflow between multiple agents and human-in-the-loop systems.",
+        salary: "$130k - $190k",
+        impact: "Operational Efficiency",
+        growth: "+90% YoY",
+        tags: ["Ops", "Workflow"]
+    }
+];
+
+export function AIJobOfTheDay() {
+    const [role] = useState(() => {
+        // Seed selection based on the day of the year to ensure consistency
+        if (typeof window === 'undefined') return FRONTIER_ROLES[0]; // Server-side default
+
+        const today = new Date();
+        const startOfYear = new Date(today.getFullYear(), 0, 0);
+        const diff = today.getTime() - startOfYear.getTime();
+        const oneDay = 1000 * 60 * 60 * 24;
+        const dayOfYear = Math.floor(diff / oneDay);
+
+        const index = dayOfYear % FRONTIER_ROLES.length;
+        return FRONTIER_ROLES[index];
+    });
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
+    return (
+        <div className="w-full max-w-sm mx-auto md:mx-0 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+            <div className="relative group overflow-hidden rounded-2xl bg-white border border-stone-200 shadow-sm hover:shadow-md transition-all duration-300">
+
+                {/* Header */}
+                <div className="px-5 py-4 border-b border-stone-100 bg-stone-50/50 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <div className="p-1.5 rounded-md bg-forest-50 text-forest-700">
+                            <Sparkles className="w-4 h-4" />
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-wider text-forest-900">Market Intel</span>
+                    </div>
+                    <span className="text-[10px] font-medium text-stone-500 bg-white px-2 py-1 rounded-full border border-stone-100 shadow-sm">
+                        {new Date().toLocaleDateString('en-US', { weekday: 'long' })}&apos;s Role
+                    </span>
+                </div>
+
+                {/* content */}
+                <div className="p-5">
+                    <div className="mb-4">
+                        <h3 className="text-lg font-serif font-bold text-stone-900 leading-tight mb-1">
+                            {role.title}
+                        </h3>
+                        <p className="text-sm text-stone-600 line-clamp-2">
+                            {role.summary}
+                        </p>
+                    </div>
+
+                    {/* Metrics Grid */}
+                    <div className="grid grid-cols-2 gap-3 mb-5">
+                        <div className="bg-stone-50 rounded-xl p-3 border border-stone-100">
+                            <p className="text-[10px] uppercase tracking-wide text-stone-500 font-semibold mb-1">Salary Signal</p>
+                            <p className="text-sm font-bold text-forest-700">{role.salary}</p>
+                        </div>
+                        <div className="bg-stone-50 rounded-xl p-3 border border-stone-100">
+                            <p className="text-[10px] uppercase tracking-wide text-stone-500 font-semibold mb-1">Strategic Value</p>
+                            <p className="text-sm font-medium text-stone-700 truncate">{role.impact}</p>
+                        </div>
+                    </div>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-5">
+                        {role.tags.map(tag => (
+                            <span key={tag} className="px-2 py-1 rounded-md bg-stone-100/80 text-stone-600 text-[10px] font-medium">
+                                {tag}
+                            </span>
+                        ))}
+                        <span className="px-2 py-1 rounded-md bg-green-50 text-green-700 text-[10px] font-medium flex items-center gap-1">
+                            <TrendingUp className="w-3 h-3" />
+                            {role.growth}
+                        </span>
+                    </div>
+
+                    {/* CTA */}
+                    <Link
+                        href="/assessment"
+                        className="flex items-center justify-center w-full py-2.5 rounded-xl bg-stone-900 text-white text-sm font-medium hover:bg-stone-800 transition group-hover:translate-y-0"
+                    >
+                        Start Career Audit
+                        <ArrowRight className="w-4 h-4 ml-2 opacity-80" />
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+}
