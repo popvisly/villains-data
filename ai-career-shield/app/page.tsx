@@ -143,7 +143,7 @@ export default function HomePage() {
             How It Works
           </h2>
           <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
-            Get your personalized AI risk assessment in 3 simple steps
+            Get your Career Shield Score and a practical plan in 3 simple steps
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -215,7 +215,7 @@ export default function HomePage() {
                   The Execution Pack
                 </h2>
                 <p className="text-xl text-gray-300 mb-8">
-                  Stop worrying and start building. Get the complete toolkit to future-proof your specific role.
+                  Turn clarity into momentum. Get a practical toolkit to strengthen your path and build proof of work.
                 </p>
 
                 <div className="space-y-4 mb-8">
@@ -247,7 +247,7 @@ export default function HomePage() {
                 </Link>
 
                 <p className="text-xs text-gray-500">
-                  SECURE CHECKOUT VIA STRIPE • MONEY-BACK GUARANTEE
+                  Secure checkout via Stripe
                 </p>
               </div>
             </div>
@@ -265,8 +265,8 @@ export default function HomePage() {
           <div className="space-y-6">
             {[
               {
-                q: 'How accurate is the AI risk assessment?',
-                a: 'We assess risk based on the type of work you do (repetitiveness, judgment, human interaction, accountability, physical presence) and today&apos;s AI capabilities. It&apos;s not a prediction of your layoff date — it&apos;s a tool for planning. We show the drivers so you can verify what&apos;s behind your score.',
+                q: 'How accurate is the Career Shield Score?',
+                a: 'We score based on the type of work you do (repetitiveness, judgment, human interaction, accountability, physical presence) and today’s automation capabilities. It’s not a prediction — it’s a planning tool. We show the drivers so you can sanity‑check what’s behind your score.',
               },
               {
                 q: "What if I'm a student? What should I study?",

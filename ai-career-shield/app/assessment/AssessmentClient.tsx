@@ -828,11 +828,10 @@ export default function AssessmentPage() {
                         {/* CTA */}
                         <div className="glass-panel p-8 rounded-2xl text-center">
                             <h3 className="text-2xl font-bold mb-4">
-                                Ready to Future-Proof Your Career?
+                                Want a clearer plan you can follow?
                             </h3>
                             <p className="text-gray-400 mb-6">
-                                Get a personalized roadmap to an AI-proof career with our Pro
-                                plan
+                                Get a practical roadmap with portfolio-ready projects, skill priorities, and interview prep.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <button

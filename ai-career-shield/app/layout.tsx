@@ -5,15 +5,15 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'AI Career Shield | Future-Proof Your Career',
+  title: 'AI Career Shield | Build Career Resilience',
   description:
-    "Don't let AI take your job. Discover your AI risk score and get a personalized roadmap to an AI-proof career.",
+    'Get clarity on how work is changing — plus a practical 30/60/90-day plan to stay valuable in your field.',
   keywords: [
-    'AI job risk',
-    'AI-proof careers',
+    'career resilience',
+    'career planning',
     'career change',
+    'future-ready skills',
     'what to study in college',
-    'future-proof jobs',
   ],
 };
 
