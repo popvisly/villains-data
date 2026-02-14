@@ -5,7 +5,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'AI Career Portal | Build Career Resilience',
+  title: 'AI Career Portal | Build Career Readiness',
   description:
     'Get clarity on how work is changing — plus a practical 30/60/90-day plan to stay valuable in your field.',
   keywords: [

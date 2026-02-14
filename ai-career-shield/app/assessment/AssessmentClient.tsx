@@ -226,8 +226,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
     const copyAsMarkdown = () => {
         if (!result) return;
-        let md = `# Career Resilience Report: ${formData.jobTitle}\n\n`;
-        md += `**Career Resilience Score**: ${result.riskScore}%\n`;
+        let md = `# Career Readiness Report: ${formData.jobTitle}\n\n`;
+        md += `**Career Readiness Score**: ${result.riskScore}%\n`;
         md += `**Confidence**: ${result.confidence}\n\n`;
         // ... (truncated markdown gen for brevity, need to keep it?) 
         // Yes, need to keep logic.
@@ -632,7 +632,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                         {/* Risk Score Card */}
                         <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
                             <div className="flex items-center justify-center gap-3 mb-4">
-                                <h2 className="text-2xl font-bold text-slate-950">Your Career Resilience Score</h2>
+                                <h2 className="text-2xl font-bold text-slate-950">Your Career Readiness Score</h2>
                                 {result.confidence && (
                                     <span
                                         className={`px-3 py-1 rounded-full text-xs font-medium ${result.confidence === 'high'
