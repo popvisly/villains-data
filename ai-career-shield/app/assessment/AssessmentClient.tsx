@@ -508,29 +508,29 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                     <div className="animate-in fade-in zoom-in-95 duration-500 space-y-6">
                         {/* Immediate Actions: This Week (MOVED TO TOP) */}
                         {result.immediateActions && result.immediateActions.length > 0 && (
-                            <div className="bg-gradient-to-r from-emerald-500/15 to-lime-500/10 border-2 border-emerald-400/30 p-8 rounded-2xl shadow-xl shadow-emerald-950/20">
+                            <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-8 shadow-sm">
                                 <div className="flex items-center justify-between mb-6">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-xl animate-pulse">🚀</div>
+                                        <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl">🚀</div>
                                         <div>
-                                            <h3 className="text-xl font-bold">This Week: Immediate Actions</h3>
-                                            <p className="text-sm text-blue-200">Start here to build immediate AI resilience</p>
+                                            <h3 className="text-xl font-bold text-slate-950">This Week: Immediate Actions</h3>
+                                            <p className="text-sm text-slate-700">Start here to build immediate AI resilience</p>
                                         </div>
                                     </div>
                                     <button
                                         onClick={copyAsMarkdown}
-                                        className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-bold transition flex items-center gap-2"
+                                        className="px-4 py-2 rounded-lg text-xs font-semibold transition border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2"
                                     >
                                         <span>📋 Copy Plan</span>
                                     </button>
                                 </div>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {result.immediateActions.map((action, i) => (
-                                        <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-start gap-4 hover:bg-white/10 transition-colors group">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold group-hover:bg-blue-600 group-hover:text-white transition-all">
+                                        <div key={i} className="rounded-xl border border-emerald-100 bg-white p-4 flex items-start gap-4 hover:bg-emerald-50/40 transition-colors group">
+                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-600/10 border border-emerald-200 flex items-center justify-center text-emerald-800 font-bold">
                                                 {i + 1}
                                             </div>
-                                            <p className="text-gray-100 text-sm leading-relaxed mt-1">{action}</p>
+                                            <p className="text-slate-800 text-sm leading-relaxed mt-1">{action}</p>
                                         </div>
                                     ))}
                                 </div>
