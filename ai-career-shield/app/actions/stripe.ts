@@ -45,6 +45,8 @@ export async function createCheckoutSession(assessmentId: string) {
 }
 
 export async function verifySession(sessionId: string) {
+
+
     try {
         // 1. Retrieve session from Stripe
         const session = await stripe.checkout.sessions.retrieve(sessionId);

@@ -4,12 +4,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { pickMarketIntelSignals, type MarketIntelTrack } from '@/data/marketIntel';
-import { Paywall } from '@/components/Paywall';
 import { assessJobRisk, generateExecutionPack } from '@/app/actions/assessment';
 import type { AssessmentInput, AssessmentResult } from '@/types';
 import { MarketSignals } from '@/components/MarketSignals';
 import { UpsellCard } from '@/components/UpsellCard';
 import { ExecutionPackView } from '@/components/ExecutionPackView';
+import { InterviewSimulator } from '@/components/InterviewSimulator';
 import { FeedbackSection } from '@/components/FeedbackSection';
 import type { ExecutionPack } from '@/types/executionPack';
 import { trackEvent } from '@/lib/analytics-client';
@@ -111,7 +111,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                     setHasSavedSession(true);
                 }
             }
-        } catch (e) {
+        } catch {
             // ignore
         }
     }, [hasAccess]);
@@ -141,7 +141,30 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
         } catch (e) {
             console.warn('Failed to restore saved assessment state', e);
         }
-    }, [hasAccess]);
+    }, [hasAccess, result, executionPack]);
+
+    // Auto-generate Execution Pack if user has access but no data
+    useEffect(() => {
+        if (hasAccess && result && !executionPack && !isUnlocking) {
+            const autoGenerate = async () => {
+                setIsUnlocking(true);
+                try {
+                    console.log('Access confirmed. Generating Execution Pack...');
+                    // Ensure we have role IDs (should be in result)
+                    if (!result.roleAdjacencies) return;
+
+                    const roleIds = result.roleAdjacencies.map(r => r.roleId);
+                    const pack = await generateExecutionPack(roleIds, formData);
+                    setExecutionPack(pack);
+                } catch (err) {
+                    console.error('Auto-generation failed:', err);
+                } finally {
+                    setIsUnlocking(false);
+                }
+            };
+            autoGenerate();
+        }
+    }, [hasAccess, result, executionPack, isUnlocking, formData]);
 
     // Persist state so we can restore after Stripe redirects
     useEffect(() => {
@@ -312,7 +335,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                     </h1>
                     <p className="text-base md:text-lg text-slate-700 leading-relaxed">
                         {step === 1
-                            ? "Choose a direction, strengthen your role, or plan a pivot — then get a scorecard and a 30/60/90 roadmap." 
+                            ? "Choose a direction, strengthen your role, or plan a pivot — then get a scorecard and a 30/60/90 roadmap."
                             : "Your Career Portal Report"}
                     </p>
 
@@ -575,14 +598,33 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                         {/* Phase 4: Execution Pack Upsell / View */}
                         {ENABLE_EXECUTION_PACK && (
-                            <div className="mt-8">
+                            <div className="mt-8" id="execution-pack">
                                 {executionPack ? (
                                     <ExecutionPackView data={executionPack} isPaid={hasAccess} />
                                 ) : (
-                                    <UpsellCard
-                                        onUnlock={handleUnlockExecutionPack}
-                                        isLoading={isUnlocking}
-                                    />
+                                    <div className="space-y-8">
+                                        <UpsellCard
+                                            onUnlock={handleUnlockExecutionPack}
+                                            isLoading={isUnlocking}
+                                        />
+
+                                        {/* Free Interview Preview */}
+                                        <section className="scroll-mt-24" id="interview-preview">
+                                            <div className="mb-4 px-4">
+                                                <h3 className="text-lg font-bold text-slate-950 flex items-center gap-2">
+                                                    <span className="p-1 rounded bg-indigo-100 text-indigo-600">🎤</span>
+                                                    Try the Interview Simulator
+                                                </h3>
+                                                <p className="text-sm text-slate-600">
+                                                    Experience our AI role-play engine. Free users get 3 practice turns.
+                                                </p>
+                                            </div>
+                                            <InterviewSimulator
+                                                role={result.roleAdjacencies?.[0]?.detail?.title || formData.jobTitle}
+                                                isPaid={false}
+                                            />
+                                        </section>
+                                    </div>
                                 )}
                             </div>
                         )}

@@ -1,61 +1,151 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
-import Link from 'next/link';
-import { Lock, ChevronRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Lock, ChevronRight, Loader2 } from 'lucide-react';
+import { getInterviewAllowance, consumeInterviewTurn } from '@/app/actions/interview';
 
 interface InterviewSimulatorProps {
   role: string;
   resumeText?: string;
-  isPaid: boolean;
+  isPaid: boolean; // hint only; server action is source of truth
 }
 
-/**
- * Phase 20 UI branch note:
- * This component is intentionally lightweight so Vercel previews don't fail.
- * The full Phase 19+ interview engine (generation, grading, turn limits) should
- * live behind server-side gates and can replace this stub once merged.
- */
-export function InterviewSimulator({ role, isPaid }: InterviewSimulatorProps) {
-  const [turn, setTurn] = useState(0);
-  const maxTurns = isPaid ? 10 : 3;
+interface AllowanceState {
+  used: number;
+  limit: number;
+  isPaid: boolean;
+  loading: boolean;
+}
 
-  const sampleQuestions = useMemo(
-    () => [
-      `Walk me through a recent project relevant to ${role}.`,
-      `Tell me about a time you handled competing priorities.`,
-      `What would you do in your first 30 days as a ${role}?`,
-      `How do you measure success in this kind of role?`,
-    ],
-    [role]
-  );
+export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: InterviewSimulatorProps) {
+  const [allowance, setAllowance] = useState<AllowanceState>({
+    used: 0,
+    limit: initialIsPaid ? 10 : 3,
+    isPaid: initialIsPaid,
+    loading: true,
+  });
 
-  if (!isPaid) {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [processing, setProcessing] = useState(false);
+
+  // Load server-side allowance on mount
+  useEffect(() => {
+    let mounted = true;
+    getInterviewAllowance()
+      .then((data) => {
+        if (mounted) {
+          setAllowance({
+            used: data.used,
+            limit: data.limit,
+            isPaid: data.isPaid,
+            loading: false,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to load allowance', err);
+        if (mounted) setAllowance(prev => ({ ...prev, loading: false }));
+      });
+
+    return () => { mounted = false; };
+  }, []);
+
+  const sampleQuestions = [
+    `Walk me through a recent project relevant to ${role}.`,
+    `Tell me about a time you handled competing priorities.`,
+    `What would you do in your first 30 days as a ${role}?`,
+    `How do you measure success in this kind of role?`,
+    `Describe a technical challenge you overcame.`,
+    `How do you handle disagreement with a stakeholder?`,
+    `Explain a complex concept to a non-technical audience.`,
+  ];
+
+  const handleNextTurn = async () => {
+    if (processing) return;
+    setProcessing(true);
+
+    try {
+      // Optimistic check
+      if (allowance.used >= allowance.limit) {
+        return; // UI should be locked anyway
+      }
+
+      const result = await consumeInterviewTurn();
+      if (result.success) {
+        setAllowance({
+          used: result.getAllowance.used,
+          limit: result.getAllowance.limit,
+          isPaid: result.getAllowance.isPaid,
+          loading: false,
+        });
+        setCurrentQuestionIndex(prev => (prev + 1) % sampleQuestions.length);
+      }
+    } catch (err) {
+      console.error('Turn consumption failed:', err);
+      // Likely limit reached or network error
+      // Re-fetch to be safe
+      getInterviewAllowance().then(data => {
+        setAllowance({
+          used: data.used,
+          limit: data.limit,
+          isPaid: data.isPaid,
+          loading: false
+        });
+      });
+    } finally {
+      setProcessing(false);
+    }
+  };
+
+  const isLocked = !allowance.loading && allowance.used >= allowance.limit;
+  const remaining = Math.max(0, allowance.limit - allowance.used);
+
+  if (allowance.loading) {
     return (
-      <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 shadow-sm">
-        <div className="flex items-start gap-3">
-          <div className="mt-0.5 rounded-xl bg-[hsl(var(--primary))]/10 p-2 text-[hsl(var(--primary))]">
-            <Lock className="h-5 w-5" />
+      <div className="flex h-48 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50">
+        <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
+      </div>
+    );
+  }
+
+  // LOCKED STATE (Limit Reached)
+  if (isLocked) {
+    return (
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm">
+        <div className="flex items-start gap-4">
+          <div className="mt-1 rounded-full bg-amber-100 p-2 text-amber-600">
+            <Lock className="h-6 w-6" />
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-slate-900">Interview Simulator (teaser)</h3>
-            <p className="mt-1 text-sm text-slate-600">
-              Try a few practice questions. Unlock the full simulator for deeper feedback and more rounds.
+            <h3 className="text-lg font-bold text-amber-900">
+              {allowance.isPaid ? 'Interview Session Complete' : 'Free Preview Complete'}
+            </h3>
+            <p className="mt-1 text-sm text-amber-800">
+              You&apos;ve used all {allowance.limit} available turns for this session.
+              {!allowance.isPaid && " Upgrade to the Execution Pack to unlock more practice rounds and deeper AI feedback."}
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-slate-700">
-              {sampleQuestions.slice(0, 3).map((q) => (
-                <li key={q} className="rounded-xl bg-[hsl(var(--background))] p-3">
-                  {q}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/assessment"
-              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[hsl(var(--primary))] px-4 py-2 text-sm font-semibold text-[hsl(var(--primary-foreground))]"
-            >
-              Unlock full access
-              <ChevronRight className="h-4 w-4" />
-            </Link>
+
+            {!allowance.isPaid && (
+              <div className="mt-4">
+                <button
+                  onClick={() => {
+                    // Checkout is handled via the Execution Pack upsell on the results page.
+                    // Keep this CTA simple to avoid duplicate checkout flows.
+                    document.getElementById('execution-pack')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }}
+                  className="inline-flex items-center gap-2 rounded-xl bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-700"
+                >
+                  Unlock the Execution Pack
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+
+            {allowance.isPaid && (
+              <div className="mt-4 text-sm text-amber-700">
+                Great work! Review your answers or start a new session later.
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -63,29 +153,54 @@ export function InterviewSimulator({ role, isPaid }: InterviewSimulatorProps) {
   }
 
   return (
-    <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 shadow-sm">
-      <div className="flex items-center justify-between gap-4">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <div>
-          <h3 className="text-lg font-semibold text-slate-900">Interview practice: {role}</h3>
-          <p className="mt-1 text-sm text-slate-600">
-            Quick practice mode (Phase 20 stub). Turn {turn}/{maxTurns}.
+          <h3 className="text-lg font-semibold text-slate-900">Interview Practice: {role}</h3>
+          <p className="text-sm text-slate-500">
+            {allowance.isPaid ? 'Pro Mode' : 'Free Preview'} • {allowance.used} / {allowance.limit} turns used
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setTurn((t) => Math.min(maxTurns, t + 1))}
-          className="rounded-xl bg-[hsl(var(--primary))] px-4 py-2 text-sm font-semibold text-[hsl(var(--primary-foreground))]"
-        >
-          Next
-        </button>
+        {!allowance.isPaid && (
+          <div className="hidden text-xs font-medium text-amber-600 sm:block">
+            {remaining} free turns left
+          </div>
+        )}
       </div>
 
-      <div className="mt-4 rounded-2xl bg-[hsl(var(--background))] p-4">
-        <p className="text-sm font-semibold text-slate-900">Sample prompt</p>
-        <p className="mt-1 text-sm text-slate-700">{sampleQuestions[Math.min(turn, sampleQuestions.length - 1)]}</p>
-        <p className="mt-3 text-xs text-slate-500">
-          (The full version will generate role-specific questions, grade your answers, and track usage server-side.)
-        </p>
+      <div className="py-6">
+        <div className="mb-4 rounded-xl bg-indigo-50 p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-indigo-500">Interviewer</p>
+          <p className="mt-1 text-base font-medium text-indigo-900">
+            {sampleQuestions[currentQuestionIndex]}
+          </p>
+        </div>
+
+        <textarea
+          className="w-full rounded-xl border-slate-200 bg-slate-50 p-3 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+          rows={3}
+          placeholder="Type your answer here..."
+        />
+      </div>
+
+      <div className="flex items-center justify-end gap-3 pt-2">
+        <button
+          onClick={handleNextTurn}
+          disabled={processing}
+          className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
+        >
+          {processing ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Processing...
+            </>
+          ) : (
+            <>
+              Submit Answer
+              <ChevronRight className="h-4 w-4" />
+            </>
+          )}
+        </button>
       </div>
     </div>
   );
