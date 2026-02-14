@@ -331,38 +331,38 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4 text-slate-950">
-                        AI Career Portal Assessment
+                        Career Readiness Diagnostic
                     </h1>
                     <p className="text-base md:text-lg text-slate-700 leading-relaxed">
                         {step === 1
-                            ? "Choose a direction, strengthen your role, or plan a pivot — then get a scorecard and a 30/60/90 roadmap."
-                            : "Your Career Portal Report"}
+                            ? "A short diagnostic that produces a scorecard and a 30/60/90 execution roadmap."
+                            : "Your executive brief"}
                     </p>
 
                 </div>
 
                 {/* RESUME BANNER */}
                 {step === 1 && hasSavedSession && (
-                    <div className="mb-8 p-6 bg-blue-900/40 border border-blue-500/50 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-500">
+                    <div className="mb-8 p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-500">
                         <div className="flex items-center gap-4">
                             <span className="text-2xl">💾</span>
                             <div>
-                                <h3 className="font-bold text-white">Welcome back!</h3>
-                                <p className="text-sm text-blue-200">
-                                    We found a saved assessment in progress.
+                                <h3 className="font-bold text-slate-900">Welcome back</h3>
+                                <p className="text-sm text-slate-600">
+                                    We found a saved diagnostic in progress.
                                 </p>
                             </div>
                         </div>
                         <div className="flex gap-3">
                             <button
                                 onClick={handleStartOver}
-                                className="px-4 py-2 text-sm text-blue-300 hover:text-white transition"
+                                className="px-4 py-2 text-sm text-slate-600 hover:text-slate-900 transition"
                             >
                                 Start Over
                             </button>
                             <button
                                 onClick={handleResume}
-                                className="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold shadow-lg shadow-blue-900/20 transition"
+                                className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold shadow-sm transition"
                             >
                                 Resume
                             </button>
@@ -372,7 +372,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                 {/* Step 1: Combined Input Form */}
                 {step === 1 && (
-                    <div className="glass-panel p-8 rounded-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <form onSubmit={handleSubmit} className="space-y-12">
 
                             {/* Section 1: The Basics */}
@@ -424,7 +424,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                                     {/* Goals */}
                                     <div className="col-span-2">
-                                        <label className="block text-sm font-medium mb-3">Primary Goal</label>
+                                        <label className="block text-sm font-medium mb-3">What are you optimizing for?</label>
                                         <div className="grid sm:grid-cols-3 gap-3">
                                             {GOALS.map((goal) => (
                                                 <button
@@ -456,7 +456,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                 <div className="space-y-6">
                                     {/* Skills Input */}
                                     <div>
-                                        <label className="block text-sm font-medium mb-2">Top skills (up to 3) *</label>
+                                        <label className="block text-sm font-medium mb-2">Top skills (up to 3)</label>
                                         <div className="flex gap-2 mb-3">
                                             <input
                                                 type="text"
@@ -523,8 +523,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                         </span>
                                     )}
                                 </button>
-                                <p className="text-center text-xs text-gray-500 mt-4">
-                                    Takes ~10 seconds. Creating your personalized assessment and 30/60/90 action plan.
+                                <p className="text-center text-xs text-slate-600 mt-4">
+                                    ~10 seconds. Outputs a scorecard plus a 30/60/90 execution roadmap.
                                 </p>
                             </div>
                         </form>
@@ -541,15 +541,15 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl">🚀</div>
                                         <div>
-                                            <h3 className="text-xl font-bold text-slate-950">This Week: Immediate Actions</h3>
-                                            <p className="text-sm text-slate-700">Start here to build immediate AI resilience</p>
+                                            <h3 className="text-xl font-bold text-slate-950">This Week: High‑leverage moves</h3>
+                                            <p className="text-sm text-slate-700">Start here to build readiness through real outputs</p>
                                         </div>
                                     </div>
                                     <button
                                         onClick={copyAsMarkdown}
                                         className="px-4 py-2 rounded-lg text-xs font-semibold transition border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2"
                                     >
-                                        <span>📋 Copy Plan</span>
+                                        <span>📋 Copy brief</span>
                                     </button>
                                 </div>
                                 <div className="grid md:grid-cols-2 gap-4">
