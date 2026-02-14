@@ -199,8 +199,8 @@ export default function AssessmentPage() {
 
     const copyAsMarkdown = () => {
         if (!result) return;
-        let md = `# AI Career Risk Report: ${formData.jobTitle}\n\n`;
-        md += `**Risk Score**: ${result.riskScore}%\n`;
+        let md = `# Career Shield Report: ${formData.jobTitle}\n\n`;
+        md += `**Career Shield Score**: ${result.riskScore}%\n`;
         md += `**Confidence**: ${result.confidence}\n\n`;
         // ... (truncated markdown gen for brevity, need to keep it?) 
         // Yes, need to keep logic.
@@ -210,7 +210,7 @@ export default function AssessmentPage() {
             md += `\n`;
         }
         if (result.plan30_60_90) {
-            md += `## 📅 Future-Proofing Roadmap\n`;
+            md += `## 📅 30/60/90 Roadmap\n`;
             result.plan30_60_90.forEach(window => {
                 md += `### ${window.window.replace('_', ' ').toUpperCase()}\n`;
                 md += `**Goals**:\n`;
@@ -615,7 +615,7 @@ export default function AssessmentPage() {
                                 </svg>
                                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                                     <div className="text-6xl font-bold">{result.riskScore}%</div>
-                                    <div className="text-sm text-gray-400">Risk Level</div>
+                                    <div className="text-sm text-gray-400">Change pressure</div>
                                 </div>
                             </div>
                             {result.reasoning && (
@@ -687,7 +687,7 @@ export default function AssessmentPage() {
                         {/* Role Adjacencies */}
                         {result.roleAdjacencies && result.roleAdjacencies.length > 0 && (
                             <div className="glass-panel p-8 rounded-2xl">
-                                <h3 className="text-xl font-bold mb-4">Future-Ready Career Paths</h3>
+                                <h3 className="text-xl font-bold mb-4">Strong next‑best paths</h3>
                                 <p className="text-gray-400 mb-6">
                                     Based on your skills, these roles offer high resilience and leverage:
                                 </p>
@@ -770,7 +770,7 @@ export default function AssessmentPage() {
                         {/* 30/60/90 Day Plan */}
                         {result.plan30_60_90 && result.plan30_60_90.length > 0 && (
                             <div className="glass-panel p-8 rounded-2xl">
-                                <h3 className="text-xl font-bold mb-6">Your Future-Proofing Roadmap</h3>
+                                <h3 className="text-xl font-bold mb-6">Your 30/60/90 roadmap</h3>
                                 <div className="grid md:grid-cols-3 gap-6">
                                     {result.plan30_60_90.map((plan, i) => (
                                         <div key={i} className="relative">
