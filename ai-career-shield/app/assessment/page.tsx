@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export default function AssessmentPage() {
   return (
-    <Suspense fallback={<main className="min-h-screen bg-slate-950" />}>
+    <Suspense fallback={<main className="min-h-screen" />}>
       <AssessmentClient />
     </Suspense>
   );

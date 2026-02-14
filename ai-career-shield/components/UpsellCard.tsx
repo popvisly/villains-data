@@ -7,7 +7,7 @@ interface UpsellCardProps {
 
 export function UpsellCard({ onUnlock, isLoading }: UpsellCardProps) {
     return (
-        <div className="glass-panel p-8 rounded-2xl border border-blue-500/20 bg-blue-500/5 relative overflow-hidden">
+        <div className="glass-panel p-8 rounded-2xl border border-emerald-400/15 bg-emerald-500/5 relative overflow-hidden">
             <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
                 <div className="flex-1">
                     <h3 className="text-2xl font-bold mb-3 tracking-tight">Make this actionable</h3>
@@ -17,19 +17,19 @@ export function UpsellCard({ onUnlock, isLoading }: UpsellCardProps) {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
                         <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                             <span className="text-xs text-gray-400">2 portfolio-ready project briefs (with README templates)</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                             <span className="text-xs text-gray-400">Step-by-step deliverables + success criteria</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                             <span className="text-xs text-gray-400">Skill priorities (what to learn first)</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                             <span className="text-xs text-gray-400">Interview prep + “ideal answer” examples</span>
                         </div>
                     </div>
@@ -44,8 +44,8 @@ export function UpsellCard({ onUnlock, isLoading }: UpsellCardProps) {
                         onClick={onUnlock}
                         disabled={isLoading}
                         className={`w-full md:w-56 px-6 py-3 rounded-xl transition-all font-bold text-sm shadow-lg ${isLoading
-                            ? 'bg-blue-900/50 text-blue-300 cursor-not-allowed'
-                            : 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-500/20'
+                            ? 'bg-emerald-950/40 text-emerald-200 cursor-not-allowed'
+                            : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20'
                             }`}
                     >
                         {isLoading ? (
