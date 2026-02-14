@@ -588,16 +588,16 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                         )}
 
                         {/* Risk Score Card */}
-                        <div className="glass-panel p-8 rounded-2xl text-center">
+                        <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
                             <div className="flex items-center justify-center gap-3 mb-4">
-                                <h2 className="text-2xl font-bold">Your Career Resilience Score</h2>
+                                <h2 className="text-2xl font-bold text-slate-950">Your Career Resilience Score</h2>
                                 {result.confidence && (
                                     <span
                                         className={`px-3 py-1 rounded-full text-xs font-medium ${result.confidence === 'high'
-                                            ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                                             : result.confidence === 'medium'
-                                                ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                                                : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+                                                ? 'bg-amber-50 text-amber-800 border border-amber-200'
+                                                : 'bg-slate-100 text-slate-700 border border-slate-200'
                                             }`}
                                     >
                                         {result.confidence} confidence
@@ -606,10 +606,10 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                 {result.planConfidence && (
                                     <span
                                         className={`px-3 py-1 rounded-full text-xs font-medium ${result.planConfidence === 'high'
-                                            ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                                            ? 'bg-sky-50 text-sky-800 border border-sky-200'
                                             : result.planConfidence === 'medium'
-                                                ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
-                                                : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                                                ? 'bg-violet-50 text-violet-800 border border-violet-200'
+                                                : 'bg-rose-50 text-rose-800 border border-rose-200'
                                             }`}
                                     >
                                         Plan Confidence: {result.planConfidence}
@@ -617,8 +617,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                 )}
                             </div>
                             {result.improvementSuggestion && (
-                                <div className="mb-6 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-lg inline-block text-sm text-blue-300">
-                                    💡 <span className="font-semibold">Pro Tip:</span> {result.improvementSuggestion}
+                                <div className="mb-6 px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg inline-block text-sm text-slate-700">
+                                    💡 <span className="font-semibold text-slate-900">Pro Tip:</span> {result.improvementSuggestion}
                                 </div>
                             )}
                             <div className="relative w-48 h-48 mx-auto mb-6">
@@ -627,7 +627,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                         cx="96"
                                         cy="96"
                                         r="80"
-                                        stroke="rgba(255,255,255,0.1)"
+                                        stroke="rgba(15,23,42,0.12)"
                                         strokeWidth="16"
                                         fill="none"
                                     />
@@ -649,16 +649,16 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                     />
                                 </svg>
                                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                    <div className="text-6xl font-bold">{result.riskScore}%</div>
-                                    <div className="text-sm text-gray-400">Change pressure</div>
+                                    <div className="text-6xl font-bold text-slate-950">{result.riskScore}%</div>
+                                    <div className="text-sm text-slate-600">Change pressure</div>
                                 </div>
                             </div>
                             {result.reasoning && (
-                                <p className="text-gray-300 max-w-2xl mx-auto mb-4">
+                                <p className="text-slate-700 max-w-2xl mx-auto mb-4">
                                     {result.reasoning}
                                 </p>
                             )}
-                            <p className="text-sm text-gray-500 max-w-2xl mx-auto italic">
+                            <p className="text-sm text-slate-600 max-w-2xl mx-auto italic">
                                 Not a prediction — a planning tool. We show the drivers so you can verify what is behind your score.
                             </p>
                         </div>

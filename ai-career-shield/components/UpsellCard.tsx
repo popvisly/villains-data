@@ -7,45 +7,45 @@ interface UpsellCardProps {
 
 export function UpsellCard({ onUnlock, isLoading }: UpsellCardProps) {
     return (
-        <div className="glass-panel p-8 rounded-2xl border border-emerald-400/15 bg-emerald-500/5 relative overflow-hidden">
+        <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm relative overflow-hidden">
             <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
                 <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-3 tracking-tight">Make this actionable</h3>
-                    <p className="text-gray-300 text-sm mb-6 leading-relaxed max-w-xl">
-                        Unlock a ready-to-use Execution Pack: <span className="text-white font-medium">2 portfolio-ready project briefs</span>, step-by-step deliverables, and interview prep tailored to your target role.
+                    <h3 className="text-2xl font-bold mb-3 tracking-tight text-slate-950">Make this actionable</h3>
+                    <p className="text-slate-700 text-sm mb-6 leading-relaxed max-w-xl">
+                        Unlock the Execution Pack: <span className="font-semibold text-slate-900">2 portfolio-ready project briefs</span>, step-by-step deliverables, and interview prep tailored to your target role.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
                         <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
-                            <span className="text-xs text-gray-400">2 portfolio-ready project briefs (with README templates)</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-600"></div>
+                            <span className="text-xs text-slate-700">2 portfolio-ready project briefs (with README templates)</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
-                            <span className="text-xs text-gray-400">Step-by-step deliverables + success criteria</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-600"></div>
+                            <span className="text-xs text-slate-700">Step-by-step deliverables + success criteria</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
-                            <span className="text-xs text-gray-400">Skill priorities (what to learn first)</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-600"></div>
+                            <span className="text-xs text-slate-700">Skill priorities (what to learn first)</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
-                            <span className="text-xs text-gray-400">Interview prep + “ideal answer” examples</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-600"></div>
+                            <span className="text-xs text-slate-700">Interview prep + “ideal answer” examples</span>
                         </div>
                     </div>
                 </div>
 
-                <div className="w-full md:w-auto text-center border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
+                <div className="w-full md:w-auto text-center border-t md:border-t-0 md:border-l border-slate-200 pt-6 md:pt-0 md:pl-8">
                     <div className="mb-4">
-                        <span className="text-3xl font-bold text-white">{EXECUTION_PACK_PRICE_DISPLAY}</span>
-                        <span className="text-gray-500 text-xs ml-2 italic">one-time payment</span>
+                        <span className="text-3xl font-bold text-slate-950">{EXECUTION_PACK_PRICE_DISPLAY}</span>
+                        <span className="text-slate-500 text-xs ml-2 italic">one-time payment</span>
                     </div>
                     <button
                         onClick={onUnlock}
                         disabled={isLoading}
                         className={`w-full md:w-56 px-6 py-3 rounded-xl transition-all font-bold text-sm shadow-lg ${isLoading
-                            ? 'bg-emerald-950/40 text-emerald-200 cursor-not-allowed'
-                            : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20'
+                            ? 'bg-slate-200 text-slate-500 cursor-not-allowed'
+                            : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/20'
                             }`}
                     >
                         {isLoading ? (
@@ -58,7 +58,7 @@ export function UpsellCard({ onUnlock, isLoading }: UpsellCardProps) {
                             </span>
                         ) : 'Unlock Execution Pack →'}
                     </button>
-                    <p className="mt-4 text-[10px] text-gray-400 uppercase tracking-widest font-semibold">
+                    <p className="mt-4 text-[10px] text-slate-500 uppercase tracking-widest font-semibold">
                         One-time purchase • instant access
                     </p>
                 </div>
