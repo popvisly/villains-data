@@ -53,14 +53,14 @@ const TOPIC_LABELS: Record<string, string> = {
 };
 
 const GOALS = [
-    { id: 'choose_direction', label: 'Choose a direction', desc: 'I am starting out' },
-    { id: 'future_proof_role', label: 'Future-proof my role', desc: 'I want to stay competitive' },
-    { id: 'plan_pivot', label: 'Pivot careers', desc: 'I want to switch fields' },
+    { id: 'choose_direction', label: 'Explore my best options', desc: 'I want clarity on what to do next' },
+    { id: 'future_proof_role', label: 'Strengthen my current path', desc: 'I want to stay valuable as the work changes' },
+    { id: 'plan_pivot', label: 'Plan a pivot', desc: 'I’m considering a new direction' },
 ];
 
 const INTERESTS = [
     'Visual Design', 'Data Analysis', 'Strategy',
-    'People/Management', 'Coding/Building', 'Writing',
+    'People/Management', 'Building things', 'Writing',
     'Research', 'Operations/Process'
 ];
 
@@ -304,12 +304,12 @@ export default function AssessmentPage() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-bold mb-4">
-                        <span className="gradient-text">AI Risk Assessment</span>
+                        <span className="gradient-text">Career Shield Check</span>
                     </h1>
                     <p className="text-xl text-gray-400">
                         {step === 1
-                            ? "Let's build your profile to measure your exposure."
-                            : "Your Personalized Risk Report"}
+                            ? "Answer a few quick questions to get your score and a 30/60/90 action plan."
+                            : "Your Career Shield Report"}
                     </p>
 
                 </div>
@@ -352,16 +352,16 @@ export default function AssessmentPage() {
                             <section>
                                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                                     <span className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm">1</span>
-                                    Professional Profile
+                                    Your role
                                 </h3>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="col-span-2 md:col-span-2">
-                                        <label className="block text-sm font-medium mb-2">Role / Major *</label>
+                                        <label className="block text-sm font-medium mb-2">Role (or field of study) *</label>
                                         <input
                                             type="text"
                                             value={formData.jobTitle}
                                             onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                                            placeholder="e.g., Marketing Manager"
+                                            placeholder="e.g., Marketing Manager / Nursing student"
                                             className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition"
                                             required
                                             list="common-jobs"
@@ -385,13 +385,13 @@ export default function AssessmentPage() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium mb-2">Years Experience</label>
+                                        <label className="block text-sm font-medium mb-2">Experience (years)</label>
                                         <input
                                             type="number"
                                             value={formData.yearsExperience || ''}
                                             onChange={(e) => setFormData({ ...formData, yearsExperience: e.target.value ? parseInt(e.target.value) : undefined })}
                                             className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition"
-                                            placeholder="e.g. 5"
+                                            placeholder="e.g. 5 (optional)"
                                         />
                                     </div>
 
@@ -403,7 +403,7 @@ export default function AssessmentPage() {
                                                 <button
                                                     key={goal.id}
                                                     type="button"
-                                                    onClick={() => setFormData({ ...formData, goal: goal.id as any })}
+                                                    onClick={() => setFormData({ ...formData, goal: goal.id as AssessmentInput['goal'] })}
                                                     className={`p-4 rounded-xl border text-left transition ${formData.goal === goal.id
                                                         ? 'bg-blue-600/20 border-blue-500 ring-1 ring-blue-500'
                                                         : 'bg-white/5 border-white/10 hover:bg-white/10'
@@ -429,14 +429,14 @@ export default function AssessmentPage() {
                                 <div className="space-y-6">
                                     {/* Skills Input */}
                                     <div>
-                                        <label className="block text-sm font-medium mb-2">Top 3 Skills *</label>
+                                        <label className="block text-sm font-medium mb-2">Top skills (up to 3) *</label>
                                         <div className="flex gap-2 mb-3">
                                             <input
                                                 type="text"
                                                 value={skillInput}
                                                 onChange={(e) => setSkillInput(e.target.value)}
                                                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addSkill())}
-                                                placeholder="Type a skill and Start Enter..."
+                                                placeholder="Type a skill and press Enter…"
                                                 className="flex-1 px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition"
                                             />
                                             <button
@@ -459,7 +459,7 @@ export default function AssessmentPage() {
 
                                     {/* Interests */}
                                     <div>
-                                        <label className="block text-sm font-medium mb-3">I enjoy...</label>
+                                        <label className="block text-sm font-medium mb-3">I’m strongest when I’m doing…</label>
                                         <div className="flex flex-wrap gap-2">
                                             {INTERESTS.map((interest) => (
                                                 <button
@@ -487,17 +487,17 @@ export default function AssessmentPage() {
                                 >
                                     {isLoading ? (
                                         <span className="flex items-center justify-center gap-2">
-                                            <span className="animate-spin text-xl">◌</span> Analyzing Profile...
+                                            <span className="animate-spin text-xl">◌</span> Building your Career Shield…
                                         </span>
                                     ) : (
                                         <span className="flex items-center justify-center gap-2">
-                                            Analyze AI Risk
+                                            Build my Career Shield
                                             <span className="group-hover:translate-x-1 transition">→</span>
                                         </span>
                                     )}
                                 </button>
                                 <p className="text-center text-xs text-gray-500 mt-4">
-                                    Takes ~10 seconds. We use OpenAI to model your role against current capabilities.
+                                    Takes ~10 seconds. Creating your personalized assessment and 30/60/90 action plan.
                                 </p>
                             </div>
                         </form>
@@ -555,7 +555,7 @@ export default function AssessmentPage() {
                         )}                        {/* Risk Score Card */}
                         <div className="glass-panel p-8 rounded-2xl text-center">
                             <div className="flex items-center justify-center gap-3 mb-4">
-                                <h2 className="text-2xl font-bold">Your AI Risk Score</h2>
+                                <h2 className="text-2xl font-bold">Your Career Shield Score</h2>
                                 {result.confidence && (
                                     <span
                                         className={`px-3 py-1 rounded-full text-xs font-medium ${result.confidence === 'high'

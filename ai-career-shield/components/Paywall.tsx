@@ -57,14 +57,14 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                         </div>
 
                         <div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Unlock Your Execution Pack</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2">Get the Execution Pack</h3>
                             <p className="text-gray-400 text-sm">
-                                Get the complete 30/60/90 day plan, detailed role adjacencies, and specific immediate actions tailored to your risk profile.
+                                2 portfolio-ready project briefs, step-by-step deliverables, and a 30/60/90 plan tailored to your role and goal.
                             </p>
                         </div>
 
                         <div className="text-3xl font-bold text-white tracking-tight">
-                            {EXECUTION_PACK_PRICE_DISPLAY} <span className="text-sm text-gray-500 font-normal">one-time</span>
+                            {EXECUTION_PACK_PRICE_DISPLAY} <span className="text-sm text-gray-500 font-normal">one-time (no subscription)</span>
                         </div>
 
                         <button
@@ -81,14 +81,14 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                                     Processing...
                                 </span>
                             ) : (
-                                'Unlock Full Access'
+                                'Continue to checkout'
                             )}
                         </button>
 
                         <div className="flex items-center justify-center gap-2 text-[10px] text-gray-500 uppercase tracking-widest">
-                            <span>Secure Payment via Stripe</span>
+                            <span>Instant access</span>
                             <span className="w-1 h-1 bg-gray-600 rounded-full" />
-                            <span>Instant Access</span>
+                            <span>One-time payment via Stripe</span>
                         </div>
                     </div>
                 </div>

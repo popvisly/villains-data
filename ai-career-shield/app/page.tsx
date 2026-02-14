@@ -52,12 +52,12 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-            Will AI Replace Your Job? <br />
-            <span className="gradient-text">Get the Data, Not the Hype.</span>
+            How resilient is your career path? <br />
+            <span className="gradient-text">Get clarity — and a plan.</span>
           </h1>
 
           <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-            Get your personalized AI Risk Score and a concrete 30/60/90-day plan to future-proof your career.
+            Get your Career Shield Score and a concrete 30/60/90-day action plan to stay valuable as the work changes.
             <br />
             <span className="text-blue-400 font-medium">Free Assessment • No Login Required</span>
           </p>
@@ -68,7 +68,7 @@ export default function HomePage() {
               href="/assessment"
               className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 transition font-bold text-lg glow"
             >
-              Check My Risk Score (Free) →
+              Get My Career Shield Score (Free) →
             </Link>
           </div>
 
@@ -220,11 +220,11 @@ export default function HomePage() {
 
                 <div className="space-y-4 mb-8">
                   {[
-                    "Detailed AI Risk Analysis (Factors & Weights)",
-                    "30/60/90-Day Concrete Action Plan",
-                    "Role Adjacency Map (Best pivot options)",
-                    "Skill Gap Analysis & Learning Resources",
-                    "Immediate 'This Week' Wins"
+                    "Career Shield Score + key drivers",
+                    "30/60/90-Day action plan",
+                    "Best next roles (adjacent paths)",
+                    "Skill priorities (what to learn first)",
+                    "Immediate “this week” wins"
                   ].map((feat, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">✓</div>
