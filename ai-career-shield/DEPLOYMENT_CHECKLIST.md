@@ -22,9 +22,10 @@
 ## 3. Database (Supabase)
 
 - [ ] **Migrations**: Verify all migrations are applied in production (SQL Editor -> Run).
-  - `001_initial_schema.sql` (Tables)
+  - `001_assessment_feedback.sql` (Initial Schema)
   - `002_purchases_table.sql` (Purchases)
   - `003_analytics_events.sql` (Analytics)
+  - `003_purchases_access_token.sql` (Token persistence)
   - `004_interview_usage.sql` (Gating Logic) - **CRITICAL: Ensure this is applied or Interview Simulator will break.**
 - [ ] **RLS Policies**: Confirm operational.
 
