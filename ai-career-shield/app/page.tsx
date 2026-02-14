@@ -68,22 +68,22 @@ export default function HomePage() {
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-1 text-xs text-slate-700">
               <span className="h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />
-              Free assessment • ~2 minutes • no login
+Free diagnostic • ~2 minutes • no login
             </div>
 
             <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">
-              Choose a direction, strengthen your role, or plan a pivot — with a 30/60/90 roadmap.
+              A career diagnostic built for AI-era workflows.
             </h1>
 
             <p className="mt-4 text-pretty text-base leading-relaxed text-slate-700 md:text-lg">
-              A 2‑minute assessment that turns your role + strengths into a clear scorecard and a plan you can execute.
+              Get a Career Readiness Score, the drivers behind it, and a 30/60/90 execution roadmap you can run this quarter.
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-800 md:text-base">
               {[
-                'Explore my best options (next‑best paths)',
-                'Strengthen my current path (what to lean into next)',
-                'Plan a pivot (a realistic 30/60/90 sequence)',
+                'Next‑best paths (if you want options)',
+                'What to double down on (if you want to stay on track)',
+                'A realistic pivot sequence (if you want to change direction)',
               ].map((t) => (
                 <li key={t} className="flex items-start gap-3">
                   <span className="mt-1 inline-block h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />
@@ -221,25 +221,25 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             title="How it works"
-            subtitle="One short assessment → a scorecard → a concrete 30/60/90 plan."
+            subtitle="A short diagnostic → a scorecard → a 30/60/90 execution roadmap."
           />
 
           <div className="mx-auto mt-10 grid max-w-4xl gap-4">
             {[
               {
                 step: '1',
-                title: 'Answer a few questions',
-                desc: 'Role, strengths, and what you want next. Keep it simple.',
+                title: 'Capture your context',
+                desc: 'Role, strengths, constraints, and what you want next.',
               },
               {
                 step: '2',
-                title: 'Get your score + drivers',
-                desc: 'You’ll see what’s pushing your score up or down — so it feels fair.',
+                title: 'Get the scorecard (with drivers)',
+                desc: 'We show what moved your score so you can sanity‑check it.',
               },
               {
                 step: '3',
-                title: 'Leave with a 30/60/90 roadmap',
-                desc: 'Learn → build → prove. Small moves that compound.',
+                title: 'Run a 30/60/90 execution roadmap',
+                desc: 'Small moves, real outputs. The plan is designed to be shippable.',
               },
             ].map((s) => (
               <div key={s.step} className="glass-panel rounded-3xl p-6">
@@ -272,20 +272,20 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             eyebrow="Deliverables"
-            title="What you get (free vs paid)"
-            subtitle="Free gives clarity. Paid gives you assets to execute."
+            title="What you get"
+            subtitle="Free gets you clarity. The Execution Pack gets you execution leverage."
           />
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             <div className="glass-panel rounded-3xl p-6">
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Free</p>
-              <h3 className="mt-2 text-xl font-semibold text-slate-900">Score + roadmap</h3>
+              <h3 className="mt-2 text-xl font-semibold text-slate-900">Scorecard + roadmap</h3>
               <ul className="mt-4 space-y-3 text-sm text-slate-700">
                 {[
                   'Career Readiness Score + key drivers',
-                  '30/60/90 roadmap (text)',
-                  '3–5 next-best paths',
-                  'Interview Simulator teaser (3 turns)',
+                  '30/60/90 execution roadmap',
+                  'Next‑best paths (3–5)',
+                  'Interview Simulator preview (3 turns)',
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-3">
                     <span className="mt-1 inline-block h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />
@@ -299,14 +299,14 @@ export default function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Execution Pack (one-time)</p>
               <div className="mt-2 flex items-end justify-between gap-4">
                 <h3 className="text-xl font-semibold text-slate-900">$19</h3>
-                <p className="text-sm text-slate-600">Lifetime access</p>
+                <p className="text-sm text-slate-600">One-time • instant access</p>
               </div>
               <ul className="mt-4 space-y-3 text-sm text-slate-700">
                 {[
-                  'PDF + exportable plan',
-                  'More detailed “proof of work” steps',
+                  'PDF + exportable execution plan',
+                  'Portfolio-ready project briefs + templates',
                   'Skill priorities (what to learn first)',
-                  'Full Interview Simulator (10 turns)',
+                  'Interview Simulator (10 turns per session)',
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-3">
                     <span className="mt-1 inline-block h-2 w-2 rounded-full bg-slate-400" />
@@ -319,7 +319,7 @@ export default function HomePage() {
                 href="/assessment"
                 className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-3 text-base font-semibold text-[hsl(var(--primary-foreground))] hover:opacity-90"
               >
-                Start with the free assessment
+                Run the diagnostic
               </Link>
               <p className="mt-3 text-center text-xs text-slate-600">Secure checkout via Stripe</p>
             </div>
@@ -327,28 +327,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ (trim the “student plan” claim; keep it honest) */}
+      {/* FAQ */}
       <section className="px-6 py-12 md:py-16">
         <div className="mx-auto max-w-3xl">
-          <SectionTitle title="FAQ" subtitle="Short answers, no marketing gymnastics." />
+          <SectionTitle title="FAQ" subtitle="Direct answers. Clear constraints." />
 
           <div className="mt-10 space-y-4">
             {[
               {
                 q: 'How accurate is the Career Readiness Score?',
-                a: 'It’s a planning tool, not a prediction. We score based on the type of work you do (repetitiveness, judgment, human interaction, accountability, physical presence) and today’s automation capabilities. We also show the drivers so you can sanity-check the result.',
+                a: 'Treat it as a scorecard, not a prophecy. We score the shape of your work (repeatability, judgment, stakeholder surface area, accountability) against today’s automation capabilities—and we show the drivers so you can validate the result.',
               },
               {
                 q: 'Do you store my data?',
-                a: "By default, we don’t store your assessment inputs. Your data is used to generate your result.",
+                a: 'By default, we don’t store your assessment inputs. We use them to generate your outputs in-session.',
               },
               {
                 q: 'How long does it take?',
-                a: 'About two minutes to answer. Results are generated right after.',
+                a: '~2 minutes to answer. Outputs generate immediately.',
               },
               {
-                q: 'What do I do after I get my plan?',
-                a: 'Start with the 30-day section. It’s designed to be small, specific, and momentum-building — not a complete life overhaul.',
+                q: 'What should I do first?',
+                a: 'Start with the “This Week” moves, then run the 30‑day section. The plan is designed to produce proof artifacts, not busywork.',
               },
             ].map((item) => (
               <details key={item.q} className="glass-panel rounded-2xl p-5">
