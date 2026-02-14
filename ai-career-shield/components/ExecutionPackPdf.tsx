@@ -94,7 +94,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
         </View>
 
         <View style={{ marginTop: 20 }}>
-          <Text style={styles.title}>AI Career Shield — Execution Pack</Text>
+          <Text style={styles.title}>AI Career Portal — Execution Pack</Text>
           <Text style={styles.subtitle}>
             Project briefs + skill gap map. Generated for: {safeText(data.skillGapMap?.roleTitle || 'your target role')}
           </Text>
@@ -232,7 +232,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
         {/* Footer */}
         <View style={{ position: 'absolute', bottom: 30, left: 30, right: 30, borderTop: '1px solid #e2e8f0', paddingTop: 10 }}>
           <Text style={{ fontSize: 9, color: '#94a3b8', textAlign: 'center' }}>
-            Generated on {new Date().toLocaleDateString()} by AI Career Shield
+            Generated on {new Date().toLocaleDateString()} by AI Career Portal
           </Text>
         </View>
       </Page>

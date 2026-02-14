@@ -17,7 +17,7 @@ export async function createCheckoutSession(assessmentId: string) {
                 price_data: {
                     currency: 'usd',
                     product_data: {
-                        name: 'AI Career Shield - Execution Pack',
+                        name: 'AI Career Portal - Execution Pack',
                         description: 'Full 30/60/90 day plan, role adjacencies, and immediate action items.',
                         images: ['https://placehold.co/600x400/png'], // Placeholder image
                     },

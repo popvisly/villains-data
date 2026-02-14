@@ -158,7 +158,7 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h3 className="text-xl font-medium text-white mb-1">Was this assessment useful?</h3>
-                    <p className="text-gray-400 text-sm">Help us refine our AI Career Shield by sharing your take.</p>
+                    <p className="text-gray-400 text-sm">Help us refine AI Career Portal by sharing your take.</p>
                 </div>
                 <button
                     type="button"

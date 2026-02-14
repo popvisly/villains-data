@@ -304,12 +304,12 @@ export default function AssessmentPage() {
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4 text-slate-950">
-                        Career Shield Assessment
+                        AI Career Portal Assessment
                     </h1>
                     <p className="text-base md:text-lg text-slate-700 leading-relaxed">
                         {step === 1
                             ? "Choose a direction, strengthen your role, or plan a pivot — then get a scorecard and a 30/60/90 roadmap." 
-                            : "Your Career Shield Report"}
+                            : "Your Career Portal Report"}
                     </p>
 
                 </div>

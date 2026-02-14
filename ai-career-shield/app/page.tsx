@@ -8,7 +8,7 @@ function Nav() {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[hsl(var(--primary))]">
             <span className="text-lg font-bold text-[hsl(var(--primary-foreground))]">🛡️</span>
           </div>
-          <span className="text-base font-semibold tracking-tight text-slate-900">AI Career Shield</span>
+          <span className="text-base font-semibold tracking-tight text-slate-900">AI Career Portal</span>
         </div>
 
         <nav className="hidden items-center gap-6 text-sm text-slate-700 md:flex">
@@ -382,7 +382,7 @@ export default function HomePage() {
 
           <footer className="mt-10 border-t border-[hsl(var(--border))] pt-8 text-sm text-slate-600">
             <div className="flex flex-col justify-between gap-4 md:flex-row">
-              <p>© 2026 AI Career Shield</p>
+              <p>© 2026 AI Career Portal</p>
               <div className="flex gap-5">
                 <Link href="/privacy" className="hover:text-slate-950">
                   Privacy
