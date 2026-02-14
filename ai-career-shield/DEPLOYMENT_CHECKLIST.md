@@ -17,7 +17,7 @@
   - `STRIPE_SECRET_KEY` (Live Mode sk_live_...)
   - `STRIPE_WEBHOOK_SECRET` (whsec_...)
   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (pk_live_...)
-  - `NEXT_PUBLIC_BASE_URL` (e.g., <https://ai-career-shield.vercel.app>)
+  - `NEXT_PUBLIC_APP_URL` (e.g., <https://ai-career-shield.vercel.app>)
 
 ## 3. Database (Supabase)
 
