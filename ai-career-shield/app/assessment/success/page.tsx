@@ -14,7 +14,8 @@ export default async function SuccessPage({
     const result = await verifySession(sp.session_id);
 
     if (result.success) {
-        redirect('/assessment?unlocked=true');
+        // Cookie-based access is now set server-side in verifySession
+        redirect('/assessment');
     }
 
     return (

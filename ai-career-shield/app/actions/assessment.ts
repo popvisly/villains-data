@@ -1,6 +1,7 @@
 'use server';
 
 import { openai } from '@/lib/openai';
+import { hasExecutionPackAccess } from '@/app/actions/stripe';
 import type { AssessmentInput, AssessmentResult } from '@/types';
 import { findRelevantRoles, getMarketSignals, getRoleById } from '@/lib/roles';
 import type { ExecutionPack } from '@/types/executionPack';
@@ -240,6 +241,10 @@ Rules:
 }
 
 export async function generateExecutionPack(roleIds: string[], input: AssessmentInput): Promise<ExecutionPack> {
+  const entitled = await hasExecutionPackAccess();
+  if (!entitled) {
+    throw new Error('Execution Pack is locked. Please complete checkout to unlock.');
+  }
   // 1. Load role data
   const roles = await Promise.all(roleIds.map(id => getRoleById(id)));
   const validRoles = roles.filter((r): r is NonNullable<typeof r> => r !== undefined);

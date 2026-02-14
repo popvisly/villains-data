@@ -2,7 +2,7 @@
 
 
 import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Paywall } from '@/components/Paywall';
 import { assessJobRisk, generateExecutionPack } from '@/app/actions/assessment';
 import type { AssessmentInput, AssessmentResult } from '@/types';
@@ -64,7 +64,7 @@ const INTERESTS = [
     'Research', 'Operations/Process'
 ];
 
-export default function AssessmentPage() {
+export default function AssessmentPage({ initialHasAccess = false }: { initialHasAccess?: boolean }) {
     const router = useRouter();
     const [step, setStep] = useState(1); // 1 = Input, 2 = Results (Merged old 1,2,3 -> 1)
     const [isLoading, setIsLoading] = useState(false);
@@ -83,8 +83,7 @@ export default function AssessmentPage() {
     const [executionPack, setExecutionPack] = useState<ExecutionPack | null>(null);
     const [isUnlocking, setIsUnlocking] = useState(false);
     const [assessmentId, setAssessmentId] = useState<string>('');
-    const searchParams = useSearchParams();
-    const hasAccess = searchParams.get('unlocked') === 'true';
+    const hasAccess = initialHasAccess;
     const [hasSavedSession, setHasSavedSession] = useState(false);
 
     const LS_KEY = 'ai-career-shield:assessment-state:v1';
@@ -96,7 +95,7 @@ export default function AssessmentPage() {
         trackEvent('assessment_start');
     }, []);
 
-    // Check for saved session on mount (if not unlocked)
+    // Check for saved session on mount (free tier)
     useEffect(() => {
         if (hasAccess) return; // Unlocked logic handles itself
         try {
@@ -118,7 +117,7 @@ export default function AssessmentPage() {
         }
     }, [hasAccess]);
 
-    // Restore state after returning from Stripe (?unlocked=true)
+    // Restore state after returning from Stripe (cookie-based access)
     useEffect(() => {
         if (!hasAccess) return;
         if (result || executionPack) return;
