@@ -111,83 +111,81 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
   // LOCKED STATE (Limit Reached)
   if (isLocked) {
     return (
-      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm">
-        <div className="flex items-start gap-4">
-          <div className="mt-1 rounded-full bg-amber-100 p-2 text-amber-600">
-            <Lock className="h-6 w-6" />
-          </div>
-          <div className="flex-1">
-            <h3 className="text-lg font-bold text-amber-900">
-              {allowance.isPaid ? 'Interview Session Complete' : 'Free Preview Complete'}
-            </h3>
-            <p className="mt-1 text-sm text-amber-800">
-              You&apos;ve used all {allowance.limit} available turns for this session.
-              {!allowance.isPaid && " Upgrade to the Execution Pack to unlock more practice rounds and deeper AI feedback."}
-            </p>
-
-            {!allowance.isPaid && (
-              <div className="mt-4">
-                <button
-                  onClick={() => {
-                    // Checkout is handled via the Execution Pack upsell on the results page.
-                    // Keep this CTA simple to avoid duplicate checkout flows.
-                    document.getElementById('execution-pack')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }}
-                  className="inline-flex items-center gap-2 rounded-xl bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-amber-700"
-                >
-                  Unlock the Execution Pack
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            )}
-
-            {allowance.isPaid && (
-              <div className="mt-4 text-sm text-amber-700">
-                Great work! Review your answers or start a new session later.
-              </div>
-            )}
-          </div>
+      <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 shadow-sm text-center">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-200 text-slate-500">
+          <Lock className="h-5 w-5" />
         </div>
+        <h3 className="text-lg font-bold text-slate-900">
+          {allowance.isPaid ? 'Session complete' : 'Free preview complete'}
+        </h3>
+        <p className="mt-2 text-sm text-slate-600 max-w-md mx-auto">
+          You&apos;ve used all {allowance.limit} available turns for this session.
+          {!allowance.isPaid && " Unlock the Execution Pack to continue practice and get detailed feedback."}
+          {allowance.isPaid && " Come back tomorrow to keep your streak alive!"}
+        </p>
+
+        {!allowance.isPaid && (
+          <div className="mt-6">
+            <button
+              onClick={() => {
+                document.getElementById('execution-pack')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 transition"
+            >
+              Unlock the Execution Pack
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </div>
     );
   }
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+      <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-slate-900">Interview Practice: {role}</h3>
-          <p className="text-sm text-slate-500">
-            {allowance.isPaid ? 'Pro Mode' : 'Free Preview'} • {allowance.used} / {allowance.limit} turns used
+          <h3 className="text-lg font-bold text-slate-900">Interview Practice: {role}</h3>
+          <p className="text-xs font-medium uppercase tracking-wider text-emerald-700 mt-1">
+            {allowance.isPaid ? 'Pro' : 'Free Preview'} • {allowance.used}/{allowance.limit} turns used
           </p>
         </div>
         {!allowance.isPaid && (
-          <div className="hidden text-xs font-medium text-amber-600 sm:block">
-            {remaining} free turns left
+          <div className="hidden text-xs font-medium text-slate-400 sm:block">
+            {remaining} turns remaining
           </div>
         )}
       </div>
 
-      <div className="py-6">
-        <div className="mb-4 rounded-xl bg-indigo-50 p-4">
-          <p className="text-xs font-bold uppercase tracking-wide text-indigo-500">Interviewer</p>
-          <p className="mt-1 text-base font-medium text-indigo-900">
+      <div className="space-y-6">
+        {/* Interviewer Prompt - Indigo Accent */}
+        <div className="rounded-xl bg-indigo-50/50 border border-indigo-100 p-5 relative">
+          <div className="absolute -top-3 left-4 bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+            Interviewer
+          </div>
+          <p className="text-base font-medium text-slate-800 leading-relaxed">
             {sampleQuestions[currentQuestionIndex]}
           </p>
         </div>
 
-        <textarea
-          className="w-full rounded-xl border-slate-200 bg-slate-50 p-3 text-sm focus:border-indigo-500 focus:ring-indigo-500"
-          rows={3}
-          placeholder="Type your answer here..."
-        />
+        {/* User Input - Clean Slate */}
+        <div className="relative">
+          <textarea
+            className="w-full rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700 placeholder:text-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition shadow-sm resize-none"
+            rows={4}
+            placeholder="Type your answer here..."
+          />
+          <div className="absolute bottom-3 right-3">
+            {/* Optional character count or hint could go here */}
+          </div>
+        </div>
       </div>
 
-      <div className="flex items-center justify-end gap-3 pt-2">
+      <div className="flex items-center justify-end pt-4">
         <button
           onClick={handleNextTurn}
           disabled={processing}
-          className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 disabled:opacity-50 transition"
         >
           {processing ? (
             <>
@@ -196,7 +194,7 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
             </>
           ) : (
             <>
-              Submit Answer
+              Next turn
               <ChevronRight className="h-4 w-4" />
             </>
           )}

@@ -8,14 +8,9 @@ create table if not exists interview_usage (
   updated_at timestamptz default now()
 );
 
--- Ensure we can look up quickly by token or anon_id
-create unique index if not exists idx_interview_usage_access_token 
-  on interview_usage(access_token) 
-  where access_token is not null;
-
-create unique index if not exists idx_interview_usage_anon_id 
-  on interview_usage(anon_id) 
-  where anon_id is not null;
+-- Ensure we can look up quickly by token or anon_id AND support ON CONFLICT
+alter table interview_usage add constraint uq_interview_usage_access_token unique (access_token);
+alter table interview_usage add constraint uq_interview_usage_anon_id unique (anon_id);
 
 -- Enable RLS
 alter table interview_usage enable row level security;

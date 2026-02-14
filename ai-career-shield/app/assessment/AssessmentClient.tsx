@@ -763,25 +763,25 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                         {/* Role Adjacencies */}
                         {result.roleAdjacencies && result.roleAdjacencies.length > 0 && (
-                            <div className="glass-panel p-8 rounded-2xl">
-                                <h3 className="text-xl font-bold mb-4">Strong next‑best paths</h3>
-                                <p className="text-gray-400 mb-6">
+                            <div className="p-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
+                                <h3 className="text-xl font-bold mb-4 text-slate-950">Strong next‑best paths</h3>
+                                <p className="text-slate-600 mb-6">
                                     Based on your skills, these roles offer high resilience and leverage:
                                 </p>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {result.roleAdjacencies.map((role, i) => (
-                                        <div key={i} className="bg-white/5 border border-white/10 rounded-lg p-5 flex flex-col h-full">
-                                            <h4 className="font-bold text-lg text-blue-300 mb-1">
+                                        <div key={i} className="bg-white border border-slate-200 shadow-sm rounded-lg p-5 flex flex-col h-full hover:border-emerald-200 transition-colors">
+                                            <h4 className="font-bold text-lg text-emerald-950 mb-1">
                                                 {role.detail?.title || role.roleId}
                                             </h4>
 
-                                            {/* Topics (NEW PHASE 3.4) */}
+                                            {/* Topics */}
                                             {role.detail?.topics && role.detail.topics.length > 0 && (
                                                 <div className="flex flex-wrap gap-1.5 mb-3">
                                                     {role.detail.topics.map((topicId) => (
                                                         <span
                                                             key={topicId}
-                                                            className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-gray-400 font-medium"
+                                                            className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-[10px] text-slate-700 font-medium"
                                                         >
                                                             {TOPIC_LABELS[topicId] || topicId}
                                                         </span>
@@ -789,37 +789,38 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                                 </div>
                                             )}
 
-                                            {/* Summary from JSON */}
+                                            {/* Summary */}
                                             {role.detail && (
-                                                <p className="text-xs text-gray-500 mb-3 italic">
+                                                <p className="text-xs text-slate-500 mb-3 italic">
                                                     {role.detail.summary}
                                                 </p>
                                             )}
 
-                                            {/* Rationale from LLM */}
+                                            {/* Rationale */}
                                             <div className="mb-4">
-                                                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Why You fit</span>
-                                                <p className="text-sm text-gray-300 mt-1">{role.rationale}</p>
+                                                <p className="text-sm text-slate-700 leading-relaxed">
+                                                    {role.rationale}
+                                                </p>
                                             </div>
 
                                             {/* Skills Gap Analysis */}
                                             <div className="grid grid-cols-2 gap-4 mb-4 mt-auto">
                                                 <div>
-                                                    <span className="text-xs font-semibold text-green-400/80 uppercase tracking-wider">You Have</span>
+                                                    <span className="text-xs font-semibold text-emerald-800 uppercase tracking-wider">You Have</span>
                                                     <ul className="mt-1 space-y-1">
                                                         {role.transferableSkills?.slice(0, 3).map((skill, j) => (
-                                                            <li key={j} className="text-xs text-gray-400 flex items-center gap-1">
-                                                                <span className="text-green-500">✓</span> {skill}
+                                                            <li key={j} className="text-xs text-slate-600 flex items-center gap-1">
+                                                                <span className="text-emerald-500">✓</span> {skill}
                                                             </li>
                                                         ))}
                                                     </ul>
                                                 </div>
                                                 <div>
-                                                    <span className="text-xs font-semibold text-orange-400/80 uppercase tracking-wider">You Need</span>
+                                                    <span className="text-xs font-semibold text-amber-700 uppercase tracking-wider">You Need</span>
                                                     <ul className="mt-1 space-y-1">
                                                         {role.gapSkills?.slice(0, 3).map((skill, j) => (
-                                                            <li key={j} className="text-xs text-gray-400 flex items-center gap-1">
-                                                                <span className="text-orange-500">↑</span> {skill}
+                                                            <li key={j} className="text-xs text-slate-500 flex items-center gap-1">
+                                                                <span className="text-amber-500">↑</span> {skill}
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -828,9 +829,9 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                                             {/* Starter Plan Sneak Peek */}
                                             {role.detail?.starterPlan30Days?.[0] && (
-                                                <div className="bg-blue-500/10 rounded p-3 mt-2">
-                                                    <span className="text-xs font-semibold text-blue-300 uppercase tracking-wider">First Step</span>
-                                                    <p className="text-xs text-gray-300 mt-1">{role.detail.starterPlan30Days[0]}</p>
+                                                <div className="bg-slate-50 border border-slate-200 rounded p-3 mt-2">
+                                                    <span className="text-xs font-semibold text-emerald-800 uppercase tracking-wider">First Step</span>
+                                                    <p className="text-xs text-slate-600 mt-1">{role.detail.starterPlan30Days[0]}</p>
                                                 </div>
                                             )}
                                         </div>
