@@ -491,11 +491,11 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                 >
                                     {isLoading ? (
                                         <span className="flex items-center justify-center gap-2">
-                                            <span className="animate-spin text-xl">◌</span> Calculating your Career Resilience…
+                                            <span className="animate-spin text-xl">◌</span> Running diagnostic…
                                         </span>
                                     ) : (
                                         <span className="flex items-center justify-center gap-2">
-                                            Generate my Resilience Report
+                                            Run the diagnostic
                                             <span className="group-hover:translate-x-1 transition">→</span>
                                         </span>
                                     )}

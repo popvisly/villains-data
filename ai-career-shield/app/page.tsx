@@ -26,7 +26,7 @@ function Nav() {
             href="/assessment"
             className="rounded-xl bg-[hsl(var(--primary))] px-4 py-2 font-semibold text-[hsl(var(--primary-foreground))] hover:opacity-90"
           >
-            Start free
+            Run the diagnostic
           </Link>
         </nav>
 
@@ -97,7 +97,7 @@ export default function HomePage() {
                 href="/assessment"
                 className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-3 text-base font-semibold text-[hsl(var(--primary-foreground))] shadow-sm hover:opacity-90"
               >
-                Start free assessment
+                Run the diagnostic
               </Link>
               <Link href="#preview" className="text-sm font-semibold text-slate-700 hover:text-slate-950">
                 See what you get →
@@ -261,7 +261,7 @@ export default function HomePage() {
               href="/assessment"
               className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-3 text-base font-semibold text-[hsl(var(--primary-foreground))] hover:opacity-90"
             >
-              Start free assessment
+              Run the diagnostic
             </Link>
           </div>
         </div>
@@ -372,7 +372,7 @@ export default function HomePage() {
                   Start now. Small moves compound.
                 </h2>
                 <p className="mt-3 text-base text-slate-700">
-                  Take the free assessment and leave with a clear next step today.
+                  Run a 60-second diagnostic and leave with a clear next step today.
                 </p>
               </div>
               <div className="md:flex md:justify-end">
@@ -380,7 +380,7 @@ export default function HomePage() {
                   href="/assessment"
                   className="inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-3 text-base font-semibold text-[hsl(var(--primary-foreground))] hover:opacity-90 md:w-auto"
                 >
-                  Start free assessment
+                  Run the diagnostic
                 </Link>
               </div>
             </div>
