@@ -804,35 +804,35 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                         {/* 30/60/90 Day Plan */}
                         {result.plan30_60_90 && result.plan30_60_90.length > 0 && (
-                            <div className="glass-panel p-8 rounded-2xl">
-                                <h3 className="text-xl font-bold mb-6">Your 30/60/90 roadmap</h3>
+                            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                                <h3 className="text-xl font-bold mb-6 text-slate-950">Your 30/60/90 roadmap</h3>
                                 <div className="grid md:grid-cols-3 gap-6">
                                     {result.plan30_60_90.map((plan, i) => (
                                         <div key={i} className="relative">
                                             {/* Vertical line for timeline feel */}
                                             {i < 2 && (
-                                                <div className="hidden md:block absolute top-12 -right-3 w-6 h-px bg-white/10" />
+                                                <div className="hidden md:block absolute top-12 -right-3 w-6 h-px bg-slate-200" />
                                             )}
-                                            <div className="bg-white/5 border border-white/10 rounded-xl p-5 h-full">
+                                            <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-5 h-full">
                                                 <div className="flex items-center gap-2 mb-4">
-                                                    <span className="px-2 py-1 rounded bg-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider">
+                                                    <span className="px-2 py-1 rounded bg-emerald-600/10 text-emerald-800 border border-emerald-200 text-xs font-bold uppercase tracking-wider">
                                                         {plan.window.replace('_', ' ')}
                                                     </span>
                                                 </div>
 
                                                 {plan.goals && plan.goals.length > 0 && (
                                                     <div className="mb-4">
-                                                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Focus</h4>
-                                                        <p className="text-sm font-medium text-gray-200">{plan.goals[0]}</p>
+                                                        <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Focus</h4>
+                                                        <p className="text-sm font-semibold text-slate-900">{plan.goals[0]}</p>
                                                     </div>
                                                 )}
 
                                                 <div>
-                                                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Tasks</h4>
+                                                    <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tasks</h4>
                                                     <ul className="space-y-3">
                                                         {plan.tasks.map((task, j) => (
-                                                            <li key={j} className="text-sm text-gray-300 flex items-start gap-2 group">
-                                                                <div className="w-1.5 h-1.5 rounded-full bg-blue-500/50 mt-1.5 group-hover:bg-blue-400 transition-colors" />
+                                                            <li key={j} className="text-sm text-slate-700 flex items-start gap-2 group">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-600/60 mt-1.5 group-hover:bg-emerald-600 transition-colors" />
                                                                 <span>{task}</span>
                                                             </li>
                                                         ))}
@@ -861,19 +861,19 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                         )}
 
                         {/* CTA */}
-                        <div className="glass-panel p-8 rounded-2xl text-center">
-                            <h3 className="text-2xl font-bold mb-4">
-                                Want a clearer plan you can follow?
+                        <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+                            <h3 className="text-2xl font-bold mb-3 text-slate-950">
+                                Want a clearer plan you can execute?
                             </h3>
-                            <p className="text-gray-400 mb-6">
-                                Get a practical roadmap with portfolio-ready projects, skill priorities, and interview prep.
+                            <p className="text-slate-700 mb-6">
+                                Unlock the Execution Pack: project briefs, skill priorities, and interview prep tailored to your target path.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <button
                                     onClick={() => router.push('/signup')}
-                                    className="px-8 py-4 rounded-lg bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold"
+                                    className="px-8 py-4 rounded-lg bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold text-slate-950"
                                 >
-                                    Get Your Career Roadmap →
+                                    Unlock the Execution Pack →
                                 </button>
                                 <button
                                     onClick={() => {
@@ -886,9 +886,9 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                             yearsExperience: undefined,
                                         });
                                     }}
-                                    className="px-8 py-4 rounded-lg bg-white/10 hover:bg-white/20 transition font-medium"
+                                    className="px-8 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 transition font-medium text-slate-900"
                                 >
-                                    Take Another Assessment
+                                    Run another diagnostic
                                 </button>
                             </div>
                         </div>
