@@ -71,18 +71,18 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">
-              Get a clear 30/60/90 plan to stay valuable as work changes.
+              Choose a direction, strengthen your role, or plan a pivot — with a 30/60/90 roadmap.
             </h1>
 
             <p className="mt-4 text-pretty text-base leading-relaxed text-slate-700 md:text-lg">
-              Not hype. Not fear. Just a practical scorecard and a short plan you can actually follow.
+              A 2‑minute assessment that turns your role + strengths into a clear scorecard and a plan you can execute.
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-800 md:text-base">
               {[
-                'Career Shield Score (with the drivers explained)',
-                '3–5 strong next-best paths (including adjacent options)',
-                'A 30/60/90 roadmap: learn → build → prove',
+                'Explore my best options (next‑best paths)',
+                'Strengthen my current path (what to lean into next)',
+                'Plan a pivot (a realistic 30/60/90 sequence)',
               ].map((t) => (
                 <li key={t} className="flex items-start gap-3">
                   <span className="mt-1 inline-block h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />
