@@ -199,8 +199,8 @@ export default function AssessmentPage() {
 
     const copyAsMarkdown = () => {
         if (!result) return;
-        let md = `# Career Shield Report: ${formData.jobTitle}\n\n`;
-        md += `**Career Shield Score**: ${result.riskScore}%\n`;
+        let md = `# Career Resilience Report: ${formData.jobTitle}\n\n`;
+        md += `**Career Resilience Score**: ${result.riskScore}%\n`;
         md += `**Confidence**: ${result.confidence}\n\n`;
         // ... (truncated markdown gen for brevity, need to keep it?) 
         // Yes, need to keep logic.
@@ -487,11 +487,11 @@ export default function AssessmentPage() {
                                 >
                                     {isLoading ? (
                                         <span className="flex items-center justify-center gap-2">
-                                            <span className="animate-spin text-xl">◌</span> Building your Career Shield…
+                                            <span className="animate-spin text-xl">◌</span> Calculating your Career Resilience…
                                         </span>
                                     ) : (
                                         <span className="flex items-center justify-center gap-2">
-                                            Build my Career Shield
+                                            Generate my Resilience Report
                                             <span className="group-hover:translate-x-1 transition">→</span>
                                         </span>
                                     )}
@@ -553,7 +553,7 @@ export default function AssessmentPage() {
                         )}                        {/* Risk Score Card */}
                         <div className="glass-panel p-8 rounded-2xl text-center">
                             <div className="flex items-center justify-center gap-3 mb-4">
-                                <h2 className="text-2xl font-bold">Your Career Shield Score</h2>
+                                <h2 className="text-2xl font-bold">Your Career Resilience Score</h2>
                                 {result.confidence && (
                                     <span
                                         className={`px-3 py-1 rounded-full text-xs font-medium ${result.confidence === 'high'

@@ -294,7 +294,7 @@ export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
                 {isPaid && (
                     <PDFDownloadLink
                         document={<ExecutionPackPdfDocument data={data} />}
-                        fileName="AI-Career-Shield-Execution-Pack.pdf"
+                        fileName="AI-Career-Portal-Execution-Pack.pdf"
                     >
                         {({ loading }) => (
                             <button

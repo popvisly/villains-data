@@ -111,7 +111,7 @@ export default function HomePage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Preview</p>
-                <p className="text-lg font-semibold text-slate-900">Career Shield Scorecard</p>
+                <p className="text-lg font-semibold text-slate-900">Career Resilience Scorecard</p>
               </div>
               <div className="rounded-full bg-[hsl(var(--primary))]/10 px-3 py-1 text-xs font-semibold text-[hsl(var(--primary))]">
                 Example
@@ -122,7 +122,7 @@ export default function HomePage() {
               <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4">
                 <div className="flex items-end justify-between">
                   <div>
-                    <p className="text-xs font-semibold text-slate-500">Career Shield Score</p>
+                    <p className="text-xs font-semibold text-slate-500">Career Resilience Score</p>
                     <p className="mt-1 text-3xl font-semibold tracking-tight text-slate-950">74</p>
                   </div>
                   <p className="text-xs text-slate-600">Change pressure: medium</p>
@@ -276,7 +276,7 @@ export default function HomePage() {
               <h3 className="mt-2 text-xl font-semibold text-slate-900">Score + roadmap</h3>
               <ul className="mt-4 space-y-3 text-sm text-slate-700">
                 {[
-                  'Career Shield Score + key drivers',
+                  'Career Resilience Score + key drivers',
                   '30/60/90 roadmap (text)',
                   '3–5 next-best paths',
                   'Interview Simulator teaser (3 turns)',
@@ -329,7 +329,7 @@ export default function HomePage() {
           <div className="mt-10 space-y-4">
             {[
               {
-                q: 'How accurate is the Career Shield Score?',
+                q: 'How accurate is the Career Resilience Score?',
                 a: 'It’s a planning tool, not a prediction. We score based on the type of work you do (repetitiveness, judgment, human interaction, accountability, physical presence) and today’s automation capabilities. We also show the drivers so you can sanity-check the result.',
               },
               {
