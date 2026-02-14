@@ -46,12 +46,12 @@ function SectionTitle({ eyebrow, title, subtitle }: { eyebrow?: string; title: s
   return (
     <div className="mx-auto max-w-3xl text-center">
       {eyebrow ? (
-        <div className="mb-3 inline-flex items-center rounded-full bg-[hsl(var(--primary))]/10 px-3 py-1 text-xs font-semibold text-[hsl(var(--primary))]">
+        <div className="mb-3 inline-flex items-center rounded-full bg-[hsl(var(--primary))]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-[hsl(var(--primary))]">
           {eyebrow}
         </div>
       ) : null}
-      <h2 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">{title}</h2>
-      {subtitle ? <p className="mt-3 text-pretty text-base text-slate-700 md:text-lg">{subtitle}</p> : null}
+      <h2 className="text-balance text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl">{title}</h2>
+      {subtitle ? <p className="mt-3 text-pretty text-base leading-relaxed text-slate-700 md:text-lg">{subtitle}</p> : null}
     </div>
   );
 }
@@ -62,19 +62,19 @@ export default function HomePage() {
       <Nav />
 
       {/* HERO */}
-      <section className="px-6 pb-10 pt-12 md:pb-16 md:pt-16">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
+      <section className="px-6 pb-14 pt-14 md:pb-20 md:pt-20">
+        <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
           <div>
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-1 text-xs text-slate-700">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-1 text-xs text-slate-700">
               <span className="h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />
               Free assessment • ~2 minutes • no login
             </div>
 
-            <h1 className="text-balance text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+            <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">
               Get a clear 30/60/90 plan to stay valuable as work changes.
             </h1>
 
-            <p className="mt-4 text-pretty text-base text-slate-700 md:text-lg">
+            <p className="mt-4 text-pretty text-base leading-relaxed text-slate-700 md:text-lg">
               Not hype. Not fear. Just a practical scorecard and a short plan you can actually follow.
             </p>
 
