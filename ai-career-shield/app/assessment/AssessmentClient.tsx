@@ -299,7 +299,7 @@ export default function AssessmentPage() {
     };
 
     return (
-        <main className="min-h-screen bg-gradient-to-b from-slate-950 via-blue-950 to-slate-950 py-20 px-6">
+        <main className="min-h-screen subtle-noise py-20 px-6">
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
@@ -351,7 +351,7 @@ export default function AssessmentPage() {
                             {/* Section 1: The Basics */}
                             <section>
                                 <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                                    <span className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm">1</span>
+                                    <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm">1</span>
                                     Your role
                                 </h3>
                                 <div className="grid md:grid-cols-2 gap-6">
@@ -362,7 +362,7 @@ export default function AssessmentPage() {
                                             value={formData.jobTitle}
                                             onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
                                             placeholder="e.g., Marketing Manager / Nursing student"
-                                            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition"
+                                            className="w-full px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
                                             required
                                             list="common-jobs"
                                         />
@@ -376,10 +376,10 @@ export default function AssessmentPage() {
                                         <select
                                             value={formData.industry}
                                             onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition"
+                                            className="w-full px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
                                             required
                                         >
-                                            <option value="">Select...</option>
+                                            <option value="">Select…</option>
                                             {INDUSTRIES.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                                         </select>
                                     </div>
@@ -390,7 +390,7 @@ export default function AssessmentPage() {
                                             type="number"
                                             value={formData.yearsExperience || ''}
                                             onChange={(e) => setFormData({ ...formData, yearsExperience: e.target.value ? parseInt(e.target.value) : undefined })}
-                                            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition"
+                                            className="w-full px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
                                             placeholder="e.g. 5 (optional)"
                                         />
                                     </div>
@@ -405,8 +405,8 @@ export default function AssessmentPage() {
                                                     type="button"
                                                     onClick={() => setFormData({ ...formData, goal: goal.id as AssessmentInput['goal'] })}
                                                     className={`p-4 rounded-xl border text-left transition ${formData.goal === goal.id
-                                                        ? 'bg-blue-600/20 border-blue-500 ring-1 ring-blue-500'
-                                                        : 'bg-white/5 border-white/10 hover:bg-white/10'
+                                                        ? 'bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary))]'
+                                                        : 'bg-white border-[hsl(var(--border))] hover:bg-[hsl(var(--muted))]'
                                                         }`}
                                                 >
                                                     <div className="font-bold text-sm mb-1">{goal.label}</div>
@@ -437,12 +437,12 @@ export default function AssessmentPage() {
                                                 onChange={(e) => setSkillInput(e.target.value)}
                                                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addSkill())}
                                                 placeholder="Type a skill and press Enter…"
-                                                className="flex-1 px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition"
+                                                className="flex-1 px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
                                             />
                                             <button
                                                 type="button"
                                                 onClick={addSkill}
-                                                className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition font-medium"
+                                                className="px-6 py-3 rounded-lg bg-[hsl(var(--muted))] hover:bg-[hsl(var(--secondary))] transition font-medium"
                                             >
                                                 Add
                                             </button>
@@ -483,7 +483,7 @@ export default function AssessmentPage() {
                                 <button
                                     type="submit"
                                     disabled={!formData.jobTitle || !formData.industry || formData.skills.length < 1 || isLoading}
-                                    className="w-full py-5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 transition font-bold text-lg shadow-lg shadow-blue-900/20 disabled:opacity-50 disabled:cursor-not-allowed group"
+                                    className="w-full py-5 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold text-lg shadow-lg shadow-emerald-950/25 disabled:opacity-50 disabled:cursor-not-allowed group"
                                 >
                                     {isLoading ? (
                                         <span className="flex items-center justify-center gap-2">
@@ -509,7 +509,7 @@ export default function AssessmentPage() {
                     <div className="animate-in fade-in zoom-in-95 duration-500 space-y-6">
                         {/* Immediate Actions: This Week (MOVED TO TOP) */}
                         {result.immediateActions && result.immediateActions.length > 0 && (
-                            <div className="bg-gradient-to-r from-blue-600/30 to-cyan-600/30 border-2 border-blue-500/50 p-8 rounded-2xl shadow-xl shadow-blue-900/20">
+                            <div className="bg-gradient-to-r from-emerald-500/15 to-lime-500/10 border-2 border-emerald-400/30 p-8 rounded-2xl shadow-xl shadow-emerald-950/20">
                                 <div className="flex items-center justify-between mb-6">
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-xl animate-pulse">🚀</div>
@@ -542,9 +542,7 @@ export default function AssessmentPage() {
                         {ENABLE_EXECUTION_PACK && (
                             <div className="mt-8">
                                 {executionPack ? (
-                                    <Paywall hasAccess={hasAccess} assessmentId={assessmentId}>
-                                        <ExecutionPackView data={executionPack} />
-                                    </Paywall>
+                                    <ExecutionPackView data={executionPack} isPaid={hasAccess} />
                                 ) : (
                                     <UpsellCard
                                         onUnlock={handleUnlockExecutionPack}
@@ -642,7 +640,7 @@ export default function AssessmentPage() {
                                         </div>
                                         <div className="h-2 bg-white/10 rounded-full overflow-hidden mb-3">
                                             <div
-                                                className="h-full bg-gradient-to-r from-blue-600 to-cyan-600 transition-all duration-1000"
+                                                className="h-full bg-gradient-to-r from-emerald-500 to-lime-500 transition-all duration-1000"
                                                 style={{ width: `${factor.score}%` }}
                                             />
                                         </div>
@@ -836,7 +834,7 @@ export default function AssessmentPage() {
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <button
                                     onClick={() => router.push('/signup')}
-                                    className="px-8 py-4 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 transition font-bold"
+                                    className="px-8 py-4 rounded-lg bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold"
                                 >
                                     Get Your Career Roadmap →
                                 </button>

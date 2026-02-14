@@ -45,13 +45,13 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
 
             {/* Unlock Card - Absolute Center/Bottom */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md px-4 z-20">
-                <div className="glass-panel border-2 border-blue-500/30 p-8 rounded-2xl shadow-2xl relative overflow-hidden group">
+                <div className="glass-panel border-2 border-emerald-400/20 p-8 rounded-2xl shadow-2xl relative overflow-hidden group">
                     {/* Shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
                     <div className="text-center space-y-6 relative z-10">
-                        <div className="mx-auto w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mb-2">
-                            <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div className="mx-auto w-12 h-12 bg-emerald-500/15 rounded-full flex items-center justify-center mb-2">
+                            <svg className="w-6 h-6 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
                         </div>
@@ -70,7 +70,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                         <button
                             onClick={handleUnlock}
                             disabled={isLoading}
-                            className="w-full py-4 bg-white hover:bg-gray-100 text-black font-bold rounded-xl transition-all relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="w-full py-4 bg-emerald-400 hover:bg-emerald-300 text-black font-bold rounded-xl transition-all relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {isLoading ? (
                                 <span className="flex items-center justify-center gap-2">
