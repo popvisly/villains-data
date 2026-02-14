@@ -21,11 +21,11 @@
 
 ## 3. Database (Supabase)
 
-- [ ] **Migrations**: Verify all migrations are applied in production.
-  - `001_initial_schema.sql`
-  - `002_purchases_table.sql`
-  - `003_analytics_events.sql`
-  - `004_interview_usage.sql`
+- [ ] **Migrations**: Verify all migrations are applied in production (SQL Editor -> Run).
+  - `001_initial_schema.sql` (Tables)
+  - `002_purchases_table.sql` (Purchases)
+  - `003_analytics_events.sql` (Analytics)
+  - `004_interview_usage.sql` (Gating Logic) - **CRITICAL: Ensure this is applied or Interview Simulator will break.**
 - [ ] **RLS Policies**: Confirm operational.
 
 ## 4. Stripe (Live Mode)
@@ -37,6 +37,8 @@
 
 ## 5. Smoke Test (Production)
 
+- [ ] **Domain**: Test on REAL HTTPS domain (e.g., `ai-career-shield.vercel.app`).
+  - *Note: Auth cookies (`aicp_ep`) are `secure: true` in production, so they will NOT work on `http://` or IP addresses.*
 - [ ] **Free Flow**: Run assessment, see results.
 - [ ] **Persistence**: Refresh page, ensure results stay.
 - [ ] **Purchase**: Buy the pack (real $19).
