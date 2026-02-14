@@ -14,14 +14,14 @@ import { InterviewSimulator } from '@/components/InterviewSimulator';
 function SkillGapTab({ data }: { data: any }) {
     if (!data) return null;
     return (
-        <section className="glass-panel p-8 rounded-2xl border border-blue-500/20 bg-blue-500/[0.02] animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-xl shadow-lg shadow-blue-500/10">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl">
                     <span>🗺️</span>
                 </div>
                 <div>
-                    <h2 className="text-2xl font-bold tracking-tight">Personalized Skill Gap Map</h2>
-                    <p className="text-sm text-gray-400">Bridging the gap to {data.roleTitle}</p>
+                    <h2 className="text-2xl font-bold tracking-tight text-slate-900">Personalized Skill Gap Map</h2>
+                    <p className="text-sm text-slate-500">Bridging the gap to {data.roleTitle}</p>
                 </div>
             </div>
 
@@ -29,31 +29,31 @@ function SkillGapTab({ data }: { data: any }) {
                 {/* Left: Matched & Gaps */}
                 <div className="lg:col-span-2 space-y-8">
                     <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-green-400 mb-4">Matched Skills</h4>
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-4">Matched Skills</h4>
                         <div className="grid sm:grid-cols-2 gap-3">
                             {data.matchedSkills.map((s: any, i: number) => (
-                                <div key={i} className="p-3 rounded-xl bg-green-500/5 border border-green-500/10">
-                                    <div className="text-sm font-medium text-gray-200">{s.skill}</div>
-                                    <div className="text-[10px] text-gray-500 mt-1">{s.evidence}</div>
+                                <div key={i} className="p-3 rounded-xl bg-emerald-50 border border-emerald-100">
+                                    <div className="text-sm font-medium text-slate-900">{s.skill}</div>
+                                    <div className="text-[10px] text-slate-600 mt-1">{s.evidence}</div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
                     <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-4">Priority Skill Gaps</h4>
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-4">Priority Skill Gaps</h4>
                         <div className="space-y-4">
                             {data.gapSkills.map((s: any, i: number) => (
-                                <div key={i} className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group">
+                                <div key={i} className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-200 transition-colors group shadow-sm">
                                     <div className="flex items-start justify-between mb-2">
-                                        <div className="text-sm font-bold text-white/90">{s.skill}</div>
-                                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30 uppercase font-bold tracking-tighter">New Skill</span>
+                                        <div className="text-sm font-bold text-slate-900">{s.skill}</div>
+                                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-600 border border-blue-100 uppercase font-bold tracking-tighter">New Skill</span>
                                     </div>
-                                    <p className="text-xs text-gray-400 mb-3 leading-relaxed">{s.whyItMatters}</p>
+                                    <p className="text-xs text-slate-600 mb-3 leading-relaxed">{s.whyItMatters}</p>
                                     <div className="flex flex-wrap gap-2">
                                         {s.howToBuild.map((step: string, si: number) => (
-                                            <span key={si} className="text-[10px] text-gray-500 flex items-center gap-1.5">
-                                                <span className="w-1 h-1 rounded-full bg-gray-600"></span>
+                                            <span key={si} className="text-[10px] text-slate-500 flex items-center gap-1.5">
+                                                <span className="w-1 h-1 rounded-full bg-slate-400"></span>
                                                 {step}
                                             </span>
                                         ))}
@@ -67,17 +67,17 @@ function SkillGapTab({ data }: { data: any }) {
                 {/* Right: Recommended Sequence */}
                 <div className="lg:col-span-1">
                     <div className="sticky top-24">
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4 font-mono">_Recommended_Sequence</h4>
-                        <div className="space-y-4 relative pl-4 border-l border-white/10">
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-4 font-mono">_Recommended_Sequence</h4>
+                        <div className="space-y-4 relative pl-4 border-l border-slate-200">
                             {data.recommendedSequence.map((seq: any, i: number) => (
                                 <div key={i} className="relative pb-6 last:pb-0">
-                                    <div className="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-blue-500 border-2 border-slate-950"></div>
-                                    <div className="text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-2">{seq.weekRange}</div>
-                                    <div className="text-xs font-semibold text-gray-200 mb-2">{seq.focus.join(' & ')}</div>
+                                    <div className="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-slate-900 border-2 border-white"></div>
+                                    <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">{seq.weekRange}</div>
+                                    <div className="text-xs font-semibold text-slate-900 mb-2">{seq.focus.join(' & ')}</div>
                                     <div className="space-y-1.5">
                                         {seq.outputs.map((out: string, oi: number) => (
-                                            <div key={oi} className="flex items-center gap-2 text-[10px] text-gray-400 bg-white/5 p-1.5 rounded-lg border border-white/5">
-                                                <span className="text-blue-500">📎</span>
+                                            <div key={oi} className="flex items-center gap-2 text-[10px] text-slate-600 bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                                                <span className="text-slate-400">📎</span>
                                                 {out}
                                             </div>
                                         ))}
@@ -86,9 +86,9 @@ function SkillGapTab({ data }: { data: any }) {
                             ))}
                         </div>
 
-                        <div className="mt-8 p-4 rounded-2xl bg-gradient-to-br from-blue-600/10 to-transparent border border-blue-500/20">
-                            <h5 className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2">Coach&apos;s Notes</h5>
-                            <ul className="text-[11px] text-gray-400 space-y-2 italic">
+                        <div className="mt-8 p-4 rounded-2xl bg-indigo-50 border border-indigo-100">
+                            <h5 className="text-[10px] font-bold text-indigo-800 uppercase tracking-widest mb-2">Coach&apos;s Notes</h5>
+                            <ul className="text-[11px] text-indigo-900/80 space-y-2 italic">
                                 {data.notes.map((n: string, i: number) => <li key={i}>&ldquo;{n}&rdquo;</li>)}
                             </ul>
                         </div>
@@ -111,26 +111,26 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: any[], isPaid: boolean }
     return (
         <div className="grid lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {briefs.map((brief) => (
-                <div key={brief.id} className="glass-panel p-6 rounded-2xl border border-white/10 hover:border-orange-500/30 transition-all flex flex-col h-full bg-gradient-to-br from-white/[0.03] to-transparent">
+                <div key={brief.id} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-emerald-300 transition-all flex flex-col h-full">
                     <div className="flex justify-between items-start mb-4">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${brief.difficulty === 'easy' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-                            brief.difficulty === 'medium' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' :
-                                'bg-red-500/10 text-red-400 border-red-500/20'
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${brief.difficulty === 'easy' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
+                            brief.difficulty === 'medium' ? 'bg-amber-50 text-amber-700 border-amber-100' :
+                                'bg-red-50 text-red-700 border-red-100'
                             }`}>
                             {brief.difficulty}
                         </span>
-                        <span className="text-[11px] text-gray-500 font-medium">Est. Time: {brief.estimatedTime}</span>
+                        <span className="text-[11px] text-slate-500 font-medium">Est. Time: {brief.estimatedTime}</span>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-2 text-white/90">{brief.title}</h3>
-                    <p className="text-sm text-gray-400 mb-6 leading-relaxed flex-grow">{brief.summary}</p>
+                    <h3 className="text-xl font-bold mb-2 text-slate-900">{brief.title}</h3>
+                    <p className="text-sm text-slate-600 mb-6 leading-relaxed flex-grow">{brief.summary}</p>
 
                     <div className="space-y-6">
                         <div>
-                            <h4 className="text-[11px] font-bold uppercase tracking-widest text-orange-400/80 mb-3">Key Deliverables</h4>
+                            <h4 className="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-3">Key Deliverables</h4>
                             <div className="flex flex-wrap gap-2">
                                 {brief.deliverables.map((d: string, i: number) => (
-                                    <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-300">
+                                    <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-100 text-slate-700">
                                         {d}
                                     </span>
                                 ))}
@@ -139,16 +139,16 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: any[], isPaid: boolean }
 
                         {brief.readme && (
                             <div>
-                                <h4 className="text-[11px] font-bold uppercase tracking-widest text-orange-400/80 mb-3 flex items-center justify-between">
+                                <h4 className="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-3 flex items-center justify-between">
                                     <span>Project README Template</span>
                                     <button
                                         onClick={() => navigator.clipboard.writeText(brief.readme || '')}
-                                        className="text-xs text-blue-400 hover:text-white transition"
+                                        className="text-xs text-emerald-600 hover:text-emerald-700 transition"
                                     >
                                         Copy Markdown
                                     </button>
                                 </h4>
-                                <div className="h-32 overflow-y-auto p-3 rounded-lg bg-black/30 border border-white/5 text-[10px] text-gray-500 font-mono whitespace-pre-wrap">
+                                <div className="h-32 overflow-y-auto p-3 rounded-lg bg-slate-50 border border-slate-200 text-[10px] text-slate-600 font-mono whitespace-pre-wrap">
                                     {brief.readme}
                                 </div>
                             </div>
@@ -174,16 +174,16 @@ function AssetsTab({ assets, isPaid }: { assets: any, isPaid: boolean }) {
             <div className="grid md:grid-cols-2 gap-8">
                 {/* Resume */}
                 <div className="space-y-4">
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400 flex items-center gap-2">
-                        <FileText className="w-4 h-4" /> Resume Power Bullets
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900 flex items-center gap-2">
+                        <FileText className="w-4 h-4 text-emerald-600" /> Resume Power Bullets
                     </h3>
                     <div className="space-y-3">
                         {assets.resumeBullets.map((bullet: string, i: number) => (
-                            <div key={i} className="group relative p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
-                                <p className="text-sm text-gray-200 pr-8">{bullet}</p>
+                            <div key={i} className="group relative p-4 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-emerald-200 transition">
+                                <p className="text-sm text-slate-700 pr-8">{bullet}</p>
                                 <button
                                     onClick={() => navigator.clipboard.writeText(bullet)}
-                                    className="absolute top-4 right-4 text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition"
+                                    className="absolute top-4 right-4 text-slate-400 hover:text-emerald-600 opacity-0 group-hover:opacity-100 transition"
                                     title="Copy to clipboard"
                                 >
                                     <Copy className="w-4 h-4" />
@@ -196,22 +196,22 @@ function AssetsTab({ assets, isPaid }: { assets: any, isPaid: boolean }) {
                 {/* LinkedIn */}
                 <div className="space-y-6">
                     <div>
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-4 flex items-center gap-2">
-                            <Linkedin className="w-4 h-4" /> LinkedIn Headlines
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2">
+                            <Linkedin className="w-4 h-4 text-blue-600" /> LinkedIn Headlines
                         </h3>
-                        <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                            <p className="text-sm text-gray-200 italic">{assets.linkedIn.headline}</p>
+                        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+                            <p className="text-sm text-slate-700 italic">{assets.linkedIn.headline}</p>
                         </div>
                     </div>
                     <div>
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-4">About Section Draft</h3>
-                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 relative group">
-                            <p className="text-xs text-gray-400 whitespace-pre-wrap leading-relaxed">
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-4">About Section Draft</h3>
+                        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm relative group">
+                            <p className="text-xs text-slate-600 whitespace-pre-wrap leading-relaxed">
                                 {assets.linkedIn.aboutSection}
                             </p>
                             <button
                                 onClick={() => navigator.clipboard.writeText(assets.linkedIn.aboutSection || '')}
-                                className="absolute top-4 right-4 text-gray-500 hover:text-white opacity-0 group-hover:opacity-100 transition"
+                                className="absolute top-4 right-4 text-slate-400 hover:text-emerald-600 opacity-0 group-hover:opacity-100 transition"
                             >
                                 <Copy className="w-4 h-4" />
                             </button>
@@ -243,49 +243,49 @@ export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header & Tabs */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/10 pb-4">
-                <div className="flex gap-6 overflow-x-auto no-scrollbar">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-200 pb-0">
+                <div className="flex gap-8 overflow-x-auto no-scrollbar">
                     <button
                         onClick={() => setActiveTab('skills')}
-                        className={`pb-2 text-sm font-medium transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'skills' ? 'text-blue-400' : 'text-slate-400 hover:text-slate-200'
+                        className={`pb-4 text-sm font-bold transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'skills' ? 'text-emerald-900' : 'text-slate-500 hover:text-slate-800'
                             }`}
                     >
                         Skill Map
                         {!isPaid && <Lock className="w-3 h-3 mb-0.5" />}
                         {activeTab === 'skills' && (
-                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400" />
+                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
                     </button>
                     <button
                         onClick={() => setActiveTab('briefs')}
-                        className={`pb-2 text-sm font-medium transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'briefs' ? 'text-blue-400' : 'text-slate-400 hover:text-slate-200'
+                        className={`pb-4 text-sm font-bold transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'briefs' ? 'text-emerald-900' : 'text-slate-500 hover:text-slate-800'
                             }`}
                     >
                         Project Briefs
                         {!isPaid && <Lock className="w-3 h-3 mb-0.5" />}
                         {activeTab === 'briefs' && (
-                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400" />
+                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
                     </button>
                     <button
                         onClick={() => setActiveTab('assets')}
-                        className={`pb-2 text-sm font-medium transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'assets' ? 'text-blue-400' : 'text-slate-400 hover:text-slate-200'
+                        className={`pb-4 text-sm font-bold transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'assets' ? 'text-emerald-900' : 'text-slate-500 hover:text-slate-800'
                             }`}
                     >
                         Career Assets
                         {!isPaid && <Lock className="w-3 h-3 mb-0.5" />}
                         {activeTab === 'assets' && (
-                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400" />
+                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
                     </button>
                     <button
                         onClick={() => setActiveTab('interview')}
-                        className={`pb-2 text-sm font-medium transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'interview' ? 'text-blue-400' : 'text-slate-400 hover:text-slate-200'
+                        className={`pb-4 text-sm font-bold transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'interview' ? 'text-emerald-900' : 'text-slate-500 hover:text-slate-800'
                             }`}
                     >
                         Interview Prep
                         {activeTab === 'interview' && (
-                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-400" />
+                            <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
                     </button>
                 </div>
@@ -299,7 +299,7 @@ export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
                         {({ loading }) => (
                             <button
                                 type="button"
-                                className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition font-bold text-xs flex items-center gap-2"
+                                className="mb-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition font-bold text-xs flex items-center gap-2"
                                 disabled={loading}
                             >
                                 {loading ? 'Preparing PDF…' : 'Download PDF Pack'}
@@ -324,15 +324,15 @@ export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
                 )}
 
                 {activeTab === 'interview' && (
-                    <section className="glass-panel p-8 rounded-2xl border border-indigo-500/20 bg-indigo-500/[0.02] animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="p-2 bg-indigo-500/20 rounded-lg">
-                                <MessageSquare className="w-6 h-6 text-indigo-400" />
+                            <div className="p-2 bg-indigo-50 rounded-lg">
+                                <MessageSquare className="w-6 h-6 text-indigo-600" />
                             </div>
                             <div>
-                                <h2 className="text-xl font-bold text-white">Mock Interview Simulator</h2>
-                                <p className="text-sm text-slate-400">
-                                    {isPaid ? 'Unlimited AI practice sessions.' : 'Try 3 questions for free. Unlock full access for more.'}
+                                <h2 className="text-xl font-bold text-slate-900">Mock Interview Simulator</h2>
+                                <p className="text-sm text-slate-500">
+                                    {isPaid ? '10 practice turns per session (server‑enforced).' : '3 turns free. Unlock the Execution Pack for 10 turns per session.'}
                                 </p>
                             </div>
                         </div>
