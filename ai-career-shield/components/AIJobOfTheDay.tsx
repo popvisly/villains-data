@@ -38,6 +38,62 @@ const FRONTIER_ROLES = [
         impact: "Operational Efficiency",
         growth: "+90% YoY",
         tags: ["Ops", "Workflow"]
+    },
+    {
+        title: "AgentOps Engineer",
+        summary: "Monitors, debugs, and optimizes multi-agent swarms in production.",
+        salary: "$140k - $220k",
+        impact: "Reliability at Scale",
+        growth: "High Demand",
+        tags: ["DevOps", "Agents"]
+    },
+    {
+        title: "Model Behaviorist",
+        summary: "Fine-tunes models to align with specific brand voices or safety guidelines (RLHF).",
+        salary: "$130k - $190k",
+        impact: "Brand Safety",
+        growth: "Niche",
+        tags: ["RLHF", "Psychology"]
+    },
+    {
+        title: "AI Creative Director",
+        summary: "Leads teams of generative artists; curates AI output to meet brand standards.",
+        salary: "$120k - $180k",
+        impact: "Quality Control",
+        growth: "Emerging",
+        tags: ["Creative", "Leadership"]
+    },
+    {
+        title: "Synthetic Media Specialist",
+        summary: "Expert in video/audio generation (Avatars, TTS, Voice Cloning) for personalized content.",
+        salary: "$100k - $150k",
+        impact: "Content Scale",
+        growth: "+200% YoY",
+        tags: ["Media", "GenAI"]
+    },
+    {
+        title: "AI Enablement Lead",
+        summary: "Internal educator; teaches employees how to use AI tools effectively to close the literacy gap.",
+        salary: "$110k - $170k",
+        impact: "Workforce Upskilling",
+        growth: "Very High",
+        tags: ["L&D", "Strategy"]
+    },
+    {
+        title: "AI Product Manager",
+        summary: "Bridges the gap between technical ML capabilities and user problems to find product-market fit.",
+        salary: "$140k - $210k",
+        impact: "Revenue Growth",
+        growth: "Stable",
+        tags: ["Product", "Strategy"]
+    },
+    {
+        title: "AI Data Governance Manager",
+        summary: "Ensures data privacy, quality, and rights management for AI models.",
+        salary: "$130k - $185k",
+        impact: "Risk Mitigation",
+        growth: "Critical",
+        tags: ["Data", "Legal"]
     }
 ];
 
@@ -70,10 +126,10 @@ export function AIJobOfTheDay() {
                 {/* Header */}
                 <div className="px-5 py-4 border-b border-stone-100 bg-stone-50/50 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="p-1.5 rounded-md bg-forest-50 text-forest-700">
+                        <div className="p-1.5 rounded-md bg-emerald-50 text-emerald-700">
                             <Sparkles className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-bold uppercase tracking-wider text-forest-900">Market Intel</span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-emerald-900">Market Intel</span>
                     </div>
                     <span className="text-[10px] font-medium text-stone-500 bg-white px-2 py-1 rounded-full border border-stone-100 shadow-sm">
                         {new Date().toLocaleDateString('en-US', { weekday: 'long' })}&apos;s Role
@@ -95,7 +151,7 @@ export function AIJobOfTheDay() {
                     <div className="grid grid-cols-2 gap-3 mb-5">
                         <div className="bg-stone-50 rounded-xl p-3 border border-stone-100">
                             <p className="text-[10px] uppercase tracking-wide text-stone-500 font-semibold mb-1">Salary Signal</p>
-                            <p className="text-sm font-bold text-forest-700">{role.salary}</p>
+                            <p className="text-sm font-bold text-emerald-700">{role.salary}</p>
                         </div>
                         <div className="bg-stone-50 rounded-xl p-3 border border-stone-100">
                             <p className="text-[10px] uppercase tracking-wide text-stone-500 font-semibold mb-1">Strategic Value</p>
@@ -110,7 +166,7 @@ export function AIJobOfTheDay() {
                                 {tag}
                             </span>
                         ))}
-                        <span className="px-2 py-1 rounded-md bg-green-50 text-green-700 text-[10px] font-medium flex items-center gap-1">
+                        <span className="px-2 py-1 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-medium flex items-center gap-1">
                             <TrendingUp className="w-3 h-3" />
                             {role.growth}
                         </span>

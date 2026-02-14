@@ -87,10 +87,11 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header Branding */}
+        {/* Header Branding - Warm Minimal Gradient (simulated with blocks) */}
         <View style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 6, flexDirection: 'row' }}>
-          <View style={{ flex: 1, backgroundColor: '#2563EB' }} />
-          <View style={{ flex: 1, backgroundColor: '#F97316' }} />
+          <View style={{ flex: 1, backgroundColor: '#059669' }} /> {/* Emerald-600 */}
+          <View style={{ flex: 1, backgroundColor: '#10b981' }} /> {/* Emerald-500 */}
+          <View style={{ flex: 1, backgroundColor: '#34d399' }} /> {/* Emerald-400 */}
         </View>
 
         <View style={{ marginTop: 20 }}>
@@ -100,7 +101,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
           </Text>
         </View>
 
-        <Text style={[styles.sectionTitle, { color: '#2563EB' }]}>Portfolio Project Briefs</Text>
+        <Text style={[styles.sectionTitle, { color: '#059669' }]}>Portfolio Project Briefs</Text>
         {data.projectBriefs.map((brief) => (
           <View key={brief.id} style={styles.card}>
             <Text style={styles.h3}>{brief.title}</Text>
@@ -123,7 +124,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
             <Text style={styles.label}>Implementation Steps</Text>
             {brief.steps.map((s) => (
               <View key={s.step} style={{ marginBottom: 6 }}>
-                <Text style={{ fontWeight: 700, fontSize: 10, color: '#F97316' }}>
+                <Text style={{ fontWeight: 700, fontSize: 10, color: '#047857' }}>
                   {s.step}. {s.title}
                 </Text>
                 {s.details.map((detail, i) => (
@@ -141,7 +142,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
           </View>
         ))}
 
-        <Text style={[styles.sectionTitle, { color: '#2563EB', marginTop: 20 }]}>Personalized Skill Gap Map</Text>
+        <Text style={[styles.sectionTitle, { color: '#059669', marginTop: 20 }]}>Personalized Skill Gap Map</Text>
         <View style={styles.card}>
           <Text style={styles.h3}>Target role: {safeText(data.skillGapMap.roleTitle)}</Text>
 
@@ -164,7 +165,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
             </View>
           </View>
 
-          <Text style={[styles.label, { marginTop: 10, color: '#2563EB' }]}>Recommended Sequence</Text>
+          <Text style={[styles.label, { marginTop: 10, color: '#059669' }]}>Recommended Sequence</Text>
           {data.skillGapMap.recommendedSequence.map((seq, i) => (
             <View key={i} style={{ marginBottom: 6 }}>
               <Text style={{ fontWeight: 700, fontSize: 10 }}>{seq.weekRange}</Text>
@@ -198,7 +199,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
             </View>
 
             <View style={styles.card}>
-              <Text style={[styles.h3, { color: '#2563EB' }]}>Resume Power Bullets</Text>
+              <Text style={[styles.h3, { color: '#059669' }]}>Resume Power Bullets</Text>
               <Text style={[styles.p, { marginBottom: 10, fontSize: 10, color: '#64748b' }]}>Copy these into your experience section:</Text>
               {data.careerAssets.resumeBullets.map((b, i) => (
                 <Text key={i} style={styles.p}>• {b}</Text>
@@ -206,7 +207,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
             </View>
 
             <View style={styles.card}>
-              <Text style={[styles.h3, { color: '#0077B5' }]}>LinkedIn Optimization</Text>
+              <Text style={[styles.h3, { color: '#0F172A' }]}>LinkedIn Optimization</Text>
 
               <Text style={styles.label}>Headlines</Text>
               <Text style={[styles.p, { fontStyle: 'italic', marginBottom: 12 }]}>{data.careerAssets.linkedIn.headline}</Text>
@@ -215,7 +216,7 @@ export function ExecutionPackPdfDocument({ data }: { data: ExecutionPack }) {
               <Text style={styles.p}>{data.careerAssets.linkedIn.aboutSection}</Text>
             </View>
 
-            <Text style={[styles.sectionTitle, { color: '#F97316', marginTop: 20 }]}>Project README Templates</Text>
+            <Text style={[styles.sectionTitle, { color: '#D97706', marginTop: 20 }]}>Project README Templates</Text>
             {data.projectBriefs.map(b => b.readme ? (
               <View key={b.id} style={{ marginTop: 10, marginBottom: 20 }}>
                 <Text style={[styles.h3, { fontSize: 11 }]}>{b.title}</Text>
