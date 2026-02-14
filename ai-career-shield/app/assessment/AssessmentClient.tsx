@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { pickMarketIntelSignals, type MarketIntelTrack } from '@/data/marketIntel';
 import { Paywall } from '@/components/Paywall';
 import { assessJobRisk, generateExecutionPack } from '@/app/actions/assessment';
 import type { AssessmentInput, AssessmentResult } from '@/types';
@@ -87,6 +88,10 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
     const [hasSavedSession, setHasSavedSession] = useState(false);
 
     const LS_KEY = 'ai-career-shield:assessment-state:v1';
+
+    const marketTrack: MarketIntelTrack =
+        formData.goal === 'choose_direction' ? 'explore' : formData.goal === 'plan_pivot' ? 'pivot' : 'strengthen';
+    const marketIntel = pickMarketIntelSignals(marketTrack, 3);
 
     // Feature Flag
     const ENABLE_EXECUTION_PACK = process.env.NEXT_PUBLIC_ENABLE_EXECUTION_PACK === 'true' || true;
@@ -537,6 +542,37 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                             </div>
                         )}
 
+                        {/* Market Intel (free) */}
+                        {marketIntel.length > 0 && (
+                            <section className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                                <div className="flex items-start justify-between gap-6">
+                                    <div>
+                                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Market Intel</p>
+                                        <h3 className="mt-1 text-xl font-bold text-slate-950">Signals for your direction</h3>
+                                        <p className="mt-1 text-sm text-slate-700">
+                                            Short, decision-grade prompts to help you explore, strengthen, or pivot.
+                                        </p>
+                                    </div>
+                                    <div className="hidden sm:block rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
+                                        Track: {marketTrack}
+                                    </div>
+                                </div>
+
+                                <div className="mt-6 grid gap-4 md:grid-cols-3">
+                                    {marketIntel.map((s) => (
+                                        <div key={s.id} className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5">
+                                            <p className="text-sm font-semibold text-slate-950">{s.title}</p>
+                                            <p className="mt-2 text-sm text-slate-700">{s.whyItMatters}</p>
+                                            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/60 p-3">
+                                                <p className="text-[11px] font-semibold uppercase tracking-wide text-emerald-800">Move this week</p>
+                                                <p className="mt-1 text-sm text-slate-800">{s.moveThisWeek}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
                         {/* Phase 4: Execution Pack Upsell / View */}
                         {ENABLE_EXECUTION_PACK && (
                             <div className="mt-8">
@@ -549,7 +585,9 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                     />
                                 )}
                             </div>
-                        )}                        {/* Risk Score Card */}
+                        )}
+
+                        {/* Risk Score Card */}
                         <div className="glass-panel p-8 rounded-2xl text-center">
                             <div className="flex items-center justify-center gap-3 mb-4">
                                 <h2 className="text-2xl font-bold">Your Career Resilience Score</h2>
