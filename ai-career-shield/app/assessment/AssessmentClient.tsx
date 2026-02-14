@@ -466,8 +466,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                                     type="button"
                                                     onClick={() => toggleInterest(interest)}
                                                     className={`px-4 py-2 rounded-full text-sm font-medium border transition ${formData.enjoys?.includes(interest)
-                                                        ? 'bg-green-500/20 text-green-400 border-green-500/50'
-                                                        : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'
+                                                        ? 'bg-emerald-600 text-white border-emerald-700'
+                                                        : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                                                         }`}
                                                 >
                                                     {interest}
@@ -482,7 +482,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                 <button
                                     type="submit"
                                     disabled={!formData.jobTitle || !formData.industry || formData.skills.length < 1 || isLoading}
-                                    className="w-full py-5 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold text-lg shadow-lg shadow-emerald-950/25 disabled:opacity-50 disabled:cursor-not-allowed group"
+                                    className="w-full py-5 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold text-lg text-slate-950 shadow-lg shadow-emerald-950/10 disabled:opacity-50 disabled:cursor-not-allowed group"
                                 >
                                     {isLoading ? (
                                         <span className="flex items-center justify-center gap-2">
