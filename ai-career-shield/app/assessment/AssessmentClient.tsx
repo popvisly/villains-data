@@ -303,12 +303,12 @@ export default function AssessmentPage() {
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl font-bold mb-4">
-                        <span className="gradient-text">Career Shield Check</span>
+                    <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4 text-slate-950">
+                        Career Shield Assessment
                     </h1>
-                    <p className="text-xl text-gray-400">
+                    <p className="text-base md:text-lg text-slate-700 leading-relaxed">
                         {step === 1
-                            ? "Answer a few quick questions to get your score and a 30/60/90 action plan."
+                            ? "Choose a direction, strengthen your role, or plan a pivot — then get a scorecard and a 30/60/90 roadmap." 
                             : "Your Career Shield Report"}
                     </p>
 
@@ -350,7 +350,7 @@ export default function AssessmentPage() {
 
                             {/* Section 1: The Basics */}
                             <section>
-                                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                                <h3 className="text-xl font-semibold text-slate-950 mb-6 flex items-center gap-2">
                                     <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm">1</span>
                                     Your role
                                 </h3>
@@ -417,12 +417,12 @@ export default function AssessmentPage() {
                                 </div>
                             </section>
 
-                            <div className="h-px bg-white/10" />
+                            <div className="h-px bg-[hsl(var(--border))]" />
 
                             {/* Section 2: Skills & Interests */}
                             <section>
-                                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                                    <span className="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-sm">2</span>
+                                <h3 className="text-xl font-semibold text-slate-950 mb-6 flex items-center gap-2">
+                                    <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm">2</span>
                                     Skills & Interests
                                 </h3>
 
