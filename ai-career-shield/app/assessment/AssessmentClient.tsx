@@ -664,18 +664,18 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                         </div>
 
                         {/* Risk Factors with Evidence & Mitigation */}
-                        <div className="glass-panel p-8 rounded-2xl">
-                            <h3 className="text-xl font-bold mb-6">Risk Breakdown</h3>
+                        <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                            <h3 className="text-xl font-bold mb-6 text-slate-950">Risk Breakdown</h3>
                             <div className="space-y-6">
                                 {result.factors.map((factor, i) => (
-                                    <div key={i} className="border-l-2 border-blue-500/30 pl-4">
+                                    <div key={i} className="border-l-2 border-emerald-200 pl-4">
                                         <div className="flex items-center justify-between mb-2">
-                                            <span className="font-medium text-lg">{factor.name}</span>
-                                            <span className="text-sm text-gray-400">
+                                            <span className="font-semibold text-lg text-slate-950">{factor.name}</span>
+                                            <span className="text-sm text-slate-500">
                                                 {factor.score}%
                                             </span>
                                         </div>
-                                        <div className="h-2 bg-white/10 rounded-full overflow-hidden mb-3">
+                                        <div className="h-2 bg-slate-200 rounded-full overflow-hidden mb-3">
                                             <div
                                                 className="h-full bg-gradient-to-r from-emerald-500 to-lime-500 transition-all duration-1000"
                                                 style={{ width: `${factor.score}%` }}
@@ -684,25 +684,25 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                                         {factor.evidence && (
                                             <div className="mb-2">
-                                                <span className="text-xs font-medium text-blue-400">Evidence:</span>
-                                                <p className="text-sm text-gray-300 mt-1">{factor.evidence}</p>
+                                                <span className="text-xs font-semibold text-slate-600">Evidence</span>
+                                                <p className="text-sm text-slate-700 mt-1">{factor.evidence}</p>
                                             </div>
                                         )}
 
                                         {factor.whyItMatters && (
                                             <div className="mb-2">
-                                                <span className="text-xs font-medium text-yellow-400">Why it matters:</span>
-                                                <p className="text-sm text-gray-300 mt-1">{factor.whyItMatters}</p>
+                                                <span className="text-xs font-semibold text-slate-600">Why it matters</span>
+                                                <p className="text-sm text-slate-700 mt-1">{factor.whyItMatters}</p>
                                             </div>
                                         )}
 
                                         {factor.mitigation && factor.mitigation.length > 0 && (
-                                            <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3 mt-2">
-                                                <span className="text-xs font-medium text-green-400">✓ How to mitigate:</span>
+                                            <div className="bg-emerald-50/60 border border-emerald-200 rounded-lg p-3 mt-2">
+                                                <span className="text-xs font-semibold text-emerald-800">✓ How to mitigate</span>
                                                 <ul className="mt-1 space-y-1">
                                                     {factor.mitigation.map((item, idx) => (
-                                                        <li key={idx} className="text-sm text-gray-300 flex items-start gap-2">
-                                                            <span className="text-green-500/50 mt-1">•</span>
+                                                        <li key={idx} className="text-sm text-slate-700 flex items-start gap-2">
+                                                            <span className="text-emerald-700/70 mt-1">•</span>
                                                             <span>{item}</span>
                                                         </li>
                                                     ))}
