@@ -2,13 +2,15 @@ interface SEOProps {
     title?: string;
     description?: string;
     url?: string;
+    canonical?: string;
     ogImage?: string;
 }
 
 export default function SEO({
     title = "AI Career Portal | Strategic Workflow Audit",
     description = "Stay valuable in the AI-era with a definitive execution sequence and strategic resilience roadmap.",
-    url = "https://ai-career-portal.vercel.app",
+    url = "https://villains-data.vercel.app", // Added default for url
+    canonical = "https://villains-data.vercel.app",
     ogImage = "/og-image.png"
 }: SEOProps) {
 
@@ -19,7 +21,7 @@ export default function SEO({
         "@type": "WebApplication",
         "name": siteName,
         "description": description,
-        "url": url,
+        "url": url, // Using the destructured url prop
         "applicationCategory": "CareerService",
         "operatingSystem": "All",
         "author": {

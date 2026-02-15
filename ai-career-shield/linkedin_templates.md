@@ -4,7 +4,7 @@
 **Tone:** Forbes-grade, Strategic, Signal-first, No-slop  
 **Product Name:** AI Career Portal  
 
-**BASE_URL=<https://ai-career-shield.vercel.app>**
+**BASE_URL=<https://villains-data.vercel.app>**
 
 ---
 
@@ -27,7 +27,7 @@ We built **AI Career Portal** to help you find where your leverage actually is�
 
 **CTA**
 Run the strategic audit (≈2 minutes):  
-[https://ai-career-shield.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=signal_slop](https://ai-career-shield.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=signal_slop)
+[https://villains-data.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=signal_slop](https://villains-data.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=signal_slop)
 
 **Comment Prompt**
 What part of your role still requires real judgment—even with AI in the loop?
@@ -55,7 +55,7 @@ The practical move isn’t to out‑produce the model. It’s to reposition towa
 
 **CTA**
 Audit your Resilience Index:  
-[https://ai-career-shield.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=leverage_shift](https://ai-career-shield.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=leverage_shift)
+[https://villains-data.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=leverage_shift](https://villains-data.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=leverage_shift)
 
 **Comment Prompt**
 Where are you seeing compression first in your industry—junior work, middle layers, or specialist roles?
@@ -84,7 +84,7 @@ That’s why we built the **Proof Kit**: a role-specific positioning thesis, pro
 
 **CTA**
 Run the audit and unlock the Proof Kit:  
-[https://ai-career-shield.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=failure_mode](https://ai-career-shield.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=failure_mode)
+[https://villains-data.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=failure_mode](https://villains-data.vercel.app/assessment?utm_source=linkedin&utm_medium=organic&utm_campaign=launch_week1&utm_content=failure_mode)
 
 **Comment Prompt**
 What’s the hardest “judgment question” you’ve been asked in an interview recently?

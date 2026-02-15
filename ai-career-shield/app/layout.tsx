@@ -7,7 +7,7 @@ const lora = Lora({ subsets: ['latin'], variable: '--font-lora' });
 const raleway = Raleway({ subsets: ['latin'], variable: '--font-raleway' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ai-career-portal.vercel.app'),
+  metadataBase: new URL('https://villains-data.vercel.app'),
   title: 'AI Career Portal | Build Strategic Resilience',
   description:
     'Audit your role and generate a strategic resilience roadmap. Get a precise 30/60/90-day execution sequence to stay valuable in the AI-era.',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Career Portal | Strategic Workflow Audit',
     description: 'Audit your role and generate a 30/60/90-day resilience sequence.',
-    url: 'https://ai-career-portal.vercel.app',
+    url: 'https://villains-data.vercel.app',
     siteName: 'AI Career Portal',
     locale: 'en_US',
     type: 'website',
