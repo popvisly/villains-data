@@ -142,7 +142,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
             return;
         }
         if (!startTime) setStartTime(Date.now());
-    }, [isLoading, startTime]);
+    }, [isLoading]); // Removed startTime from deps to prevent loop
 
     useEffect(() => {
         if (!isLoading || !startTime || !streamedObject) return;

@@ -156,7 +156,7 @@ export async function hasExecutionPackAccess(requiredTier?: 'execution' | 'execu
 
         return { hasAccess: true, tier: userTier };
     } catch (e) {
-        console.error('hasExecutionPackAccess error:', e);
+        // Fallback to free/locked state instead of throwing
         return { hasAccess: false };
     }
 }
