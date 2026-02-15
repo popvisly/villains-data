@@ -143,6 +143,13 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                         </div>
                     </div>
                 </div>
+
+                {/* Transparency Note: Forbes-style trustworthiness anchor */}
+                <div className="mt-12 max-w-2xl mx-auto text-center">
+                    <p className="text-xs text-slate-500 leading-relaxed italic">
+                        &ldquo;Job discovery isn’t magic—it’s sourcing. If a platform can’t show where a listing came from, you shouldn’t trust it. We analyze roles you provide (LinkedIn, Indeed, company pages) and always link to the source so the evaluation is verifiable.&rdquo;
+                    </p>
+                </div>
             </div>
         </div>
     );

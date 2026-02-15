@@ -348,6 +348,10 @@ export default function HomePage() {
                 a: '~2 minutes to answer. Outputs generate immediately.',
               },
               {
+                q: 'How do you evaluate roles?',
+                a: 'We analyze roles you provide (LinkedIn/Indeed/company postings). We always link to the source so the evaluation is verifiable. When a job tool claims it can “find roles for you,” the key question is sourcing. We make this transparent so you can trust exactly what you’re seeing.',
+              },
+              {
                 q: 'What should I do first?',
                 a: 'Start with the “This Week” moves, then run the 30‑day section. The plan is designed to produce proof artifacts, not busywork.',
               },
