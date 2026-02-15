@@ -21,6 +21,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
 
     const handleUnlock = async (tier: 'execution' | 'executive' = 'execution') => {
         trackEvent('pricing_plan_click', { tier, assessmentId });
+        trackEvent('checkout_started', { tier, assessmentId });
         setIsLoading(true);
         try {
             const result = await createCheckoutSession(assessmentId, tier);
@@ -57,7 +58,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                         <div className="mb-6">
                             <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider">Most Popular</span>
                             <h3 className="text-2xl font-bold text-slate-950 mt-3">Execution Pack</h3>
-                            <p className="text-sm text-emerald-700 mt-1 font-medium">Instant 7-day resilience roadmap.</p>
+                            <p className="text-sm text-emerald-700 mt-1 font-medium">Instant 7‑day resilience roadmap.</p>
                         </div>
 
                         <div className="flex-1 space-y-4 mb-8">
@@ -90,7 +91,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                                 disabled={isLoading}
                                 className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                             >
-                                {isLoading ? 'Processing...' : 'Unlock Execution Pack'}
+                                {isLoading ? 'Processing...' : 'Unlock the Execution Pack'}
                             </button>
                             <p className="mt-3 text-[10px] text-center text-slate-400">One-time purchase. Includes 12 months of updates.</p>
                         </div>
@@ -109,9 +110,9 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
 
                         <div className="flex-1 space-y-4 mb-8">
                             {[
-                                { title: "Everything in Execution", desc: "All core audit & matching tools." },
-                                { title: "Project Brief Library", desc: "Professional proof-of-work library." },
-                                { title: "Interview simulations", desc: "Role-specific high-stakes practice." },
+                                { title: "Everything in Execution Pack", desc: "All core audit & matching tools." },
+                                { title: "Project brief library", desc: "Professional proof-of-work library." },
+                                { title: "Unlimited interview simulations", desc: "Role-specific high-stakes practice." },
                                 { title: "Executive Blueprint PDF", desc: "Share-ready strategy briefing." }
                             ].map((item, i) => (
                                 <div key={i} className="flex gap-3">
@@ -139,7 +140,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                             >
                                 {isLoading ? 'Processing...' : 'Unlock Executive License'}
                             </button>
-                            <p className="mt-3 text-[10px] text-center text-slate-400">One-time purchase. Full leverage toolkit.</p>
+                            <p className="mt-3 text-[10px] text-center text-slate-400">One-time purchase. Includes 12 months of updates. Designed for higher-leverage roles.</p>
                         </div>
                     </div>
                 </div>

@@ -25,6 +25,7 @@ export default function SuccessCheck({ sessionId }: { sessionId: string }) {
                 if (result.success) {
                     // Cookie is set! Redirect to assessment to see unlocked state.
                     trackEvent('payment_success_view', { sessionId });
+                    trackEvent('purchase_completed', { sessionId });
                     router.push('/assessment');
                     router.refresh(); // Ensure the layout refreshes to pick up the cookie
                 } else {

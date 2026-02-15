@@ -352,8 +352,16 @@ export default function HomePage() {
                 a: 'We analyze roles you provide (LinkedIn/Indeed/company postings). We always link to the source so the evaluation is verifiable. When a job tool claims it can “find roles for you,” the key question is sourcing. We make this transparent so you can trust exactly what you’re seeing.',
               },
               {
+                q: 'Do you recommend using AI for cover letters?',
+                a: 'Using AI for cover letters is most effective when you treat it as a first draft—not an autopilot. A tailored letter that you edit into your own voice (and sanity-checked for specifics) will almost always outperform a generic template. Our recommendation: Add 2 specifics from the role, include 1 quantified proof, and delete generic fluff.',
+              },
+              {
                 q: 'What should I do first?',
                 a: 'Start with the “This Week” moves, then run the 30‑day section. The plan is designed to produce proof artifacts, not busywork.',
+              },
+              {
+                q: 'What does one-time purchase include?',
+                a: 'Includes 12 months of updates. You’ll keep access to what you’ve unlocked.',
               },
             ].map((item) => (
               <details key={item.q} className="group glass-panel rounded-2xl p-6 open:ring-1 open:ring-[hsl(var(--primary))]/20">
@@ -404,10 +412,10 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-serif">
-              Built for Institutional Authority.
+              Built for executive-grade career leverage.
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              One-time investment. Lifetime resilience.
+              One-time purchase. A resilience system you can reuse.
             </p>
           </div>
 
@@ -442,11 +450,11 @@ export default function HomePage() {
               </div>
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Execution Pack</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700">Instant 7-day resilience roadmap.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700">Instant 7‑day resilience roadmap.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Strategic 30/60/90 Roadmap', 'Personalized Skill Gap Map', 'AI-Role Matcher (resume scan)', 'Elite LinkedIn & Resume Assets'].map((item) => (
+                {['Strategic 30/60/90 roadmap', 'Personalized skill-gap map', 'AI role matcher (resume scan)', 'Elite LinkedIn + resume assets'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700 font-medium">
                     <Check className="w-4 h-4 text-emerald-600" /> {item}
                   </li>
@@ -457,7 +465,7 @@ export default function HomePage() {
                 onClick={() => trackEvent('pricing_plan_click', { tier: 'execution', location: 'landing_page' })}
                 className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-center shadow-lg transition"
               >
-                Get Execution Pack
+                Get the Execution Pack
               </Link>
               <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes 12 months of updates.</p>
             </div>
@@ -470,7 +478,7 @@ export default function HomePage() {
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Everything in Execution', 'Professional Project Brief Library', 'Unlimited interview simulations', 'Executive Blueprint PDF (share-ready)'].map((item) => (
+                {['Everything in Execution Pack', 'Professional project brief library', 'Unlimited role-specific interview simulations', 'Executive Blueprint PDF (share-ready)'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
                     <Check className="w-4 h-4 text-indigo-600" /> {item}
                   </li>
@@ -483,7 +491,7 @@ export default function HomePage() {
               >
                 Go Executive
               </Link>
-              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Full status & leverage toolkit.</p>
+              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes 12 months of updates. Designed for higher-leverage roles.</p>
             </div>
           </div>
 
