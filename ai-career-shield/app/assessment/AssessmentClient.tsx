@@ -93,7 +93,20 @@ const assessmentSchema = z.object({
         discretion: z.number().min(1).max(10),
         automation: z.number().min(1).max(10),
         why: z.string()
-    }))
+    })),
+    teaserNarrative: z.object({
+        positioningThesis: z.string(),
+        proofPoints: z.array(z.object({
+            bullet: z.string(),
+            isQuantified: z.boolean(),
+            source: z.enum(['user', 'inferred']),
+            evidence: z.string().optional()
+        })),
+        teaserInterviewQuestion: z.object({
+            question: z.string(),
+            strongAnswerBullets: z.array(z.string())
+        })
+    }).optional()
 });
 
 export default function AssessmentPage({ initialHasAccess = false, initialTier }: { initialHasAccess?: boolean, initialTier?: 'execution' | 'executive' }) {
