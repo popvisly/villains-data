@@ -4,37 +4,71 @@
 
 @layer base {
   :root {
-    /* Warm minimal base (Paperform-ish) */
-    --background: 40 43% 96%; /* cream */
-    --foreground: 222 30% 12%; /* near-black */
+    /* Soft UI Evolution (UI/UX Pro Max) */
+    --background: 255 33% 98%;
+    /* Warm White #F5F3FF (Hue 255 roughly) or stick to HSL */
+    /* converting #F5F3FF to HSL: 250, 60%, 98% */
+    --background: 250 60% 98%;
+    --foreground: 243 47% 35%;
+    /* Text #312E81 */
 
     --card: 0 0% 100%;
-    --card-foreground: 222 30% 12%;
+    --card-foreground: 243 47% 35%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 30% 12%;
+    --popover-foreground: 243 47% 35%;
 
-    /* Forest green accent */
-    --primary: 153 58% 24%;
-    --primary-foreground: 40 43% 96%;
+    /* Indigo Primary #6366F1 -> 239 84% 67% */
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 20% 90%;
-    --secondary-foreground: 222 30% 12%;
+    /* Secondary #818CF8 -> 234 89% 74% */
+    --secondary: 234 89% 74%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 40 18% 92%;
-    --muted-foreground: 222 12% 40%;
+    --muted: 240 10% 96%;
+    --muted-foreground: 240 5% 50%;
 
-    --accent: 40 18% 92%;
-    --accent-foreground: 222 30% 12%;
+    --accent: 234 89% 94%;
+    --accent-foreground: 243 47% 35%;
 
-    --destructive: 0 70% 42%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 12% 86%;
-    --input: 40 12% 86%;
-    --ring: 153 58% 24%;
+    --border: 240 15% 90%;
+    --input: 240 15% 90%;
+    --ring: 239 84% 67%;
 
-    --radius: 0.9rem;
+    --radius: 1.0rem;
+
+    /* CTA - Emerald #10B981 -> 160 84% 39% */
+    --cta: 160 84% 39%;
+    --cta-foreground: 0 0% 100%;
+
+    /* Semantic Intents (Soft UI) */
+    /* Success: Emerald-ish */
+    --success-subtle: 152 76% 97%;
+    /* emerald-50 */
+    --success-border: 149 80% 90%;
+    /* emerald-100 */
+    --success-foreground: 160 84% 39%;
+    /* emerald-600/700 mix */
+
+    /* Warning: Amber-ish */
+    --warning-subtle: 48 100% 96%;
+    /* amber-50 */
+    --warning-border: 48 100% 88%;
+    /* amber-100 */
+    --warning-foreground: 38 92% 50%;
+    /* amber-600 */
+
+    /* Info: Blue-ish */
+    --info-subtle: 214 100% 97%;
+    /* blue-50 */
+    --info-border: 214 95% 93%;
+    /* blue-100 */
+    --info-foreground: 221 83% 53%;
+    /* blue-600 */
   }
 }
 
@@ -46,6 +80,15 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-lora), serif;
   }
 }
 
@@ -70,7 +113,7 @@
   }
 
   .subtle-noise {
-    background-image: radial-gradient(rgba(0,0,0,0.035) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px);
     background-size: 14px 14px;
   }
 }

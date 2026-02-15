@@ -1,8 +1,8 @@
 import React from 'react';
-import { bucketLabel, fetchAllFeedbackRows, mean } from '@/lib/analytics';
+import { fetchAllFeedbackRows, mean } from '@/lib/analytics';
 import { supabaseAdmin } from '@/lib/supabase';
 
-type BucketAvg = { bucket: string; count: number; avg: number | null };
+
 
 function round1(n: number) {
   return Math.round(n * 10) / 10;
@@ -39,29 +39,7 @@ function MetricCard({ label, value, subtext }: { label: string; value: string | 
   );
 }
 
-function computeAvgByBucket(rows: Awaited<ReturnType<typeof fetchAllFeedbackRows>>, key: 'job_title_bucket' | 'industry_bucket'): BucketAvg[] {
-  const map = new Map<string, { count: number; ratings: number[] }>();
 
-  for (const r of rows) {
-    const bucket = bucketLabel(r[key]);
-    const rating = r.rating;
-    if (typeof rating !== 'number') continue;
-
-    const cur = map.get(bucket) || { count: 0, ratings: [] };
-    cur.count += 1;
-    cur.ratings.push(rating);
-    map.set(bucket, cur);
-  }
-
-  const out: BucketAvg[] = Array.from(map.entries()).map(([bucket, v]) => ({
-    bucket,
-    count: v.count,
-    avg: mean(v.ratings),
-  }));
-
-  out.sort((a, b) => (b.avg ?? 0) - (a.avg ?? 0));
-  return out;
-}
 
 async function fetchEventCounts() {
   const { data, error } = await supabaseAdmin
@@ -143,11 +121,13 @@ export default async function AnalyticsPage({
   const streamingEvents = events.filter(e => e.event_name.startsWith('streaming_'));
   const firstTokenLatencies = streamingEvents
     .filter(e => e.event_name === 'streaming_token_first')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .map(e => (e.properties as any)?.latency)
     .filter((n): n is number => typeof n === 'number');
 
   const finishDurations = streamingEvents
     .filter(e => e.event_name === 'streaming_complete')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .map(e => (e.properties as any)?.duration)
     .filter((n): n is number => typeof n === 'number');
 
@@ -245,6 +225,7 @@ export default async function AnalyticsPage({
                     </tr>
                   </thead>
                   <tbody>
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     {purchases.slice(0, 10).map((p: any) => (
                       <tr key={p.id} className="border-b border-white/5">
                         <td className="py-2 text-gray-300">{new Date(p.created_at).toLocaleDateString()}</td>

@@ -352,7 +352,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
         <main className="min-h-screen subtle-noise py-20 px-6">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4 text-slate-950">
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-4 text-slate-950">
                         Strategic Workflow Audit
                     </h1>
                     <p className="text-base md:text-lg text-slate-700 leading-relaxed">
@@ -363,7 +363,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                 </div>
 
                 {step === 1 && hasSavedSession && (
-                    <div className="mb-8 p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-500">
+                    <div className="mb-8 p-6 bg-[hsl(var(--success-subtle))] border border-[hsl(var(--success-border))] rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-500">
                         <div className="flex items-center gap-4">
                             <span className="text-2xl">💾</span>
                             <div>
@@ -373,16 +373,16 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                         </div>
                         <div className="flex gap-3">
                             <button onClick={handleStartOver} className="px-4 py-2 text-sm text-slate-600 hover:text-slate-900 transition">Start Over</button>
-                            <button onClick={handleResume} className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold shadow-sm transition">Resume</button>
+                            <button onClick={handleResume} className="px-6 py-2 bg-[hsl(var(--cta))] hover:opacity-90 text-[hsl(var(--cta-foreground))] rounded-lg font-bold shadow-sm transition">Resume</button>
                         </div>
                     </div>
                 )}
 
                 {step === 1 && (isLoading || streamedObject) && (
                     <div className="mb-12 animate-in fade-in zoom-in-95 duration-500">
-                        <div className="rounded-2xl border border-emerald-200 bg-emerald-50/30 p-8 shadow-sm">
+                        <div className="rounded-2xl border border-[hsl(var(--success-border))] bg-[hsl(var(--success-subtle))]/30 p-8 shadow-sm">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl animate-pulse">✨</div>
+                                <div className="w-10 h-10 rounded-full bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] flex items-center justify-center text-xl animate-pulse">✨</div>
                                 <div>
                                     <h3 className="text-xl font-bold text-slate-950">Consulting Analyst briefing...</h3>
                                     <p className="text-sm text-slate-700">Synthesizing market signals and automation vectors.</p>
@@ -399,8 +399,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                                 <div className="grid gap-4 md:grid-cols-2">
                                     {displayedFactors.map((f, i) => (
-                                        <div key={i} className="p-4 rounded-xl bg-white border border-emerald-100 animate-in slide-in-from-left-2 fade-in duration-300">
-                                            <p className="text-[10px] font-bold text-emerald-700 uppercase mb-1">{f?.name || 'Analyzing Factor...'}</p>
+                                        <div key={i} className="p-4 rounded-xl bg-white border border-[hsl(var(--success-border))] animate-in slide-in-from-left-2 fade-in duration-300">
+                                            <p className="text-[10px] font-bold text-[hsl(var(--success-foreground))] uppercase mb-1">{f?.name || 'Analyzing Factor...'}</p>
                                             <p className="text-sm text-slate-800 line-clamp-2 italic">&quot;{f?.evidence || 'Identifying technical dependencies...'}&quot;</p>
                                         </div>
                                     ))}
@@ -438,8 +438,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                     <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <form onSubmit={handleSubmit} className="space-y-12">
                             <section>
-                                <h3 className="text-xl font-semibold text-slate-950 mb-6 flex items-center gap-2">
-                                    <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm">1</span>
+                                <h3 className="text-xl font-serif font-bold text-slate-950 mb-6 flex items-center gap-2">
+                                    <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm font-sans">1</span>
                                     Your role
                                 </h3>
                                 <div className="grid md:grid-cols-2 gap-6">
@@ -499,8 +499,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                             <div className="h-px bg-[hsl(var(--border))]" />
 
                             <section>
-                                <h3 className="text-xl font-semibold text-slate-950 mb-6 flex items-center gap-2">
-                                    <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm">2</span>
+                                <h3 className="text-xl font-serif font-bold text-slate-950 mb-6 flex items-center gap-2">
+                                    <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm font-sans">2</span>
                                     Skills & Interests
                                 </h3>
                                 <div className="space-y-6">
@@ -534,7 +534,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                                     key={interest}
                                                     type="button"
                                                     onClick={() => toggleInterest(interest)}
-                                                    className={`px-4 py-2 rounded-full text-sm font-medium border transition ${formData.enjoys?.includes(interest) ? 'bg-emerald-600 text-white border-emerald-700' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'}`}
+                                                    className={`px-4 py-2 rounded-full text-sm font-medium border transition ${formData.enjoys?.includes(interest) ? 'bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] border-[hsl(var(--cta))]' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'}`}
                                                 >
                                                     {interest}
                                                 </button>
@@ -548,7 +548,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                 <button
                                     type="submit"
                                     disabled={!formData.jobTitle || !formData.industry || formData.skills.length < 1 || isLoading}
-                                    className="w-full py-5 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold text-lg text-slate-950 shadow-lg shadow-emerald-950/10 disabled:opacity-50 disabled:cursor-not-allowed group"
+                                    className="w-full py-5 rounded-xl bg-[hsl(var(--cta))] hover:opacity-90 transition font-bold text-lg text-[hsl(var(--cta-foreground))] shadow-lg shadow-emerald-950/20 disabled:opacity-50 disabled:cursor-not-allowed group"
                                 >
                                     Audit Your Role
                                 </button>
@@ -595,10 +595,10 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                         )}
 
                         {result.immediateActions && result.immediateActions.length > 0 && (
-                            <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-8 shadow-sm">
+                            <div className="rounded-2xl border border-[hsl(var(--success-border))] bg-[hsl(var(--success-subtle))]/70 p-8 shadow-sm">
                                 <div className="flex items-center justify-between mb-6">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl">🚀</div>
+                                        <div className="w-10 h-10 rounded-full bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] flex items-center justify-center text-xl">🚀</div>
                                         <div>
                                             <h3 className="text-xl font-bold text-slate-950">This Week: High‑leverage moves</h3>
                                             <p className="text-sm text-slate-700">Start here to build readiness through real outputs</p>
@@ -608,8 +608,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                 </div>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {result.immediateActions.map((action, i) => (
-                                        <div key={i} className="rounded-xl border border-emerald-100 bg-white p-4 flex items-start gap-4 hover:bg-emerald-50/40 transition-colors group">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-600/10 border border-emerald-200 flex items-center justify-center text-emerald-800 font-bold">{i + 1}</div>
+                                        <div key={i} className="rounded-xl border border-[hsl(var(--success-border))] bg-white p-4 flex items-start gap-4 hover:bg-[hsl(var(--success-subtle))]/40 transition-colors group">
+                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[hsl(var(--success-subtle))] border border-[hsl(var(--success-border))] flex items-center justify-center text-[hsl(var(--success-foreground))] font-bold">{i + 1}</div>
                                             <p className="text-slate-800 text-sm leading-relaxed mt-1">{action}</p>
                                         </div>
                                     ))}
@@ -619,7 +619,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                         <section className="rounded-2xl border border-[hsl(var(--border))] bg-white p-8">
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="p-3 rounded-xl bg-orange-100/50">
+                                <div className="p-3 rounded-xl bg-[hsl(var(--warning-subtle))]">
                                     <span className="text-2xl">⚖️</span>
                                 </div>
                                 <div>
@@ -633,7 +633,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                     <div className="relative w-32 h-32 flex items-center justify-center">
                                         <svg className="w-full h-full transform -rotate-90">
                                             <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-slate-200" />
-                                            <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="12" fill="transparent" strokeDasharray={364} strokeDashoffset={364 - (364 * result.riskScore) / 100} className="text-emerald-500 transition-all duration-1000 ease-out" />
+                                            <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="12" fill="transparent" strokeDasharray={364} strokeDashoffset={364 - (364 * result.riskScore) / 100} className="text-[hsl(var(--cta))] transition-all duration-1000 ease-out" />
                                         </svg>
                                         <span className="absolute text-3xl font-bold text-slate-950">{result.riskScore}%</span>
                                     </div>
@@ -648,7 +648,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                                 <span className="text-slate-600">{factor.score}%</span>
                                             </div>
                                             <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                                                <div className="h-full bg-emerald-500/80 rounded-full transition-all duration-1000" style={{ width: `${factor.score}%`, transitionDelay: `${i * 150}ms` }} />
+                                                <div className="h-full bg-[hsl(var(--cta))]/80 rounded-full transition-all duration-1000" style={{ width: `${factor.score}%`, transitionDelay: `${i * 150}ms` }} />
                                             </div>
                                         </div>
                                     ))}
@@ -675,7 +675,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                     {result.plan30_60_90.map((win) => (
                                         <div key={win.window} className="rounded-2xl border border-slate-200 bg-white p-8">
                                             <div className="flex items-center gap-4 mb-6">
-                                                <span className="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-lg uppercase tracking-wide">
+                                                <span className="px-3 py-1 bg-[hsl(var(--success-subtle))] text-[hsl(var(--success-foreground))] text-xs font-bold rounded-lg uppercase tracking-wide">
                                                     {win.window.replace('_', ' ')}
                                                 </span>
                                                 <h4 className="text-lg font-bold text-slate-950">{win.goals[0]}</h4>
@@ -683,7 +683,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                             <div className="grid md:grid-cols-2 gap-4">
                                                 {win.tasks.map((task, k) => (
                                                     <div key={k} className="flex items-start gap-3 p-3 rounded-lg border border-slate-50 bg-slate-50/30 text-sm text-slate-800">
-                                                        <span className="text-emerald-500 mt-1">✓</span>
+                                                        <span className="text-[hsl(var(--cta))] mt-1">✓</span>
                                                         {task}
                                                     </div>
                                                 ))}

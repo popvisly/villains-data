@@ -10,7 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('\n🔍 AI Career Shield - Environment Validator\n');
+console.log('\x1b[36m%s\x1b[0m', 'AI Career Portal Environment Validation...');
 console.log('='.repeat(60));
 
 let hasErrors = false;

@@ -3,6 +3,7 @@
 import { supabaseAdmin } from '@/lib/supabase';
 
 type EventName = string;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EventProperties = Record<string, any>;
 
 export async function logEvent(name: EventName, properties: EventProperties = {}, url?: string) {

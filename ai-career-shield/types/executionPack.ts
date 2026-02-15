@@ -74,9 +74,22 @@ export interface SkillGapMap {
     notes: string[];
 }
 
+export interface ResumeMatch {
+    roleTitle: string;
+    fitScore: number;
+    reasoning: string;
+    criticalGaps: string[];
+    strengths: string[];
+}
+
+export interface MatchResult {
+    matches: ResumeMatch[];
+}
+
 export interface ExecutionPack {
     version: 1;
     projectBriefs: ProjectBrief[];
     skillGapMap: SkillGapMap;
     careerAssets?: CareerAssets;
+    resumeMatches?: ResumeMatch[];
 }

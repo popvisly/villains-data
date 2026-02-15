@@ -9,9 +9,14 @@ module.exports = {
             colors: {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
+                cta: {
+                    DEFAULT: 'hsl(var(--cta))',
+                    foreground: 'hsl(var(--cta-foreground))',
+                }
             },
             fontFamily: {
-                sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                sans: ['var(--font-raleway)', 'var(--font-inter)', 'sans-serif'],
+                serif: ['var(--font-lora)', 'serif'],
             },
         },
     },

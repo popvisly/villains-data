@@ -22,7 +22,7 @@ export function ShareBriefCard({ jobTitle, riskScore, topFactor, titleOverride }
         <div id="share-brief-card" className="p-8 rounded-2xl bg-white border border-slate-200 shadow-xl max-w-md mx-auto overflow-hidden relative group">
             {/* Minimalist Watermark/Branding */}
             <div className="absolute top-4 right-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                AI Career Shield • Audit Brief
+                AI Career Portal • Audit Brief
             </div>
 
             <div className="space-y-6">
@@ -60,7 +60,7 @@ export function ShareBriefCard({ jobTitle, riskScore, topFactor, titleOverride }
                 </div>
 
                 <div className="text-[9px] text-slate-400 mt-4 text-center">
-                    Verify your resilience at aicareershield.com
+                    Verify your resilience at aicareerportal.com
                 </div>
             </div>
         </div>
