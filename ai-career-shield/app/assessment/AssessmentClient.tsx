@@ -444,16 +444,16 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                     Your role
                                 </h3>
                                 <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="col-span-2">
-                                        <label className="block text-sm font-medium mb-2">Current Role / Strategic Focus *</label>
+                                    <div>
+                                        <label className="block text-sm font-bold text-slate-700 mb-2">Current role (or goal role)</label>
                                         <input
                                             type="text"
                                             value={formData.jobTitle}
                                             onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                                            placeholder="e.g., Marketing Manager / Nursing student"
-                                            className="w-full px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
+                                            placeholder="e.g. Senior Product Manager or Lead Designer"
+                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[hsl(var(--primary))]/20 outline-none transition-all"
                                             required
-                                            list="common-jobs"
+                                            autoFocus
                                         />
                                         <datalist id="common-jobs">{COMMON_JOBS.map((job) => <option key={job} value={job} />)}</datalist>
                                     </div>
@@ -549,11 +549,13 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                 <button
                                     type="submit"
                                     disabled={!formData.jobTitle || !formData.industry || formData.skills.length < 1 || isLoading}
-                                    className="w-full py-5 rounded-xl bg-[hsl(var(--cta))] hover:opacity-90 transition font-bold text-lg text-[hsl(var(--cta-foreground))] shadow-lg shadow-emerald-950/20 disabled:opacity-50 disabled:cursor-not-allowed group"
+                                    className="w-full py-5 rounded-2xl bg-[hsl(var(--cta))] hover:opacity-90 transition font-bold text-lg text-[hsl(var(--cta-foreground))] shadow-lg shadow-emerald-950/20 disabled:opacity-50 disabled:cursor-not-allowed group"
                                 >
-                                    Audit Your Role
+                                    Run Strategic Audit
                                 </button>
-                                <p className="text-center text-xs text-slate-600 mt-4">Premium real-time analysis briefing.</p>
+                                <div className="mt-4 text-center">
+                                    <p className="text-xs font-bold text-slate-500 uppercase tracking-tight">Real-time briefing • ~2 minutes • no login</p>
+                                </div>
                             </div>
                         </form>
                     </div>

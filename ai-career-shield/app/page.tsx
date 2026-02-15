@@ -92,7 +92,7 @@ export default function HomePage() {
               Signal, <span className="text-[hsl(var(--primary))]">not slop.</span>
             </h1>
             <p className="mt-8 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl">
-              We turn AI-era noise into a clear diagnosis: what&apos;s being automated, what&apos;s gaining leverage, and what you need to build next. Don&apos;t just apply faster—become irreplaceable.
+              We turn AI-era noise into a clear diagnosis: what&apos;s being automated, what&apos;s gaining leverage, and what you need to build next. Don&apos;t just apply faster—become harder to commoditize.
             </p>
             <ul className="mt-10 space-y-4 text-base text-slate-700">
               {[
@@ -363,7 +363,7 @@ export default function HomePage() {
 
               <p className="text-xs font-bold uppercase tracking-wider text-[hsl(var(--primary))] mb-4">Execution Pack (one-time)</p>
               <div className="flex items-baseline gap-2 mb-6">
-                <h3 className="text-4xl font-bold text-slate-900 font-serif">$19</h3>
+                <h3 className="text-4xl font-bold text-slate-900 font-serif">$39</h3>
                 <span className="text-sm font-semibold text-slate-500">USD</span>
               </div>
 
@@ -447,37 +447,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="px-6 py-24 md:py-32">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative glass-panel rounded-[2.5rem] p-10 md:p-16 overflow-hidden">
-            <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-[hsl(var(--primary))]/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-64 h-64 bg-[hsl(var(--cta))]/10 rounded-full blur-3xl"></div>
-
-            <div className="relative grid gap-10 md:grid-cols-2 md:items-center">
-              <div>
-                <h2 className="text-balance text-4xl font-bold tracking-tight text-slate-900 md:text-5xl font-serif">
-                  Start now. Small moves compound.
-                </h2>
-                <p className="mt-6 text-xl text-slate-600">
-                  Run a 60-second strategic audit and leave with a clear next step today.
-                </p>
-              </div>
-              <div className="md:flex md:justify-end">
-                <Link
-                  href="/assessment"
-                  className="inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-10 py-5 text-xl font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 shadow-xl shadow-emerald-500/20 md:w-auto transition-all hover:scale-[1.02]"
-                >
-                  Audit Your Role
-                  <ArrowRight className="ml-2 h-6 w-6" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5-YEAR REALITY CHECK (Super-short variant) */}
+      {/* 5-YEAR REALITY CHECK + FINAL CTA */}
       <section className="px-6 py-24 bg-white border-t border-slate-100">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
@@ -497,6 +467,18 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+
+          <div className="mt-16 text-center">
+            <Link
+              href="/assessment"
+              className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-10 py-5 text-xl font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 shadow-xl shadow-emerald-500/20 transition-all hover:scale-[1.02]"
+            >
+              Audit Your Role
+              <ArrowRight className="ml-2 h-6 w-6" />
+            </Link>
+            <p className="mt-4 text-sm text-slate-500">~2 minutes • no login required</p>
+          </div>
+
           <div className="mt-10 text-center">
             <p className="text-[10px] text-slate-400 uppercase tracking-widest font-medium italic">
               Not a prediction market—an evidence‑based diagnostic.
