@@ -89,11 +89,10 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-balance text-6xl font-bold tracking-tight text-slate-950 md:text-7xl font-serif">
-              Don&apos;t just apply faster.<br />
-              <span className="text-[hsl(var(--primary))]">Become irreplaceable.</span>
+              Signal, <span className="text-[hsl(var(--primary))]">not slop.</span>
             </h1>
             <p className="mt-8 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl">
-              While others automate generic applications, we audit your role to build a high-leverage resilience roadmap. Get a precise 30/60/90-day execution sequence to stay valuable in the AI-era.
+              We turn AI-era noise into a clear diagnosis: what&apos;s being automated, what&apos;s gaining leverage, and what you need to build next. Don&apos;t just apply faster—become irreplaceable.
             </p>
             <ul className="mt-10 space-y-4 text-base text-slate-700">
               {[
@@ -158,51 +157,41 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* WHAT'S CHANGING (less doom, more clarity) */}
-      <section className="px-6 py-24 md:py-32 bg-white/50 border-y border-slate-100 relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-full w-full max-w-7xl">
-          <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-amber-500/5 blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 h-72 w-72 rounded-full bg-[hsl(var(--primary))]/5 blur-3xl"></div>
-        </div>
+      {/* MARKET SHIFT: Reddit-inspired insights */}
+      <section className="px-6 py-24 md:py-32 bg-slate-50 border-y border-slate-200/60 relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
-            eyebrow="Why this exists"
-            title="Work changes fast. You don’t need panic — you need a plan."
-            subtitle="Automation shifts workflows first. The winning move is to strengthen the parts of your work that grow with change."
+            eyebrow="Market Reality"
+            title="What’s changing in the AI job market"
+            subtitle="Automation made volume meaningless. Differentiation has moved upstream."
           />
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2">
-            <div className="glass-panel rounded-3xl p-8 md:p-10 border-slate-200">
-              <h3 className="text-2xl font-bold text-slate-900 font-serif mb-6">What tends to change first</h3>
-              <ul className="space-y-4 text-base text-slate-600">
-                {[
-                  'Repetitive, rules-based tasks (reports, tickets, scheduling)',
-                  'Work that is screen-only and easy to standardize',
-                  'Roles with weak feedback loops and unclear ownership',
-                ].map((t) => (
-                  <li key={t} className="flex items-start gap-3">
-                    <Zap className="mt-1 h-5 w-5 text-amber-500 shrink-0" />
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="glass-panel rounded-3xl p-8 md:p-10 ring-1 ring-[hsl(var(--primary))]/10 shadow-xl shadow-[hsl(var(--primary))]/5">
-              <h3 className="text-2xl font-bold text-slate-900 font-serif mb-6">What we help you strengthen</h3>
-              <ul className="space-y-4 text-base text-slate-600">
-                {[
-                  'Judgment + prioritisation (what matters, what moves outcomes)',
-                  'Communication + trust (stakeholders, customers, teams)',
-                  'Proof of work (projects, systems, artifacts you can show)',
-                ].map((t) => (
-                  <li key={t} className="flex items-start gap-3">
-                    <Target className="mt-1 h-5 w-5 text-[hsl(var(--primary))] shrink-0" />
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
+            {[
+              {
+                icon: <Zap className="w-6 h-6 text-amber-500" />,
+                title: "Applications are cheap",
+                desc: "Generic volume is at an all-time high. If anyone can apply to 100 jobs in a click, the value of an application drops to zero. You win by being the candidate who understands the strategy, not just the tools."
+              },
+              {
+                icon: <Target className="w-6 h-6 text-[hsl(var(--primary))]" />,
+                title: "Work is being compressed",
+                desc: "AI handles the first-pass 'slop'—the reports, the tickets, the rote execution. Humans are being judged on higher-leverage discretion: judgment, domain ownership, and systems thinking."
+              },
+              {
+                icon: <Lock className="w-6 h-6 text-indigo-500" />,
+                title: "Interviews got stricter",
+                desc: "Hiring teams are spotting GPT-polished answers instantly. Interviews are shifting toward 'failure-mode' probing: what went wrong, what trade-offs did you make, and why was your judgment better than the model?"
+              }
+            ].map((card, i) => (
+              <div key={i} className="glass-panel rounded-3xl p-8 hover:shadow-xl transition-all duration-300">
+                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-900/5">
+                  {card.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 font-serif mb-4">{card.title}</h3>
+                <p className="text-base text-slate-600 leading-relaxed">{card.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -257,6 +246,82 @@ export default function HomePage() {
             >
               Audit Your Role
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* STRATEGIC PROOF: Visual artifact preview */}
+      <section className="px-6 py-24 md:py-32 overflow-hidden bg-white">
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
+            eyebrow="The Output"
+            title="Strategic Proof"
+            subtitle="Generic advice is slop. We provide high-signal artifacts you can actually use."
+          />
+
+          <div className="mt-16 grid gap-10 lg:grid-cols-3">
+            {/* Artifact 1: Resilience Index */}
+            <div className="rounded-[2rem] bg-slate-50 p-8 ring-1 ring-slate-200">
+              <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6 font-serif">A. Resilience Index</p>
+              <div className="flex items-center justify-between mb-8">
+                <div className="text-6xl font-bold text-slate-900 font-serif">74%</div>
+                <div className="text-right">
+                  <div className="text-xs font-bold text-emerald-600 uppercase">Resilient</div>
+                  <div className="text-[10px] text-slate-500">Above average</div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="p-3 rounded-xl bg-white border border-slate-100 italic text-xs text-slate-600">
+                  &ldquo;Judgment + Stakeholder complexity is your moat. Current execution tasks are high-risk.&rdquo;
+                </div>
+                <div className="p-3 rounded-xl bg-white border border-slate-100 italic text-xs text-slate-600">
+                  &ldquo;Drivers: 8.2 Discretion, 4.1 Repetition.&rdquo;
+                </div>
+              </div>
+            </div>
+
+            {/* Artifact 2: Leverage Map */}
+            <div className="rounded-[2rem] bg-indigo-50/50 p-8 ring-1 ring-indigo-100">
+              <p className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6 font-serif">B. Leverage Map</p>
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Commoditizing</div>
+                <div className="text-[10px] font-bold uppercase tracking-tighter text-indigo-500">Compounding</div>
+              </div>
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-2 rounded-lg bg-white/60 text-[10px] text-slate-500 line-through">Status Reports</div>
+                  <div className="p-2 rounded-lg bg-white text-[10px] font-bold text-indigo-700">Vendor Strategy</div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-2 rounded-lg bg-white/60 text-[10px] text-slate-500 line-through">Meeting Agendas</div>
+                  <div className="p-2 rounded-lg bg-white text-[10px] font-bold text-indigo-700">Risk Mitigation</div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-2 rounded-lg bg-white/60 text-[10px] text-slate-500 line-through">Drafting RFPs</div>
+                  <div className="p-2 rounded-lg bg-white text-[10px] font-bold text-indigo-700">Logic Validation</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Artifact 3: Pressure Test */}
+            <div className="rounded-[2rem] bg-emerald-50/50 p-8 ring-1 ring-emerald-100">
+              <p className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-6 font-serif">C. Pressure-Test</p>
+              <div className="space-y-4">
+                <div className="text-xs font-bold text-slate-900">
+                  &ldquo;Tell me about a time you ignored the data to make a better call.&rdquo;
+                </div>
+                <div className="p-4 rounded-2xl bg-white border border-emerald-100">
+                  <p className="text-[10px] text-emerald-800 font-bold mb-2">Targetproof Strategy:</p>
+                  <ul className="space-y-2">
+                    {['Explain the logic-gap in the model', 'Detail the stakeholder trade-off', 'Quantify the averted risk'].map((item, i) => (
+                      <li key={i} className="flex gap-2 text-[10px] text-emerald-700">
+                        <span className="text-emerald-400">✓</span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -454,7 +519,7 @@ export default function HomePage() {
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Strategic 30/60/90 roadmap', 'Personalized skill-gap map', 'AI role matcher (resume scan)', 'Elite LinkedIn + resume assets'].map((item) => (
+                {['Leverage Map (30/60/90 roadmap)', 'Noise Filter (skill-gap analysis)', 'AI role matcher (resume scan)', 'Elite LinkedIn + resume assets'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700 font-medium">
                     <Check className="w-4 h-4 text-emerald-600" /> {item}
                   </li>
@@ -478,7 +543,7 @@ export default function HomePage() {
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Everything in Execution Pack', 'Professional project brief library', 'Unlimited role-specific interview simulations', 'Executive Blueprint PDF (share-ready)'].map((item) => (
+                {['Everything in Execution Pack', 'Professional project brief library', 'Failure-Mode interview simulations', 'Executive Blueprint PDF (share-ready)'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
                     <Check className="w-4 h-4 text-indigo-600" /> {item}
                   </li>

@@ -63,9 +63,9 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
 
                         <div className="flex-1 space-y-4 mb-8">
                             {[
-                                { title: "Strategic 30/60/90 Roadmap", desc: "Concrete execution sequence." },
-                                { title: "Personalized Skill Gap Map", desc: "Precise audit vs target role." },
-                                { title: "AI-Role Matcher", desc: "Scan resume vs 10 frontier roles." },
+                                { title: "Leverage Map (30/60/90)", desc: "Concrete execution sequence." },
+                                { title: "Noise Filter (Skill-gap analysis)", desc: "Precise audit vs target role." },
+                                { title: "AI role matcher", desc: "Scan resume vs 10 frontier roles." },
                                 { title: "Elite Career Assets", desc: "Resume bullets & LinkedIn headline." }
                             ].map((item, i) => (
                                 <div key={i} className="flex gap-3">
@@ -112,7 +112,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                             {[
                                 { title: "Everything in Execution Pack", desc: "All core audit & matching tools." },
                                 { title: "Project brief library", desc: "Professional proof-of-work library." },
-                                { title: "Unlimited interview simulations", desc: "Role-specific high-stakes practice." },
+                                { title: "Failure-Mode interview simulations", desc: "High-stakes practice for backlash prep." },
                                 { title: "Executive Blueprint PDF", desc: "Share-ready strategy briefing." }
                             ].map((item, i) => (
                                 <div key={i} className="flex gap-3">
