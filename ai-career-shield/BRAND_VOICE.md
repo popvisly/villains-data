@@ -1,4 +1,4 @@
-# AI Career Shield - Brand Voice Guide
+# AI Career Portal - Brand Voice Guide
 
 > **North Star:** We turn uncertainty into a next step.
 
@@ -207,7 +207,7 @@ A professional planning tool that helps people understand how AI might reshape t
 
 ## Impact
 
-This voice guide ensures AI Career Shield feels like:
+This voice guide ensures AI Career Portal feels like:
 
 - A professional planning tool (not a panic product)
 - Something you can recommend to students without feeling gross

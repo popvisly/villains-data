@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Icon } from '@/components/ui/Icon';
 import { submitFeedback } from '@/app/actions/feedback';
 import type { FeedbackInput } from '@/types/feedback';
 
@@ -92,7 +93,7 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
         return (
             <div className="mt-12 py-4 px-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <span className="text-lg">✓</span>
+                    <Icon name="check" size={18} className="text-emerald-500" />
                     <span className="text-sm text-gray-300">Thanks for your feedback!</span>
                 </div>
                 <button
@@ -139,7 +140,7 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
                                         setState('expanded');
                                     }}
                                 >
-                                    ★
+                                    <Icon name="star" size={18} fill={(hoverRating || rating) >= star ? 'currentColor' : 'none'} />
                                 </button>
                             ))}
                         </div>
@@ -165,7 +166,7 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
                     onClick={() => setState('collapsed')}
                     className="text-gray-600 hover:text-gray-300 transition-colors text-sm"
                 >
-                    ✕
+                    <Icon name="close" size={20} />
                 </button>
             </div>
 
@@ -184,7 +185,7 @@ export const FeedbackSection: React.FC<FeedbackSectionProps> = ({
                                 onMouseLeave={() => setHoverRating(0)}
                                 onClick={() => setRating(star)}
                             >
-                                ★
+                                <Icon name="star" size={32} fill={(hoverRating || rating) >= star ? 'currentColor' : 'none'} />
                             </button>
                         ))}
                     </div>

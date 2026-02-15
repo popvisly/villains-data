@@ -1,5 +1,5 @@
 +-----------------------------------------------------------------------------------------+
-|  TARGET: AI Career Shield - RECOMMENDED DESIGN SYSTEM                                   |
+|  TARGET: AI Career Portal - RECOMMENDED DESIGN SYSTEM                                   |
 +-----------------------------------------------------------------------------------------+
 |                                                                                          |
 |  PATTERN: Storytelling + Social Proof                                                   |
@@ -27,8 +27,8 @@
 |  TYPOGRAPHY: Lora / Raleway                                                             |
 |     Mood: calm, wellness, health, relaxing, natural, organic                            |
 |     Best For: Health apps, wellness, spa, meditation, yoga, organic brands              |
-|     Google Fonts: https://fonts.google.com/share?selection.family=Lora:wght@400;500;600;700|Raleway:wght@300;400;500;600;700|
-|     CSS Import: @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;50...|
+|     Google Fonts: <https://fonts.google.com/share?selection.family=Lora:wght@400;500;600;700|Raleway:wght@300;400;500;600;700|>
+|     CSS Import: @import url('<https://fonts.googleapis.com/css2?family=Lora:wght@400;50...|>
 |                                                                                          |
 |  KEY EFFECTS:                                                                           |
 |     Improved shadows (softer than flat, clearer than neumorphism), modern (200-300ms),  |

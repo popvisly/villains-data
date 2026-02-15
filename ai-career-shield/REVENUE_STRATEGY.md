@@ -1,4 +1,4 @@
-# AI Career Shield - Path to $10K Monthly Recurring Revenue
+# AI Career Portal - Path to $10K Monthly Recurring Revenue
 
 > **Research Date:** February 2026  
 > **Goal:** Achieve $10,000 MRR through strategic pricing, conversion optimization, and value delivery

@@ -17,24 +17,7 @@ import { trackEvent } from '@/lib/analytics-client';
 import { experimental_useObject as useObject } from 'ai/react';
 import { useExperiment } from '@/hooks/useExperiment';
 import { z } from 'zod';
-import {
-    Briefcase,
-    GraduationCap,
-    BookOpen,
-    Save,
-    Sparkles,
-    ShieldCheck,
-    Rocket,
-    Copy,
-    Scale,
-    Check,
-    ArrowRight,
-    Search,
-    Brain,
-    Shield,
-    Download,
-    Link2
-} from 'lucide-react';
+import { Icon, type IconName } from '@/components/ui/Icon';
 
 
 
@@ -122,10 +105,10 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
         experienceLevel: 'mid',
         enjoys: [],
     });
-    const PERSONAS = [
-        { id: 'professional', label: 'Professional', desc: 'Working or seeking work', icon: Briefcase },
-        { id: 'student', label: 'Student', desc: 'In school or recently graduated', icon: GraduationCap },
-        { id: 'teacher', label: 'Educator', desc: 'Teaching & instruction', icon: BookOpen },
+    const PERSONAS: { id: AssessmentInput['audience'], label: string, desc: string, icon: IconName }[] = [
+        { id: 'professional', label: 'Professional', desc: 'Working or seeking work', icon: 'professional' },
+        { id: 'student', label: 'Student', desc: 'In school or recently graduated', icon: 'student' },
+        { id: 'teacher', label: 'Educator', desc: 'Teaching & instruction', icon: 'educator' },
     ];
     const [skillInput, setSkillInput] = useState('');
     const [result, setResult] = useState<AssessmentResult | null>(null);
@@ -174,6 +157,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
             return;
         }
         if (!startTime) setStartTime(Date.now());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading]); // Removed startTime from deps to prevent loop
 
     useEffect(() => {
@@ -400,7 +384,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                     <div className="mb-8 p-6 bg-[hsl(var(--success-subtle))] border border-[hsl(var(--success-border))] rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-500">
                         <div className="flex items-center gap-4">
                             <span className="p-2 rounded-lg bg-emerald-100 text-emerald-700">
-                                <Save className="w-5 h-5" />
+                                <Icon name="copy" size={20} />
                             </span>
                             <div>
                                 <h3 className="font-bold text-slate-900">Welcome back</h3>
@@ -419,7 +403,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                         <div className="rounded-2xl border border-[hsl(var(--success-border))] bg-[hsl(var(--success-subtle))]/30 p-8 shadow-sm">
                             <div className="flex items-center gap-4 mb-6">
                                 <div className="w-10 h-10 rounded-full bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] flex items-center justify-center animate-pulse">
-                                    <Sparkles className="w-5 h-5" />
+                                    <Icon name="sparkles" size={20} />
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-slate-950">Consulting Analyst briefing...</h3>
@@ -448,9 +432,10 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                 <div className="flex justify-center mt-2">
                                     <button
                                         onClick={() => setStep(2)}
-                                        className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-emerald-600 transition"
+                                        className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-emerald-600 transition flex items-center gap-1.5"
                                     >
-                                        ⚡ Skip to Full Summary
+                                        <Icon name="zap" size={10} />
+                                        Skip to Full Summary
                                     </button>
                                 </div>
 
@@ -460,7 +445,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                         <ul className="space-y-2">
                                             {(streamedObject.immediateActions as string[]).map((a, i) => (
                                                 <li key={i} className="text-sm text-slate-800 flex items-start gap-2">
-                                                    <span className="text-emerald-500 mt-0.5">→</span>
+                                                    <Icon name="arrowRight" size={14} className="text-emerald-500 mt-1" />
                                                     {a}
                                                 </li>
                                             ))}
@@ -493,7 +478,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                                     className={`p-4 rounded-2xl border text-center transition-all ${formData.audience === p.id ? 'bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary))]' : 'bg-white border-slate-200 hover:bg-slate-50'}`}
                                                 >
                                                     <div className="flex justify-center mb-3">
-                                                        <p.icon className={`w-6 h-6 ${formData.audience === p.id ? 'text-[hsl(var(--primary))]' : 'text-slate-400'}`} />
+                                                        <Icon name={p.icon} size={24} className={formData.audience === p.id ? 'text-[hsl(var(--primary))]' : 'text-slate-400'} />
                                                     </div>
                                                     <div className="font-bold text-xs text-slate-900">{p.label}</div>
                                                 </button>
@@ -590,7 +575,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             {formData.skills.map((skill) => (
                                                 <div key={skill} className="px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center gap-2 text-sm">
                                                     <span>{skill}</span>
-                                                    <button type="button" onClick={() => removeSkill(skill)} className="text-red-400 hover:text-white">×</button>
+                                                    <button type="button" onClick={() => removeSkill(skill)} className="text-red-400 hover:text-white">
+                                                        <Icon name="close" size={12} />
+                                                    </button>
                                                 </div>
                                             ))}
                                         </div>
@@ -616,7 +603,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             <div className="pt-4">
                                 {formData.audience === 'teacher' && (
                                     <div className="mb-6 p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-3">
-                                        <Shield className="w-5 h-5 text-slate-400" />
+                                        <Icon name="shield" size={20} className="text-slate-400" />
                                         <p className="text-sm text-slate-700 font-medium">
                                             Strategic Audit focus: Identifying &quot;Mentorship Moats&quot; vs. automatable instruction workflows.
                                         </p>
@@ -655,9 +642,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             trackEvent('share_image_click', { variant: shareCopyVariant });
                                             alert('Feature incoming: Save as Image');
                                         }}
-                                        className="px-4 py-2 text-xs font-bold border border-slate-200 rounded-lg hover:bg-slate-50 transition"
+                                        className="px-4 py-2 text-xs font-bold border border-slate-200 rounded-lg hover:bg-slate-50 transition flex items-center gap-1.5"
                                     >
-                                        <Download className="w-3.5 h-3.5" />
+                                        <Icon name="download" size={14} />
                                         <span>Save Brief as Image</span>
                                     </button>
                                     <button
@@ -667,9 +654,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             navigator.clipboard.writeText(text);
                                             alert('Share text copied to clipboard!');
                                         }}
-                                        className="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition"
+                                        className="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition flex items-center gap-1.5"
                                     >
-                                        <Link2 className="w-3.5 h-3.5" />
+                                        <Icon name="link" size={14} />
                                         <span>Copy Share Link</span>
                                     </button>
                                 </div>
@@ -687,7 +674,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                 <div className="flex items-center justify-between mb-6">
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-full bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] flex items-center justify-center">
-                                            <Rocket className="w-5 h-5" />
+                                            <Icon name="rocket" size={20} />
                                         </div>
                                         <div>
                                             <h3 className="text-xl font-bold text-slate-950">This Week: High‑leverage moves</h3>
@@ -695,7 +682,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                         </div>
                                     </div>
                                     <button onClick={copyAsMarkdown} className="px-4 py-2 rounded-lg text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2">
-                                        <Copy className="w-3.5 h-3.5" />
+                                        <Icon name="copy" size={14} />
                                         <span>Copy brief</span>
                                     </button>
                                 </div>
@@ -713,7 +700,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                         <section className="rounded-2xl border border-[hsl(var(--border))] bg-white p-8">
                             <div className="flex items-center gap-4 mb-8">
                                 <div className="p-3 rounded-xl bg-[hsl(var(--warning-subtle))] text-[hsl(var(--warning-foreground))]">
-                                    <Scale className="w-6 h-6" />
+                                    <Icon name="scale" size={24} />
                                 </div>
                                 <div>
                                     <h2 className="text-2xl font-bold tracking-tight text-slate-950">Resilience Index</h2>
@@ -776,7 +763,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             <div className="grid md:grid-cols-2 gap-4">
                                                 {win.tasks.map((task, k) => (
                                                     <div key={k} className="flex items-start gap-3 p-3 rounded-lg border border-slate-50 bg-slate-50/30 text-sm text-slate-800">
-                                                        <Check className="w-3.5 h-3.5 text-[hsl(var(--cta))] mt-1" />
+                                                        <Icon name="check" size={14} className="text-[hsl(var(--cta))] mt-1" />
                                                         {task}
                                                     </div>
                                                 ))}

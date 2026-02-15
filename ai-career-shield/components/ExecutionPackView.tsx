@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { ExecutionPack, SkillGapMap, ProjectBrief, CareerAssets } from '@/types/executionPack';
 import { ExecutionPackPdfDocument } from '@/components/ExecutionPackPdf';
-import { Lock, FileText, Linkedin, Copy, MessageSquare, Sparkles } from 'lucide-react';
+import { Icon } from '@/components/ui/Icon';
 import { LockedFeature } from '@/components/Paywall/LockedFeature';
 import { InterviewSimulator } from '@/components/InterviewSimulator';
 import { ResumeMatcher } from '@/components/ResumeMatcher';
@@ -17,8 +17,8 @@ function SkillGapTab({ data }: { data: SkillGapMap }) {
     return (
         <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-xl bg-[hsl(var(--success-subtle))] flex items-center justify-center text-xl">
-                    <span>🗺️</span>
+                <div className="w-10 h-10 rounded-xl bg-[hsl(var(--success-subtle))] flex items-center justify-center">
+                    <Icon name="map" size={24} className="text-emerald-600" />
                 </div>
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight text-slate-900">Personalized Skill Gap Map</h2>
@@ -78,7 +78,7 @@ function SkillGapTab({ data }: { data: SkillGapMap }) {
                                     <div className="space-y-1.5">
                                         {seq.outputs.map((out: string, oi: number) => (
                                             <div key={oi} className="flex items-center gap-2 text-[10px] text-slate-600 bg-slate-50 p-1.5 rounded-lg border border-slate-100">
-                                                <span className="text-slate-400">📎</span>
+                                                <Icon name="paperclip" size={12} className="text-slate-400" />
                                                 {out}
                                             </div>
                                         ))}
@@ -177,7 +177,7 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
                     {/* Resume */}
                     <div className="space-y-4">
                         <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900 flex items-center gap-2">
-                            <FileText className="w-4 h-4 text-emerald-600" /> Resume Power Bullets
+                            <Icon name="file" size={16} className="text-emerald-600" /> Resume Power Bullets
                         </h3>
                         <div className="space-y-3">
                             {assets.resumeBullets.map((bullet: string, i: number) => (
@@ -188,7 +188,7 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
                                         className="absolute top-4 right-4 text-slate-400 hover:text-emerald-600 opacity-0 group-hover:opacity-100 transition"
                                         title="Copy to clipboard"
                                     >
-                                        <Copy className="w-4 h-4" />
+                                        <Icon name="copy" size={16} />
                                     </button>
                                 </div>
                             ))}
@@ -199,7 +199,7 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
                     <div className="space-y-6">
                         <div>
                             <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2">
-                                <Linkedin className="w-4 h-4 text-[#0077b5]" /> LinkedIn Headlines
+                                <Icon name="linkedin" size={16} className="text-[#0077b5]" /> LinkedIn Headlines
                             </h3>
                             <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
                                 <p className="text-sm text-slate-700 italic">{assets.linkedIn.headline}</p>
@@ -215,7 +215,7 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
                                     onClick={() => navigator.clipboard.writeText(assets.linkedIn.aboutSection || '')}
                                     className="absolute top-4 right-4 text-slate-400 hover:text-emerald-600 opacity-0 group-hover:opacity-100 transition"
                                 >
-                                    <Copy className="w-4 h-4" />
+                                    <Icon name="copy" size={16} />
                                 </button>
                             </div>
                         </div>
@@ -255,7 +255,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                             }`}
                     >
                         Skill Map
-                        {!isPaid && <Lock className="w-3 h-3 mb-0.5" />}
+                        {!isPaid && <Icon name="locked" size={12} className="mb-0.5" />}
                         {activeTab === 'skills' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
@@ -266,7 +266,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                             }`}
                     >
                         Portfolio Briefs
-                        {(!isPaid || tier === 'execution') && <Lock className="w-3 h-3 mb-0.5 text-amber-500" />}
+                        {(!isPaid || tier === 'execution') && <Icon name="locked" size={12} className="mb-0.5 text-amber-500" />}
                         {activeTab === 'briefs' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
@@ -277,7 +277,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                             }`}
                     >
                         Career Assets
-                        {!isPaid && <Lock className="w-3 h-3 mb-0.5" />}
+                        {!isPaid && <Icon name="locked" size={12} className="mb-0.5" />}
                         {activeTab === 'assets' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
@@ -288,7 +288,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                             }`}
                     >
                         Role Matcher
-                        <Sparkles className="w-3 h-3 mb-0.5 text-indigo-500" />
+                        <Icon name="sparkles" size={12} className="mb-0.5 text-indigo-500" />
                         {activeTab === 'matcher' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
@@ -299,7 +299,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                             }`}
                     >
                         Interview Pack
-                        {(!isPaid || tier === 'execution') && <Lock className="w-3 h-3 mb-0.5 text-amber-500" />}
+                        {(!isPaid || tier === 'execution') && <Icon name="locked" size={12} className="mb-0.5 text-amber-500" />}
                         {activeTab === 'interview' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
@@ -353,7 +353,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                         <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
                             <div className="flex items-center gap-3 mb-6">
                                 <div className="p-2 bg-indigo-50 rounded-lg">
-                                    <MessageSquare className="w-5 h-5 text-indigo-600" />
+                                    <Icon name="message" size={20} className="text-indigo-600" />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-slate-950">Failure-Mode Interview Simulator</h3>

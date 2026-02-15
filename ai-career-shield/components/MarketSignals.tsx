@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from '@/components/ui/Icon';
 import type { MarketSignalData } from '@/types';
 
 interface MarketSignalsProps {
@@ -9,12 +10,12 @@ export function MarketSignals({ data }: MarketSignalsProps) {
     return (
         <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <span className="text-6xl">📈</span>
+                <Icon name="trending" size={64} />
             </div>
 
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-emerald-600/10 border border-emerald-200 flex items-center justify-center text-xl">
-                    <span>📊</span>
+                <div className="w-10 h-10 rounded-full bg-emerald-600/10 border border-emerald-200 flex items-center justify-center">
+                    <Icon name="chart" size={20} className="text-emerald-600" />
                 </div>
                 <div>
                     <h3 className="text-xl font-bold text-slate-950">Global Market Signals</h3>

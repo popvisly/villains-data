@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { Icon } from '@/components/ui/Icon';
 
 export default function Error({
     error,
@@ -20,7 +21,7 @@ export default function Error({
         <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white p-6">
             <div className="max-w-md w-full glass-panel p-8 rounded-2xl border border-red-500/30 text-center">
                 <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-3xl">⚠️</span>
+                    <Icon name="warning" size={32} className="text-red-500" />
                 </div>
 
                 <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>

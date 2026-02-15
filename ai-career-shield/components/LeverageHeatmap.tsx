@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, Zap, HelpCircle } from 'lucide-react';
+import { Icon } from '@/components/ui/Icon';
 
 interface HeatmapCell {
     label: string;
@@ -19,10 +19,10 @@ export const LeverageHeatmap: React.FC<{ cells: HeatmapCell[] }> = ({ cells }) =
                 </div>
                 <div className="flex gap-4">
                     <div className="flex items-center gap-2 text-[10px] font-bold text-red-600 uppercase">
-                        <Zap className="w-3 h-3" /> Melting
+                        <Icon name="zap" size={12} /> Melting
                     </div>
                     <div className="flex items-center gap-2 text-[10px] font-bold text-emerald-600 uppercase">
-                        <TrendingUp className="w-3 h-3" /> Compounding
+                        <Icon name="trending" size={12} /> Compounding
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ export const LeverageHeatmap: React.FC<{ cells: HeatmapCell[] }> = ({ cells }) =
                     >
                         <div className="flex justify-between items-start mb-2">
                             <span className="text-xs font-bold text-slate-900">{cell.label}</span>
-                            <HelpCircle className="w-3 h-3 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <Icon name="info" size={12} className="text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
 
                         <div className="flex gap-1 h-1 bg-slate-200 rounded-full overflow-hidden mt-4">

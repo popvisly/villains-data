@@ -1,4 +1,4 @@
-# AI Career Shield - Phase 2 Product Evolution
+# AI Career Portal - Phase 2 Product Evolution
 
 > **Guiding Principle:** "Monthly is for progress + updates; one-time is for the roadmap."
 
@@ -6,7 +6,7 @@
 
 ## Overview
 
-Phase 2 transforms AI Career Shield from a one-time assessment into a subscription product with recurring value through progress tracking, weekly updates, and personalized guidance.
+Phase 2 transforms AI Career Portal from a one-time assessment into a subscription product with recurring value through progress tracking, weekly updates, and personalized guidance.
 
 ---
 

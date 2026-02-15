@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Sparkles, TrendingUp, ArrowRight } from 'lucide-react';
+import { Icon } from '@/components/ui/Icon';
 
 import { FRONTIER_ROLES } from '@/data/frontierRoles';
 
@@ -39,7 +39,7 @@ export function AIJobOfTheDay() {
                 <div className="px-5 py-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <div className="p-1.5 rounded-md bg-[hsl(var(--cta))]/10 text-[hsl(var(--cta))]">
-                            <Sparkles className="w-4 h-4" />
+                            <Icon name="sparkles" size={16} />
                         </div>
                         <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Analyst Briefing</span>
                     </div>
@@ -77,7 +77,7 @@ export function AIJobOfTheDay() {
                             </span>
                         ))}
                         <span className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-[11px] font-bold flex items-center gap-1 border border-emerald-100">
-                            <TrendingUp className="w-3 h-3" />
+                            <Icon name="trending" size={12} />
                             {role.growth}
                         </span>
                     </div>
@@ -88,7 +88,7 @@ export function AIJobOfTheDay() {
                         className="flex items-center justify-center w-full py-3 rounded-xl bg-slate-900 text-white text-sm font-bold hover:bg-[hsl(var(--primary))] transition-all group-hover:shadow-md group-hover:translate-y-[-1px]"
                     >
                         Audit Your Role
-                        <ArrowRight className="w-4 h-4 ml-2 opacity-80" />
+                        <Icon name="arrowRight" size={16} className="ml-2 opacity-80" />
                     </Link>
                 </div>
             </div>

@@ -84,7 +84,18 @@ export async function POST(req: NextRequest) {
              - Be urgent but constructive.
              - Ground the 30/60/90 plan in the starterPlan and proofProjects of selected roles.
              - Generate 4-6 heatmap cells that specifically contrast "Melting" (repeatable execution) with "Compounding" (high-stakes judgment).
-             - ALWAYS generate the "teaserNarrative" to provide a free preview of the execution pack.`,
+             - ALWAYS generate the "teaserNarrative" to provide a free preview of the execution pack.
+             
+             TEASER NARRATIVE GUIDELINES:
+             - positioningThesis: Must be an executive-grade statement about the CANDIDATE'S unique leverage (e.g. "I lead ambiguity-to-shipping execution across X, with strong judgment in Y..."), NOT a generic commentary on AI trends.
+             - proofPoints: Frame as candidate-facing claims. Use placeholder metrics for validation (e.g., "Led X to reduce Y by [Z]%"). 
+                RULE: Set 'source: user' ONLY if literal evidence exists in user inputs (role/skills/experience). If inferred, set 'source: inferred'. 
+                RULE: 'evidence' field MUST contain the literal fragment from user input if 'source: user'.
+             - teaserInterviewQuestion: Force a "failure-mode" or "tradeoff" pattern. Use one of these structures: 
+                1. "Tell me about a time an AI-assisted recommendation was wrong—what did you do?" 
+                2. "What's your escalation path when AI output conflicts with stakeholder direction?" 
+                3. "What metric would tell you the AI feature improved decision quality, not just speed?"
+             - strongAnswerBullets: MUST include (1) Evaluation baseline / success criteria, (2) Guardrail or rollback plan, and (3) Stakeholder tradeoff consideration.`,
         prompt: `Analyze this context: 
              Persona: ${audience || 'Professional'}
              Subject/Title: ${jobTitle}

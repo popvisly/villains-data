@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Lock, ChevronRight, Loader2 } from 'lucide-react';
+import { Icon } from '@/components/ui/Icon';
 import { getInterviewAllowance, consumeInterviewTurn } from '@/app/actions/interview';
 
 interface InterviewSimulatorProps {
@@ -103,7 +103,7 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
   if (allowance.loading) {
     return (
       <div className="flex h-48 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50">
-        <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
+        <Icon name="loader" size={24} className="animate-spin text-slate-400" />
       </div>
     );
   }
@@ -113,7 +113,7 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
     return (
       <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 shadow-sm text-center">
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-200 text-slate-500">
-          <Lock className="h-5 w-5" />
+          <Icon name="locked" size={20} />
         </div>
         <h3 className="text-lg font-bold text-slate-900">
           {allowance.isPaid ? 'Session complete' : 'Free preview complete'}
@@ -133,7 +133,7 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
               className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 transition"
             >
               Unlock the Execution Pack
-              <ChevronRight className="h-4 w-4" />
+              <Icon name="chevronDown" size={16} className="-rotate-90" />
             </button>
           </div>
         )}
@@ -189,13 +189,13 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
         >
           {processing ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Icon name="loader" size={16} className="animate-spin" />
               Processing...
             </>
           ) : (
             <>
               Next turn
-              <ChevronRight className="h-4 w-4" />
+              <Icon name="chevronDown" size={16} className="-rotate-90" />
             </>
           )}
         </button>

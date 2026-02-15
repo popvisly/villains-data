@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { AIJobOfTheDay } from '@/components/AIJobOfTheDay';
 import { TrendingRoles } from '@/components/TrendingRoles';
-import { CheckCircle2, Zap, Sparkles, ArrowRight, TrendingUp, Target, Lock, Check } from 'lucide-react';
+import { Icon } from '@/components/ui/Icon';
 import { trackEvent } from '@/lib/analytics-client';
 
 function Nav() {
@@ -12,7 +12,7 @@ function Nav() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <div className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[hsl(var(--primary))] shadow-sm shadow-indigo-500/20">
-            <Sparkles className="h-5 w-5 text-[hsl(var(--primary-foreground))]" />
+            <Icon name="sparkles" size={20} className="text-[hsl(var(--primary-foreground))]" />
           </div>
           <span className="text-lg font-bold tracking-tight text-slate-900">AI Career Portal</span>
         </div>
@@ -102,7 +102,7 @@ export default function HomePage() {
               ].map((t) => (
                 <li key={t} className="flex items-start gap-3 group">
                   <div className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] group-hover:bg-[hsl(var(--primary))] group-hover:text-white transition-colors">
-                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    <Icon name="checkCircle" size={14} />
                   </div>
                   <span className="group-hover:text-slate-900 transition-colors">{t}</span>
                 </li>
@@ -115,16 +115,16 @@ export default function HomePage() {
                 className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-8 py-4 text-lg font-bold text-[hsl(var(--cta-foreground))] shadow-lg shadow-emerald-500/25 hover:opacity-90 hover:translate-y-[-1px] hover:shadow-xl transition-all"
               >
                 Run Strategic Audit
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <Icon name="arrowRight" size={20} className="ml-2" />
               </Link>
               <Link href="#preview" className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-600 hover:text-[hsl(var(--primary))] transition-colors group">
                 See what you get
-                <span className="group-hover:translate-x-1 transition-transform inline-block ml-1">→</span>
+                <Icon name="arrowRight" size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             <p className="mt-6 text-sm text-slate-500 flex items-center gap-2">
-              <Lock className="w-4 h-4 text-slate-400" />
+              <Icon name="locked" size={16} className="text-slate-400" />
               No credit card required for free roadmap
             </p>
           </div>
@@ -149,7 +149,7 @@ export default function HomePage() {
             {/* Floating Badge */}
             <div className="absolute right-0 top-16 z-30 animate-bounce duration-[3000ms]">
               <div className="flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 shadow-lg ring-1 ring-slate-900/5 backdrop-blur">
-                <TrendingUp className="h-4 w-4 text-emerald-500" />
+                <Icon name="trending" size={16} className="text-emerald-500" />
                 <span className="text-xs font-bold text-slate-700">Trending Role</span>
               </div>
             </div>
@@ -169,17 +169,17 @@ export default function HomePage() {
           <div className="mt-16 grid gap-8 md:grid-cols-3">
             {[
               {
-                icon: <Zap className="w-6 h-6 text-amber-500" />,
+                icon: <Icon name="zap" size={24} className="text-amber-500" />,
                 title: "Applications are cheap",
                 desc: "Generic volume is at an all-time high. If anyone can apply to 100 jobs in a click, the value of an application drops to zero. You win by being the candidate who understands the strategy, not just the tools."
               },
               {
-                icon: <Target className="w-6 h-6 text-[hsl(var(--primary))]" />,
+                icon: <Icon name="audit" size={24} className="text-[hsl(var(--primary))]" />,
                 title: "Work is being compressed",
                 desc: "AI handles the first-pass 'slop'—the reports, the tickets, the rote execution. Humans are being judged on higher-leverage discretion: judgment, domain ownership, and systems thinking."
               },
               {
-                icon: <Lock className="w-6 h-6 text-indigo-500" />,
+                icon: <Icon name="locked" size={24} className="text-indigo-500" />,
                 title: "Interviews got stricter",
                 desc: "Hiring teams are spotting GPT-polished answers instantly. Interviews are shifting toward 'failure-mode' probing: what went wrong, what trade-offs did you make, and why was your judgment better than the model?"
               }
@@ -315,7 +315,7 @@ export default function HomePage() {
                   <ul className="space-y-2">
                     {['Explain the logic-gap in the model', 'Detail the stakeholder trade-off', 'Quantify the averted risk'].map((item, i) => (
                       <li key={i} className="flex gap-2 text-[10px] text-emerald-700">
-                        <Check className="w-3 h-3 text-emerald-400" /> {item}
+                        <Icon name="check" size={12} className="text-emerald-400" /> {item}
                       </li>
                     ))}
                   </ul>
@@ -347,7 +347,7 @@ export default function HomePage() {
                   'Interview Simulator preview (3 turns)',
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-1 h-5 w-5 text-slate-400 shrink-0" />
+                    <Icon name="checkCircle" size={20} className="text-slate-400 mt-1" />
                     <span>{t}</span>
                   </li>
                 ))}
@@ -357,7 +357,7 @@ export default function HomePage() {
             <div className="relative glass-panel rounded-3xl p-8 md:p-10 border-[hsl(var(--primary))]/20 ring-4 ring-[hsl(var(--primary))]/5">
               <div className="absolute top-0 right-0 p-6">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[hsl(var(--primary))]/10 px-3 py-1 text-xs font-bold text-[hsl(var(--primary))] uppercase tracking-wide">
-                  <Zap className="w-3 h-3" /> Most Popular
+                  <Icon name="zap" size={12} /> Most Popular
                 </span>
               </div>
 
@@ -375,7 +375,7 @@ export default function HomePage() {
                   'Interview Simulator (10 turns per session)',
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-1 h-5 w-5 text-[hsl(var(--primary))] shrink-0" />
+                    <Icon name="checkCircle" size={20} className="text-[hsl(var(--primary))] mt-1" />
                     <span>{t}</span>
                   </li>
                 ))}
@@ -436,8 +436,8 @@ export default function HomePage() {
               <details key={item.q} className="group glass-panel rounded-2xl p-6 open:ring-1 open:ring-[hsl(var(--primary))]/20">
                 <summary className="cursor-pointer list-none flex items-center justify-between text-lg font-bold text-slate-900 group-hover:text-[hsl(var(--primary))] transition-colors">
                   {item.q}
-                  <span className="ml-4 flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-500 group-open:-rotate-180 transition-transform">
-                    ↓
+                  <span className="ml-4 flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-500 group-open:rotate-180 transition-transform">
+                    <Icon name="chevronDown" size={16} />
                   </span>
                 </summary>
                 <p className="mt-4 text-base text-slate-600 leading-relaxed pr-8">{item.a}</p>
@@ -474,7 +474,7 @@ export default function HomePage() {
               className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-10 py-5 text-xl font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 shadow-xl shadow-emerald-500/20 transition-all hover:scale-[1.02]"
             >
               Run Strategic Audit
-              <ArrowRight className="ml-2 h-6 w-6" />
+              <Icon name="arrowRight" size={24} className="ml-2" />
             </Link>
             <p className="mt-4 text-sm text-slate-500">~2 minutes • no login required</p>
           </div>
@@ -509,7 +509,7 @@ export default function HomePage() {
               <ul className="space-y-3 mb-8 flex-1">
                 {['Resilience Index score', 'Top 3 automation drivers', 'Immediate 7-day moves'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
-                    <Check className="w-4 h-4 text-emerald-600" /> {item}
+                    <Icon name="check" size={16} className="text-emerald-600" /> {item}
                   </li>
                 ))}
               </ul>
@@ -535,7 +535,7 @@ export default function HomePage() {
               <ul className="space-y-3 mb-8 flex-1">
                 {['Leverage Map (30/60/90 roadmap)', 'Noise Filter (skill-gap analysis)', 'AI role matcher (resume scan)', 'Elite LinkedIn + resume assets'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700 font-medium">
-                    <Check className="w-4 h-4 text-emerald-600" /> {item}
+                    <Icon name="check" size={16} className="text-emerald-600" /> {item}
                   </li>
                 ))}
               </ul>
@@ -565,7 +565,7 @@ export default function HomePage() {
                   'Everything in Execution Pack',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
-                    <Check className="w-4 h-4 text-indigo-600" /> {item}
+                    <Icon name="check" size={16} className="text-indigo-600" /> {item}
                   </li>
                 ))}
               </ul>
@@ -593,7 +593,7 @@ export default function HomePage() {
       <footer className="py-20 px-6 border-t border-slate-200 bg-slate-50">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
           <div className="flex items-center gap-2 font-bold text-slate-900">
-            <Sparkles className="w-5 h-5 text-[hsl(var(--primary))]" />
+            <Icon name="sparkles" size={20} className="text-[hsl(var(--primary))]" />
             AI Career Portal
           </div>
           <div className="flex gap-8">

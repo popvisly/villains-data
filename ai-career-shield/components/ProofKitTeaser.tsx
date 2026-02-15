@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, ArrowRight, MessageSquare, Sparkles } from 'lucide-react';
+import { Icon } from '@/components/ui/Icon';
 import type { ExecutiveNarrative } from '@/types/executionPack';
 
 interface ProofKitTeaserProps {
@@ -12,11 +12,11 @@ export function ProofKitTeaser({ narrative, onUpgrade }: ProofKitTeaserProps) {
     const interview = narrative.teaserInterviewQuestion;
 
     return (
-        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm mb-8">
+        <div data-testid="proofkit-teaser" className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm mb-8">
             {/* Header */}
             <div className="bg-slate-900 px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-emerald-400" />
+                    <Icon name="sparkles" size={16} className="text-emerald-400" />
                     <span className="text-xs font-bold uppercase tracking-widest text-white">Free Preview: Proof Kit (Excerpt)</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
@@ -29,7 +29,7 @@ export function ProofKitTeaser({ narrative, onUpgrade }: ProofKitTeaserProps) {
                 {/* Thesis Section */}
                 <section>
                     <div className="flex items-center gap-2 mb-3">
-                        <ShieldCheck className="w-4 h-4 text-slate-400" />
+                        <Icon name="shield" size={16} className="text-slate-400" />
                         <span className="text-xs font-bold uppercase tracking-tight text-slate-500">Positioning Thesis</span>
                     </div>
                     <p className="text-xl font-serif font-bold text-slate-950 leading-snug">
@@ -61,7 +61,7 @@ export function ProofKitTeaser({ narrative, onUpgrade }: ProofKitTeaserProps) {
                 {interview && (
                     <section>
                         <div className="flex items-center gap-2 mb-4">
-                            <MessageSquare className="w-4 h-4 text-slate-400" />
+                            <Icon name="message" size={16} className="text-slate-400" />
                             <span className="text-xs font-bold uppercase tracking-tight text-slate-500">Interview Pack Preview</span>
                         </div>
                         <div className="space-y-4">
@@ -94,7 +94,7 @@ export function ProofKitTeaser({ narrative, onUpgrade }: ProofKitTeaserProps) {
                         className="w-full py-4 rounded-xl bg-slate-950 text-white font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition shadow-lg shadow-slate-200 group"
                     >
                         Unlock Executive License
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        <Icon name="arrowRight" size={16} className="transition-transform group-hover:translate-x-1" />
                     </button>
                 </div>
             </div>

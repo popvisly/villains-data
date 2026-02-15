@@ -1,4 +1,4 @@
-# AI Career Shield - Testing Guide
+# AI Career Portal - Testing Guide
 
 ## Quick Start
 

@@ -1,4 +1,4 @@
-# AI Career Shield - Developer Quick Reference
+# AI Career Portal - Developer Quick Reference
 
 ## Quick Start
 

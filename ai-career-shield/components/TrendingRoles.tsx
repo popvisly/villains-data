@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { TrendingUp, X, Info } from 'lucide-react';
+import { Icon } from '@/components/ui/Icon';
 import { FRONTIER_ROLES } from '@/data/frontierRoles';
 
 export function TrendingRoles() {
@@ -27,7 +27,7 @@ export function TrendingRoles() {
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                     <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
-                        <TrendingUp className="w-4 h-4" />
+                        <Icon name="trending" size={16} />
                     </div>
                     <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Fastest Growing</h3>
                 </div>
@@ -54,7 +54,7 @@ export function TrendingRoles() {
                                 </div>
                             </div>
                         </div>
-                        <Info className="w-3 h-3 text-slate-300 group-hover:text-emerald-500 opacity-0 group-hover:opacity-100 transition-all" />
+                        <Icon name="info" size={12} className="text-slate-300 group-hover:text-emerald-500 opacity-0 group-hover:opacity-100 transition-all" />
                     </button>
                 ))}
             </div>
@@ -91,7 +91,7 @@ export function TrendingRoles() {
                                 onClick={() => setSelectedRole(null)}
                                 className="p-1 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
                             >
-                                <X className="w-5 h-5" />
+                                <Icon name="close" size={20} />
                             </button>
                         </div>
 
