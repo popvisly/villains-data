@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { AIJobOfTheDay } from '@/components/AIJobOfTheDay';
 import { TrendingRoles } from '@/components/TrendingRoles';
