@@ -26,7 +26,7 @@ function Nav() {
             href="/assessment"
             className="rounded-xl bg-[hsl(var(--primary))] px-4 py-2 font-semibold text-[hsl(var(--primary-foreground))] hover:opacity-90"
           >
-            Run the diagnostic
+            Audit Your Role
           </Link>
         </nav>
 
@@ -68,15 +68,15 @@ export default function HomePage() {
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-3 py-1 text-xs text-slate-700">
               <span className="h-2 w-2 rounded-full bg-[hsl(var(--primary))]" />
-Free diagnostic • ~2 minutes • no login
+              Free audit • ~2 minutes • no login
             </div>
 
             <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">
-              A career diagnostic built for AI-era workflows.
+              A strategic workflow audit built for the AI‑era.
             </h1>
 
             <p className="mt-4 text-pretty text-base leading-relaxed text-slate-700 md:text-lg">
-              Get a Career Readiness Score, the drivers behind it, and a 30/60/90 execution roadmap you can run this quarter.
+              Generate an Executive Resilience Roadmap, including precise risk drivers and a 30/60/90 execution sequence.
             </p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-800 md:text-base">
@@ -97,7 +97,7 @@ Free diagnostic • ~2 minutes • no login
                 href="/assessment"
                 className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-3 text-base font-semibold text-[hsl(var(--primary-foreground))] shadow-sm hover:opacity-90"
               >
-                Run the diagnostic
+                Audit Your Role
               </Link>
               <Link href="#preview" className="text-sm font-semibold text-slate-700 hover:text-slate-950">
                 See what you get →
@@ -116,7 +116,7 @@ Free diagnostic • ~2 minutes • no login
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Preview</p>
-                  <p className="text-lg font-semibold text-slate-900">Career Readiness Scorecard</p>
+                  <p className="text-lg font-semibold text-slate-900">Resilience Executive Brief</p>
                 </div>
                 <div className="rounded-full bg-[hsl(var(--primary))]/10 px-3 py-1 text-xs font-semibold text-[hsl(var(--primary))]">
                   Example
@@ -127,10 +127,10 @@ Free diagnostic • ~2 minutes • no login
                 <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4">
                   <div className="flex items-end justify-between">
                     <div>
-                      <p className="text-xs font-semibold text-slate-500">Career Readiness Score</p>
+                      <p className="text-xs font-semibold text-slate-500">Resilience Index</p>
                       <p className="mt-1 text-3xl font-semibold tracking-tight text-slate-950">74</p>
                     </div>
-                    <p className="text-xs text-slate-600">Change pressure: medium</p>
+                    <p className="text-xs text-slate-600">Resilience Gap: Moderate</p>
                   </div>
                   <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
                     <div className="rounded-xl bg-[hsl(var(--background))] p-3">
@@ -221,7 +221,7 @@ Free diagnostic • ~2 minutes • no login
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             title="How it works"
-            subtitle="A short diagnostic → a scorecard → a 30/60/90 execution roadmap."
+            subtitle="A strategic audit → a Resilience Index → a 30/60/90 execution sequence."
           />
 
           <div className="mx-auto mt-10 grid max-w-4xl gap-4">
@@ -233,13 +233,13 @@ Free diagnostic • ~2 minutes • no login
               },
               {
                 step: '2',
-                title: 'Get the scorecard (with drivers)',
-                desc: 'We show what moved your score so you can sanity‑check it.',
+                title: 'Access the resilience index (with drivers)',
+                desc: 'We show what moved your index so you can sanity‑check it.',
               },
               {
                 step: '3',
                 title: 'Run a 30/60/90 execution roadmap',
-                desc: 'Small moves, real outputs. The plan is designed to be shippable.',
+                desc: 'Small moves, real outputs. The sequence is designed to be shippable.',
               },
             ].map((s) => (
               <div key={s.step} className="glass-panel rounded-3xl p-6">
@@ -261,7 +261,7 @@ Free diagnostic • ~2 minutes • no login
               href="/assessment"
               className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-3 text-base font-semibold text-[hsl(var(--primary-foreground))] hover:opacity-90"
             >
-              Run the diagnostic
+              Audit Your Role
             </Link>
           </div>
         </div>
@@ -279,10 +279,10 @@ Free diagnostic • ~2 minutes • no login
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             <div className="glass-panel rounded-3xl p-6">
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Free</p>
-              <h3 className="mt-2 text-xl font-semibold text-slate-900">Scorecard + roadmap</h3>
+              <h3 className="mt-2 text-xl font-semibold text-slate-900">Brief + sequence</h3>
               <ul className="mt-4 space-y-3 text-sm text-slate-700">
                 {[
-                  'Career Readiness Score + key drivers',
+                  'Resilience Index + key drivers',
                   '30/60/90 execution roadmap',
                   'Next‑best paths (3–5)',
                   'Interview Simulator preview (3 turns)',
@@ -319,7 +319,7 @@ Free diagnostic • ~2 minutes • no login
                 href="/assessment"
                 className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-3 text-base font-semibold text-[hsl(var(--primary-foreground))] hover:opacity-90"
               >
-                Run the diagnostic
+                Audit Your Role
               </Link>
               <p className="mt-3 text-center text-xs text-slate-600">Secure checkout via Stripe</p>
             </div>
@@ -335,8 +335,8 @@ Free diagnostic • ~2 minutes • no login
           <div className="mt-10 space-y-4">
             {[
               {
-                q: 'How accurate is the Career Readiness Score?',
-                a: 'Treat it as a scorecard, not a prophecy. We score the shape of your work (repeatability, judgment, stakeholder surface area, accountability) against today’s automation capabilities—and we show the drivers so you can validate the result.',
+                q: 'How accurate is the Resilience Index?',
+                a: 'Treat it as a strategic analysis, not a prophecy. We evaluate the architecture of your workflow (repeatability, cognitive surface area, stakeholder complexity) against current AI capabilities—and we expose the drivers for professional validation.',
               },
               {
                 q: 'Do you store my data?',
@@ -372,7 +372,7 @@ Free diagnostic • ~2 minutes • no login
                   Start now. Small moves compound.
                 </h2>
                 <p className="mt-3 text-base text-slate-700">
-                  Run a 60-second diagnostic and leave with a clear next step today.
+                  Run a 60-second strategic audit and leave with a clear next step today.
                 </p>
               </div>
               <div className="md:flex md:justify-end">
@@ -380,7 +380,7 @@ Free diagnostic • ~2 minutes • no login
                   href="/assessment"
                   className="inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-3 text-base font-semibold text-[hsl(var(--primary-foreground))] hover:opacity-90 md:w-auto"
                 >
-                  Run the diagnostic
+                  Audit Your Role
                 </Link>
               </div>
             </div>

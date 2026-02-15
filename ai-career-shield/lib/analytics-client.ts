@@ -8,7 +8,14 @@ type EventName =
     | 'checkout_start'
     | 'payment_success_view'
     | 'assessment_resume'
-    | 'assessment_reset';
+    | 'assessment_reset'
+    | 'streaming_start'
+    | 'streaming_token_first'
+    | 'streaming_factor_first'
+    | 'streaming_insight_first'
+    | 'streaming_complete'
+    | 'share_image_click'
+    | 'share_link_click';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 

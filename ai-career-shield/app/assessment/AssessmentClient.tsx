@@ -3,16 +3,18 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { pickMarketIntelSignals, type MarketIntelTrack } from '@/data/marketIntel';
-import { assessJobRisk, generateExecutionPack } from '@/app/actions/assessment';
+import { generateExecutionPack } from '@/app/actions/assessment';
 import type { AssessmentInput, AssessmentResult } from '@/types';
-import { MarketSignals } from '@/components/MarketSignals';
+import { ShareBriefCard } from '@/components/ShareBriefCard';
 import { UpsellCard } from '@/components/UpsellCard';
 import { ExecutionPackView } from '@/components/ExecutionPackView';
 import { InterviewSimulator } from '@/components/InterviewSimulator';
 import { FeedbackSection } from '@/components/FeedbackSection';
 import type { ExecutionPack } from '@/types/executionPack';
 import { trackEvent } from '@/lib/analytics-client';
+import { experimental_useObject as useObject } from 'ai/react';
+import { useExperiment } from '@/hooks/useExperiment';
+import { z } from 'zod';
 
 
 
@@ -42,17 +44,6 @@ const INDUSTRIES = [
     'Other',
 ];
 
-const TOPIC_LABELS: Record<string, string> = {
-    'ai-work': 'AI & Work',
-    'career-planning': 'Career Planning',
-    'skills-learning': 'Skills & Learning',
-    'automation-ops': 'Automation & Ops',
-    'governance-safety': 'Governance & Safety',
-    'leadership-collaboration': 'Leadership',
-    'creative-production': 'Creative AI',
-    'research-frontier': 'Frontier HR',
-};
-
 const GOALS = [
     { id: 'choose_direction', label: 'Explore my best options', desc: 'I want clarity on what to do next' },
     { id: 'future_proof_role', label: 'Strengthen my current path', desc: 'I want to stay valuable as the work changes' },
@@ -65,10 +56,34 @@ const INTERESTS = [
     'Research', 'Operations/Process'
 ];
 
+// Define the schema for useObject
+const assessmentSchema = z.object({
+    riskScore: z.number().min(0).max(100),
+    confidence: z.enum(['low', 'medium', 'high']),
+    factors: z.array(z.object({
+        name: z.string(),
+        score: z.number().min(0).max(100),
+        evidence: z.string(),
+        whyItMatters: z.string(),
+        mitigation: z.array(z.string())
+    })),
+    roleAdjacencies: z.array(z.object({
+        roleId: z.string(),
+        rationale: z.string(),
+        transferableSkills: z.array(z.string()),
+        gapSkills: z.array(z.string())
+    })),
+    immediateActions: z.array(z.string()),
+    plan30_60_90: z.array(z.object({
+        window: z.enum(['30_days', '60_days', '90_days']),
+        goals: z.array(z.string()),
+        tasks: z.array(z.string())
+    }))
+});
+
 export default function AssessmentPage({ initialHasAccess = false }: { initialHasAccess?: boolean }) {
     const router = useRouter();
-    const [step, setStep] = useState(1); // 1 = Input, 2 = Results (Merged old 1,2,3 -> 1)
-    const [isLoading, setIsLoading] = useState(false);
+    const [step, setStep] = useState(1);
     const [formData, setFormData] = useState<AssessmentInput>({
         jobTitle: '',
         industry: '',
@@ -89,31 +104,95 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
     const LS_KEY = 'ai-career-shield:assessment-state:v1';
 
-    const marketTrack: MarketIntelTrack =
-        formData.goal === 'choose_direction' ? 'explore' : formData.goal === 'plan_pivot' ? 'pivot' : 'strengthen';
-    const marketIntel = pickMarketIntelSignals(marketTrack, 3);
-
-    // Feature Flag
     const ENABLE_EXECUTION_PACK = process.env.NEXT_PUBLIC_ENABLE_EXECUTION_PACK === 'true' || true;
+
+    const [startTime, setStartTime] = useState<number | null>(null);
+    const [hasEmittedFirstToken, setHasEmittedFirstToken] = useState(false);
+    const [hasEmittedFirstFactor, setHasEmittedFirstFactor] = useState(false);
+    const [displayedFactors, setDisplayedFactors] = useState<AssessmentResult['factors']>([]);
+    const [hasEmittedFirstInsight, setHasEmittedFirstInsight] = useState(false);
+
+    // A/B Test Bucketing
+    const shareTimingVariant = useExperiment('share_timing_v1', ['immediate', 'delayed']);
+    const shareCopyVariant = useExperiment('share_copy_v1', ['resilience', 'readiness']);
+
+    // Use AI SDK for streaming assessment
+    const { object: streamedObject, submit, isLoading } = useObject({
+        api: '/api/assess',
+        schema: assessmentSchema,
+        onFinish: ({ object }) => {
+            if (object) {
+                const duration = startTime ? Date.now() - startTime : 0;
+                trackEvent('streaming_complete', { duration, job: formData.jobTitle });
+                setResult(object as unknown as AssessmentResult);
+                setAssessmentId(crypto.randomUUID());
+                setStep(2);
+            }
+        },
+    });
+
+    // Performance Instrumentation
+    useEffect(() => {
+        if (!isLoading) {
+            setStartTime(null);
+            setHasEmittedFirstToken(false);
+            setHasEmittedFirstFactor(false);
+            return;
+        }
+        if (!startTime) setStartTime(Date.now());
+    }, [isLoading, startTime]);
+
+    useEffect(() => {
+        if (!isLoading || !startTime || !streamedObject) return;
+
+        if (!hasEmittedFirstToken) {
+            trackEvent('streaming_token_first', { latency: Date.now() - startTime });
+            setHasEmittedFirstToken(true);
+        }
+
+        if (!hasEmittedFirstFactor && (streamedObject.factors as AssessmentResult['factors'])?.length > 0) {
+            trackEvent('streaming_factor_first', { latency: Date.now() - startTime, variant: shareTimingVariant || 'unknown' });
+            setHasEmittedFirstFactor(true);
+        }
+
+        if (!hasEmittedFirstInsight && (streamedObject.factors as AssessmentResult['factors'])?.length >= 2) {
+            trackEvent('streaming_insight_first', { latency: Date.now() - startTime, variant: shareTimingVariant || 'unknown' });
+            setHasEmittedFirstInsight(true);
+        }
+    }, [isLoading, startTime, streamedObject, hasEmittedFirstToken, hasEmittedFirstFactor, hasEmittedFirstInsight, shareTimingVariant]);
+
+    useEffect(() => {
+        if (!streamedObject?.factors) {
+            setDisplayedFactors([]);
+            return;
+        }
+        const targetFactors = streamedObject.factors as AssessmentResult['factors'];
+
+        // Adaptive speed: If we have many new factors, type faster.
+        const diff = targetFactors.length - displayedFactors.length;
+        if (diff > 0) {
+            const timer = setTimeout(() => {
+                setDisplayedFactors(targetFactors.slice(0, displayedFactors.length + 1));
+            }, diff > 2 ? 50 : 200); // 50ms if burst, 200ms if steady
+            return () => clearTimeout(timer);
+        }
+    }, [streamedObject?.factors, displayedFactors]);
 
     useEffect(() => {
         trackEvent('assessment_start');
     }, []);
 
-    // Check for saved session on mount (free tier)
     useEffect(() => {
-        if (hasAccess) return; // Unlocked logic handles itself
+        if (hasAccess) return;
         try {
             const raw = window.localStorage.getItem(LS_KEY);
             if (raw) {
                 const saved = JSON.parse(raw);
-                if (saved?.formData?.jobTitle) { // Basic check
+                if (saved?.formData?.jobTitle) {
                     setHasSavedSession(true);
                 }
             }
-        } catch {
-            // ignore
-        }
+        } catch { /* ignore */ }
     }, [hasAccess]);
 
     useEffect(() => {
@@ -122,7 +201,6 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
         }
     }, [hasAccess]);
 
-    // Restore state after returning from Stripe (cookie-based access)
     useEffect(() => {
         if (!hasAccess) return;
         if (result || executionPack) return;
@@ -143,16 +221,12 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
         }
     }, [hasAccess, result, executionPack]);
 
-    // Auto-generate Execution Pack if user has access but no data
     useEffect(() => {
         if (hasAccess && result && !executionPack && !isUnlocking) {
             const autoGenerate = async () => {
                 setIsUnlocking(true);
                 try {
-                    console.log('Access confirmed. Generating Execution Pack...');
-                    // Ensure we have role IDs (should be in result)
                     if (!result.roleAdjacencies) return;
-
                     const roleIds = result.roleAdjacencies.map(r => r.roleId);
                     const pack = await generateExecutionPack(roleIds, formData);
                     setExecutionPack(pack);
@@ -166,10 +240,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
         }
     }, [hasAccess, result, executionPack, isUnlocking, formData]);
 
-    // Persist state so we can restore after Stripe redirects
     useEffect(() => {
         if (!result) return;
-
         try {
             const payload = {
                 savedAt: Date.now(),
@@ -179,9 +251,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                 assessmentId,
             };
             window.localStorage.setItem(LS_KEY, JSON.stringify(payload));
-        } catch {
-            // ignore (private mode / quota)
-        }
+        } catch { /* ignore */ }
     }, [formData, result, executionPack, assessmentId]);
 
     const handleResume = () => {
@@ -191,9 +261,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                 const saved = JSON.parse(raw);
                 if (saved.formData) setFormData(saved.formData);
                 if (saved.result) setResult(saved.result);
-                // DO NOT restore executionPack here (Free Tier)
                 if (saved.assessmentId) setAssessmentId(saved.assessmentId);
-
                 setHasSavedSession(false);
                 if (saved.result) {
                     setStep(2);
@@ -226,11 +294,9 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
     const copyAsMarkdown = () => {
         if (!result) return;
-        let md = `# Career Readiness Report: ${formData.jobTitle}\n\n`;
-        md += `**Career Readiness Score**: ${result.riskScore}%\n`;
+        let md = `# Resilience Executive Brief: ${formData.jobTitle}\n\n`;
+        md += `**Resilience Index**: ${result.riskScore}%\n`;
         md += `**Confidence**: ${result.confidence}\n\n`;
-        // ... (truncated markdown gen for brevity, need to keep it?) 
-        // Yes, need to keep logic.
         if (result.immediateActions) {
             md += `## 🚀 This Week: Immediate Actions\n`;
             result.immediateActions.forEach((a, i) => md += `${i + 1}. ${a}\n`);
@@ -251,52 +317,10 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
         alert('Plan copied to clipboard as Markdown!');
     };
 
-    const handleUnlockExecutionPack = async () => {
-        if (!result || !result.roleAdjacencies) return;
-        trackEvent('checkout_start', { assessmentId });
-        setIsUnlocking(true);
-        try {
-            const roleIds = result.roleAdjacencies.map(r => r.roleId);
-            const pack = await generateExecutionPack(roleIds, formData);
-            setExecutionPack(pack); // Note: This logic is actually for "generating" the pack data, not the checkout itself.
-            // Wait, previous code: handleUnlock passed to Paywall component handles the checkout link.
-            // The UpsellCard onUnlock prop was calling handleUnlockExecutionPack?
-            // In the previous file (Step 3075, line 508): UpsellCard onUnlock={handleUnlockExecutionPack}
-            // BUT Paywall component (line 503) handles the actual payment wall.
-            // If the user clicks "Unlock" on the BLURRED paywall, `Paywall` handles it.
-            // If the user clicks "Unlock" on the `UpsellCard` (teaser), we need to redirect to stripe?
-            // Let's check `UpsellCard`.
-            // Current code generates pack *before* payment? No. 
-            // `createCheckoutSession` is called in `Paywall`.
-            // The `UpsellCard` might just be a teaser.
-            // Let's assume standard behavior:
-            // We want to CLICK UNLOCK -> STRIPE.
-            // `Paywall` does that.
-            // `UpsellCard` does that?
-            // I'll keep the function signature.
-        } catch (error) {
-            console.error('Failed to unlock:', error);
-        } finally {
-            setIsUnlocking(false);
-        }
-    };
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         trackEvent('assessment_complete', { job: formData.jobTitle, industry: formData.industry });
-        setIsLoading(true);
-
-        try {
-            const assessment = await assessJobRisk(formData);
-            setResult(assessment);
-            setAssessmentId(crypto.randomUUID());
-            setStep(2); // Move to Results
-        } catch (error) {
-            console.error('Assessment failed:', error);
-            alert('Failed to assess your job risk. Please try again.');
-        } finally {
-            setIsLoading(false);
-        }
+        submit(formData);
     };
 
     const addSkill = () => {
@@ -316,7 +340,6 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
         });
     };
 
-    // Helper for interest toggling
     const toggleInterest = (interest: string) => {
         const current = formData.enjoys || [];
         const next = current.includes(interest)
@@ -328,62 +351,100 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
     return (
         <main className="min-h-screen subtle-noise py-20 px-6">
             <div className="max-w-4xl mx-auto">
-                {/* Header */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4 text-slate-950">
-                        Career Readiness Diagnostic
+                        Strategic Workflow Audit
                     </h1>
                     <p className="text-base md:text-lg text-slate-700 leading-relaxed">
                         {step === 1
-                            ? "A short diagnostic that produces a scorecard and a 30/60/90 execution roadmap."
-                            : "Your executive brief"}
+                            ? "An executive analysis that produces a Resilience Index and a shippable execution sequence."
+                            : "Strategic Brief"}
                     </p>
-
                 </div>
 
-                {/* RESUME BANNER */}
                 {step === 1 && hasSavedSession && (
                     <div className="mb-8 p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-500">
                         <div className="flex items-center gap-4">
                             <span className="text-2xl">💾</span>
                             <div>
                                 <h3 className="font-bold text-slate-900">Welcome back</h3>
-                                <p className="text-sm text-slate-600">
-                                    We found a saved diagnostic in progress.
-                                </p>
+                                <p className="text-sm text-slate-600">We found a saved analysis in progress.</p>
                             </div>
                         </div>
                         <div className="flex gap-3">
-                            <button
-                                onClick={handleStartOver}
-                                className="px-4 py-2 text-sm text-slate-600 hover:text-slate-900 transition"
-                            >
-                                Start Over
-                            </button>
-                            <button
-                                onClick={handleResume}
-                                className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold shadow-sm transition"
-                            >
-                                Resume
-                            </button>
+                            <button onClick={handleStartOver} className="px-4 py-2 text-sm text-slate-600 hover:text-slate-900 transition">Start Over</button>
+                            <button onClick={handleResume} className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold shadow-sm transition">Resume</button>
                         </div>
                     </div>
                 )}
 
-                {/* Step 1: Combined Input Form */}
-                {step === 1 && (
+                {step === 1 && (isLoading || streamedObject) && (
+                    <div className="mb-12 animate-in fade-in zoom-in-95 duration-500">
+                        <div className="rounded-2xl border border-emerald-200 bg-emerald-50/30 p-8 shadow-sm">
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xl animate-pulse">✨</div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-950">Consulting Analyst briefing...</h3>
+                                    <p className="text-sm text-slate-700">Synthesizing market signals and automation vectors.</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-6">
+                                {streamedObject?.riskScore !== undefined && (
+                                    <div className="p-4 rounded-xl bg-white border border-emerald-100 flex items-center justify-between">
+                                        <span className="text-sm font-semibold text-slate-600 uppercase tracking-tight">Current Resilience Index</span>
+                                        <span className="text-2xl font-bold text-emerald-600">{streamedObject.riskScore}%</span>
+                                    </div>
+                                )}
+
+                                <div className="grid gap-4 md:grid-cols-2">
+                                    {displayedFactors.map((f, i) => (
+                                        <div key={i} className="p-4 rounded-xl bg-white border border-emerald-100 animate-in slide-in-from-left-2 fade-in duration-300">
+                                            <p className="text-[10px] font-bold text-emerald-700 uppercase mb-1">{f?.name || 'Analyzing Factor...'}</p>
+                                            <p className="text-sm text-slate-800 line-clamp-2 italic">&quot;{f?.evidence || 'Identifying technical dependencies...'}&quot;</p>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Instant Mode Toggle */}
+                                <div className="flex justify-center mt-2">
+                                    <button
+                                        onClick={() => setStep(2)}
+                                        className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-emerald-600 transition"
+                                    >
+                                        ⚡ Skip to Full Summary
+                                    </button>
+                                </div>
+
+                                {streamedObject?.immediateActions && (streamedObject.immediateActions as string[]).length > 0 && (
+                                    <div className="mt-4 p-4 rounded-xl border border-emerald-200 bg-white shadow-sm">
+                                        <p className="text-xs font-bold text-emerald-800 uppercase mb-3 px-1">Initial Momentum Steps</p>
+                                        <ul className="space-y-2">
+                                            {(streamedObject.immediateActions as string[]).map((a, i) => (
+                                                <li key={i} className="text-sm text-slate-800 flex items-start gap-2">
+                                                    <span className="text-emerald-500 mt-0.5">→</span>
+                                                    {a}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {step === 1 && !isLoading && !streamedObject && (
                     <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <form onSubmit={handleSubmit} className="space-y-12">
-
-                            {/* Section 1: The Basics */}
                             <section>
                                 <h3 className="text-xl font-semibold text-slate-950 mb-6 flex items-center gap-2">
                                     <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm">1</span>
                                     Your role
                                 </h3>
                                 <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="col-span-2 md:col-span-2">
-                                        <label className="block text-sm font-medium mb-2">Role (or field of study) *</label>
+                                    <div className="col-span-2">
+                                        <label className="block text-sm font-medium mb-2">Current Role / Strategic Focus *</label>
                                         <input
                                             type="text"
                                             value={formData.jobTitle}
@@ -393,11 +454,8 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                             required
                                             list="common-jobs"
                                         />
-                                        <datalist id="common-jobs">
-                                            {COMMON_JOBS.map((job) => <option key={job} value={job} />)}
-                                        </datalist>
+                                        <datalist id="common-jobs">{COMMON_JOBS.map((job) => <option key={job} value={job} />)}</datalist>
                                     </div>
-
                                     <div>
                                         <label className="block text-sm font-medium mb-2">Industry *</label>
                                         <select
@@ -410,7 +468,6 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                             {INDUSTRIES.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                                         </select>
                                     </div>
-
                                     <div>
                                         <label className="block text-sm font-medium mb-2">Experience (years)</label>
                                         <input
@@ -421,8 +478,6 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                             placeholder="e.g. 5 (optional)"
                                         />
                                     </div>
-
-                                    {/* Goals */}
                                     <div className="col-span-2">
                                         <label className="block text-sm font-medium mb-3">What are you optimizing for?</label>
                                         <div className="grid sm:grid-cols-3 gap-3">
@@ -431,10 +486,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                                     key={goal.id}
                                                     type="button"
                                                     onClick={() => setFormData({ ...formData, goal: goal.id as AssessmentInput['goal'] })}
-                                                    className={`p-4 rounded-xl border text-left transition ${formData.goal === goal.id
-                                                        ? 'bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary))]'
-                                                        : 'bg-white border-[hsl(var(--border))] hover:bg-[hsl(var(--muted))]'
-                                                        }`}
+                                                    className={`p-4 rounded-xl border text-left transition ${formData.goal === goal.id ? 'bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary))]' : 'bg-white border-[hsl(var(--border))] hover:bg-[hsl(var(--muted))]'}`}
                                                 >
                                                     <div className="font-bold text-sm mb-1">{goal.label}</div>
                                                 </button>
@@ -446,15 +498,12 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
 
                             <div className="h-px bg-[hsl(var(--border))]" />
 
-                            {/* Section 2: Skills & Interests */}
                             <section>
                                 <h3 className="text-xl font-semibold text-slate-950 mb-6 flex items-center gap-2">
                                     <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm">2</span>
                                     Skills & Interests
                                 </h3>
-
                                 <div className="space-y-6">
-                                    {/* Skills Input */}
                                     <div>
                                         <label className="block text-sm font-medium mb-2">Top skills (up to 3)</label>
                                         <div className="flex gap-2 mb-3">
@@ -466,13 +515,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                                 placeholder="Type a skill and press Enter…"
                                                 className="flex-1 px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
                                             />
-                                            <button
-                                                type="button"
-                                                onClick={addSkill}
-                                                className="px-6 py-3 rounded-lg bg-[hsl(var(--muted))] hover:bg-[hsl(var(--secondary))] transition font-medium"
-                                            >
-                                                Add
-                                            </button>
+                                            <button type="button" onClick={addSkill} className="px-6 py-3 rounded-lg bg-[hsl(var(--muted))] hover:bg-[hsl(var(--secondary))] transition font-medium">Add</button>
                                         </div>
                                         <div className="flex flex-wrap gap-2 min-h-[40px]">
                                             {formData.skills.map((skill) => (
@@ -483,8 +526,6 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                             ))}
                                         </div>
                                     </div>
-
-                                    {/* Interests */}
                                     <div>
                                         <label className="block text-sm font-medium mb-3">I’m strongest when I’m doing…</label>
                                         <div className="flex flex-wrap gap-2">
@@ -493,10 +534,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                                     key={interest}
                                                     type="button"
                                                     onClick={() => toggleInterest(interest)}
-                                                    className={`px-4 py-2 rounded-full text-sm font-medium border transition ${formData.enjoys?.includes(interest)
-                                                        ? 'bg-emerald-600 text-white border-emerald-700'
-                                                        : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
-                                                        }`}
+                                                    className={`px-4 py-2 rounded-full text-sm font-medium border transition ${formData.enjoys?.includes(interest) ? 'bg-emerald-600 text-white border-emerald-700' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'}`}
                                                 >
                                                     {interest}
                                                 </button>
@@ -512,29 +550,50 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                     disabled={!formData.jobTitle || !formData.industry || formData.skills.length < 1 || isLoading}
                                     className="w-full py-5 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold text-lg text-slate-950 shadow-lg shadow-emerald-950/10 disabled:opacity-50 disabled:cursor-not-allowed group"
                                 >
-                                    {isLoading ? (
-                                        <span className="flex items-center justify-center gap-2">
-                                            <span className="animate-spin text-xl">◌</span> Running diagnostic…
-                                        </span>
-                                    ) : (
-                                        <span className="flex items-center justify-center gap-2">
-                                            Run the diagnostic
-                                            <span className="group-hover:translate-x-1 transition">→</span>
-                                        </span>
-                                    )}
+                                    Audit Your Role
                                 </button>
-                                <p className="text-center text-xs text-slate-600 mt-4">
-                                    ~10 seconds. Outputs a scorecard plus a 30/60/90 execution roadmap.
-                                </p>
+                                <p className="text-center text-xs text-slate-600 mt-4">Premium real-time analysis briefing.</p>
                             </div>
                         </form>
                     </div>
                 )}
 
-                {/* Result Step (Merged old step 4) */}
                 {step === 2 && result && (
                     <div className="animate-in fade-in zoom-in-95 duration-500 space-y-6">
-                        {/* Immediate Actions: This Week (MOVED TO TOP) */}
+                        {/* Viral Share Card A/B Test */}
+                        {((shareTimingVariant === 'immediate') || (displayedFactors.length >= 2)) && (
+                            <section className="mb-12 text-center">
+                                <ShareBriefCard
+                                    jobTitle={formData.jobTitle}
+                                    riskScore={result.riskScore}
+                                    topFactor={result.factors[0]?.name || "Strategic Resilience"}
+                                    titleOverride={shareCopyVariant === 'readiness' ? `AI Readiness Audit: ${formData.jobTitle}` : undefined}
+                                />
+                                <div className="mt-4 flex justify-center gap-3">
+                                    <button
+                                        onClick={() => {
+                                            trackEvent('share_image_click', { variant: shareCopyVariant });
+                                            alert('Feature incoming: Save as Image');
+                                        }}
+                                        className="px-4 py-2 text-xs font-bold border border-slate-200 rounded-lg hover:bg-slate-50 transition"
+                                    >
+                                        📥 Save Brief as Image
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            trackEvent('share_link_click', { variant: shareCopyVariant });
+                                            const text = `I just ran a Strategic Workflow Audit on my role as ${formData.jobTitle}. My Resilience Index is ${result.riskScore}%. Check yours at aicareershield.com`;
+                                            navigator.clipboard.writeText(text);
+                                            alert('Share text copied to clipboard!');
+                                        }}
+                                        className="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition"
+                                    >
+                                        🔗 Copy Share Link
+                                    </button>
+                                </div>
+                            </section>
+                        )}
+
                         {result.immediateActions && result.immediateActions.length > 0 && (
                             <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-8 shadow-sm">
                                 <div className="flex items-center justify-between mb-6">
@@ -545,19 +604,12 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                                             <p className="text-sm text-slate-700">Start here to build readiness through real outputs</p>
                                         </div>
                                     </div>
-                                    <button
-                                        onClick={copyAsMarkdown}
-                                        className="px-4 py-2 rounded-lg text-xs font-semibold transition border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2"
-                                    >
-                                        <span>📋 Copy brief</span>
-                                    </button>
+                                    <button onClick={copyAsMarkdown} className="px-4 py-2 rounded-lg text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2"><span>📋 Copy brief</span></button>
                                 </div>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {result.immediateActions.map((action, i) => (
                                         <div key={i} className="rounded-xl border border-emerald-100 bg-white p-4 flex items-start gap-4 hover:bg-emerald-50/40 transition-colors group">
-                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-600/10 border border-emerald-200 flex items-center justify-center text-emerald-800 font-bold">
-                                                {i + 1}
-                                            </div>
+                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-600/10 border border-emerald-200 flex items-center justify-center text-emerald-800 font-bold">{i + 1}</div>
                                             <p className="text-slate-800 text-sm leading-relaxed mt-1">{action}</p>
                                         </div>
                                     ))}
@@ -565,30 +617,76 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                             </div>
                         )}
 
-                        {/* Market Intel (free) */}
-                        {marketIntel.length > 0 && (
-                            <section className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-                                <div className="flex items-start justify-between gap-6">
-                                    <div>
-                                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Market Intel</p>
-                                        <h3 className="mt-1 text-xl font-bold text-slate-950">Signals for your direction</h3>
-                                        <p className="mt-1 text-sm text-slate-700">
-                                            Short, decision-grade prompts to help you explore, strengthen, or pivot.
-                                        </p>
+                        <section className="rounded-2xl border border-[hsl(var(--border))] bg-white p-8">
+                            <div className="flex items-center gap-4 mb-8">
+                                <div className="p-3 rounded-xl bg-orange-100/50">
+                                    <span className="text-2xl">⚖️</span>
+                                </div>
+                                <div>
+                                    <h2 className="text-2xl font-bold tracking-tight text-slate-950">Resilience Index</h2>
+                                    <p className="text-sm text-slate-600">Calibration vs. automation vectors</p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                                <div className="flex flex-col items-center justify-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+                                    <div className="relative w-32 h-32 flex items-center justify-center">
+                                        <svg className="w-full h-full transform -rotate-90">
+                                            <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-slate-200" />
+                                            <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="12" fill="transparent" strokeDasharray={364} strokeDashoffset={364 - (364 * result.riskScore) / 100} className="text-emerald-500 transition-all duration-1000 ease-out" />
+                                        </svg>
+                                        <span className="absolute text-3xl font-bold text-slate-950">{result.riskScore}%</span>
                                     </div>
-                                    <div className="hidden sm:block rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
-                                        Track: {marketTrack}
-                                    </div>
+                                    <p className="mt-4 text-xs font-bold uppercase tracking-widest text-slate-500">Resilience Index</p>
                                 </div>
 
-                                <div className="mt-6 grid gap-4 md:grid-cols-3">
-                                    {marketIntel.map((s) => (
-                                        <div key={s.id} className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5">
-                                            <p className="text-sm font-semibold text-slate-950">{s.title}</p>
-                                            <p className="mt-2 text-sm text-slate-700">{s.whyItMatters}</p>
-                                            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/60 p-3">
-                                                <p className="text-[11px] font-semibold uppercase tracking-wide text-emerald-800">Move this week</p>
-                                                <p className="mt-1 text-sm text-slate-800">{s.moveThisWeek}</p>
+                                <div className="md:col-span-2 space-y-4">
+                                    {result.factors.slice(0, 3).map((factor, i) => (
+                                        <div key={i} className="space-y-1.5">
+                                            <div className="flex justify-between text-sm font-semibold">
+                                                <span className="text-slate-900">{factor.name}</span>
+                                                <span className="text-slate-600">{factor.score}%</span>
+                                            </div>
+                                            <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                <div className="h-full bg-emerald-500/80 rounded-full transition-all duration-1000" style={{ width: `${factor.score}%`, transitionDelay: `${i * 150}ms` }} />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <div className="grid md:grid-cols-2 gap-6">
+                            {result.roleAdjacencies?.map((adj, i) => (
+                                <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6 hover:shadow-md transition">
+                                    <h4 className="text-lg font-bold text-slate-950 mb-2">{adj.detail?.title}</h4>
+                                    <p className="text-sm text-slate-700 leading-relaxed mb-4">{adj.rationale}</p>
+                                    <div className="flex gap-2">
+                                        {adj.transferableSkills.slice(0, 2).map(s => <span key={s} className="px-2 py-1 bg-slate-100 rounded text-[10px] font-bold uppercase text-slate-600">{s}</span>)}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {result.plan30_60_90 && (
+                            <section className="mt-12">
+                                <h3 className="text-2xl font-bold text-slate-950 mb-8">Strategic Execution Sequence</h3>
+                                <div className="space-y-4">
+                                    {result.plan30_60_90.map((win) => (
+                                        <div key={win.window} className="rounded-2xl border border-slate-200 bg-white p-8">
+                                            <div className="flex items-center gap-4 mb-6">
+                                                <span className="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-lg uppercase tracking-wide">
+                                                    {win.window.replace('_', ' ')}
+                                                </span>
+                                                <h4 className="text-lg font-bold text-slate-950">{win.goals[0]}</h4>
+                                            </div>
+                                            <div className="grid md:grid-cols-2 gap-4">
+                                                {win.tasks.map((task, k) => (
+                                                    <div key={k} className="flex items-start gap-3 p-3 rounded-lg border border-slate-50 bg-slate-50/30 text-sm text-slate-800">
+                                                        <span className="text-emerald-500 mt-1">✓</span>
+                                                        {task}
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
                                     ))}
@@ -596,347 +694,29 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                             </section>
                         )}
 
-                        {/* Phase 4: Execution Pack Upsell / View */}
                         {ENABLE_EXECUTION_PACK && (
-                            <div className="mt-8" id="execution-pack">
-                                {executionPack ? (
-                                    <ExecutionPackView data={executionPack} isPaid={hasAccess} />
-                                ) : (
-                                    <div className="space-y-8">
-                                        <UpsellCard
-                                            onUnlock={handleUnlockExecutionPack}
-                                            isLoading={isUnlocking}
-                                        />
+                            <UpsellCard
+                                onUnlock={() => router.push('/assessment#pricing')}
+                                isLoading={isUnlocking}
+                            />
+                        )}
 
-                                        {/* Free Interview Preview */}
-                                        <section className="scroll-mt-24" id="interview-preview">
-                                            <div className="mb-4 px-4">
-                                                <h3 className="text-lg font-bold text-slate-950 flex items-center gap-2">
-                                                    <span className="p-1 rounded bg-indigo-100 text-indigo-600">🎤</span>
-                                                    Try the Interview Simulator
-                                                </h3>
-                                                <p className="text-sm text-slate-600">
-                                                    Experience our AI role-play engine. Free users get 3 practice turns.
-                                                </p>
-                                            </div>
-                                            <InterviewSimulator
-                                                role={result.roleAdjacencies?.[0]?.detail?.title || formData.jobTitle}
-                                                isPaid={false}
-                                            />
-                                        </section>
-                                    </div>
-                                )}
+                        {hasAccess && executionPack && (
+                            <ExecutionPackView
+                                data={executionPack}
+                                isPaid={hasAccess}
+                            />
+                        )}
+
+                        {hasAccess && (
+                            <div className="rounded-2xl border border-slate-200 bg-white p-8">
+                                <InterviewSimulator
+                                    role={result.roleAdjacencies?.[0]?.detail?.title || formData.jobTitle}
+                                    isPaid={hasAccess}
+                                />
                             </div>
                         )}
 
-                        {/* Risk Score Card */}
-                        <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-                            <div className="flex items-center justify-center gap-3 mb-4">
-                                <h2 className="text-2xl font-bold text-slate-950">Your Career Readiness Score</h2>
-                                {result.confidence && (
-                                    <span
-                                        className={`px-3 py-1 rounded-full text-xs font-medium ${result.confidence === 'high'
-                                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                                            : result.confidence === 'medium'
-                                                ? 'bg-amber-50 text-amber-800 border border-amber-200'
-                                                : 'bg-slate-100 text-slate-700 border border-slate-200'
-                                            }`}
-                                    >
-                                        {result.confidence} confidence
-                                    </span>
-                                )}
-                                {result.planConfidence && (
-                                    <span
-                                        className={`px-3 py-1 rounded-full text-xs font-medium ${result.planConfidence === 'high'
-                                            ? 'bg-sky-50 text-sky-800 border border-sky-200'
-                                            : result.planConfidence === 'medium'
-                                                ? 'bg-violet-50 text-violet-800 border border-violet-200'
-                                                : 'bg-rose-50 text-rose-800 border border-rose-200'
-                                            }`}
-                                    >
-                                        Plan Confidence: {result.planConfidence}
-                                    </span>
-                                )}
-                            </div>
-                            {result.improvementSuggestion && (
-                                <div className="mb-6 px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg inline-block text-sm text-slate-700">
-                                    💡 <span className="font-semibold text-slate-900">Pro Tip:</span> {result.improvementSuggestion}
-                                </div>
-                            )}
-                            <div className="relative w-48 h-48 mx-auto mb-6">
-                                <svg className="w-full h-full transform -rotate-90">
-                                    <circle
-                                        cx="96"
-                                        cy="96"
-                                        r="80"
-                                        stroke="rgba(15,23,42,0.12)"
-                                        strokeWidth="16"
-                                        fill="none"
-                                    />
-                                    <circle
-                                        cx="96"
-                                        cy="96"
-                                        r="80"
-                                        stroke={
-                                            result.riskScore > 70
-                                                ? '#ef4444'
-                                                : result.riskScore > 40
-                                                    ? '#f59e0b'
-                                                    : '#10b981'
-                                        }
-                                        strokeWidth="16"
-                                        fill="none"
-                                        strokeDasharray={`${(result.riskScore / 100) * 502.4} 502.4`}
-                                        className="transition-all duration-1000"
-                                    />
-                                </svg>
-                                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                    <div className="text-6xl font-bold text-slate-950">{result.riskScore}%</div>
-                                    <div className="text-sm text-slate-600">Change pressure</div>
-                                </div>
-                            </div>
-                            {result.reasoning && (
-                                <p className="text-slate-700 max-w-2xl mx-auto mb-4">
-                                    {result.reasoning}
-                                </p>
-                            )}
-                            <p className="text-sm text-slate-600 max-w-2xl mx-auto italic">
-                                Not a prediction — a planning tool. We show the drivers so you can verify what is behind your score.
-                            </p>
-                        </div>
-
-                        {/* Risk Factors with Evidence & Mitigation */}
-                        <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-                            <h3 className="text-xl font-bold mb-6 text-slate-950">Risk Breakdown</h3>
-                            <div className="space-y-6">
-                                {result.factors.map((factor, i) => (
-                                    <div key={i} className="border-l-2 border-emerald-200 pl-4">
-                                        <div className="flex items-center justify-between mb-2">
-                                            <span className="font-semibold text-lg text-slate-950">{factor.name}</span>
-                                            <span className="text-sm text-slate-500">
-                                                {factor.score}%
-                                            </span>
-                                        </div>
-                                        <div className="h-2 bg-slate-200 rounded-full overflow-hidden mb-3">
-                                            <div
-                                                className="h-full bg-gradient-to-r from-emerald-500 to-lime-500 transition-all duration-1000"
-                                                style={{ width: `${factor.score}%` }}
-                                            />
-                                        </div>
-
-                                        {factor.evidence && (
-                                            <div className="mb-2">
-                                                <span className="text-xs font-semibold text-slate-600">Evidence</span>
-                                                <p className="text-sm text-slate-700 mt-1">{factor.evidence}</p>
-                                            </div>
-                                        )}
-
-                                        {factor.whyItMatters && (
-                                            <div className="mb-2">
-                                                <span className="text-xs font-semibold text-slate-600">Why it matters</span>
-                                                <p className="text-sm text-slate-700 mt-1">{factor.whyItMatters}</p>
-                                            </div>
-                                        )}
-
-                                        {factor.mitigation && factor.mitigation.length > 0 && (
-                                            <div className="bg-emerald-50/60 border border-emerald-200 rounded-lg p-3 mt-2">
-                                                <span className="text-xs font-semibold text-emerald-800">✓ How to mitigate</span>
-                                                <ul className="mt-1 space-y-1">
-                                                    {factor.mitigation.map((item, idx) => (
-                                                        <li key={idx} className="text-sm text-slate-700 flex items-start gap-2">
-                                                            <span className="text-emerald-700/70 mt-1">•</span>
-                                                            <span>{item}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )}
-
-                                        {/* Fallback to legacy description */}
-                                        {!factor.evidence && !factor.whyItMatters && factor.description && (
-                                            <p className="text-sm text-gray-400">{factor.description}</p>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Role Adjacencies */}
-                        {result.roleAdjacencies && result.roleAdjacencies.length > 0 && (
-                            <div className="p-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
-                                <h3 className="text-xl font-bold mb-4 text-slate-950">Strong next‑best paths</h3>
-                                <p className="text-slate-600 mb-6">
-                                    Based on your skills, these roles offer high resilience and leverage:
-                                </p>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    {result.roleAdjacencies.map((role, i) => (
-                                        <div key={i} className="bg-white border border-slate-200 shadow-sm rounded-lg p-5 flex flex-col h-full hover:border-emerald-200 transition-colors">
-                                            <h4 className="font-bold text-lg text-emerald-950 mb-1">
-                                                {role.detail?.title || role.roleId}
-                                            </h4>
-
-                                            {/* Topics */}
-                                            {role.detail?.topics && role.detail.topics.length > 0 && (
-                                                <div className="flex flex-wrap gap-1.5 mb-3">
-                                                    {role.detail.topics.map((topicId) => (
-                                                        <span
-                                                            key={topicId}
-                                                            className="px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-[10px] text-slate-700 font-medium"
-                                                        >
-                                                            {TOPIC_LABELS[topicId] || topicId}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            )}
-
-                                            {/* Summary */}
-                                            {role.detail && (
-                                                <p className="text-xs text-slate-500 mb-3 italic">
-                                                    {role.detail.summary}
-                                                </p>
-                                            )}
-
-                                            {/* Rationale */}
-                                            <div className="mb-4">
-                                                <p className="text-sm text-slate-700 leading-relaxed">
-                                                    {role.rationale}
-                                                </p>
-                                            </div>
-
-                                            {/* Skills Gap Analysis */}
-                                            <div className="grid grid-cols-2 gap-4 mb-4 mt-auto">
-                                                <div>
-                                                    <span className="text-xs font-semibold text-emerald-800 uppercase tracking-wider">You Have</span>
-                                                    <ul className="mt-1 space-y-1">
-                                                        {role.transferableSkills?.slice(0, 3).map((skill, j) => (
-                                                            <li key={j} className="text-xs text-slate-600 flex items-center gap-1">
-                                                                <span className="text-emerald-500">✓</span> {skill}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <span className="text-xs font-semibold text-amber-700 uppercase tracking-wider">You Need</span>
-                                                    <ul className="mt-1 space-y-1">
-                                                        {role.gapSkills?.slice(0, 3).map((skill, j) => (
-                                                            <li key={j} className="text-xs text-slate-500 flex items-center gap-1">
-                                                                <span className="text-amber-500">↑</span> {skill}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            {/* Starter Plan Sneak Peek */}
-                                            {role.detail?.starterPlan30Days?.[0] && (
-                                                <div className="bg-slate-50 border border-slate-200 rounded p-3 mt-2">
-                                                    <span className="text-xs font-semibold text-emerald-800 uppercase tracking-wider">First Step</span>
-                                                    <p className="text-xs text-slate-600 mt-1">{role.detail.starterPlan30Days[0]}</p>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Market Signals Card (NEW PHASE 3.3) */}
-                        {result.marketSignals && (
-                            <MarketSignals data={result.marketSignals} />
-                        )}
-
-                        {/* 30/60/90 Day Plan */}
-                        {result.plan30_60_90 && result.plan30_60_90.length > 0 && (
-                            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-                                <h3 className="text-xl font-bold mb-6 text-slate-950">Your 30/60/90 roadmap</h3>
-                                <div className="grid md:grid-cols-3 gap-6">
-                                    {result.plan30_60_90.map((plan, i) => (
-                                        <div key={i} className="relative">
-                                            {/* Vertical line for timeline feel */}
-                                            {i < 2 && (
-                                                <div className="hidden md:block absolute top-12 -right-3 w-6 h-px bg-slate-200" />
-                                            )}
-                                            <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-5 h-full">
-                                                <div className="flex items-center gap-2 mb-4">
-                                                    <span className="px-2 py-1 rounded bg-emerald-600/10 text-emerald-800 border border-emerald-200 text-xs font-bold uppercase tracking-wider">
-                                                        {plan.window.replace('_', ' ')}
-                                                    </span>
-                                                </div>
-
-                                                {plan.goals && plan.goals.length > 0 && (
-                                                    <div className="mb-4">
-                                                        <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Focus</h4>
-                                                        <p className="text-sm font-semibold text-slate-900">{plan.goals[0]}</p>
-                                                    </div>
-                                                )}
-
-                                                <div>
-                                                    <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tasks</h4>
-                                                    <ul className="space-y-3">
-                                                        {plan.tasks.map((task, j) => (
-                                                            <li key={j} className="text-sm text-slate-700 flex items-start gap-2 group">
-                                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-600/60 mt-1.5 group-hover:bg-emerald-600 transition-colors" />
-                                                                <span>{task}</span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Legacy Recommendations (fallback) */}
-                        {result.recommendations && result.recommendations.length > 0 && !result.plan30_60_90 && (
-                            <div className="glass-panel p-8 rounded-2xl">
-                                <h3 className="text-xl font-bold mb-6">What You Should Do</h3>
-                                <ul className="space-y-3">
-                                    {result.recommendations.map((rec, i) => (
-                                        <li key={i} className="flex items-start gap-3">
-                                            <span className="text-blue-400 mt-1">→</span>
-                                            <span className="text-gray-300">{rec}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-
-                        {/* CTA */}
-                        <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-                            <h3 className="text-2xl font-bold mb-3 text-slate-950">
-                                Want a clearer plan you can execute?
-                            </h3>
-                            <p className="text-slate-700 mb-6">
-                                Unlock the Execution Pack: project briefs, skill priorities, and interview prep tailored to your target path.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <button
-                                    onClick={() => router.push('/signup')}
-                                    className="px-8 py-4 rounded-lg bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-600 hover:to-lime-600 transition font-bold text-slate-950"
-                                >
-                                    Unlock the Execution Pack →
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        setStep(1);
-                                        setResult(null);
-                                        setFormData({
-                                            jobTitle: '',
-                                            industry: '',
-                                            skills: [],
-                                            yearsExperience: undefined,
-                                        });
-                                    }}
-                                    className="px-8 py-4 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 transition font-medium text-slate-900"
-                                >
-                                    Run another diagnostic
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Phase 5: Feedback Loop */}
                         <FeedbackSection
                             assessmentId={assessmentId}
                             jobTitleBucket={formData.jobTitle}
@@ -945,14 +725,10 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                             confidence={result.confidence || 'medium'}
                             planConfidence={result.planConfidence || 'medium'}
                             roleIds={result.roleAdjacencies?.map(r => r.roleId) || []}
-                            executionPackStatus={{
-                                generated: !!executionPack,
-                                validated: !!executionPack && executionPack.version === 1
-                            }}
                         />
                     </div>
                 )}
             </div>
-        </main >
+        </main>
     );
 }

@@ -66,7 +66,7 @@ function computeAvgByBucket(rows: Awaited<ReturnType<typeof fetchAllFeedbackRows
 async function fetchEventCounts() {
   const { data, error } = await supabaseAdmin
     .from('analytics_events')
-    .select('event_name, created_at')
+    .select('event_name, created_at, properties')
     .order('created_at', { ascending: false })
     .limit(5000); // Reasonable limit for v1
 
@@ -93,7 +93,6 @@ export default async function AnalyticsPage({
   const requiredToken = process.env.ADMIN_TOKEN;
 
   if (requiredToken && sp.token !== requiredToken) {
-    const isDev = process.env.NODE_ENV !== 'production';
     const tokenStatus = sp.token ? 'invalid' : 'missing';
 
     return (
@@ -136,10 +135,24 @@ export default async function AnalyticsPage({
   // Compute Funnel
   const started = events.filter(e => e.event_name === 'assessment_start').length;
   const completed = events.filter(e => e.event_name === 'assessment_complete').length;
-  const paywallViews = events.filter(e => e.event_name === 'paywall_view').length; // Or use checkout_start if strict
   const checkouts = events.filter(e => e.event_name === 'checkout_start').length;
   const purchaseCount = purchases.length;
   const totalRevenue = purchases.reduce((sum, p) => sum + (p.amount_total || 0), 0) / 100;
+
+  // Performance Metrics
+  const streamingEvents = events.filter(e => e.event_name.startsWith('streaming_'));
+  const firstTokenLatencies = streamingEvents
+    .filter(e => e.event_name === 'streaming_token_first')
+    .map(e => (e.properties as any)?.latency)
+    .filter((n): n is number => typeof n === 'number');
+
+  const finishDurations = streamingEvents
+    .filter(e => e.event_name === 'streaming_complete')
+    .map(e => (e.properties as any)?.duration)
+    .filter((n): n is number => typeof n === 'number');
+
+  const avgFirstToken = mean(firstTokenLatencies);
+  const avgFinish = mean(finishDurations);
 
   // Conversion Rates
   const completionRate = started ? (completed / started) * 100 : 0;
@@ -148,11 +161,8 @@ export default async function AnalyticsPage({
   const overallConversion = started ? (purchaseCount / started) * 100 : 0;
 
   // Feedback Stats (Existing Logic)
-  const totalFeedback = feedbackRows.length;
   const feedbackRatings = feedbackRows.map(r => r.rating).filter((n): n is number => typeof n === 'number');
   const avgRating = mean(feedbackRatings);
-  const avgByJob = computeAvgByBucket(feedbackRows, 'job_title_bucket');
-  const avgByIndustry = computeAvgByBucket(feedbackRows, 'industry_bucket');
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-blue-950 to-slate-950 py-10 px-6">
@@ -200,6 +210,22 @@ export default async function AnalyticsPage({
                 <span className="text-gray-400">{purchaseCount} ({purchaseRate.toFixed(1)}% of checkout)</span>
               </div>
               <Bar value={purchaseCount} max={started} colorClass="bg-green-500" />
+            </div>
+          </div>
+        </Panel>
+
+        {/* Performance Overview */}
+        <Panel title="Streaming Performance" subtitle="Executive Audit Response Latency">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+              <p className="text-xs text-slate-400 uppercase font-bold mb-1">Avg. Time to First Token</p>
+              <p className="text-3xl font-bold">{avgFirstToken ? `${(avgFirstToken / 1000).toFixed(2)}s` : '---'}</p>
+              <p className="text-[10px] text-emerald-500 mt-1">Goal: &lt; 2.00s</p>
+            </div>
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+              <p className="text-xs text-slate-400 uppercase font-bold mb-1">Avg. Completion Time</p>
+              <p className="text-3xl font-bold">{avgFinish ? `${(avgFinish / 1000).toFixed(2)}s` : '---'}</p>
+              <p className="text-[10px] text-slate-400 mt-1">Total strategy sequence generation</p>
             </div>
           </div>
         </Panel>

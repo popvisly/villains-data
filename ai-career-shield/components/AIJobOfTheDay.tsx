@@ -9,17 +9,17 @@ import { Sparkles, TrendingUp, ArrowRight } from 'lucide-react';
 const FRONTIER_ROLES = [
     {
         title: "AI Agent Architect",
-        summary: "Designs the 'brain' of autonomous systems—defining memory, planning, and tool use.",
+        summary: "Architects the operational logic for autonomous systems—defining memory protocols, planning hierarchies, and tool-use boundaries.",
         salary: "$160k - $240k",
-        impact: "Critical for reliability",
+        impact: "Operational reliability and cognitive risk mitigation",
         growth: "+140% YoY",
         tags: ["Engineering", "Cognitive Systems"]
     },
     {
         title: "AI Ethics & Compliance Officer",
-        summary: "Ensures AI systems are safe, legal, and fair by developing governance frameworks.",
+        summary: "Develops and oversees robust governance frameworks ensuring systemic fairness, safety, and legal alignment.",
         salary: "$150k - $210k",
-        impact: "Risk mitigation (EU AI Act)",
+        impact: "Systemic risk mitigation and regulatory compliance (EU AI Act)",
         growth: "High Demand",
         tags: ["Governance", "Legal"]
     },
@@ -27,13 +27,13 @@ const FRONTIER_ROLES = [
         title: "AI Interaction Designer",
         summary: "Designs the personality and conversation flow for helpful, safe AI interactions.",
         salary: "$110k - $160k",
-        impact: "User Trust & Adoption",
+        impact: "Product adoption and systemic engagement",
         growth: "Emerging",
         tags: ["UX", "Psychology"]
     },
     {
         title: "Agent Orchestrator",
-        summary: "Manages the workflow between multiple agents and human-in-the-loop systems.",
+        summary: "Orchestrates complex multi-agent workflows and human-in-the-loop operational processes.",
         salary: "$130k - $190k",
         impact: "Operational Efficiency",
         growth: "+90% YoY",
@@ -41,7 +41,7 @@ const FRONTIER_ROLES = [
     },
     {
         title: "AgentOps Engineer",
-        summary: "Monitors, debugs, and optimizes multi-agent swarms in production.",
+        summary: "Supervises and optimizes distributed agent swarms within high-scale production environments.",
         salary: "$140k - $220k",
         impact: "Reliability at Scale",
         growth: "High Demand",
@@ -81,7 +81,7 @@ const FRONTIER_ROLES = [
     },
     {
         title: "AI Product Manager",
-        summary: "Bridges the gap between technical ML capabilities and user problems to find product-market fit.",
+        summary: "Synthesizes ML technical capabilities with institutional requirements to drive product-market alignment.",
         salary: "$140k - $210k",
         impact: "Revenue Growth",
         growth: "Stable",
@@ -114,7 +114,10 @@ export function AIJobOfTheDay() {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
+        const timer = setTimeout(() => {
+            setMounted(true);
+        }, 0);
+        return () => clearTimeout(timer);
     }, []);
 
     if (!mounted) return null;
@@ -129,10 +132,10 @@ export function AIJobOfTheDay() {
                         <div className="p-1.5 rounded-md bg-emerald-50 text-emerald-700">
                             <Sparkles className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-bold uppercase tracking-wider text-emerald-900">Market Intel</span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-emerald-900">Analyst Briefing</span>
                     </div>
                     <span className="text-[10px] font-medium text-stone-500 bg-white px-2 py-1 rounded-full border border-stone-100 shadow-sm">
-                        {new Date().toLocaleDateString('en-US', { weekday: 'long' })}&apos;s Role
+                        Daily Briefing
                     </span>
                 </div>
 
@@ -177,7 +180,7 @@ export function AIJobOfTheDay() {
                         href="/assessment"
                         className="flex items-center justify-center w-full py-2.5 rounded-xl bg-stone-900 text-white text-sm font-medium hover:bg-stone-800 transition group-hover:translate-y-0"
                     >
-                        Start Career Audit
+                        Audit Your Role
                         <ArrowRight className="w-4 h-4 ml-2 opacity-80" />
                     </Link>
                 </div>

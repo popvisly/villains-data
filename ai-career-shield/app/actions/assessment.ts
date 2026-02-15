@@ -4,6 +4,8 @@ import { openai } from '@/lib/openai';
 import { hasExecutionPackAccess } from '@/app/actions/stripe';
 import type { AssessmentInput, AssessmentResult } from '@/types';
 import { findRelevantRoles, getMarketSignals, getRoleById } from '@/lib/roles';
+
+export { findRelevantRoles };
 import type { ExecutionPack } from '@/types/executionPack';
 
 export async function assessJobRisk(data: AssessmentInput): Promise<AssessmentResult> {

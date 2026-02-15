@@ -54,10 +54,26 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                         </div>
 
                         <div>
-                            <h3 className="text-2xl font-bold text-slate-950 mb-2">Unlock the Execution Pack</h3>
-                            <p className="text-slate-700 text-sm">
-                                2 portfolio-ready project briefs, step-by-step deliverables, and a 30/60/90 plan tailored to your role and goal.
-                            </p>
+                            <h3 className="text-2xl font-bold text-slate-950 mb-2">Secure Your Execution Sequence</h3>
+                            <div className="space-y-4 text-left mt-6">
+                                {[
+                                    { title: "Strategic Roadmap", desc: "A definitive 30/60/90-day sequence for operational resilience." },
+                                    { title: "Portfolio Deliverables", desc: "2 high-impact project briefs ready for your professional record." },
+                                    { title: "Market Adjacencies", desc: "Precise role pivots mapped to current institutional demand." }
+                                ].map((item, i) => (
+                                    <div key={i} className="flex gap-3">
+                                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
+                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-bold text-slate-900">{item.title}</p>
+                                            <p className="text-xs text-slate-600">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="text-3xl font-bold text-slate-950 tracking-tight">
