@@ -7,7 +7,7 @@ export interface AssessmentInput {
     skills: string[];
     yearsExperience?: number;
     // Phase 2.2: Enhanced Signals
-    audience?: 'student' | 'professional';
+    audience?: 'professional' | 'student' | 'teacher';
     goal?: 'choose_direction' | 'future_proof_role' | 'plan_pivot';
     experienceLevel?: 'entry' | 'mid' | 'senior';
     enjoys?: string[]; // e.g. ["Visual Design", "Data", "People", "Strategy"]
@@ -29,6 +29,14 @@ export interface MarketSignalData {
     trendingRoles: { title: string; why: string; topics?: string[] }[];
     recurringSkillSignals: { skill: string; why: string; topics?: string[] }[];
     topics?: string[];
+}
+
+export interface HeatmapCell {
+    label: string;
+    state: 'melting' | 'compounding' | 'stable';
+    discretion: number;
+    automation: number;
+    why: string;
 }
 
 export interface AssessmentResult {
@@ -68,6 +76,9 @@ export interface AssessmentResult {
 
     /** Phase 4: Tailored execution assets (behind feature flag) */
     executionPack?: ExecutionPack;
+
+    /** Phase 4.1: Specialist Leverage Heatmap */
+    heatmap?: HeatmapCell[];
 }
 
 export interface RiskFactor {

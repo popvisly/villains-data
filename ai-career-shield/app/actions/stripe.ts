@@ -14,8 +14,8 @@ export async function createCheckoutSession(assessmentId: string, tier: 'executi
     const priceCents = tier === 'executive' ? PRICE_EXECUTIVE_LICENSE_CENTS : PRICE_EXECUTION_PACK_CENTS;
     const productName = tier === 'executive' ? 'AI Career Portal - Executive License' : 'AI Career Portal - Execution Pack';
     const productDesc = tier === 'executive'
-        ? 'Full Roadmap + Assets + Matcher + Project Briefs + Interview Simulator.'
-        : 'Full Roadmap + Skill Gap Map + Smart Matcher + Career Assets.';
+        ? 'Full Roadmap + Assets + Matcher + Project Briefs + Interview Simulator. Includes 12 months of updates.'
+        : 'Full Roadmap + Skill Gap Map + Smart Matcher + Career Assets. Includes 12 months of updates.';
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],

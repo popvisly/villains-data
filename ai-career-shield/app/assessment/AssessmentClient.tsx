@@ -9,6 +9,7 @@ import { ShareBriefCard } from '@/components/ShareBriefCard';
 import { UpsellCard } from '@/components/UpsellCard';
 import { ExecutionPackView } from '@/components/ExecutionPackView';
 import { InterviewSimulator } from '@/components/InterviewSimulator';
+import { LeverageHeatmap } from '@/components/LeverageHeatmap';
 import { FeedbackSection } from '@/components/FeedbackSection';
 import type { ExecutionPack } from '@/types/executionPack';
 import { trackEvent } from '@/lib/analytics-client';
@@ -18,18 +19,6 @@ import { z } from 'zod';
 
 
 
-const COMMON_JOBS = [
-    'Software Developer',
-    'Data Analyst',
-    'Customer Service Representative',
-    'Accountant',
-    'Marketing Manager',
-    'Teacher',
-    'Nurse',
-    'Graphic Designer',
-    'Sales Representative',
-    'Administrative Assistant',
-];
 
 const INDUSTRIES = [
     'Technology',
@@ -78,6 +67,13 @@ const assessmentSchema = z.object({
         window: z.enum(['30_days', '60_days', '90_days']),
         goals: z.array(z.string()),
         tasks: z.array(z.string())
+    })),
+    heatmap: z.array(z.object({
+        label: z.string(),
+        state: z.enum(['melting', 'compounding', 'stable']),
+        discretion: z.number().min(1).max(10),
+        automation: z.number().min(1).max(10),
+        why: z.string()
     }))
 });
 
@@ -94,6 +90,11 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
         experienceLevel: 'mid',
         enjoys: [],
     });
+    const PERSONAS = [
+        { id: 'professional', label: 'Professional', desc: 'Working or seeking work', icon: '💼' },
+        { id: 'student', label: 'Student', desc: 'In school or recently graduated', icon: '🎓' },
+        { id: 'teacher', label: 'Teacher / Educator', desc: 'Focus on teaching and prep', icon: '🍎' },
+    ];
     const [skillInput, setSkillInput] = useState('');
     const [result, setResult] = useState<AssessmentResult | null>(null);
     const [executionPack, setExecutionPack] = useState<ExecutionPack | null>(null);
@@ -441,57 +442,82 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             <section>
                                 <h3 className="text-xl font-serif font-bold text-slate-950 mb-6 flex items-center gap-2">
                                     <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] flex items-center justify-center text-sm font-sans">1</span>
-                                    Your role
+                                    Your context
                                 </h3>
-                                <div className="grid md:grid-cols-2 gap-6">
+                                <div className="space-y-8">
+                                    {/* Persona Selection */}
                                     <div>
-                                        <label className="block text-sm font-bold text-slate-700 mb-2">Current role (or goal role)</label>
-                                        <input
-                                            type="text"
-                                            value={formData.jobTitle}
-                                            onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                                            placeholder="e.g. Senior Product Manager or Lead Designer"
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[hsl(var(--primary))]/20 outline-none transition-all"
-                                            required
-                                            autoFocus
-                                        />
-                                        <datalist id="common-jobs">{COMMON_JOBS.map((job) => <option key={job} value={job} />)}</datalist>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">Industry *</label>
-                                        <select
-                                            value={formData.industry}
-                                            onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                                            className="w-full px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
-                                            required
-                                        >
-                                            <option value="">Select…</option>
-                                            {INDUSTRIES.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">Experience (years)</label>
-                                        <input
-                                            type="number"
-                                            value={formData.yearsExperience || ''}
-                                            onChange={(e) => setFormData({ ...formData, yearsExperience: e.target.value ? parseInt(e.target.value) : undefined })}
-                                            className="w-full px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
-                                            placeholder="e.g. 5 (optional)"
-                                        />
-                                    </div>
-                                    <div className="col-span-2">
-                                        <label className="block text-sm font-medium mb-3">What are you optimizing for?</label>
-                                        <div className="grid sm:grid-cols-3 gap-3">
-                                            {GOALS.map((goal) => (
+                                        <label className="block text-sm font-bold text-slate-700 mb-4">I am a...</label>
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                            {PERSONAS.map((p) => (
                                                 <button
-                                                    key={goal.id}
+                                                    key={p.id}
                                                     type="button"
-                                                    onClick={() => setFormData({ ...formData, goal: goal.id as AssessmentInput['goal'] })}
-                                                    className={`p-4 rounded-xl border text-left transition ${formData.goal === goal.id ? 'bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary))]' : 'bg-white border-[hsl(var(--border))] hover:bg-[hsl(var(--muted))]'}`}
+                                                    onClick={() => setFormData({ ...formData, audience: p.id as 'professional' | 'student' | 'teacher' })}
+                                                    className={`p-4 rounded-2xl border text-center transition-all ${formData.audience === p.id ? 'bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary))]' : 'bg-white border-slate-200 hover:bg-slate-50'}`}
                                                 >
-                                                    <div className="font-bold text-sm mb-1">{goal.label}</div>
+                                                    <div className="text-2xl mb-2">{p.icon}</div>
+                                                    <div className="font-bold text-xs text-slate-900">{p.label}</div>
                                                 </button>
                                             ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-sm font-bold text-slate-700 mb-2">
+                                                {formData.audience === 'student' ? 'Main Area of Study' :
+                                                    formData.audience === 'teacher' ? 'Subject / Level' :
+                                                        'Current role (or goal role)'}
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={formData.jobTitle}
+                                                onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
+                                                placeholder={formData.audience === 'student' ? 'e.g. Computer Science' : 'e.g. Senior Product Manager'}
+                                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[hsl(var(--primary))]/20 outline-none transition-all"
+                                                required
+                                                autoFocus
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">
+                                                Industry / Category *
+                                            </label>
+                                            <select
+                                                value={formData.industry}
+                                                onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
+                                                className="w-full px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
+                                                required
+                                            >
+                                                <option value="">Select…</option>
+                                                {INDUSTRIES.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">Experience (years)</label>
+                                            <input
+                                                type="number"
+                                                value={formData.yearsExperience || ''}
+                                                onChange={(e) => setFormData({ ...formData, yearsExperience: e.target.value ? parseInt(e.target.value) : undefined })}
+                                                className="w-full px-4 py-3 rounded-lg bg-white border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none transition"
+                                                placeholder="e.g. 5 (optional)"
+                                            />
+                                        </div>
+                                        <div className="col-span-2">
+                                            <label className="block text-sm font-medium mb-3">What are you optimizing for?</label>
+                                            <div className="grid sm:grid-cols-3 gap-3">
+                                                {GOALS.map((goal) => (
+                                                    <button
+                                                        key={goal.id}
+                                                        type="button"
+                                                        onClick={() => setFormData({ ...formData, goal: goal.id as AssessmentInput['goal'] })}
+                                                        className={`p-4 rounded-xl border text-left transition ${formData.goal === goal.id ? 'bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary))]' : 'bg-white border-[hsl(var(--border))] hover:bg-[hsl(var(--muted))]'}`}
+                                                    >
+                                                        <div className="font-bold text-sm mb-1">{goal.label}</div>
+                                                    </button>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -585,7 +611,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                     <button
                                         onClick={() => {
                                             trackEvent('share_link_click', { variant: shareCopyVariant });
-                                            const text = `I just ran a Strategic Workflow Audit on my role as ${formData.jobTitle}. My Resilience Index is ${result.riskScore}%. Check yours at aicareershield.com`;
+                                            const text = `I just ran a Strategic Workflow Audit on my role as ${formData.jobTitle}. My Resilience Index is ${result.riskScore}%. Check yours at aicareerportal.com`;
                                             navigator.clipboard.writeText(text);
                                             alert('Share text copied to clipboard!');
                                         }}
@@ -594,6 +620,12 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                         🔗 Copy Share Link
                                     </button>
                                 </div>
+                            </section>
+                        )}
+
+                        {result.heatmap && result.heatmap.length > 0 && (
+                            <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+                                <LeverageHeatmap cells={result.heatmap} />
                             </section>
                         )}
 
