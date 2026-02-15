@@ -68,7 +68,7 @@ export default function HomePage() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative overflow-hidden px-6 py-12 md:py-24">
+      <section className="relative overflow-hidden px-6 pt-10 pb-12 md:pt-16 md:pb-24">
         {/* Ambient Background - Adjusted for "Soft UI" depth */}
         <div className="absolute -top-40 -right-40 -z-10 h-96 w-96 rounded-full bg-[hsl(var(--primary))]/10 blur-3xl opacity-60 mix-blend-multiply filter"></div>
         <div className="absolute top-20 right-20 -z-10 h-72 w-72 rounded-full bg-[hsl(var(--cta))]/10 blur-3xl opacity-60 mix-blend-multiply filter"></div>

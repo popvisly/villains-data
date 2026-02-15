@@ -367,7 +367,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
     };
 
     return (
-        <main className="min-h-screen subtle-noise py-20 px-6">
+        <main className="min-h-screen subtle-noise pt-10 pb-20 px-6">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-4 text-slate-950">
@@ -641,7 +641,8 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                         }}
                                         className="px-4 py-2 text-xs font-bold border border-slate-200 rounded-lg hover:bg-slate-50 transition"
                                     >
-                                        📥 Save Brief as Image
+                                        <Download className="w-3.5 h-3.5" />
+                                        <span>Save Brief as Image</span>
                                     </button>
                                     <button
                                         onClick={() => {
@@ -652,7 +653,8 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                         }}
                                         className="px-4 py-2 text-xs font-bold bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition"
                                     >
-                                        🔗 Copy Share Link
+                                        <Link2 className="w-3.5 h-3.5" />
+                                        <span>Copy Share Link</span>
                                     </button>
                                 </div>
                             </section>
@@ -758,7 +760,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             <div className="grid md:grid-cols-2 gap-4">
                                                 {win.tasks.map((task, k) => (
                                                     <div key={k} className="flex items-start gap-3 p-3 rounded-lg border border-slate-50 bg-slate-50/30 text-sm text-slate-800">
-                                                        <span className="text-[hsl(var(--cta))] mt-1">✓</span>
+                                                        <Check className="w-3.5 h-3.5 text-[hsl(var(--cta))] mt-1" />
                                                         {task}
                                                     </div>
                                                 ))}
