@@ -49,15 +49,15 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                         <div className="mb-6">
                             <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider">Most Popular</span>
                             <h3 className="text-2xl font-bold text-slate-950 mt-3">Execution Pack</h3>
-                            <p className="text-sm text-slate-500 mt-1">Foundational resilience roadmap.</p>
+                            <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700">Roadmap + assets delivered in 7 days.</p>
                         </div>
 
                         <div className="flex-1 space-y-4 mb-8">
                             {[
-                                { title: "Strategic Roadmap", desc: "30/60/90 day execution sequence." },
-                                { title: "Skill Gap Map", desc: "Precise matching to your target role." },
-                                { title: "Smart Matcher", desc: "Scan your resume against 10 roles." },
-                                { title: "Career Assets", desc: "Tailored resume bullets & LinkedIn headline." }
+                                { title: "Strategic 30/60/90 Roadmap", desc: "Concrete execution sequence." },
+                                { title: "Personalized Skill Gap Map", desc: "Precise audit vs target role." },
+                                { title: "AI-Role Matcher", desc: "Scan resume vs 10 frontier roles." },
+                                { title: "Elite Career Assets", desc: "Resume bullets & LinkedIn headline." }
                             ].map((item, i) => (
                                 <div key={i} className="flex gap-3">
                                     <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
@@ -75,7 +75,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
 
                         <div className="mt-auto">
                             <div className="text-3xl font-bold text-slate-950 tracking-tight mb-4">
-                                $39 <span className="text-sm text-slate-500 font-normal">one-time</span>
+                                $39 <span className="text-sm text-slate-500 font-normal">one-time access</span>
                             </div>
                             <button
                                 onClick={() => handleUnlock('execution')}
@@ -95,14 +95,14 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                         <div className="mb-6">
                             <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider">Full Access</span>
                             <h3 className="text-2xl font-bold text-slate-950 mt-3">Executive License</h3>
-                            <p className="text-sm text-slate-500 mt-1">The complete professional toolkit.</p>
+                            <p className="text-sm text-slate-500 mt-1 opacity-80">Professional-grade strategic toolbox.</p>
                         </div>
 
                         <div className="flex-1 space-y-4 mb-8">
                             {[
-                                { title: "Everything in Execution", desc: "All roadmap and matching tools." },
-                                { title: "Project Brief Library", desc: "Grounded portfolio deliverables." },
-                                { title: "Interview Simulator", desc: "Unlimited high-stakes practice turns." },
+                                { title: "Everything in Execution", desc: "All core audit & matching tools." },
+                                { title: "Project Brief Library", desc: "Proof-of-work deliverables." },
+                                { title: "Interview Simulator", desc: "Unlimited high-stakes practice." },
                                 { title: "Executive Blueprint PDF", desc: "Downloadable strategy briefing." }
                             ].map((item, i) => (
                                 <div key={i} className="flex gap-3">
@@ -121,7 +121,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
 
                         <div className="mt-auto">
                             <div className="text-3xl font-bold text-slate-950 tracking-tight mb-4">
-                                $99 <span className="text-sm text-slate-500 font-normal">one-time investment</span>
+                                $99 <span className="text-sm text-slate-500 font-normal">one-time access</span>
                             </div>
                             <button
                                 onClick={() => handleUnlock('executive')}

@@ -409,18 +409,18 @@ export default function HomePage() {
             <div className="rounded-3xl border border-slate-200 bg-white p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">The Audit</h3>
-                <p className="text-sm text-slate-500 mt-1">Initial resilience check.</p>
+                <p className="text-sm text-slate-500 mt-1">Foundational resilience check.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$0</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Resilience Index score', 'Top 3 automation drivers', 'Immediate 1-week moves'].map((item) => (
+                {['Resilience Index score', 'Top 3 automation drivers', 'Immediate 7-day moves'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
                     <Check className="w-4 h-4 text-emerald-600" /> {item}
                   </li>
                 ))}
               </ul>
               <Link href="/assessment" className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-xl text-center transition">
-                Start Audit
+                Start Free Audit
               </Link>
             </div>
 
@@ -431,11 +431,11 @@ export default function HomePage() {
               </div>
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Execution Pack</h3>
-                <p className="text-sm text-slate-500 mt-1">Full roadmap & assets.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 underline decoration-emerald-200 decoration-2 underline-offset-4">Full resilience roadmap in 7 days.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Strategic 30/60/90 Roadmap', 'Personalized Skill Gap Map', 'Smart Matcher (resume scan)', 'Tailored LinkedIn/Resume Assets'].map((item) => (
+                {['Strategic 30/60/90 Roadmap', 'Personalized Skill Gap Map', 'Smart Matcher (resume scan)', 'Elite LinkedIn & Resume Assets'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700 font-medium">
                     <Check className="w-4 h-4 text-emerald-600" /> {item}
                   </li>
@@ -450,11 +450,11 @@ export default function HomePage() {
             <div className="rounded-3xl border border-indigo-200 bg-indigo-50/30 p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Executive License</h3>
-                <p className="text-sm text-slate-500 mt-1">Full professional readiness.</p>
+                <p className="text-sm text-slate-500 mt-1">High-leverage strategic toolbox.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Everything in Execution', 'Project Brief Library', 'Unlimited Interview Practice', 'Executive Blueprint PDF'].map((item) => (
+                {['Everything in Execution', 'Professional Project Brief Library', 'Unlimited Mock Interview Practice', 'Executive Blueprint PDF'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
                     <Check className="w-4 h-4 text-indigo-600" /> {item}
                   </li>
@@ -464,6 +464,10 @@ export default function HomePage() {
                 Go Executive
               </Link>
             </div>
+          </div>
+
+          <div className="mt-16 text-center italic text-slate-500">
+            &ldquo;Automation applies faster. Strategy wins offers.&rdquo;
           </div>
         </div>
       </section>
