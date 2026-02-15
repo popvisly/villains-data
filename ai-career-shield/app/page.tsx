@@ -315,7 +315,7 @@ export default function HomePage() {
                   <ul className="space-y-2">
                     {['Explain the logic-gap in the model', 'Detail the stakeholder trade-off', 'Quantify the averted risk'].map((item, i) => (
                       <li key={i} className="flex gap-2 text-[10px] text-emerald-700">
-                        <span className="text-emerald-400">✓</span> {item}
+                        <Check className="w-3 h-3 text-emerald-400" /> {item}
                       </li>
                     ))}
                   </ul>

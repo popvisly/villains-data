@@ -16,6 +16,22 @@ import { trackEvent } from '@/lib/analytics-client';
 import { experimental_useObject as useObject } from 'ai/react';
 import { useExperiment } from '@/hooks/useExperiment';
 import { z } from 'zod';
+import {
+    Briefcase,
+    GraduationCap,
+    BookOpen,
+    Save,
+    Sparkles,
+    ShieldCheck,
+    Rocket,
+    Copy,
+    Scale,
+    Check,
+    ArrowRight,
+    Search,
+    Brain,
+    Shield
+} from 'lucide-react';
 
 
 
@@ -91,9 +107,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
         enjoys: [],
     });
     const PERSONAS = [
-        { id: 'professional', label: 'Professional', desc: 'Working or seeking work', icon: '💼' },
-        { id: 'student', label: 'Student', desc: 'In school or recently graduated', icon: '🎓' },
-        { id: 'teacher', label: 'Teacher / Educator', desc: 'Focus on teaching and prep', icon: '🍎' },
+        { id: 'professional', label: 'Professional', desc: 'Working or seeking work', icon: Briefcase },
+        { id: 'student', label: 'Student', desc: 'In school or recently graduated', icon: GraduationCap },
+        { id: 'teacher', label: 'Educator', desc: 'Teaching & instruction', icon: BookOpen },
     ];
     const [skillInput, setSkillInput] = useState('');
     const [result, setResult] = useState<AssessmentResult | null>(null);
@@ -300,12 +316,12 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
         md += `**Resilience Index**: ${result.riskScore}%\n`;
         md += `**Confidence**: ${result.confidence}\n\n`;
         if (result.immediateActions) {
-            md += `## 🚀 This Week: Immediate Actions\n`;
+            md += `## Immediate Actions\n`;
             result.immediateActions.forEach((a, i) => md += `${i + 1}. ${a}\n`);
             md += `\n`;
         }
         if (result.plan30_60_90) {
-            md += `## 📅 30/60/90 Roadmap\n`;
+            md += `## 30/60/90 Roadmap\n`;
             result.plan30_60_90.forEach(window => {
                 md += `### ${window.window.replace('_', ' ').toUpperCase()}\n`;
                 md += `**Goals**:\n`;
@@ -367,7 +383,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                 {step === 1 && hasSavedSession && (
                     <div className="mb-8 p-6 bg-[hsl(var(--success-subtle))] border border-[hsl(var(--success-border))] rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-500">
                         <div className="flex items-center gap-4">
-                            <span className="text-2xl">💾</span>
+                            <span className="p-2 rounded-lg bg-emerald-100 text-emerald-700">
+                                <Save className="w-5 h-5" />
+                            </span>
                             <div>
                                 <h3 className="font-bold text-slate-900">Welcome back</h3>
                                 <p className="text-sm text-slate-600">We found a saved analysis in progress.</p>
@@ -384,7 +402,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                     <div className="mb-12 animate-in fade-in zoom-in-95 duration-500">
                         <div className="rounded-2xl border border-[hsl(var(--success-border))] bg-[hsl(var(--success-subtle))]/30 p-8 shadow-sm">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-10 h-10 rounded-full bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] flex items-center justify-center text-xl animate-pulse">✨</div>
+                                <div className="w-10 h-10 rounded-full bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] flex items-center justify-center animate-pulse">
+                                    <Sparkles className="w-5 h-5" />
+                                </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-slate-950">Consulting Analyst briefing...</h3>
                                     <p className="text-sm text-slate-700">Synthesizing market signals and automation vectors.</p>
@@ -456,7 +476,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                                     onClick={() => setFormData({ ...formData, audience: p.id as 'professional' | 'student' | 'teacher' })}
                                                     className={`p-4 rounded-2xl border text-center transition-all ${formData.audience === p.id ? 'bg-[hsl(var(--primary))]/10 border-[hsl(var(--primary))] ring-1 ring-[hsl(var(--primary))]' : 'bg-white border-slate-200 hover:bg-slate-50'}`}
                                                 >
-                                                    <div className="text-2xl mb-2">{p.icon}</div>
+                                                    <div className="flex justify-center mb-3">
+                                                        <p.icon className={`w-6 h-6 ${formData.audience === p.id ? 'text-[hsl(var(--primary))]' : 'text-slate-400'}`} />
+                                                    </div>
                                                     <div className="font-bold text-xs text-slate-900">{p.label}</div>
                                                 </button>
                                             ))}
@@ -474,7 +496,11 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                                 type="text"
                                                 value={formData.jobTitle}
                                                 onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                                                placeholder={formData.audience === 'student' ? 'e.g. Computer Science' : 'e.g. Senior Product Manager'}
+                                                placeholder={
+                                                    formData.audience === 'student' ? 'e.g. Computer Science' :
+                                                        formData.audience === 'teacher' ? 'e.g. High School English (Year 11-12)' :
+                                                            'e.g. Senior Product Manager'
+                                                }
                                                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[hsl(var(--primary))]/20 outline-none transition-all"
                                                 required
                                                 autoFocus
@@ -572,6 +598,15 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             </section>
 
                             <div className="pt-4">
+                                {formData.audience === 'teacher' && (
+                                    <div className="mb-6 p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-3">
+                                        <Shield className="w-5 h-5 text-slate-400" />
+                                        <p className="text-sm text-slate-700 font-medium">
+                                            Strategic Audit focus: Identifying &quot;Mentorship Moats&quot; vs. automatable instruction workflows.
+                                        </p>
+                                    </div>
+                                )}
+
                                 <button
                                     type="submit"
                                     disabled={!formData.jobTitle || !formData.industry || formData.skills.length < 1 || isLoading}
@@ -633,13 +668,18 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             <div className="rounded-2xl border border-[hsl(var(--success-border))] bg-[hsl(var(--success-subtle))]/70 p-8 shadow-sm">
                                 <div className="flex items-center justify-between mb-6">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] flex items-center justify-center text-xl">🚀</div>
+                                        <div className="w-10 h-10 rounded-full bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] flex items-center justify-center">
+                                            <Rocket className="w-5 h-5" />
+                                        </div>
                                         <div>
                                             <h3 className="text-xl font-bold text-slate-950">This Week: High‑leverage moves</h3>
                                             <p className="text-sm text-slate-700">Start here to build readiness through real outputs</p>
                                         </div>
                                     </div>
-                                    <button onClick={copyAsMarkdown} className="px-4 py-2 rounded-lg text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2"><span>📋 Copy brief</span></button>
+                                    <button onClick={copyAsMarkdown} className="px-4 py-2 rounded-lg text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2">
+                                        <Copy className="w-3.5 h-3.5" />
+                                        <span>Copy brief</span>
+                                    </button>
                                 </div>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {result.immediateActions.map((action, i) => (
@@ -654,8 +694,8 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
 
                         <section className="rounded-2xl border border-[hsl(var(--border))] bg-white p-8">
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="p-3 rounded-xl bg-[hsl(var(--warning-subtle))]">
-                                    <span className="text-2xl">⚖️</span>
+                                <div className="p-3 rounded-xl bg-[hsl(var(--warning-subtle))] text-[hsl(var(--warning-foreground))]">
+                                    <Scale className="w-6 h-6" />
                                 </div>
                                 <div>
                                     <h2 className="text-2xl font-bold tracking-tight text-slate-950">Resilience Index</h2>
