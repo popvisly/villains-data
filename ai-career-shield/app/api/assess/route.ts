@@ -83,7 +83,8 @@ export async function POST(req: NextRequest) {
              - Select 2-3 role adjacencies from the candidates above.
              - Be urgent but constructive.
              - Ground the 30/60/90 plan in the starterPlan and proofProjects of selected roles.
-             - Generate 4-6 heatmap cells that specifically contrast "Melting" (repeatable execution) with "Compounding" (high-stakes judgment).`,
+             - Generate 4-6 heatmap cells that specifically contrast "Melting" (repeatable execution) with "Compounding" (high-stakes judgment).
+             - ALWAYS generate the "teaserNarrative" to provide a free preview of the execution pack.`,
         prompt: `Analyze this context: 
              Persona: ${audience || 'Professional'}
              Subject/Title: ${jobTitle}
