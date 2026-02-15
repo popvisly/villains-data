@@ -142,10 +142,11 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
 
                         <div className="flex-1 space-y-4 mb-8">
                             {[
-                                { title: "Everything in Execution Pack", desc: "All core audit & matching tools." },
-                                { title: "Project brief library", desc: "Professional proof-of-work library." },
-                                { title: "Failure-Mode interview simulations", desc: "High-stakes practice for backlash prep." },
-                                { title: "Executive Blueprint PDF", desc: "Share-ready strategy briefing." }
+                                { title: "Proof Kit (recommended)", desc: "A complete positioning package: executive narrative, portfolio-ready brief, and interview frameworks." },
+                                { title: "Failure-Mode interview simulations", desc: "Practice the questions that screen for judgment, tradeoffs, and accountability." },
+                                { title: "Project brief library", desc: "Professional proof-of-work templates you can ship and show." },
+                                { title: "Executive Blueprint PDF (share-ready)", desc: "A clean briefing you can reuse for LinkedIn, networking, and interviews." },
+                                { title: "Everything in Execution Pack", desc: "All core audit outputs and matching tools." }
                             ].map((item, i) => (
                                 <div key={i} className="flex gap-3">
                                     <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">

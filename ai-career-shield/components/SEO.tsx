@@ -1,0 +1,42 @@
+interface SEOProps {
+    title?: string;
+    description?: string;
+    url?: string;
+    ogImage?: string;
+}
+
+export default function SEO({
+    title = "AI Career Portal | Strategic Workflow Audit",
+    description = "Stay valuable in the AI-era with a definitive execution sequence and strategic resilience roadmap.",
+    url = "https://ai-career-portal.vercel.app",
+    ogImage = "/og-image.png"
+}: SEOProps) {
+
+    const siteName = "AI Career Portal";
+
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": siteName,
+        "description": description,
+        "url": url,
+        "applicationCategory": "CareerService",
+        "operatingSystem": "All",
+        "author": {
+            "@type": "Organization",
+            "name": "Villains At Large"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0.00",
+            "priceCurrency": "USD"
+        }
+    };
+
+    return (
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+    );
+}

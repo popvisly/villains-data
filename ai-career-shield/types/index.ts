@@ -79,6 +79,9 @@ export interface AssessmentResult {
 
     /** Phase 4.1: Specialist Leverage Heatmap */
     heatmap?: HeatmapCell[];
+
+    /** Phase 4.2: Free Teaser of the Proof Kit (Executive Narrative) */
+    teaserNarrative?: import('./executionPack').ExecutiveNarrative;
 }
 
 export interface RiskFactor {

@@ -7,6 +7,7 @@ const lora = Lora({ subsets: ['latin'], variable: '--font-lora' });
 const raleway = Raleway({ subsets: ['latin'], variable: '--font-raleway' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ai-career-portal.vercel.app'),
   title: 'AI Career Portal | Build Strategic Resilience',
   description:
     'Audit your role and generate a strategic resilience roadmap. Get a precise 30/60/90-day execution sequence to stay valuable in the AI-era.',
@@ -18,6 +19,9 @@ export const metadata: Metadata = {
     'AI job risk',
     'executive roadmap',
   ],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'AI Career Portal | Strategic Workflow Audit',
     description: 'Audit your role and generate a 30/60/90-day resilience sequence.',
@@ -33,6 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
+import SEO from '@/components/SEO';
+
 export default function RootLayout({
   children,
 }: {
@@ -40,7 +46,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${lora.variable} ${raleway.variable} font-sans`}>{children}</body>
+      <body className={`${inter.variable} ${lora.variable} ${raleway.variable} font-sans`}>
+        <SEO />
+        {children}
+      </body>
     </html>
   );
 }

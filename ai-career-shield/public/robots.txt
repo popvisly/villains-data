@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://ai-career-portal.vercel.app/sitemap.xml
+
+# AI Crawler Management
+# We allow GPTBot and ClaudeBot to ensure we're cited in AI search engines (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Block generic AI training if needed (Optional, currently keeping open for visibility)
+# User-agent: Google-Extended
+# Disallow: /

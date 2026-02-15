@@ -104,8 +104,8 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: ProjectBrief[], isPaid: 
     if (!isPaid) {
         return (
             <LockedFeature
-                title="Project Briefs Locked"
-                description="Unlock detailed, portfolio-ready project briefs designed to close your skill gaps and prove your value."
+                title="Portfolio Briefs Locked"
+                description="Unlock professional-grade project briefs designed to close your skill gaps and prove your value."
             />
         );
     }
@@ -265,7 +265,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                         className={`pb-4 text-sm font-bold transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'briefs' ? 'text-emerald-900' : 'text-slate-500 hover:text-slate-800'
                             }`}
                     >
-                        Project Briefs
+                        Portfolio Briefs
                         {(!isPaid || tier === 'execution') && <Lock className="w-3 h-3 mb-0.5 text-amber-500" />}
                         {activeTab === 'briefs' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
@@ -298,7 +298,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                         className={`pb-4 text-sm font-bold transition-colors relative whitespace-nowrap flex items-center gap-2 ${activeTab === 'interview' ? 'text-emerald-900' : 'text-slate-500 hover:text-slate-800'
                             }`}
                     >
-                        Interview Prep
+                        Interview Pack
                         {(!isPaid || tier === 'execution') && <Lock className="w-3 h-3 mb-0.5 text-amber-500" />}
                         {activeTab === 'interview' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
@@ -356,8 +356,8 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                                     <MessageSquare className="w-5 h-5 text-indigo-600" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-slate-950">Interview Simulator</h3>
-                                    <p className="text-sm text-slate-600">Practice defending your strategic roadmap with AI.</p>
+                                    <h3 className="font-bold text-slate-950">Failure-Mode Interview Simulator</h3>
+                                    <p className="text-sm text-slate-600">Practice questions that screen for judgment, tradeoffs, and accountability.</p>
                                 </div>
                             </div>
                             <InterviewSimulator

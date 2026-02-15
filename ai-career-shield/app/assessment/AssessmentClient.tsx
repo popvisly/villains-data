@@ -7,6 +7,7 @@ import { generateExecutionPack } from '@/app/actions/assessment';
 import type { AssessmentInput, AssessmentResult } from '@/types';
 import { ShareBriefCard } from '@/components/ShareBriefCard';
 import { UpsellCard } from '@/components/UpsellCard';
+import { ProofKitTeaser } from '@/components/ProofKitTeaser';
 import { ExecutionPackView } from '@/components/ExecutionPackView';
 import { InterviewSimulator } from '@/components/InterviewSimulator';
 import { LeverageHeatmap } from '@/components/LeverageHeatmap';
@@ -30,7 +31,9 @@ import {
     ArrowRight,
     Search,
     Brain,
-    Shield
+    Shield,
+    Download,
+    Link2
 } from 'lucide-react';
 
 
@@ -769,6 +772,17 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                     ))}
                                 </div>
                             </section>
+                        )}
+
+                        {!hasAccess && result?.teaserNarrative && (
+                            <ProofKitTeaser
+                                narrative={result.teaserNarrative}
+                                onUpgrade={() => {
+                                    const el = document.getElementById('pricing');
+                                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                    else router.push('/assessment#pricing');
+                                }}
+                            />
                         )}
 
                         {ENABLE_EXECUTION_PACK && (

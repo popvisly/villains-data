@@ -61,10 +61,20 @@ Return ONLY valid JSON that matches this schema exactly:
   "plan30_60_90": [
     {
       "window": "30_days"|"60_days"|"90_days",
-      "goals": string[] (1-3),
-      "tasks": string[] (3-7, concrete, non-vague, grounded in the role's library data)
+      "goals": string[],
+      "tasks": string[]
     }
-  ]
+  ],
+  "teaserNarrative": {
+    "positioningThesis": string (max 35 words; senior institutional tone),
+    "proofPoints": [
+      { "bullet": string (exactly 1 bullet; max 18 words), "isQuantified": boolean, "source": "user"|"inferred", "evidence": string }
+    ],
+    "teaserInterviewQuestion": {
+      "question": string,
+      "strongAnswerBullets": string[] (2-3 bullets)
+    }
+  }
 }
 
 Rules:
@@ -191,6 +201,17 @@ Rules:
         res.improvementSuggestion = "Add more specific technical skills and tools you use to improve plan grounding.";
       }
 
+      // 6. Teaser Narrative repair
+      if (!res.teaserNarrative) {
+        res.teaserNarrative = {
+          positioningThesis: "Strategic resilient professional focused on high-stakes workflow ownership.",
+          proofPoints: [{ bullet: "Advancing from execution volume to high-discretion judgment.", isQuantified: false, source: "inferred", evidence: "" }],
+          leverageShift: { commoditizing: [], compounding: [] },
+          signatureProject: { title: "", whyNow: "", kpi: { name: "", isPlaceholder: true }, timeline: "4 weeks" },
+          interviewAngle: { tradeoff: "Balancing immediate delivery speed with long-term system stability.", failureMode: "", accountability: "" }
+        };
+      }
+
       return res;
     };
 
@@ -292,10 +313,20 @@ ${gapSkillsRaw.join(', ')}
 Instructions:
 1. Generate 2 ProjectBriefs. Each MUST map strictly to one of the roles' "proofProjects".
 2. Generate 1 SkillGapMap for the primary role (${targetRole.title}).
-3. Generate "Career Assets" tailored to the transition (Resume bullets, LinkedIn profile).
-4. For each ProjectBrief, generate a "README.md" template users can adapt for GitHub.
-5. Use the LLM to provide high-value "why it matters", "how to build", and "portfolio packaging" context.
-6. Return ONLY valid JSON matching the ExecutionPack schema (version: 1).
+3. Generate "Executive Narrative" positioning (The Proof Kit centerpiece).
+4. Generate "Career Assets" tailored to the transition (Resume bullets, LinkedIn profile).
+5. For each ProjectBrief, generate a "README.md" template users can adapt for GitHub.
+6. Use the LLM to provide high-value "why it matters", "how to build", and "portfolio packaging" context.
+7. Return ONLY valid JSON matching the ExecutionPack schema (version: 1).
+
+EXECUTIVE NARRATIVE RULES:
+- Thesis: max 35 words. Institutional, senior tone.
+- Proof points: exactly 3 bullets. Max 18 words each.
+- Source/Evidence: If based on user input, set source: "user" and include the quote/fragment in 'evidence'. If suggested framings, set source: "inferred".
+- Quantification: If a user metric is missing, use qualitative phrasing, set isQuantified: false, and provide a metric example in 'metricToValidate'.
+- Leverage bullets: 3+3 bullets. Max 8 words each.
+- Signature Project: 'title' MUST EXACTLY MATCH one of the ProjectBrief titles generated in this same call. KPI must be structured. Timeline must be one of: "2 weeks", "4 weeks", "6 weeks".
+- Interview Angle: 3 bullets (tradeoff, failureMode, accountability). Max 20 words each.
 
 JSON Schema Reference:
 {
@@ -316,9 +347,30 @@ JSON Schema Reference:
       "portfolioPackaging": { "headline": string, "whatToShow": string[], "talkTrack": string[] },
       "variations": string[],
       "starterResources": [{ "title": string, "url": string, "type": "doc"|"tool"|"course"|"video" }],
-      "readme": string (Markdown template with sections: Title, Overview, Tech Stack, Key Features, How to Run)
+      "readme": string
     }
   ],
+  "executiveNarrative": {
+    "positioningThesis": string,
+    "proofPoints": [
+      { "bullet": string, "isQuantified": boolean, "metricToValidate": string, "source": "user"|"inferred", "evidence": string }
+    ],
+    "leverageShift": {
+      "commoditizing": string[],
+      "compounding": string[]
+    },
+    "signatureProject": {
+      "title": string,
+      "whyNow": string,
+      "kpi": { "name": string, "target": string, "isPlaceholder": boolean },
+      "timeline": "2 weeks"|"4 weeks"|"6 weeks"
+    },
+    "interviewAngle": {
+      "tradeoff": string,
+      "failureMode": string,
+      "accountability": string
+    }
+  },
   "skillGapMap": {
     "roleId": string,
     "roleTitle": string,
@@ -329,12 +381,12 @@ JSON Schema Reference:
     "notes": string[]
   },
   "careerAssets": {
-    "resumeBullets": string[] (5-7 powerful action-verb bullets tailored to the target role),
+    "resumeBullets": string[] (5-7 powerful action-verb bullets),
     "linkedIn": {
-        "headline": string (2-3 variations),
-        "aboutSection": string (Draft focusing on the pivot)
+        "headline": string,
+        "aboutSection": string
     },
-    "coverLetter": string (Skeleton for target role),
+    "coverLetter": string,
     "interviewPrep": {
         "questions": string[],
         "starStories": string[]
@@ -402,6 +454,36 @@ JSON Schema Reference:
 
     if (!pack.skillGapMap || !validRoleIds.has(pack.skillGapMap.roleId)) return false;
     if (!pack.skillGapMap.gapSkills?.length) return false;
+
+    // --- Executive Narrative Validation & Alignment ---
+    if (pack.executiveNarrative) {
+      const narrative = pack.executiveNarrative;
+      const allowedTitles = new Set(briefs.map(b => b.title));
+
+      // Title Alignment: Force narrative title to match one of the briefs
+      if (!allowedTitles.has(narrative.signatureProject.title)) {
+        console.warn(`Narrative Title Drift: '${narrative.signatureProject.title}' not found in briefs. Realigning...`);
+        narrative.signatureProject.title = briefs[0].title;
+      }
+
+      // Word Count Repair (Best-effort truncation for senior tone)
+      const truncate = (str: string, max: number) => {
+        const words = str.split(/\s+/);
+        return words.length > max ? words.slice(0, max).join(' ') + '...' : str;
+      };
+
+      narrative.positioningThesis = truncate(narrative.positioningThesis, 35);
+      narrative.proofPoints = narrative.proofPoints.slice(0, 3).map(p => ({
+        ...p,
+        bullet: truncate(p.bullet, 18),
+        source: (p.source === 'user' && (!p.evidence || p.evidence.trim().length === 0)) ? 'inferred' : (p.source || 'inferred')
+      }));
+      narrative.leverageShift.commoditizing = narrative.leverageShift.commoditizing.slice(0, 4).map(s => truncate(s, 8));
+      narrative.leverageShift.compounding = narrative.leverageShift.compounding.slice(0, 4).map(s => truncate(s, 8));
+      narrative.interviewAngle.tradeoff = truncate(narrative.interviewAngle.tradeoff, 20);
+      narrative.interviewAngle.failureMode = truncate(narrative.interviewAngle.failureMode, 20);
+      narrative.interviewAngle.accountability = truncate(narrative.interviewAngle.accountability, 20);
+    }
 
     return true;
   };

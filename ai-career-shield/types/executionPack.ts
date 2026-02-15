@@ -86,10 +86,45 @@ export interface MatchResult {
     matches: ResumeMatch[];
 }
 
+export interface ExecutiveNarrative {
+    positioningThesis: string; // max 35 words
+    proofPoints: {
+        bullet: string;         // max 18 words
+        isQuantified: boolean;
+        metricToValidate?: string;
+        source: "user" | "inferred";
+        evidence?: string;      // short quote/fragment from user input
+    }[];
+    leverageShift: {
+        commoditizing: string[]; // 2-4 bullets, max 8 words each
+        compounding: string[];    // 2-4 bullets, max 8 words each
+    };
+    signatureProject: {
+        title: string;          // MUST match one of the ProjectBrief titles
+        whyNow: string;
+        kpi: {
+            name: string;
+            target?: string;
+            isPlaceholder?: boolean;
+        };
+        timeline: "2 weeks" | "4 weeks" | "6 weeks";
+    };
+    interviewAngle: {
+        tradeoff: string;       // max 20 words
+        failureMode: string;    // max 20 words
+        accountability: string; // max 20 words
+    };
+    teaserInterviewQuestion?: {
+        question: string;
+        strongAnswerBullets: string[];
+    };
+}
+
 export interface ExecutionPack {
     version: 1;
     projectBriefs: ProjectBrief[];
     skillGapMap: SkillGapMap;
     careerAssets?: CareerAssets;
     resumeMatches?: ResumeMatch[];
+    executiveNarrative?: ExecutiveNarrative;
 }

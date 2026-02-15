@@ -31,7 +31,7 @@ function Nav() {
             href="/assessment"
             className="rounded-xl bg-[hsl(var(--cta))] px-5 py-2.5 font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 transition-all shadow-sm shadow-emerald-500/20"
           >
-            Audit Your Role
+            Run Strategic Audit
           </Link>
         </nav>
 
@@ -114,7 +114,7 @@ export default function HomePage() {
                 href="/assessment"
                 className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-8 py-4 text-lg font-bold text-[hsl(var(--cta-foreground))] shadow-lg shadow-emerald-500/25 hover:opacity-90 hover:translate-y-[-1px] hover:shadow-xl transition-all"
               >
-                Audit Your Role
+                Run Strategic Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link href="#preview" className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-600 hover:text-[hsl(var(--primary))] transition-colors group">
@@ -244,7 +244,7 @@ export default function HomePage() {
               href="/assessment"
               className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-8 py-4 text-lg font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 shadow-lg shadow-emerald-500/25 transition-all hover:translate-y-[-1px]"
             >
-              Audit Your Role
+              Run Strategic Audit
             </Link>
           </div>
         </div>
@@ -473,7 +473,7 @@ export default function HomePage() {
               href="/assessment"
               className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-10 py-5 text-xl font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 shadow-xl shadow-emerald-500/20 transition-all hover:scale-[1.02]"
             >
-              Audit Your Role
+              Run Strategic Audit
               <ArrowRight className="ml-2 h-6 w-6" />
             </Link>
             <p className="mt-4 text-sm text-slate-500">~2 minutes • no login required</p>
@@ -518,7 +518,7 @@ export default function HomePage() {
                 onClick={() => trackEvent('pricing_plan_click', { tier: 'free', location: 'landing_page' })}
                 className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-xl text-center transition"
               >
-                Start Free Audit
+                Run Strategic Audit
               </Link>
             </div>
 
@@ -557,7 +557,13 @@ export default function HomePage() {
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Everything in Execution Pack', 'Professional project brief library', 'Failure-Mode interview simulations', 'Executive Blueprint PDF (share-ready)'].map((item) => (
+                {[
+                  'Proof Kit: narrative + portfolio + interview readiness',
+                  'Failure-Mode interview simulations',
+                  'Professional project brief library',
+                  'Executive Blueprint PDF (share-ready)',
+                  'Everything in Execution Pack',
+                ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
                     <Check className="w-4 h-4 text-indigo-600" /> {item}
                   </li>
@@ -571,6 +577,9 @@ export default function HomePage() {
                 Go Executive
               </Link>
               <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes 12 months of updates. Designed for higher-leverage roles.</p>
+              <p className="mt-4 text-[10px] text-center text-indigo-600 font-medium italic">
+                &ldquo;Built to help you sound senior under pressure—not just polished on paper.&rdquo;
+              </p>
             </div>
           </div>
 

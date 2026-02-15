@@ -1,0 +1,20 @@
+# AI Career Portal
+
+> Don't just apply faster—become the candidate AI can’t replace.
+
+## Mission
+The AI Career Portal is designed to help professionals, students, and educators navigate the transition to an AI-augmented workforce. We provide strategic workflow audits, resilience roadmaps, and interview preparation artifacts ("Proof Kits") to differentiate human talent from automated "slop."
+
+## Core Features
+- **Strategic Workflow Audit**: Identifies high-leverage human "moats" vs. automatable instruction.
+- **Resilience Roadmap**: A 30/60/90-day execution sequence for career stability.
+- **Proof Kit**: Interview-ready artifacts including Executive Narratives and Failure-Mode Interview Packs.
+- **Leverage Heatmap**: Visualizing where human decision quality out competes execution volume.
+
+## Target Audience
+- **Professionals**: Transitioning or upskilling in AI-impacted industries.
+- **Students**: Future-proofing their career entry strategy.
+- **Educators**: Auditing instructional workflows for AI leverage.
+
+## Technical Details
+This is a Next.js application focused on providing actionable career intelligence through a combination of proprietary framework logic and AI-driven analysis.
