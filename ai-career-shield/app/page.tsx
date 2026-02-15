@@ -428,6 +428,10 @@ export default function HomePage() {
                 q: 'What does one-time purchase include?',
                 a: 'Includes 12 months of updates. You’ll keep access to what you’ve unlocked.',
               },
+              {
+                q: 'Will AI replace my job in 5 years?',
+                a: 'Usually it’s not replacement—it’s compression. AI automates first‑pass execution, and organizations keep fewer people to own the workflow. This audit shows what’s being commoditized in your role, what’s compounding, and what to build next.',
+              },
             ].map((item) => (
               <details key={item.q} className="group glass-panel rounded-2xl p-6 open:ring-1 open:ring-[hsl(var(--primary))]/20">
                 <summary className="cursor-pointer list-none flex items-center justify-between text-lg font-bold text-slate-900 group-hover:text-[hsl(var(--primary))] transition-colors">
@@ -469,6 +473,34 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5-YEAR REALITY CHECK (Super-short variant) */}
+      <section className="px-6 py-24 bg-white border-t border-slate-100">
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
+            title="The 5‑Year Reality Check"
+            subtitle="Most jobs won’t disappear. They’ll be redesigned—fast."
+          />
+
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {[
+              { title: "Role Compression", desc: "Teams get smaller before roles 'vanish.' AI removes the first‑pass work." },
+              { title: "Leverage Shift", desc: "Value is moving to judgment and risk. Climb the discretion ladder." },
+              { title: "Signal Shift", desc: "Polished GPT-answers are cheap. Failure-modes and decision quality are the signal." }
+            ].map((card, i) => (
+              <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                <h4 className="font-bold text-slate-900 mb-2">{card.title}</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">{card.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <p className="text-[10px] text-slate-400 uppercase tracking-widest font-medium italic">
+              Not a prediction market—an evidence‑based diagnostic.
+            </p>
           </div>
         </div>
       </section>

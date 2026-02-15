@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { createCheckoutSession } from '@/app/actions/stripe';
 import { trackEvent } from '@/lib/analytics-client';
+import { Zap } from 'lucide-react';
 
 interface PaywallProps {
     hasAccess: boolean;
@@ -52,7 +53,38 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
 
             {/* Unlock Cards - Centered */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl px-4 z-20">
-                <div className="grid md:grid-cols-2 gap-6 pb-20">
+                {/* 5-Year Outlook Module (editorial bridge) */}
+                <div className="mb-16 glass-panel rounded-[2.5rem] p-8 md:p-12 border-slate-200 bg-white/50 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-indigo-500/5 rounded-full blur-3xl"></div>
+                    <div className="relative">
+                        <h3 className="text-2xl font-bold text-slate-900 font-serif mb-2">5-Year Outlook (for your role)</h3>
+                        <p className="text-sm text-slate-500 mb-8">A practical read on what’s getting cheaper—and what’s gaining leverage.</p>
+
+                        <div className="grid gap-6 md:grid-cols-3">
+                            <div className="space-y-2">
+                                <div className="text-xs font-bold uppercase tracking-widest text-slate-400">Getting commoditized</div>
+                                <p className="text-sm text-slate-600 leading-relaxed">First‑pass execution and template work will be cheaper and faster.</p>
+                            </div>
+                            <div className="space-y-2">
+                                <div className="text-xs font-bold uppercase tracking-widest text-[hsl(var(--primary))]">Gaining leverage</div>
+                                <p className="text-sm text-slate-600 leading-relaxed">Judgment, prioritization, and accountable decisions will command the premium.</p>
+                            </div>
+                            <div className="space-y-2">
+                                <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Your next move</div>
+                                <p className="text-sm text-slate-600 leading-relaxed">Use the roadmap to shift 1–2 workstreams toward higher‑discretion ownership.</p>
+                            </div>
+                        </div>
+
+                        <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-3">
+                            <Zap className="w-4 h-4 text-[hsl(var(--primary))]" />
+                            <p className="text-xs font-bold text-[hsl(var(--primary))] uppercase tracking-tight">
+                                Unlock the 30/60/90 roadmap + assets to operationalize this shift.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
                     {/* Tier 1: Execution Pack */}
                     <div className="rounded-3xl border border-slate-200 bg-white/95 backdrop-blur-sm p-8 shadow-xl relative overflow-hidden flex flex-col">
                         <div className="mb-6">
