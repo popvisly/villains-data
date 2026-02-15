@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import { createCheckoutSession } from '@/app/actions/stripe';
 
-import { EXECUTION_PACK_PRICE_DISPLAY } from '@/lib/constants';
-
 interface PaywallProps {
     hasAccess: boolean;
     assessmentId: string;
@@ -14,10 +12,10 @@ interface PaywallProps {
 export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, children }) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleUnlock = async () => {
+    const handleUnlock = async (tier: 'execution' | 'executive' = 'execution') => {
         setIsLoading(true);
         try {
-            const result = await createCheckoutSession(assessmentId);
+            const result = await createCheckoutSession(assessmentId, tier);
             if (result.url) {
                 window.location.href = result.url;
             }
@@ -43,66 +41,95 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, child
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(248,250,252,0.85)] to-[rgba(248,250,252,0.96)] z-10" />
             </div>
 
-            {/* Unlock Card - Absolute Center */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md px-4 z-20">
-                <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm relative overflow-hidden">
-                    <div className="text-center space-y-6">
-                        <div className="mx-auto w-12 h-12 rounded-full bg-emerald-600/10 border border-emerald-200 flex items-center justify-center mb-2">
-                            <svg className="w-6 h-6 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
+            {/* Unlock Cards - Centered */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl px-4 z-20">
+                <div className="grid md:grid-cols-2 gap-6 pb-20">
+                    {/* Tier 1: Execution Pack */}
+                    <div className="rounded-3xl border border-slate-200 bg-white/95 backdrop-blur-sm p-8 shadow-xl relative overflow-hidden flex flex-col">
+                        <div className="mb-6">
+                            <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider">Most Popular</span>
+                            <h3 className="text-2xl font-bold text-slate-950 mt-3">Execution Pack</h3>
+                            <p className="text-sm text-slate-500 mt-1">Foundational resilience roadmap.</p>
                         </div>
 
-                        <div>
-                            <h3 className="text-2xl font-bold text-slate-950 mb-2">Secure Your Execution Sequence</h3>
-                            <div className="space-y-4 text-left mt-6">
-                                {[
-                                    { title: "Strategic Roadmap", desc: "A definitive 30/60/90-day sequence for operational resilience." },
-                                    { title: "Portfolio Deliverables", desc: "2 high-impact project briefs ready for your professional record." },
-                                    { title: "Market Adjacencies", desc: "Precise role pivots mapped to current institutional demand." }
-                                ].map((item, i) => (
-                                    <div key={i} className="flex gap-3">
-                                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
-                                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-bold text-slate-900">{item.title}</p>
-                                            <p className="text-xs text-slate-600">{item.desc}</p>
-                                        </div>
+                        <div className="flex-1 space-y-4 mb-8">
+                            {[
+                                { title: "Strategic Roadmap", desc: "30/60/90 day execution sequence." },
+                                { title: "Skill Gap Map", desc: "Precise matching to your target role." },
+                                { title: "Smart Matcher", desc: "Scan your resume against 10 roles." },
+                                { title: "Career Assets", desc: "Tailored resume bullets & LinkedIn headline." }
+                            ].map((item, i) => (
+                                <div key={i} className="flex gap-3">
+                                    <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
+                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                        </svg>
                                     </div>
-                                ))}
+                                    <div>
+                                        <p className="text-sm font-bold text-slate-900">{item.title}</p>
+                                        <p className="text-xs text-slate-600">{item.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-auto">
+                            <div className="text-3xl font-bold text-slate-950 tracking-tight mb-4">
+                                $39 <span className="text-sm text-slate-500 font-normal">one-time</span>
                             </div>
+                            <button
+                                onClick={() => handleUnlock('execution')}
+                                disabled={isLoading}
+                                className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                            >
+                                {isLoading ? 'Processing...' : 'Unlock Execution Pack'}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Tier 2: Executive License */}
+                    <div className="rounded-3xl border-2 border-indigo-200 bg-white/95 backdrop-blur-sm p-8 shadow-2xl relative overflow-hidden flex flex-col ring-4 ring-indigo-50/50">
+                        <div className="absolute top-0 right-0 px-4 py-1.5 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-bl-xl">
+                            Elite Authority
+                        </div>
+                        <div className="mb-6">
+                            <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider">Full Access</span>
+                            <h3 className="text-2xl font-bold text-slate-950 mt-3">Executive License</h3>
+                            <p className="text-sm text-slate-500 mt-1">The complete professional toolkit.</p>
                         </div>
 
-                        <div className="text-3xl font-bold text-slate-950 tracking-tight">
-                            {EXECUTION_PACK_PRICE_DISPLAY}{' '}
-                            <span className="text-sm text-slate-500 font-normal">one-time (no subscription)</span>
+                        <div className="flex-1 space-y-4 mb-8">
+                            {[
+                                { title: "Everything in Execution", desc: "All roadmap and matching tools." },
+                                { title: "Project Brief Library", desc: "Grounded portfolio deliverables." },
+                                { title: "Interview Simulator", desc: "Unlimited high-stakes practice turns." },
+                                { title: "Executive Blueprint PDF", desc: "Downloadable strategy briefing." }
+                            ].map((item, i) => (
+                                <div key={i} className="flex gap-3">
+                                    <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600">
+                                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-bold text-slate-900">{item.title}</p>
+                                        <p className="text-xs text-slate-600">{item.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
 
-                        <button
-                            onClick={handleUnlock}
-                            disabled={isLoading}
-                            className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-                        >
-                            {isLoading ? (
-                                <span className="flex items-center justify-center gap-2">
-                                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                    </svg>
-                                    Redirecting…
-                                </span>
-                            ) : (
-                                'Continue to checkout'
-                            )}
-                        </button>
-
-                        <div className="flex items-center justify-center gap-2 text-[10px] text-slate-500 uppercase tracking-widest font-semibold">
-                            <span>Instant access</span>
-                            <span className="w-1 h-1 bg-slate-300 rounded-full" />
-                            <span>One-time payment via Stripe</span>
+                        <div className="mt-auto">
+                            <div className="text-3xl font-bold text-slate-950 tracking-tight mb-4">
+                                $99 <span className="text-sm text-slate-500 font-normal">one-time investment</span>
+                            </div>
+                            <button
+                                onClick={() => handleUnlock('executive')}
+                                disabled={isLoading}
+                                className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                            >
+                                {isLoading ? 'Processing...' : 'Unlock Executive License'}
+                            </button>
                         </div>
                     </div>
                 </div>

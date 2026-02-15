@@ -4,15 +4,19 @@ import { stripe } from '@/lib/stripe';
 import { supabaseAdmin } from '@/lib/supabase';
 import { cookies, headers } from 'next/headers';
 import crypto from 'crypto';
-import { EXECUTION_PACK_PRICE_CENTS } from '@/lib/constants';
+import { PRICE_EXECUTION_PACK_CENTS, PRICE_EXECUTIVE_LICENSE_CENTS } from '@/lib/constants';
 
 const EP_COOKIE = 'aicp_ep';
 
-export async function createCheckoutSession(assessmentId: string) {
+export async function createCheckoutSession(assessmentId: string, tier: 'execution' | 'executive' = 'execution') {
     const origin = (await headers()).get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3015';
 
-    // Specific price ID or ad-hoc price data
-    // For v1, we'll use ad-hoc price data to avoid needing a Product set up in Stripe Dashboard
+    const priceCents = tier === 'executive' ? PRICE_EXECUTIVE_LICENSE_CENTS : PRICE_EXECUTION_PACK_CENTS;
+    const productName = tier === 'executive' ? 'AI Career Portal - Executive License' : 'AI Career Portal - Execution Pack';
+    const productDesc = tier === 'executive'
+        ? 'Full Roadmap + Assets + Matcher + Project Briefs + Interview Simulator.'
+        : 'Full Roadmap + Skill Gap Map + Smart Matcher + Career Assets.';
+
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
@@ -20,11 +24,11 @@ export async function createCheckoutSession(assessmentId: string) {
                 price_data: {
                     currency: 'usd',
                     product_data: {
-                        name: 'AI Career Portal - Execution Pack',
-                        description: 'Full 30/60/90 day plan, role adjacencies, and immediate action items.',
-                        images: ['https://placehold.co/600x400/png'], // Placeholder image
+                        name: productName,
+                        description: productDesc,
+                        images: ['https://placehold.co/600x400/png'],
                     },
-                    unit_amount: EXECUTION_PACK_PRICE_CENTS,
+                    unit_amount: priceCents,
                 },
                 quantity: 1,
             },
@@ -34,6 +38,7 @@ export async function createCheckoutSession(assessmentId: string) {
         cancel_url: `${origin}/assessment`,
         metadata: {
             assessmentId,
+            tier,
         },
     });
 
@@ -66,6 +71,7 @@ export async function verifySession(sessionId: string) {
                 status: session.status || 'unknown',
                 customer_email: session.customer_details?.email || null,
                 assessment_id: assessmentId,
+                tier: session.metadata?.tier || 'execution', // Record the tier
             },
             { onConflict: 'stripe_session_id' }
         );
@@ -120,26 +126,38 @@ export async function verifySession(sessionId: string) {
     }
 }
 
-export async function hasExecutionPackAccess(): Promise<boolean> {
+export async function hasExecutionPackAccess(requiredTier?: 'execution' | 'executive'): Promise<{ hasAccess: boolean; tier?: 'execution' | 'executive' }> {
     try {
         const token = (await cookies()).get(EP_COOKIE)?.value;
-        if (!token) return false;
+        if (!token) return { hasAccess: false };
 
-        const { data, error } = await supabaseAdmin
+        const query = supabaseAdmin
             .from('purchases')
-            .select('id')
+            .select('id, tier')
             .eq('access_token', token)
             .limit(1);
 
+        const { data, error } = await query;
+
         if (error) {
             console.error('Entitlement check failed:', error);
-            return false;
+            return { hasAccess: false };
         }
 
-        return !!(data && data.length > 0);
+        if (!data || data.length === 0) return { hasAccess: false };
+
+        const purchase = data[0];
+        const userTier = purchase.tier as 'execution' | 'executive' || 'execution';
+
+        // If a specific tier is required, check it
+        if (requiredTier === 'executive') {
+            return { hasAccess: userTier === 'executive', tier: userTier };
+        }
+
+        return { hasAccess: true, tier: userTier };
     } catch (e) {
         console.error('hasExecutionPackAccess error:', e);
-        return false;
+        return { hasAccess: false };
     }
 }
 

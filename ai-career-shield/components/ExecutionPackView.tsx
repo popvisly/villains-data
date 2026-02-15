@@ -231,9 +231,10 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
 interface ExecutionPackViewProps {
     data: ExecutionPack;
     isPaid: boolean;
+    tier?: 'execution' | 'executive';
 }
 
-export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
+export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps) {
     const [activeTab, setActiveTab] = useState<'skills' | 'briefs' | 'assets' | 'matcher' | 'interview'>('skills');
 
     // Context for interview simulator
@@ -265,7 +266,7 @@ export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
                             }`}
                     >
                         Project Briefs
-                        {!isPaid && <Lock className="w-3 h-3 mb-0.5" />}
+                        {(!isPaid || tier === 'execution') && <Lock className="w-3 h-3 mb-0.5 text-amber-500" />}
                         {activeTab === 'briefs' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
@@ -298,6 +299,7 @@ export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
                             }`}
                     >
                         Interview Prep
+                        {(!isPaid || tier === 'execution') && <Lock className="w-3 h-3 mb-0.5 text-amber-500" />}
                         {activeTab === 'interview' && (
                             <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600" />
                         )}
@@ -330,7 +332,12 @@ export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
                 )}
 
                 {activeTab === 'briefs' && (
-                    <ProjectBriefsTab briefs={data.projectBriefs} isPaid={isPaid} />
+                    (isPaid && tier === 'executive')
+                        ? <ProjectBriefsTab briefs={data.projectBriefs} isPaid={isPaid} />
+                        : <LockedFeature
+                            title="Project Briefs Locked"
+                            description="Upgrade to the Executive License to unlock professional-grade project briefs you can use as proof of AI value."
+                        />
                 )}
 
                 {activeTab === 'assets' && (
@@ -342,25 +349,29 @@ export function ExecutionPackView({ data, isPaid }: ExecutionPackViewProps) {
                 )}
 
                 {activeTab === 'interview' && (
-                    <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="p-2 bg-[hsl(var(--primary))/5] rounded-lg">
-                                <MessageSquare className="w-6 h-6 text-[hsl(var(--primary))]" />
+                    (isPaid && tier === 'executive') ? (
+                        <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-500">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="p-2 bg-indigo-50 rounded-lg">
+                                    <MessageSquare className="w-5 h-5 text-indigo-600" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-slate-950">Interview Simulator</h3>
+                                    <p className="text-sm text-slate-600">Practice defending your strategic roadmap with AI.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h2 className="text-xl font-bold text-slate-900">Mock Interview Simulator</h2>
-                                <p className="text-sm text-slate-500">
-                                    {isPaid ? '10 practice turns per session (server‑enforced).' : '3 turns free. Unlock the Execution Pack for 10 turns per session.'}
-                                </p>
-                            </div>
-                        </div>
-
-                        <InterviewSimulator
-                            role={data.skillGapMap.roleTitle}
-                            resumeText={interviewContext}
-                            isPaid={isPaid}
+                            <InterviewSimulator
+                                role={data.skillGapMap.roleTitle}
+                                resumeText={interviewContext}
+                                isPaid={isPaid}
+                            />
+                        </section>
+                    ) : (
+                        <LockedFeature
+                            title="Interview Simulator Locked"
+                            description="Upgrade to the Executive License to practice your AI transition with a high-stakes interview simulator."
                         />
-                    </section>
+                    )
                 )}
             </div>
         </div>

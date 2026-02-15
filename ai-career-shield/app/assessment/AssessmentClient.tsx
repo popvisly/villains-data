@@ -81,7 +81,7 @@ const assessmentSchema = z.object({
     }))
 });
 
-export default function AssessmentPage({ initialHasAccess = false }: { initialHasAccess?: boolean }) {
+export default function AssessmentPage({ initialHasAccess = false, initialTier }: { initialHasAccess?: boolean, initialTier?: 'execution' | 'executive' }) {
     const router = useRouter();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState<AssessmentInput>({
@@ -100,6 +100,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
     const [isUnlocking, setIsUnlocking] = useState(false);
     const [assessmentId, setAssessmentId] = useState<string>('');
     const hasAccess = initialHasAccess;
+    const [tier] = useState<'execution' | 'executive' | undefined>(initialTier);
     const [hasSavedSession, setHasSavedSession] = useState(false);
 
     const LS_KEY = 'ai-career-shield:assessment-state:v1';
@@ -705,6 +706,7 @@ export default function AssessmentPage({ initialHasAccess = false }: { initialHa
                             <ExecutionPackView
                                 data={executionPack}
                                 isPaid={hasAccess}
+                                tier={tier}
                             />
                         )}
 

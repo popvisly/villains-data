@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { AIJobOfTheDay } from '@/components/AIJobOfTheDay';
 import { TrendingRoles } from '@/components/TrendingRoles';
-import { CheckCircle2, Zap, Sparkles, ArrowRight, TrendingUp, Target, Lock } from 'lucide-react';
+import { CheckCircle2, Zap, Sparkles, ArrowRight, TrendingUp, Target, Lock, Check } from 'lucide-react';
 
 function Nav() {
   return (
@@ -85,14 +85,13 @@ export default function HomePage() {
               <span className="text-slate-600">no login</span>
             </div>
 
-            <h1 className="text-balance text-6xl font-bold leading-[1.1] tracking-tight text-slate-900 md:text-7xl font-serif">
-              A strategic workflow audit <span className="text-transparent bg-clip-text bg-gradient-to-r from-[hsl(var(--primary))] to-indigo-500">built for the AI‑era.</span>
+            <h1 className="text-balance text-6xl font-bold tracking-tight text-slate-950 md:text-7xl font-serif">
+              Don&apos;t just apply faster.<br />
+              <span className="text-[hsl(var(--primary))]">Become irreplaceable.</span>
             </h1>
-
-            <p className="mt-8 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl max-w-lg">
-              Generate an Executive Resilience Roadmap, including precise risk drivers and a 30/60/90 execution sequence.
+            <p className="mt-8 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl">
+              While others automate generic applications, we audit your role to build a high-leverage resilience roadmap. Get a precise 30/60/90-day execution sequence to stay valuable in the AI-era.
             </p>
-
             <ul className="mt-10 space-y-4 text-base text-slate-700">
               {[
                 'Next‑best paths (if you want options)',
@@ -391,25 +390,99 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
-          <footer className="mt-20 border-t border-[hsl(var(--border))] pt-10 text-sm font-medium text-slate-500">
-            <div className="flex flex-col justify-between gap-6 md:flex-row items-center">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded bg-slate-200 flex items-center justify-center text-xs">🛡️</div>
-                <p>© 2026 AI Career Portal</p>
-              </div>
-              <div className="flex gap-8">
-                <Link href="/privacy" className="hover:text-slate-900 transition-colors">
-                  Privacy
-                </Link>
-                <Link href="/terms" className="hover:text-slate-900 transition-colors">
-                  Terms
-                </Link>
-              </div>
-            </div>
-          </footer>
         </div>
       </section>
+
+      <section id="pricing" className="py-24 px-6 border-t border-slate-200">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-serif">
+              Built for Institutional Authority.
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              One-time investment. Lifetime resilience.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* The Audit: FREE */}
+            <div className="rounded-3xl border border-slate-200 bg-white p-8 flex flex-col hover:shadow-lg transition">
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-slate-900">The Audit</h3>
+                <p className="text-sm text-slate-500 mt-1">Initial resilience check.</p>
+              </div>
+              <div className="text-3xl font-bold text-slate-900 mb-6">$0</div>
+              <ul className="space-y-3 mb-8 flex-1">
+                {['Resilience Index score', 'Top 3 automation drivers', 'Immediate 1-week moves'].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
+                    <Check className="w-4 h-4 text-emerald-600" /> {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/assessment" className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-xl text-center transition">
+                Start Audit
+              </Link>
+            </div>
+
+            {/* Execution Pack: $39 */}
+            <div className="rounded-3xl border-2 border-slate-900 bg-white p-8 flex flex-col shadow-xl scale-105 relative z-10">
+              <div className="absolute top-0 right-0 px-3 py-1 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">
+                Most Popular
+              </div>
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-slate-900">Execution Pack</h3>
+                <p className="text-sm text-slate-500 mt-1">Full roadmap & assets.</p>
+              </div>
+              <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
+              <ul className="space-y-3 mb-8 flex-1">
+                {['Strategic 30/60/90 Roadmap', 'Personalized Skill Gap Map', 'Smart Matcher (resume scan)', 'Tailored LinkedIn/Resume Assets'].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-slate-700 font-medium">
+                    <Check className="w-4 h-4 text-emerald-600" /> {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/assessment" className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-center shadow-lg transition">
+                Get Execution Pack
+              </Link>
+            </div>
+
+            {/* Executive License: $99 */}
+            <div className="rounded-3xl border border-indigo-200 bg-indigo-50/30 p-8 flex flex-col hover:shadow-lg transition">
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-slate-900">Executive License</h3>
+                <p className="text-sm text-slate-500 mt-1">Full professional readiness.</p>
+              </div>
+              <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
+              <ul className="space-y-3 mb-8 flex-1">
+                {['Everything in Execution', 'Project Brief Library', 'Unlimited Interview Practice', 'Executive Blueprint PDF'].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
+                    <Check className="w-4 h-4 text-indigo-600" /> {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/assessment" className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-center transition">
+                Go Executive
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-20 px-6 border-t border-slate-200 bg-slate-50">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
+          <div className="flex items-center gap-2 font-bold text-slate-900">
+            <Sparkles className="w-5 h-5 text-[hsl(var(--primary))]" />
+            AI Career Portal
+          </div>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-slate-900 transition font-medium">Privacy</a>
+            <a href="#" className="hover:text-slate-900 transition font-medium">Terms</a>
+            <a href="#" className="hover:text-slate-900 transition font-medium">Support</a>
+          </div>
+          <p>© 2026 aicareerportal.com. Built for strategic resilient professionals.</p>
+        </div>
+      </footer>
     </main >
   );
 }
