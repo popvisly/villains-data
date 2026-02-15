@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { AIJobOfTheDay } from '@/components/AIJobOfTheDay';
 import { TrendingRoles } from '@/components/TrendingRoles';
 import { CheckCircle2, Zap, Sparkles, ArrowRight, TrendingUp, Target, Lock, Check } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics-client';
 
 function Nav() {
   return (
@@ -419,7 +420,11 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <Link href="/assessment" className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-xl text-center transition">
+              <Link
+                href="/assessment"
+                onClick={() => trackEvent('pricing_plan_click', { tier: 'free', location: 'landing_page' })}
+                className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-xl text-center transition"
+              >
                 Start Free Audit
               </Link>
             </div>
@@ -431,38 +436,48 @@ export default function HomePage() {
               </div>
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Execution Pack</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 underline decoration-emerald-200 decoration-2 underline-offset-4">Full resilience roadmap in 7 days.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700">Instant 7-day resilience roadmap.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Strategic 30/60/90 Roadmap', 'Personalized Skill Gap Map', 'Smart Matcher (resume scan)', 'Elite LinkedIn & Resume Assets'].map((item) => (
+                {['Strategic 30/60/90 Roadmap', 'Personalized Skill Gap Map', 'AI-Role Matcher (resume scan)', 'Elite LinkedIn & Resume Assets'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700 font-medium">
                     <Check className="w-4 h-4 text-emerald-600" /> {item}
                   </li>
                 ))}
               </ul>
-              <Link href="/assessment" className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-center shadow-lg transition">
+              <Link
+                href="/assessment"
+                onClick={() => trackEvent('pricing_plan_click', { tier: 'execution', location: 'landing_page' })}
+                className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-center shadow-lg transition"
+              >
                 Get Execution Pack
               </Link>
+              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes 12 months of updates.</p>
             </div>
 
             {/* Executive License: $99 */}
             <div className="rounded-3xl border border-indigo-200 bg-indigo-50/30 p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Executive License</h3>
-                <p className="text-sm text-slate-500 mt-1">High-leverage strategic toolbox.</p>
+                <p className="text-sm text-slate-500 mt-1">For senior professionals & leaders.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
-                {['Everything in Execution', 'Professional Project Brief Library', 'Unlimited Mock Interview Practice', 'Executive Blueprint PDF'].map((item) => (
+                {['Everything in Execution', 'Professional Project Brief Library', 'Unlimited interview simulations', 'Executive Blueprint PDF (share-ready)'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
                     <Check className="w-4 h-4 text-indigo-600" /> {item}
                   </li>
                 ))}
               </ul>
-              <Link href="/assessment" className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-center transition">
+              <Link
+                href="/assessment"
+                onClick={() => trackEvent('pricing_plan_click', { tier: 'executive', location: 'landing_page' })}
+                className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-center transition"
+              >
                 Go Executive
               </Link>
+              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Full status & leverage toolkit.</p>
             </div>
           </div>
 

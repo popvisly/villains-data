@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { verifySession } from '@/app/actions/stripe';
 import { useRouter } from 'next/navigation';
+import { trackEvent } from '@/lib/analytics-client';
 
 export default function SuccessCheck({ sessionId }: { sessionId: string }) {
     const router = useRouter();
@@ -23,6 +24,7 @@ export default function SuccessCheck({ sessionId }: { sessionId: string }) {
 
                 if (result.success) {
                     // Cookie is set! Redirect to assessment to see unlocked state.
+                    trackEvent('payment_success_view', { sessionId });
                     router.push('/assessment');
                     router.refresh(); // Ensure the layout refreshes to pick up the cookie
                 } else {

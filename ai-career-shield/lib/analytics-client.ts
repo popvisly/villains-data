@@ -5,6 +5,8 @@ type EventName =
     | 'assessment_start'
     | 'assessment_complete'
     | 'paywall_view'
+    | 'view_pricing'
+    | 'pricing_plan_click'
     | 'checkout_start'
     | 'payment_success_view'
     | 'assessment_resume'
@@ -15,7 +17,8 @@ type EventName =
     | 'streaming_insight_first'
     | 'streaming_complete'
     | 'share_image_click'
-    | 'share_link_click';
+    | 'share_link_click'
+    | 'share_clicked';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 
