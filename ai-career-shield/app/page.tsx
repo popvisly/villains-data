@@ -5,6 +5,7 @@ import { AIJobOfTheDay } from '@/components/AIJobOfTheDay';
 import { TrendingRoles } from '@/components/TrendingRoles';
 import { Icon } from '@/components/ui/Icon';
 import { trackEvent } from '@/lib/analytics-client';
+import { APP_NAME, BRAND_CONFIG, ROUTES } from '@/lib/brand';
 
 function Nav() {
   return (
@@ -14,30 +15,30 @@ function Nav() {
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[hsl(var(--primary))] shadow-sm shadow-indigo-500/20">
             <Icon name="sparkles" size={20} className="text-[hsl(var(--primary-foreground))]" />
           </div>
-          <span className="text-lg font-bold tracking-tight text-slate-900">AI Career Portal</span>
+          <span className="text-xl font-bold tracking-tighter text-slate-900">{APP_NAME}</span>
         </div>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
           <Link href="#how" className="hover:text-[hsl(var(--primary))] transition-colors">
             How it works
           </Link>
-          <Link href="#preview" className="hover:text-[hsl(var(--primary))] transition-colors">
-            What you get
+          <Link href="/start" className="hover:text-[hsl(var(--primary))] transition-colors font-bold text-slate-900 border-b-2 border-indigo-500">
+            Plans
           </Link>
           <Link href="#pricing" className="hover:text-[hsl(var(--primary))] transition-colors">
             Pricing
           </Link>
           <Link
-            href="/assessment"
+            href="/start"
             className="rounded-xl bg-[hsl(var(--cta))] px-5 py-2.5 font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 transition-all shadow-sm shadow-emerald-500/20"
           >
-            Run Strategic Audit
+            Generate My Plan
           </Link>
         </nav>
 
         <div className="md:hidden">
           <Link
-            href="/assessment"
+            href="/start"
             className="rounded-xl bg-[hsl(var(--cta))] px-4 py-2 text-sm font-bold text-[hsl(var(--cta-foreground))]"
           >
             Start
@@ -48,16 +49,16 @@ function Nav() {
   );
 }
 
-function SectionTitle({ eyebrow, title, subtitle }: { eyebrow?: string; title: string; subtitle?: string }) {
+function SectionTitle({ eyebrow, title, subtitle, dark }: { eyebrow?: string; title: string; subtitle?: string; dark?: boolean }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
       {eyebrow ? (
-        <div className="mb-4 inline-flex items-center rounded-full bg-[hsl(var(--primary))]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-[hsl(var(--primary))]">
+        <div className={`mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${dark ? 'bg-indigo-500/20 text-indigo-400' : 'bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))]'}`}>
           {eyebrow}
         </div>
       ) : null}
-      <h2 className="text-balance text-4xl font-bold tracking-tight text-slate-900 md:text-5xl font-serif">{title}</h2>
-      {subtitle ? <p className="mt-5 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl">{subtitle}</p> : null}
+      <h2 className={`text-balance text-4xl font-bold tracking-tight md:text-5xl font-serif ${dark ? 'text-white' : 'text-slate-900'}`}>{title}</h2>
+      {subtitle ? <p className={`mt-5 text-pretty text-lg leading-relaxed md:text-xl ${dark ? 'text-slate-400' : 'text-slate-600'}`}>{subtitle}</p> : null}
     </div>
   );
 }
@@ -88,11 +89,15 @@ export default function HomePage() {
               <span className="text-slate-600">no login</span>
             </div>
 
-            <h1 className="text-balance text-6xl font-bold tracking-tight text-slate-950 md:text-7xl font-serif">
-              Signal, <span className="text-[hsl(var(--primary))]">not slop.</span>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6 [text-wrap:balance]">
+              {APP_NAME} for the <span className="text-[hsl(var(--primary))]">AI era</span>
             </h1>
-            <p className="mt-8 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl">
-              We turn AI-era noise into a clear diagnosis: what&apos;s being automated, what&apos;s gaining leverage, and what you need to build next. Don&apos;t just apply faster—become harder to commoditize.
+            <div className="mb-8 inline-flex items-center gap-2 rounded-lg bg-indigo-50 px-4 py-2 text-sm font-bold text-indigo-700 border border-indigo-100">
+              <Icon name="zap" size={16} />
+              {BRAND_CONFIG.differentiator}
+            </div>
+            <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl">
+              We turn AI-era noise into a clear diagnosis: what&apos;s being automated, what&apos;s gaining leverage, and what you need to build next. {BRAND_CONFIG.philosophy}
             </p>
             <ul className="mt-10 space-y-4 text-base text-slate-700">
               {[
@@ -109,17 +114,21 @@ export default function HomePage() {
               ))}
             </ul>
 
-            <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/assessment"
-                className="inline-flex items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-8 py-4 text-lg font-bold text-[hsl(var(--cta-foreground))] shadow-lg shadow-emerald-500/25 hover:opacity-90 hover:translate-y-[-1px] hover:shadow-xl transition-all"
+                href={ROUTES.START}
+                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-8 text-base font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
               >
-                Run Strategic Audit
-                <Icon name="arrowRight" size={20} className="ml-2" />
+                <span className="relative z-10 flex items-center gap-2">
+                  Start Your Plan
+                  <Icon name="arrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
+                </span>
               </Link>
-              <Link href="#preview" className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-slate-600 hover:text-[hsl(var(--primary))] transition-colors group">
-                See what you get
-                <Icon name="arrowRight" size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
+              <Link
+                href="#how"
+                className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-8 py-4 text-lg font-bold text-slate-700 transition-all hover:bg-slate-50"
+              >
+                How it works
               </Link>
             </div>
 
@@ -383,11 +392,69 @@ export default function HomePage() {
 
               <Link
                 href="/assessment"
-                className="inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-4 text-base font-bold text-[hsl(var(--primary-foreground))] hover:opacity-90 shadow-lg shadow-indigo-500/20 transition-all"
+                className="inline-flex w-full items-center justify-center rounded-2xl bg-[hsl(var(--primary))] px-6 py-4 text-base font-bold text-[hsl(var(--primary-foreground))] shadow-lg shadow-indigo-500/20 transition-all"
               >
                 Access Execution Pack
               </Link>
               <p className="mt-4 text-center text-xs font-medium text-slate-500">Secure checkout via Stripe • Instant Access</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Modular System Overview */}
+      <section className="px-6 py-24 md:py-32 bg-slate-50 border-y border-slate-200">
+        <div className="mx-auto max-w-6xl">
+          <SectionTitle title="A Modular Operating System" subtitle="Living alongside AI requires more than a career audit. It requires a protocol." />
+
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Module 1 */}
+            <div className="glass-panel p-8 rounded-3xl border-slate-200 relative overflow-hidden group">
+              <div className="absolute -top-4 -right-4 h-24 w-24 bg-indigo-50 rounded-full opacity-50 group-hover:scale-110 transition-transform" />
+              <div className="relative">
+                <div className="h-10 w-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center mb-6">
+                  <Icon name="professional" size={20} className="text-indigo-600" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Module 1: Career</h3>
+                <p className="text-sm text-slate-500 mb-6">The &ldquo;Throughput&rdquo; layer. Audit your workflow for AI-leveraged resilience.</p>
+                <Link href="/assessment" className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:gap-3 transition-all">
+                  Run Audit <Icon name="arrowRight" size={14} />
+                </Link>
+              </div>
+            </div>
+
+            {/* Module 2 */}
+            <div className="glass-panel p-8 rounded-3xl border-indigo-200 bg-white ring-1 ring-indigo-500/10 relative overflow-hidden group">
+              <div className="absolute top-4 right-6">
+                <span className="bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">New Module</span>
+              </div>
+              <div className="relative">
+                <div className="h-10 w-10 rounded-xl bg-indigo-600 shadow-sm flex items-center justify-center mb-6">
+                  <Icon name="eyeOff" size={20} className="text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Module 2: Attention</h3>
+                <p className="text-sm text-slate-500 mb-6">The &ldquo;Input&rdquo; layer. A personal protocol to filter slop and protect clean thought.</p>
+                <Link href="/attention" className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:gap-3 transition-all">
+                  Build Protocol <Icon name="arrowRight" size={14} />
+                </Link>
+              </div>
+            </div>
+
+            {/* Module 3 */}
+            <div className="glass-panel p-8 rounded-3xl border-slate-200 opacity-60 grayscale relative overflow-hidden">
+              <div className="absolute top-4 right-6">
+                <span className="bg-slate-200 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Coming Soon</span>
+              </div>
+              <div className="relative">
+                <div className="h-10 w-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center mb-6">
+                  <Icon name="shield" size={20} className="text-slate-400" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Module 3: Identity</h3>
+                <p className="text-sm text-slate-500 mb-6">The &ldquo;Output&rdquo; layer. Turn results into a verifiable proof archive.</p>
+                <div className="inline-flex items-center gap-2 text-sm font-bold text-slate-400">
+                  Locked <Icon name="locked" size={14} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -405,6 +472,14 @@ export default function HomePage() {
                 a: 'Treat it as a strategic analysis, not a prophecy. We evaluate the architecture of your workflow (repeatability, cognitive surface area, stakeholder complexity) against current AI capabilities—and we expose the drivers for professional validation.',
               },
               {
+                q: 'Is this a mental health tool?',
+                a: 'Absolutely not. This is a strategic planning tool for career and information management. If you are feeling unsafe or in immediate danger, please consult a professional or contact emergency services.',
+              },
+              {
+                q: 'What is &ldquo;Grounded AI&rdquo; use?',
+                a: 'AI is a tool, not an oracle. Our protocols focus on maintaining user agency: drafting before prompting, verifying high-stakes decisions, and intentional offline &ldquo;quiet hours&rdquo; to protect cognition.',
+              },
+              {
                 q: 'Do you store my data?',
                 a: 'By default, we don’t store your assessment inputs. We use them to generate your outputs in-session.',
               },
@@ -414,19 +489,11 @@ export default function HomePage() {
               },
               {
                 q: 'How do you evaluate roles?',
-                a: 'We analyze roles you provide (LinkedIn/Indeed/company postings). We always link to the source so the evaluation is verifiable. When a job tool claims it can “find roles for you,” the key question is sourcing. We make this transparent so you can trust exactly what you’re seeing.',
-              },
-              {
-                q: 'Do you recommend using AI for cover letters?',
-                a: 'Using AI for cover letters is most effective when you treat it as a first draft—not an autopilot. A tailored letter that you edit into your own voice (and sanity-checked for specifics) will almost always outperform a generic template. Our recommendation: Add 2 specifics from the role, include 1 quantified proof, and delete generic fluff.',
+                a: 'We analyze roles you provide (LinkedIn/Indeed/company postings). We always link to the source so the evaluation is verifiable. When a job tool claims it can &ldquo;find roles for you,&rdquo; the key question is sourcing. We make this transparent so you can trust exactly what you’re seeing.',
               },
               {
                 q: 'What should I do first?',
-                a: 'Start with the “This Week” moves, then run the 30‑day section. The plan is designed to produce proof artifacts, not busywork.',
-              },
-              {
-                q: 'What does one-time purchase include?',
-                a: 'Includes 12 months of updates. You’ll keep access to what you’ve unlocked.',
+                a: 'Start with the &ldquo;This Week&rdquo; moves, then run the 30‑day section. The plan is designed to produce proof artifacts, not busywork.',
               },
               {
                 q: 'Will AI replace my job in 5 years?',
@@ -443,6 +510,76 @@ export default function HomePage() {
                 <p className="mt-4 text-base text-slate-600 leading-relaxed pr-8">{item.a}</p>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Grounded Section */}
+      <section className="px-6 py-24 md:py-32 bg-slate-900 text-white overflow-hidden relative">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(79,70,229,0.1),transparent)]" />
+        <div className="mx-auto max-w-4xl relative text-center">
+          <SectionTitle
+            title="Grounded in the AI Era"
+            subtitle="We help you act, then log off. Keep your agency in a world of infinite noise."
+            dark
+          />
+
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="h-10 w-10 shrink-0 rounded-lg bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
+                  <Icon name="brain" size={20} className="text-indigo-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2 italic">Think Mode: User First</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">AI is built to refine your judgment, not replace it. Our plans prioritize your drafting before AI enhancement.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="h-10 w-10 shrink-0 rounded-lg bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
+                  <Icon name="scale" size={20} className="text-indigo-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2 italic">Tool, Not Authority</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">Avoid &ldquo;Oracle Mode&rdquo;. We structure outputs to show uncertainty and require your final decision.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="h-10 w-10 shrink-0 rounded-lg bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
+                  <Icon name="shield" size={20} className="text-indigo-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2 italic">Signal in. Signal out.</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">Filter the slop. Identify your high-stakes topics and ignore the SEO bait loops.</p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="h-10 w-10 shrink-0 rounded-lg bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
+                  <Icon name="time" size={20} className="text-indigo-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2 italic">Dependency Resistance</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">No infinite chat loops. We prefer forms &rarr; plans &rarr; action. Build your moat, then ship.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-20 p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm">
+            <p className="text-xl font-medium text-indigo-200 font-serif italic mb-6">
+              &ldquo;The goal of a People Plan isn&rsquo;t to live inside an AI interface. It&rsquo;s to make you harder to commoditize in the real world.&rdquo;
+            </p>
+            <div className="flex justify-center gap-4">
+              <Link href="/assessment" className="px-6 py-3 bg-white text-slate-900 rounded-xl font-bold hover:bg-slate-100 transition-all">
+                Access Module 1
+              </Link>
+              <Link href="/attention" className="px-6 py-3 border border-white/20 text-white rounded-xl font-bold hover:bg-white/10 transition-all">
+                Build Attention Plan
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -594,7 +731,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
           <div className="flex items-center gap-2 font-bold text-slate-900">
             <Icon name="sparkles" size={20} className="text-[hsl(var(--primary))]" />
-            AI Career Portal
+            People Plan Audit
           </div>
           <div className="flex gap-8">
             <a href="#" className="hover:text-slate-900 transition font-medium">Privacy</a>

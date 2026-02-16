@@ -1,4 +1,4 @@
-# AI Career Portal - Brand Voice Guide
+# RolePilot - Brand Voice Guide
 
 > **North Star:** We turn uncertainty into a next step.
 

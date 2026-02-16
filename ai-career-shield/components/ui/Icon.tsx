@@ -36,7 +36,9 @@ import {
     ChevronRight,
     CircleCheck,
     HelpCircle,
-    Loader2
+    Loader2,
+    EyeOff,
+    Radio
 } from 'lucide-react';
 
 const iconMap = {
@@ -76,6 +78,8 @@ const iconMap = {
     checkCircle: CircleCheck,
     target: Target,
     loader: Loader2,
+    eyeOff: EyeOff,
+    signal: Radio,
 } as const;
 
 export type IconName = keyof typeof iconMap;

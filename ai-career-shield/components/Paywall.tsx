@@ -7,25 +7,26 @@ import { Icon } from '@/components/ui/Icon';
 
 interface PaywallProps {
     hasAccess: boolean;
-    assessmentId: string;
+    planId: string;
+    type: 'career' | 'attention';
     children: React.ReactNode;
 }
 
-export const Paywall: React.FC<PaywallProps> = ({ hasAccess, assessmentId, children }) => {
+export const Paywall: React.FC<PaywallProps> = ({ hasAccess, planId, type, children }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (!hasAccess) {
-            trackEvent('paywall_view', { assessmentId });
+            trackEvent('paywall_view', { planId, type });
         }
-    }, [hasAccess, assessmentId]);
+    }, [hasAccess, planId, type]);
 
     const handleUnlock = async (tier: 'execution' | 'executive' = 'execution') => {
-        trackEvent('pricing_plan_click', { tier, assessmentId });
-        trackEvent('checkout_started', { tier, assessmentId });
+        trackEvent('pricing_plan_click', { tier, planId, type });
+        trackEvent('checkout_started', { tier, planId, type });
         setIsLoading(true);
         try {
-            const result = await createCheckoutSession(assessmentId, tier);
+            const result = await createCheckoutSession(planId, type, tier);
             if (result.url) {
                 window.location.href = result.url;
             }

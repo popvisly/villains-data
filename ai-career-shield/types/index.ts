@@ -1,5 +1,6 @@
 import { Role } from './role';
 import { ExecutionPack } from './executionPack';
+export * from './attention';
 
 export interface AssessmentInput {
     jobTitle: string;

@@ -6,9 +6,11 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const lora = Lora({ subsets: ['latin'], variable: '--font-lora' });
 const raleway = Raleway({ subsets: ['latin'], variable: '--font-raleway' });
 
+import { APP_NAME, APP_TAGLINE, APP_URL } from '@/lib/brand';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://villains-data.vercel.app'),
-  title: 'AI Career Portal | Build Strategic Resilience',
+  metadataBase: new URL(APP_URL),
+  title: `${APP_NAME} | ${APP_TAGLINE}`,
   description:
     'Audit your role and generate a strategic resilience roadmap. Get a precise 30/60/90-day execution sequence to stay valuable in the AI-era.',
   keywords: [
@@ -23,16 +25,16 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'AI Career Portal | Strategic Workflow Audit',
+    title: `${APP_NAME} | ${APP_TAGLINE}`,
     description: 'Audit your role and generate a 30/60/90-day resilience sequence.',
-    url: 'https://villains-data.vercel.app',
-    siteName: 'AI Career Portal',
+    url: APP_URL,
+    siteName: APP_NAME,
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Career Portal | Strategic Workflow Audit',
+    title: `${APP_NAME} | ${APP_TAGLINE}`,
     description: 'Stay valuable in the AI-era with a definitive execution sequence.',
   },
 };

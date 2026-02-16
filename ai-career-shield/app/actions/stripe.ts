@@ -8,14 +8,25 @@ import { PRICE_EXECUTION_PACK_CENTS, PRICE_EXECUTIVE_LICENSE_CENTS } from '@/lib
 
 const EP_COOKIE = 'aicp_ep';
 
-export async function createCheckoutSession(assessmentId: string, tier: 'execution' | 'executive' = 'execution') {
+export async function createCheckoutSession(
+    planId: string,
+    type: 'career' | 'attention',
+    tier: 'execution' | 'executive' = 'execution'
+) {
     const origin = (await headers()).get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3015';
 
     const priceCents = tier === 'executive' ? PRICE_EXECUTIVE_LICENSE_CENTS : PRICE_EXECUTION_PACK_CENTS;
-    const productName = tier === 'executive' ? 'AI Career Portal - Executive License' : 'AI Career Portal - Execution Pack';
-    const productDesc = tier === 'executive'
-        ? 'Full Roadmap + Assets + Matcher + Project Briefs + Interview Simulator. Includes 12 months of updates.'
-        : 'Full Roadmap + Skill Gap Map + Smart Matcher + Career Assets. Includes 12 months of updates.';
+
+    // Dynamic Product Details
+    const productName = type === 'career'
+        ? (tier === 'executive' ? 'People Plan - Executive License' : 'People Plan - Execution Pack')
+        : 'People Plan - Attention Protocol Unlock';
+
+    const productDesc = type === 'career'
+        ? (tier === 'executive'
+            ? 'Full Roadmap + Assets + Matcher + Project Briefs + Interview Simulator. Includes 12 months of updates.'
+            : 'Full Roadmap + Skill Gap Map + Smart Matcher + Career Assets. Includes 12 months of updates.')
+        : 'Unlock full Anti-Slop Protocol details, Weekly Signal Sprint templates, and PDF export for your Attention Plan.';
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -34,10 +45,11 @@ export async function createCheckoutSession(assessmentId: string, tier: 'executi
             },
         ],
         mode: 'payment',
-        success_url: `${origin}/assessment/success?session_id={CHECKOUT_SESSION_ID}&assessmentId=${assessmentId}`,
-        cancel_url: `${origin}/assessment`,
+        success_url: `${origin}/${type === 'career' ? 'assessment' : 'attention'}/success?session_id={CHECKOUT_SESSION_ID}&planId=${planId}`,
+        cancel_url: `${origin}/${type === 'career' ? 'assessment' : 'attention'}`,
         metadata: {
-            assessmentId,
+            planId,
+            type,
             tier,
         },
     });
@@ -61,7 +73,7 @@ export async function verifySession(sessionId: string) {
         }
 
         // 2. Record purchase in Supabase (idempotent)
-        const assessmentId = session.metadata?.assessmentId || null;
+        const planId = session.metadata?.planId || null;
 
         const { error: upsertError } = await supabaseAdmin.from('purchases').upsert(
             {
@@ -70,7 +82,7 @@ export async function verifySession(sessionId: string) {
                 currency: session.currency || 'usd',
                 status: session.status || 'unknown',
                 customer_email: session.customer_details?.email || null,
-                assessment_id: assessmentId,
+                assessment_id: planId, // Keep column name for DB compatibility if needed, but it holds planId
                 tier: session.metadata?.tier || 'execution', // Record the tier
             },
             { onConflict: 'stripe_session_id' }
@@ -126,7 +138,7 @@ export async function verifySession(sessionId: string) {
     }
 }
 
-export async function hasExecutionPackAccess(requiredTier?: 'execution' | 'executive'): Promise<{ hasAccess: boolean; tier?: 'execution' | 'executive' }> {
+export async function hasPlanAccess(requiredTier?: 'execution' | 'executive'): Promise<{ hasAccess: boolean; tier?: 'execution' | 'executive' }> {
     try {
         const token = (await cookies()).get(EP_COOKIE)?.value;
         if (!token) return { hasAccess: false };
@@ -140,14 +152,19 @@ export async function hasExecutionPackAccess(requiredTier?: 'execution' | 'execu
         const { data, error } = await query;
 
         if (error) {
-            console.error('Entitlement check failed:', error);
+            // Entitlement checks should fail closed (no access) without polluting the console.
+            // In some environments (local/dev, misconfigured env, transient network), Supabase may error.
+            if (process.env.NODE_ENV !== 'production') {
+                const e: any = error as any;
+                console.debug('Entitlement check failed (non-fatal):', e?.message || e);
+            }
             return { hasAccess: false };
         }
 
         if (!data || data.length === 0) return { hasAccess: false };
 
         const purchase = data[0];
-        const userTier = purchase.tier as 'execution' | 'executive' || 'execution';
+        const userTier = (purchase.tier as 'execution' | 'executive') || 'execution';
 
         // If a specific tier is required, check it
         if (requiredTier === 'executive') {
@@ -155,9 +172,15 @@ export async function hasExecutionPackAccess(requiredTier?: 'execution' | 'execu
         }
 
         return { hasAccess: true, tier: userTier };
-    } catch (e) {
+    } catch {
         // Fallback to free/locked state instead of throwing
         return { hasAccess: false };
     }
+}
+
+// Back-compat helper (older modules expect a boolean entitlement check)
+export async function hasExecutionPackAccess(): Promise<boolean> {
+    const { hasAccess } = await hasPlanAccess('execution');
+    return hasAccess;
 }
 

@@ -19,7 +19,9 @@ type EventName =
     | 'streaming_complete'
     | 'share_image_click'
     | 'share_link_click'
-    | 'share_clicked';
+    | 'share_clicked'
+    | 'attention_audit_start'
+    | 'attention_audit_complete';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 
