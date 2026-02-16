@@ -4,67 +4,9 @@ import Link from 'next/link';
 import { AILifePlanBriefing } from '@/components/AILifePlanBriefing';
 import { Icon } from '@/components/ui/Icon';
 import { trackEvent } from '@/lib/analytics-client';
-import { APP_NAME, APP_PRODUCT, ROUTES } from '@/lib/brand';
-
-function Nav() {
-  return (
-    <header className="sticky top-0 z-50 border-b border-[hsl(var(--border))] bg-[hsl(var(--background))]/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[hsl(var(--primary))] shadow-sm shadow-indigo-500/20">
-            {/* Capture-mark app icon */}
-            <img src="/icon.svg" alt="Captori" className="h-5 w-5 text-[hsl(var(--primary-foreground))]" style={{ filter: 'invert(1)' }} />
-          </div>
-          <div className="leading-tight">
-            <div className="text-xl font-bold tracking-tighter text-slate-900">{APP_NAME}</div>
-            <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">{APP_PRODUCT}</div>
-          </div>
-        </div>
-
-        <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-          <Link href="/start" className="hover:text-[hsl(var(--primary))] transition-colors">
-            How it works
-          </Link>
-          <Link href="/example" className="hover:text-[hsl(var(--primary))] transition-colors">
-            Example
-          </Link>
-          <Link href="#pricing" className="hover:text-[hsl(var(--primary))] transition-colors">
-            Pricing
-          </Link>
-          <Link
-            href="/start"
-            className="rounded-xl bg-[hsl(var(--cta))] px-5 py-2.5 font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 transition-all shadow-sm shadow-emerald-500/20"
-          >
-            Generate My Plan
-          </Link>
-        </nav>
-
-        <div className="md:hidden">
-          <Link
-            href="/start"
-            className="rounded-xl bg-[hsl(var(--cta))] px-4 py-2 text-sm font-bold text-[hsl(var(--cta-foreground))]"
-          >
-            Start
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-function SectionTitle({ eyebrow, title, subtitle, dark }: { eyebrow?: string; title: string; subtitle?: string; dark?: boolean }) {
-  return (
-    <div className="mx-auto max-w-3xl text-center">
-      {eyebrow ? (
-        <div className={`mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${dark ? 'bg-indigo-500/20 text-indigo-400' : 'bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))]'}`}>
-          {eyebrow}
-        </div>
-      ) : null}
-      <h2 className={`text-balance text-4xl font-bold tracking-tight md:text-5xl font-serif ${dark ? 'text-white' : 'text-slate-900'}`}>{title}</h2>
-      {subtitle ? <p className={`mt-5 text-pretty text-lg leading-relaxed md:text-xl ${dark ? 'text-slate-400' : 'text-slate-600'}`}>{subtitle}</p> : null}
-    </div>
-  );
-}
+import { ROUTES } from '@/lib/brand';
+import { Nav } from '@/components/ui/Nav';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 
 export default function HomePage() {
   return (
@@ -566,63 +508,70 @@ export default function HomePage() {
           <div className="mt-16 space-y-4">
             {[
               {
-                q: 'Is this a “feel-good” AI career tool?',
-                a: 'No. Captori produces task-level diagnosis (Resilience Index + drivers) and a 30/60/90 build plan with proof artifacts you can ship alongside a full-time job.',
+                title: "Pre-Purchase (Why Buy)",
+                questions: [
+                  { q: 'How is this different from generic career coaching?', a: 'Career coaching is $200+/hour for human advice. Captori gives you a personalized 30/60/90 plan for $39, based on your specific role architecture. You get concrete proof artifacts to build, not just "work on your presence."' },
+                  { q: 'Can I get a refund if it doesn\'t help?', a: 'Yes. If you execute the plan and don\'t see value, email us within 30 days. We only ask that you show us you actually tried (started building the proof artifacts).' },
+                  { q: 'Do I need to quit my job to use this?', a: 'No. The plan is designed to execute alongside a full-time job. Each milestone is 2-5 hours of work. The 30/60/90 structure fits into your existing schedule.' },
+                  { q: 'How long does it take to see results?', a: 'If you execute: 30 days for your first artifact, 60 days to templatize judgment, 90 days for portfolio-ready evidence. If you don\'t execute: zero results.' },
+                  { q: 'Is this just for people worried about losing their jobs?', a: 'No. This is for mid-career professionals who want to build leverage and own their positioning. Whether you\'re up for promotion, changing roles, or staying relevant—the plan helps you build proof of strategic value.' },
+                ]
               },
               {
-                q: 'What if competition explodes and wages drop?',
-                a: 'That’s exactly why the plan focuses on moving you up the discretion ladder: judgment, verification, ownership, and accountable decisions—work that doesn’t commoditize as easily as volume output.',
+                title: "Post-Purchase (Getting Started)",
+                questions: [
+                  { q: 'I got my plan, now what?', a: 'Open the PDF. Go to page 2: "This Week." Your first action is in the 30-day section: build your decision framework. Block 2 hours this week to document how you make trade-offs.' },
+                  { q: 'How do I use this with my existing tools?', a: 'Your plan is tool-agnostic. Export milestones to Notion (create a page with timeline) or Todoist (add as projects). The plan tells you WHAT to build; your tools track WHEN.' },
+                  { q: 'Can I customize my plan?', a: 'The plan is personalized based on your assessment. If your role changes, retake it. You can adapt milestones to your specific context—e.g., "Build a framework" becomes "Build How I Score Features doc."' },
+                ]
               },
               {
-                q: 'Will AI replace my job?',
-                a: 'Wrong question. The useful question is: which parts of your role become cheap, and which become more valuable? We map that split and give you a plan to reposition.',
+                title: "Technical Issues",
+                questions: [
+                  { q: 'I didn\'t receive my plan email', a: 'Check your spam. If not there, email support@captori.com with your Stripe receipt. We\'ll resend within 24 hours.' },
+                  { q: 'Can I download this as a PDF?', a: 'Yes. Your plan is delivered as a PDF attachment. Save it to your drive/cloud storage for permanent access.' },
+                  { q: 'My Resilience Index seems wrong. Can I retake?', a: 'Yes. Go to captori.com/start and retake it. Your score is derived from your inputs (task mix, discretion, complexity), so different answers = different score.' },
+                ]
               },
               {
-                q: 'Is this a calendar optimizer / habit tracker / AI life coach?',
-                a: 'No. Captori is a leverage plan: inputs → decisions → shippable outputs → proof. No infinite chat loops.',
+                title: "Payment & Billing",
+                questions: [
+                  { q: 'Is this a subscription?', a: 'No. One-time payment ($39 or $99). No recurring charges.' },
+                  { q: 'Can I upgrade from $39 to $99?', a: 'Yes. Email support@captori.com. We\'ll send you a payment link for the $60 difference.' },
+                  { q: 'Can I buy this for my team?', a: 'Yes. For 5+ team members, email support@captori.com for team pricing. Each person gets their own personalized assessment and plan.' },
+                ]
               },
               {
-                q: 'How accurate is the Resilience Index?',
-                a: 'Treat it as a strategic analysis, not a prophecy. We evaluate the architecture of your workflow (repeatability, cognitive surface area, stakeholder complexity) against current AI capabilities—and we expose the drivers for professional validation.',
+                title: "Product & Roadmap",
+                questions: [
+                  { q: 'When will Module 4 (Capacity) be released?', a: 'Module 4 (Capacity - Recovery plan for sustainable execution) is scheduled for Q2 2025. All Suite/Executive purchases include it at no extra charge.' },
+                  { q: 'Can I get updates to my plan as AI changes?', a: 'We update the AI job market analysis quarterly. Existing customers can purchase an annual refresh for $29. We\'ll email you when updates available.' },
+                ]
               },
               {
-                q: 'Is this a mental health tool?',
-                a: 'Absolutely not. This is a strategic planning tool for career and information management. If you are feeling unsafe or in immediate danger, please consult a professional or contact emergency services.',
-              },
-              {
-                q: 'What is &ldquo;Grounded AI&rdquo;?',
-                a: 'AI is a tool, not an oracle. Our protocols focus on maintaining user agency: drafting before prompting, verifying high-stakes decisions, and intentional offline &ldquo;quiet hours&rdquo; to protect cognition.',
-              },
-              {
-                q: 'Do you store my data?',
-                a: 'By default, we don’t store your assessment inputs. We use them to generate your outputs in-session.',
-              },
-              {
-                q: 'How long does it take?',
-                a: '~2 minutes to answer. Outputs generate immediately.',
-              },
-              {
-                q: 'How do you evaluate roles?',
-                a: 'We analyze roles you provide (LinkedIn/Indeed/company postings). We always link to the source so the evaluation is verifiable. When a job tool claims it can &ldquo;find roles for you,&rdquo; the key question is sourcing. We make this transparent so you can trust exactly what you’re seeing.',
-              },
-              {
-                q: 'What should I do first?',
-                a: 'Start with the &ldquo;This Week&rdquo; moves, then run the 30‑day section. The plan is designed to produce proof artifacts, not busywork.',
-              },
-              {
-                q: 'Will AI replace my job in 5 years?',
-                a: 'Usually it’s not replacement—it’s compression. AI automates first‑pass labor, and organizations keep fewer people to own the workflow. This plan shows what’s being commoditized in your role, what’s compounding, and what to build next.',
-              },
-            ].map((item) => (
-              <details key={item.q} className="group glass-panel rounded-2xl p-6 open:ring-1 open:ring-[hsl(var(--primary))]/20">
-                <summary className="cursor-pointer list-none flex items-center justify-between text-lg font-bold text-slate-900 group-hover:text-[hsl(var(--primary))] transition-colors">
-                  {item.q}
-                  <span className="ml-4 flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-500 group-open:rotate-180 transition-transform">
-                    <Icon name="chevronDown" size={16} />
-                  </span>
-                </summary>
-                <p className="mt-4 text-base text-slate-600 leading-relaxed pr-8">{item.a}</p>
-              </details>
+                title: "Philosophy & Approach",
+                questions: [
+                  { q: 'What is "Grounded AI"?', a: 'Our approach: (1) Draft before prompting, (2) No infinite loops (stop after 3+ revisions), (3) Protected thinking time (90 min daily with no inputs). AI as a tool, not an oracle.' },
+                  { q: 'Why no productivity features?', a: 'Intentional. You already have productivity tools. We focus on WHAT to build (strategic plan), not HOW to track it (Notion/Todoist).' },
+                ]
+              }
+            ].map((section: { title: string; questions: { q: string; a: string }[] }) => (
+              <div key={section.title} className="mb-12">
+                <h3 className="text-xl font-bold text-slate-900 mb-6 px-4">{section.title}</h3>
+                <div className="space-y-4">
+                  {section.questions.map((item) => (
+                    <details key={item.q} className="group glass-panel rounded-2xl p-6 open:ring-1 open:ring-indigo-500/20">
+                      <summary className="cursor-pointer list-none flex items-center justify-between text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        {item.q}
+                        <span className="ml-4 flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-slate-500 group-open:rotate-180 transition-transform">
+                          <Icon name="chevronDown" size={16} />
+                        </span>
+                      </summary>
+                      <p className="mt-4 text-base text-slate-600 leading-relaxed pr-8">{item.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>

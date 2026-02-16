@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Lora, Raleway } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -10,7 +11,7 @@ import { APP_NAME, APP_PRODUCT, APP_TAGLINE, APP_URL } from '@/lib/brand';
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
-  title: `${APP_NAME} | ${APP_PRODUCT}`, 
+  title: `${APP_NAME} | ${APP_PRODUCT}`,
   description:
     'Generate a 30/60/90 operating plan for the AI era—career, attention, identity, and capacity—built from your constraints.',
   keywords: [
@@ -51,6 +52,11 @@ export default function RootLayout({
       <body className={`${inter.variable} ${lora.variable} ${raleway.variable} font-sans`}>
         <SEO />
         {children}
+        <Script id="crisp-widget" strategy="afterInteractive">
+          {`
+            window.$crisp=[];window.CRISP_WEBSITE_ID="6ec2802d-0797-4560-a8d8-26f59066601f";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+          `}
+        </Script>
       </body>
     </html>
   );
