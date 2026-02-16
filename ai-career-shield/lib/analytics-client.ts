@@ -21,7 +21,14 @@ type EventName =
     | 'share_link_click'
     | 'share_clicked'
     | 'attention_audit_start'
-    | 'attention_audit_complete';
+    | 'attention_audit_complete'
+    | 'identity_generate_start'
+    | 'identity_generate_complete'
+    | 'artifact_link_added'
+    | 'persona_toggle_click'
+    | 'linkedin_copy_click'
+    | 'playbook_template_copy'
+    | 'playbook_pdf_export';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 

@@ -3,6 +3,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { APP_NAME, ROUTES } from '@/lib/brand';
 import { generateExecutionPack } from '@/app/actions/assessment';
 import type { AssessmentInput, AssessmentResult } from '@/types';
 import { ShareBriefCard } from '@/components/ShareBriefCard';
@@ -787,6 +789,27 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                 }}
                             />
                         )}
+
+                        {/* AI Leverage Playbook Teaser */}
+                        <div className="rounded-2xl border border-slate-200 bg-white p-8 hover:shadow-lg transition group">
+                            <div className="flex flex-col md:flex-row items-center gap-6">
+                                <div className="h-16 w-16 shrink-0 rounded-2xl bg-slate-900 flex items-center justify-center shadow-lg">
+                                    <Icon name="sparkles" size={32} className="text-indigo-400" />
+                                </div>
+                                <div className="flex-1 text-center md:text-left">
+                                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
+                                        <h3 className="text-xl font-bold text-slate-950">AI Leverage Playbook (PM)</h3>
+                                        <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider border border-indigo-100">Suite Perk</span>
+                                    </div>
+                                    <p className="text-sm text-slate-600 leading-relaxed mb-4">
+                                        Operationalize your audit. Use role-specific AI workflows to turn your strategy into shippable proofs.
+                                    </p>
+                                    <Link href={ROUTES.PLAYBOOK} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-indigo-600 hover:text-indigo-700 transition-colors">
+                                        Explore Playbook <Icon name="arrowRight" size={14} />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
 
                         {ENABLE_EXECUTION_PACK && (
                             <UpsellCard

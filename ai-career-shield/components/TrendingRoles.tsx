@@ -27,9 +27,9 @@ export function TrendingRoles() {
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                     <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600">
-                        <Icon name="trending" size={16} />
+                        <Icon name="sparkles" size={16} />
                     </div>
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Fastest Growing</h3>
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Strategic Shifts (Example)</h3>
                 </div>
             </div>
 

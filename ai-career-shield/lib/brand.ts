@@ -3,8 +3,8 @@
  * This makes the "Brand Lock" phase trivial.
  */
 
-export const APP_NAME = 'People Plan';
-export const APP_TAGLINE = 'Plans for the AI era';
+export const APP_NAME = 'AI-Life Plan';
+export const APP_TAGLINE = 'Work, attention, identity, and capacity.';
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
 export const BRAND_CONFIG = {
@@ -22,5 +22,6 @@ export const ROUTES = {
     START: '/start',
     CAREER: '/assessment',
     ATTENTION: '/attention',
-    IDENTITY: '#', // Coming soon
+    IDENTITY: '/identity',
+    PLAYBOOK: '/playbook',
 };

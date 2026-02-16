@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 
+import { ROUTES } from '@/lib/brand';
 import { FRONTIER_ROLES } from '@/data/frontierRoles';
 
 export function AIJobOfTheDay() {
@@ -41,7 +42,7 @@ export function AIJobOfTheDay() {
                         <div className="p-1.5 rounded-md bg-[hsl(var(--cta))]/10 text-[hsl(var(--cta))]">
                             <Icon name="sparkles" size={16} />
                         </div>
-                        <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Analyst Briefing</span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Analyst Briefing (Example)</span>
                     </div>
                 </div>
 
@@ -84,10 +85,10 @@ export function AIJobOfTheDay() {
 
                     {/* CTA */}
                     <Link
-                        href="/assessment"
+                        href={ROUTES.START}
                         className="flex items-center justify-center w-full py-3 rounded-xl bg-slate-900 text-white text-sm font-bold hover:bg-[hsl(var(--primary))] transition-all group-hover:shadow-md group-hover:translate-y-[-1px]"
                     >
-                        Audit Your Role
+                        Start with Career
                         <Icon name="arrowRight" size={16} className="ml-2 opacity-80" />
                     </Link>
                 </div>

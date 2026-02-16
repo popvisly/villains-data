@@ -12,7 +12,7 @@ export function UpsellCard({ onUnlock, isLoading }: UpsellCardProps) {
                 <div className="flex-1">
                     <h3 className="text-2xl font-bold mb-3 tracking-tight text-slate-950">Make this actionable</h3>
                     <p className="text-slate-700 text-sm mb-6 leading-relaxed max-w-xl">
-                        Unlock the Execution Pack: <span className="font-semibold text-slate-900">2 portfolio-ready project briefs</span>, step-by-step deliverables, and interview prep tailored to your target role.
+                        Unlock the People Plan Suite: <span className="font-semibold text-slate-900">Leverage Map, Anti-Slop Protocol, and Proof Archive</span>. Includes artifact blueprints and interview prep.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
@@ -56,7 +56,7 @@ export function UpsellCard({ onUnlock, isLoading }: UpsellCardProps) {
                                 </svg>
                                 Preparing…
                             </span>
-                        ) : 'Unlock Execution Pack →'}
+                        ) : 'Unlock the Suite →'}
                     </button>
                     <p className="mt-4 text-[10px] text-slate-500 uppercase tracking-widest font-semibold">
                         One-time purchase • instant access

@@ -3,19 +3,20 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
-import { APP_NAME, BRAND_CONFIG, ROUTES } from '@/lib/brand';
+import { ROUTES } from '@/lib/brand';
 
 const PLANS = [
     {
         id: 'career',
-        title: 'Career People Plan',
-        desc: 'Choose a direction + get a 30/60/90 build plan.',
+        title: 'Career Plan',
+        subtitle: '(Throughput)',
+        desc: 'Direction + a 30/60/90 build sequence',
         output: [
-            'Leverage Map + Trajectories',
-            '30/60/90 Build Plan',
-            'Proof-of-work briefs',
+            'Leverage Map',
+            'Trajectories',
+            'Proof‑of‑Work briefs',
         ],
-        cta: 'Generate my plan',
+        cta: 'Generate Career Plan',
         href: ROUTES.CAREER,
         status: 'active',
         icon: 'professional',
@@ -24,14 +25,14 @@ const PLANS = [
     {
         id: 'attention',
         title: 'Attention Plan',
-        subtitle: '(Signal vs Slop)',
-        desc: 'Filter inputs, protect clean thought, increase output.',
+        subtitle: '(Input)',
+        desc: 'Filter slop, protect clean thought, increase output',
         output: [
-            'Grounded Protocol',
-            'No‑Slop Briefing',
-            'Weekly Signal Sprint',
+            'Anti‑Slop protocol',
+            'Daily briefing',
+            'Weekly sprint',
         ],
-        cta: 'Generate my plan',
+        cta: 'Generate Attention Plan',
         href: ROUTES.ATTENTION,
         status: 'active',
         icon: 'eyeOff',
@@ -40,18 +41,34 @@ const PLANS = [
     {
         id: 'identity',
         title: 'Identity Plan',
-        subtitle: '(Proof Archive)',
-        desc: 'Turn work into receipts. Build a public proof trail.',
+        subtitle: '(Output)',
+        desc: 'Turn work into receipts (proof over promise)',
         output: [
-            'Positioning line',
-            'Proof archive structure',
-            'Publishing prompts',
+            'Positioning statement',
+            'Proof archive',
+            'Share-ready kit',
         ],
-        cta: 'Notify Me',
-        href: '#',
-        status: 'upcoming',
+        cta: 'Generate Identity Plan',
+        href: ROUTES.IDENTITY,
+        status: 'active',
         icon: 'shield',
         color: 'slate'
+    },
+    {
+        id: 'capacity',
+        title: 'Capacity Plan',
+        subtitle: '(Sustain)',
+        desc: 'Protect energy so you can ship consistently',
+        output: [
+            'Energy budget',
+            'Guardrails',
+            'Minimum viable day',
+        ],
+        cta: 'Generate Capacity Plan',
+        href: '/capacity',
+        status: 'upcoming',
+        icon: 'zap',
+        color: 'amber'
     }
 ];
 
@@ -62,7 +79,8 @@ const QUIZ_QUESTIONS = [
         options: [
             { label: 'Noise & Overwhelm', value: 'attention' },
             { label: 'Uncertain Direction', value: 'career' },
-            { label: 'Lack of Credibility', value: 'identity' }
+            { label: 'Lack of Credibility', value: 'identity' },
+            { label: 'Burnout & Low Energy', value: 'capacity' }
         ]
     },
     {
@@ -71,7 +89,8 @@ const QUIZ_QUESTIONS = [
         options: [
             { label: '7 Days (Fix noise)', value: 'attention' },
             { label: '30 Days (Start pivot)', value: 'career' },
-            { label: '90 Days (Proof archive)', value: 'identity' }
+            { label: '90 Days (Proof archive)', value: 'identity' },
+            { label: 'Indefinite (Sustainability)', value: 'capacity' }
         ]
     }
 ];
@@ -105,8 +124,9 @@ export default function StartPage() {
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-20">
-                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Which {APP_NAME} do you need?</h1>
-                    <p className="text-lg text-slate-600">{BRAND_CONFIG.tagline}</p>
+                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Choose your module</h1>
+                    <p className="text-lg text-slate-600 mb-2">Your AI‑Life Plan is made of 4 modules. Start with the one that hurts most.</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">An AI‑Life Plan is a leverage plan, not a schedule.</p>
                 </div>
 
                 {/* Plans Grid */}

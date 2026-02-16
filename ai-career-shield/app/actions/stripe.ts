@@ -10,7 +10,7 @@ const EP_COOKIE = 'aicp_ep';
 
 export async function createCheckoutSession(
     planId: string,
-    type: 'career' | 'attention',
+    type: 'career' | 'attention' | 'identity',
     tier: 'execution' | 'executive' = 'execution'
 ) {
     const origin = (await headers()).get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3015';
@@ -19,14 +19,16 @@ export async function createCheckoutSession(
 
     // Dynamic Product Details
     const productName = type === 'career'
-        ? (tier === 'executive' ? 'People Plan - Executive License' : 'People Plan - Execution Pack')
-        : 'People Plan - Attention Protocol Unlock';
+        ? (tier === 'executive' ? 'AI-Life Plan - Executive License' : 'AI-Life Plan - Suite Unlock')
+        : (type === 'attention' ? 'AI-Life Plan - Attention Protocol Unlock' : 'AI-Life Plan - Identity Hub Unlock');
 
     const productDesc = type === 'career'
         ? (tier === 'executive'
             ? 'Full Roadmap + Assets + Matcher + Project Briefs + Interview Simulator. Includes 12 months of updates.'
             : 'Full Roadmap + Skill Gap Map + Smart Matcher + Career Assets. Includes 12 months of updates.')
-        : 'Unlock full Anti-Slop Protocol details, Weekly Signal Sprint templates, and PDF export for your Attention Plan.';
+        : (type === 'attention'
+            ? 'Unlock full Anti-Slop Protocol details, Weekly Signal Sprint templates, and PDF export for your Attention Plan.'
+            : 'Unlock the Positioning Statement Generator, LinkedIn Authority Kit, and Proof Archive. Includes 12 months of updates.');
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -45,8 +47,8 @@ export async function createCheckoutSession(
             },
         ],
         mode: 'payment',
-        success_url: `${origin}/${type === 'career' ? 'assessment' : 'attention'}/success?session_id={CHECKOUT_SESSION_ID}&planId=${planId}`,
-        cancel_url: `${origin}/${type === 'career' ? 'assessment' : 'attention'}`,
+        success_url: `${origin}/${type === 'career' ? 'assessment' : (type === 'attention' ? 'attention' : 'identity')}/success?session_id={CHECKOUT_SESSION_ID}&planId=${planId}`,
+        cancel_url: `${origin}/${type === 'career' ? 'assessment' : (type === 'attention' ? 'attention' : 'identity')}`,
         metadata: {
             planId,
             type,
@@ -151,17 +153,7 @@ export async function hasPlanAccess(requiredTier?: 'execution' | 'executive'): P
 
         const { data, error } = await query;
 
-        if (error) {
-            // Entitlement checks should fail closed (no access) without polluting the console.
-            // In some environments (local/dev, misconfigured env, transient network), Supabase may error.
-            if (process.env.NODE_ENV !== 'production') {
-                const e: any = error as any;
-                console.debug('Entitlement check failed (non-fatal):', e?.message || e);
-            }
-            return { hasAccess: false };
-        }
-
-        if (!data || data.length === 0) return { hasAccess: false };
+        if (error || !data || data.length === 0) return { hasAccess: false };
 
         const purchase = data[0];
         const userTier = (purchase.tier as 'execution' | 'executive') || 'execution';
