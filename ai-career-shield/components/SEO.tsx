@@ -7,12 +7,9 @@ interface SEOProps {
 }
 
 export default function SEO({
-    title = "AI Career Portal | Strategic Workflow Audit",
     description = "Stay valuable in the AI-era with a definitive execution sequence and strategic resilience roadmap.",
     url = "https://villains-data.vercel.app", // Added default for url
-    canonical = "https://captori.com",
-    ogImage = "/og-image.png"
-}: SEOProps) {
+}: { description?: string; url?: string }) {
 
     const siteName = "AI Career Portal";
 
