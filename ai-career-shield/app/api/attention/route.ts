@@ -7,7 +7,7 @@ export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
     const context = await req.json();
-    const { slopEntryPoints, outputGoal, cleanThoughtMinutes, highStakesTopics, consumeBuildRatio } = context;
+    const { slopEntryPoints, outputGoal, cleanThoughtMinutes, highStakesTopics, buildRatio } = context;
 
     const result = streamObject({
         model: openai('gpt-4o-mini'),
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
              - Slop Entry Points: ${slopEntryPoints.join(', ')}
              - Current Clean Thought: ${cleanThoughtMinutes}
              - Topics of Interest: ${highStakesTopics.join(', ')}
-             - Consume/Build Ratio: ${consumeBuildRatio}% Build
+             - Build Ratio: ${buildRatio}% Build
              
              INSTRUCTIONS:
              1. Generate 3 "No-Slop Rules": Tactical friction points (e.g., "No AI chats for first 60m of day", "Delete infinite scroll apps").

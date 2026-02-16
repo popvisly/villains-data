@@ -34,7 +34,7 @@ export default function AttentionClient({ hasAccess }: { hasAccess: boolean }) {
         outputGoal: '',
         cleanThoughtMinutes: '0-15m',
         highStakesTopics: [],
-        consumeBuildRatio: 80, // Default to 80% consume
+        buildRatio: 20, // Default to 20% build
     });
     const [topicInput, setTopicInput] = useState('');
     const [result, setResult] = useState<AttentionResult | null>(null);
@@ -80,17 +80,18 @@ export default function AttentionClient({ hasAccess }: { hasAccess: boolean }) {
         return (
             <div className="max-w-2xl mx-auto px-4 py-12">
                 <div className="mb-12 text-center">
-                    <h1 className="text-4xl font-bold text-slate-900 mb-4">{APP_NAME} | Attention Audit</h1>
+                    <h1 className="text-4xl font-bold text-slate-900 mb-4">{APP_NAME} | Attention Plan</h1>
                     <p className="text-slate-600 font-medium italic">{BRAND_CONFIG.philosophy}</p>
                 </div>
 
                 <div className="space-y-12">
                     {/* Q1: Slop Entry */}
                     <section>
-                        <h2 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                        <h2 className="text-lg font-semibold text-slate-900 mb-1 flex items-center gap-2">
                             <Icon name="eyeOff" size={20} className="text-indigo-600" />
                             Where does the &ldquo;Slop&rdquo; enter your day?
                         </h2>
+                        <p className="text-xs text-slate-500 mb-4 font-medium italic">No judgment—just pattern recognition.</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {SLOP_ENTRIES.map(entry => (
                                 <button
@@ -125,6 +126,18 @@ export default function AttentionClient({ hasAccess }: { hasAccess: boolean }) {
                                         + {example}
                                     </button>
                                 ))}
+                                <button
+                                    onClick={() => setFormData({ ...formData, outputGoal: 'Write consistently' })}
+                                    className="px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-medium text-slate-600 hover:border-indigo-300 hover:text-indigo-600 transition-all"
+                                >
+                                    + Write consistently
+                                </button>
+                                <button
+                                    onClick={() => setFormData({ ...formData, outputGoal: 'Ship a weekly artifact' })}
+                                    className="px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-medium text-slate-600 hover:border-indigo-300 hover:text-indigo-600 transition-all"
+                                >
+                                    + Ship a weekly artifact
+                                </button>
                             </div>
                             <input
                                 type="text"
@@ -157,6 +170,11 @@ export default function AttentionClient({ hasAccess }: { hasAccess: boolean }) {
                                 </button>
                             ))}
                         </div>
+                        {formData.cleanThoughtMinutes && (
+                            <p className="mt-3 text-[10px] text-indigo-500 font-bold uppercase tracking-wider italic animate-in fade-in duration-300">
+                                &ldquo;We&rsquo;ll design your protocol around this constraint.&rdquo;
+                            </p>
+                        )}
                     </section>
 
                     {/* Q4: Topics */}
@@ -176,16 +194,31 @@ export default function AttentionClient({ hasAccess }: { hasAccess: boolean }) {
                                 </span>
                             ))}
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 mb-4">
                             <input
                                 type="text"
                                 value={topicInput}
                                 onChange={e => setTopicInput(e.target.value)}
                                 onKeyDown={e => e.key === 'Enter' && addTopic()}
                                 placeholder="Add a topic..."
-                                className="flex-1 p-3 rounded-lg border border-slate-200 outline-none"
+                                className="flex-1 p-3 rounded-lg border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition-all"
                             />
-                            <button onClick={addTopic} className="px-4 py-2 bg-slate-900 text-white rounded-lg">Add</button>
+                            <button onClick={addTopic} className="px-6 py-2 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-all">Add</button>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {['Salary negotiation', 'Role pivot', 'Redundancy risk'].map(chip => (
+                                <button
+                                    key={chip}
+                                    onClick={() => {
+                                        if (!formData.highStakesTopics.includes(chip)) {
+                                            setFormData(prev => ({ ...prev, highStakesTopics: [...prev.highStakesTopics, chip] }));
+                                        }
+                                    }}
+                                    className="px-3 py-1 rounded-full border border-slate-200 bg-white text-[10px] font-bold text-slate-500 hover:border-indigo-300 hover:text-indigo-600 transition-all"
+                                >
+                                    + {chip}
+                                </button>
+                            ))}
                         </div>
                     </section>
 
@@ -200,13 +233,13 @@ export default function AttentionClient({ hasAccess }: { hasAccess: boolean }) {
                                 type="range"
                                 min="0"
                                 max="100"
-                                value={formData.consumeBuildRatio}
-                                onChange={e => setFormData({ ...formData, consumeBuildRatio: parseInt(e.target.value) })}
+                                value={formData.buildRatio}
+                                onChange={e => setFormData({ ...formData, buildRatio: parseInt(e.target.value) })}
                                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
                             />
-                            <div className="flex justify-between text-xs font-medium text-slate-500 uppercase tracking-widest">
-                                <span>{100 - formData.consumeBuildRatio}% Consume</span>
-                                <span>{formData.consumeBuildRatio}% Build</span>
+                            <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-widest">
+                                <span>{100 - formData.buildRatio}% Consume</span>
+                                <span>{formData.buildRatio}% Build</span>
                             </div>
                         </div>
                     </section>
@@ -214,9 +247,9 @@ export default function AttentionClient({ hasAccess }: { hasAccess: boolean }) {
                     <button
                         onClick={handleSubmit}
                         disabled={!formData.outputGoal || isLoading}
-                        className="w-full py-4 bg-indigo-600 text-white rounded-xl font-semibold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all disabled:opacity-50 disabled:shadow-none"
+                        className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all disabled:opacity-50 disabled:shadow-none uppercase tracking-wide"
                     >
-                        Generate My Attention Plan
+                        Generate My Anti-Slop Plan
                     </button>
                 </div>
             </div>
@@ -247,7 +280,7 @@ export default function AttentionClient({ hasAccess }: { hasAccess: boolean }) {
                     <div className="md:col-span-2">
                         <Paywall
                             hasAccess={hasAccess}
-                            planId="attention_v1" // Dynamic ID could be added later if persisted
+                            planId="suite_v1"
                             type="attention"
                         >
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">

@@ -5,7 +5,7 @@ export const attentionInputSchema = z.object({
     outputGoal: z.string(),
     cleanThoughtMinutes: z.enum(['0-15m', '15-45m', '45-90m', '90m+']),
     highStakesTopics: z.array(z.string()),
-    consumeBuildRatio: z.number().min(0).max(100), // 0 = 100% consume, 100 = 100% build
+    buildRatio: z.number().min(0).max(100), // 0 = 100% consume, 100 = 100% build
 });
 
 export type AttentionInput = z.infer<typeof attentionInputSchema>;
