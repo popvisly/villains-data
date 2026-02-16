@@ -6,13 +6,13 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const lora = Lora({ subsets: ['latin'], variable: '--font-lora' });
 const raleway = Raleway({ subsets: ['latin'], variable: '--font-raleway' });
 
-import { APP_NAME, APP_TAGLINE, APP_URL } from '@/lib/brand';
+import { APP_NAME, APP_PRODUCT, APP_TAGLINE, APP_URL } from '@/lib/brand';
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
-  title: `${APP_NAME} | ${APP_TAGLINE}`,
+  title: `${APP_NAME} | ${APP_PRODUCT}`, 
   description:
-    'Audit your role and generate a strategic resilience roadmap. Get a precise 30/60/90-day execution sequence to stay valuable in the AI-era.',
+    'Generate a 30/60/90 operating plan for the AI era—career, attention, identity, and capacity—built from your constraints.',
   keywords: [
     'career resilience',
     'career planning',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: `${APP_NAME} | ${APP_TAGLINE}`,
-    description: 'Audit your role and generate a 30/60/90-day resilience sequence.',
+    title: `${APP_NAME} | ${APP_PRODUCT}`,
+    description: 'Generate a 30/60/90 operating plan you can execute alongside a full-time job.',
     url: APP_URL,
     siteName: APP_NAME,
     locale: 'en_US',
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${APP_NAME} | ${APP_TAGLINE}`,
-    description: 'Stay valuable in the AI-era with a definitive execution sequence.',
+    title: `${APP_NAME} | ${APP_PRODUCT}`,
+    description: 'A practical operating plan for the AI era—built from your constraints. Not a prediction.',
   },
 };
 

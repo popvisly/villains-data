@@ -4,17 +4,21 @@ import Link from 'next/link';
 import { AILifePlanBriefing } from '@/components/AILifePlanBriefing';
 import { Icon } from '@/components/ui/Icon';
 import { trackEvent } from '@/lib/analytics-client';
-import { APP_NAME, ROUTES } from '@/lib/brand';
+import { APP_NAME, APP_PRODUCT, ROUTES } from '@/lib/brand';
 
 function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b border-[hsl(var(--border))] bg-[hsl(var(--background))]/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[hsl(var(--primary))] shadow-sm shadow-indigo-500/20">
-            <Icon name="sparkles" size={20} className="text-[hsl(var(--primary-foreground))]" />
+            {/* Capture-mark app icon */}
+            <img src="/icon.svg" alt="Captori" className="h-5 w-5 text-[hsl(var(--primary-foreground))]" style={{ filter: 'invert(1)' }} />
           </div>
-          <span className="text-xl font-bold tracking-tighter text-slate-900">{APP_NAME}</span>
+          <div className="leading-tight">
+            <div className="text-xl font-bold tracking-tighter text-slate-900">{APP_NAME}</div>
+            <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">{APP_PRODUCT}</div>
+          </div>
         </div>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
