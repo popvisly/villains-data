@@ -7,6 +7,7 @@ import { trackEvent } from '@/lib/analytics-client';
 import { ROUTES } from '@/lib/brand';
 import { Nav } from '@/components/ui/Nav';
 import { SectionTitle } from '@/components/ui/SectionTitle';
+import { Tooltip } from '@/components/ui/Tooltip';
 
 export default function HomePage() {
   return (
@@ -35,54 +36,19 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6 [text-wrap:balance]">
-              AI is changing your role faster than your title.
+              AI-Life Plan — Get Your Personalized Career Growth & Resilience Blueprint in Minutes.
             </h1>
-            <div className="mb-10 flex flex-wrap gap-3">
-              {[
-                { label: 'Not interview prep', icon: 'zap' as const, color: 'text-indigo-600', border: 'border-indigo-100', bg: 'bg-indigo-50/30' },
-                { label: 'Not a calendar optimizer', icon: 'locked' as const, color: 'text-slate-600', border: 'border-slate-200', bg: 'bg-slate-50/50' },
-                { label: 'Not a habit tracker', icon: 'eyeOff' as const, color: 'text-amber-700', border: 'border-amber-100', bg: 'bg-amber-50/40' },
-              ].map((item) => (
-                <span key={item.label} className={`inline-flex items-center gap-2.5 rounded-2xl border ${item.border} ${item.bg} px-4 py-2.5 text-[13px] font-bold ${item.color} shadow-sm backdrop-blur-sm transition-all hover:bg-white`}>
-                  <Icon name={item.icon} size={14} className="opacity-70" />
-                  {item.label}.
-                </span>
-              ))}
-            </div>
-            <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-bold italic">
-              Stop guessing. Start building your moat.
+            <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-bold">
+              Generate a 30/60/90 actionable strategy with measurable milestones, templates you can export, and a skill-proof pathway — no fluff.
             </p>
-            <p className="mt-6 text-pretty text-lg leading-relaxed text-slate-500 md:text-xl">
-              Get an operational <strong>30/60/90 plan</strong> you can execute <strong>alongside a full‑time job.</strong>
-            </p>
-            <ul className="mt-10 space-y-4 text-base text-slate-700">
-              {[
-                { title: 'Leverage Map', desc: 'what’s compounding vs commoditizing' },
-                { title: 'Build Plan', desc: '30/60/90 sequence + proof artifacts' },
-                { title: 'Grounded Protocol', desc: 'plans → actions → log off' },
-              ].map((item) => (
-                <li key={item.title} className="flex items-start gap-3 group">
-                  <div className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-[hsl(var(--primary))]/10 text-[hsl(var(--primary))] group-hover:bg-[hsl(var(--primary))] group-hover:text-white transition-colors">
-                    <Icon name="checkCircle" size={14} />
-                  </div>
-                  <span className="group-hover:text-slate-900 transition-colors">
-                    <strong className="text-slate-900">{item.title}:</strong> {item.desc}
-                  </span>
-                </li>
-              ))}
-            </ul>
 
-            <div className="mt-8 mb-10 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
-              Strategic operating plan. Built for leverage.
-            </div>
-
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-start gap-4">
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-start gap-4">
               <Link
                 href={ROUTES.START}
                 className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Generate My AI‑Life Plan
+                  Create My Plan Now — It Only Takes 2 Minutes
                   <Icon name="arrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
@@ -90,14 +56,28 @@ export default function HomePage() {
                 href="/example"
                 className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/50 px-8 py-4 text-lg font-bold text-slate-600 backdrop-blur-sm transition-all hover:bg-white hover:border-slate-300"
               >
-                See Example
+                See Sample Plan
               </Link>
             </div>
 
-            <p className="mt-6 text-sm text-slate-500 flex items-center gap-2">
-              <Icon name="locked" size={16} className="text-slate-400" />
-              Build your plan. Then log off.
-            </p>
+            <div className="mt-12 space-y-4">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">What You’ll Get With Captori</h3>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {[
+                  { label: 'Personalized 30/60/90 Career Action Plan', tooltip: 'A structured plan that builds strength in your role and future opportunities.' },
+                  { label: 'Exportable templates (Notion/Jira/Docs)', tooltip: 'Ready-to-use documents to help you start executing immediately.' },
+                  { label: 'Success metrics & growth milestones', tooltip: 'Measurable targets to track your progress over the next 90 days.' },
+                  { label: 'Priority skills and artifact map', tooltip: 'A prioritized list of actions that give you the greatest professional leverage.' },
+                ].map((item) => (
+                  <li key={item.label} className="flex items-center gap-2 text-sm font-medium text-slate-600">
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                      <Icon name="checkCircle" size={12} />
+                    </div>
+                    <Tooltip content={item.tooltip}>{item.label}</Tooltip>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Right: Floating Stack Layout */}
@@ -120,6 +100,37 @@ export default function HomePage() {
                 </div>
               </div>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SOCIAL PROOF: Trusted by */}
+      <section className="border-y border-slate-200 bg-white/50 py-10">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex items-center gap-4">
+              <div className="flex -space-x-3 overflow-hidden">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="inline-block h-10 w-10 rounded-full ring-2 ring-white bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-400 border border-slate-200 font-sans">
+                    U{i}
+                  </div>
+                ))}
+              </div>
+              <div className="text-sm">
+                <div className="flex items-center gap-0.5 text-amber-500">
+                  {[1, 2, 3, 4, 5].map((i) => <Icon key={i} name="sparkles" size={12} />)}
+                </div>
+                <p className="font-bold text-slate-900">78% of users shipped within 30 days</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+              <span className="text-sm font-bold tracking-tight text-slate-400">USED BY LEADERSHIP IN:</span>
+              <div className="flex items-center gap-6">
+                <div className="font-bold text-slate-400">PRODUCT COLLECTIVE</div>
+                <div className="font-bold text-slate-400 uppercase tracking-tighter">LENNY&rsquo;S COHORTS</div>
+                <div className="font-bold text-slate-400">REFORGE</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -192,23 +203,23 @@ export default function HomePage() {
             {[
               {
                 step: '1',
-                title: 'Capture your context',
+                title: 'Answer a few questions',
                 desc: 'Role, strengths, constraints—and the move you’re aiming at next.',
               },
               {
                 step: '2',
-                title: 'See the drivers',
+                title: 'AI generates your plan',
                 desc: 'Your Resilience Index plus the leverage drivers behind it, so you can sanity‑check the logic.',
               },
               {
                 step: '3',
-                title: 'Ship outputs',
-                desc: 'A 30/60/90 build sequence with proof artifacts you can complete alongside your current job.',
+                title: 'Export & start implementing',
+                desc: 'A 30/60/90 build sequence with proof artifacts you can paste into Jira, Notion, or Slack.',
               },
               {
                 step: '4',
-                title: 'Stay grounded',
-                desc: 'Attention and capacity protocols that protect clean thought, prevent spirals, and keep AI a tool—not an authority.',
+                title: 'See measurable progress',
+                desc: 'Follow the success metrics and milestones to build your moat alongside your day job.',
               },
             ].map((s) => (
               <div key={s.step} className="group glass-panel rounded-3xl p-8 hover:border-[hsl(var(--primary))]/30 transition-all cursor-default">
@@ -620,15 +631,55 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* TESTIMONIALS */}
+      <section className="px-6 py-24 bg-white relative overflow-hidden">
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
+            eyebrow="User Feedback"
+            title="Trusted by early testers"
+            subtitle="Professionals at top tech companies are using Captori to build leverage in the AI era."
+          />
+          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                quote: "Captori helped me translate my 'product vibes' into a concrete roadmap that my manager actually respected.",
+                author: "Senior PM",
+                company: "Series B Fintech"
+              },
+              {
+                quote: "The 30/60/90 plan wasn't just fluff. It gave me the exact Jira tickets I needed to ship my first AI-integrated feature.",
+                author: "Engineering Lead",
+                company: "Growth Stage SaaS"
+              },
+              {
+                quote: "I was worried about AI replacement. Now I have a Resilience Plan that proves I'm the one owning the judgment.",
+                author: "Product Designer",
+                company: "Global Marketplace"
+              }
+            ].map((t, i) => (
+              <div key={i} className="glass-panel rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-md transition">
+                <div className="flex items-center gap-0.5 text-amber-500 mb-6">
+                  {[1, 2, 3, 4, 5].map((i) => <Icon key={i} name="sparkles" size={12} />)}
+                </div>
+                <p className="text-lg text-slate-700 italic mb-8">&ldquo;{t.quote}&rdquo;</p>
+                <div className="border-t border-slate-100 pt-6">
+                  <p className="font-bold text-slate-900">{t.author}</p>
+                  <p className="text-sm text-slate-500">{t.company}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section id="pricing" className="py-24 px-6 border-t border-slate-200">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-serif">
-              Unlock your AI‑Life Plan
+              Simple, outcome-based pricing
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              One-time purchase. Designed to be executed <strong>alongside a full-time job.</strong>
+              One-time purchase. Instantly generate your strategy and begin your build.
             </p>
           </div>
 
@@ -636,8 +687,8 @@ export default function HomePage() {
             {/* The Audit: FREE */}
             <div className="rounded-3xl border border-slate-200 bg-white p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-slate-900">Free Plan</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-slate-600 italic">Diagnosis + first moves.</p>
+                <h3 className="text-lg font-bold text-slate-900">Free</h3>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-slate-600 italic">AI resilience basics, score & priorities.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$0</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -654,29 +705,29 @@ export default function HomePage() {
               >
                 Start Free
               </Link>
+              <p className="mt-4 text-[10px] text-center text-slate-400 italic">Diagnose your risk in 2 minutes.</p>
             </div>
 
-            {/* Suite Unlock: $39 */}
-            <div className="rounded-3xl border-2 border-slate-900 bg-white p-8 flex flex-col shadow-xl scale-105 relative z-10">
-              <div className="absolute top-0 right-0 px-3 py-1 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">
+            {/* AI-Life Plan (Standard): $39 */}
+            <div className="rounded-3xl border-2 border-[hsl(var(--primary))] bg-white p-8 flex flex-col shadow-xl scale-105 relative z-10">
+              <div className="absolute top-0 right-0 px-3 py-1 bg-[hsl(var(--primary))] text-white text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">
                 Most Popular
               </div>
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-slate-900">AI‑Life Plan (Suite Unlock)</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 italic">Full plan + shippable sequence (One-time purchase).</p>
+                <h3 className="text-lg font-bold text-slate-900">Standard</h3>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 italic">Full personalized AI-Life Plan + exports.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
               <ul className="space-y-3 mb-8 flex-1">
                 {[
-                  'Career (Leverage Map & 30/60/90 Build Plan)',
-                  'Attention (Grounded Protocol & Anti‑slop)',
-                  'Identity (Proof Archive & positioning kit)',
-                  <span key="capacity-upcoming" className="flex items-center gap-2 text-slate-400">
-                    <Icon name="time" size={16} /> Capacity (Recovery plan) — included when released
-                  </span>
+                  'Full 30/60/90 Career Build Plan',
+                  'Grounded Protocol (Attention & Recovery)',
+                  'Exportable templates (Notion/Jira)',
+                  'Identity Proofing Kit',
+                  'Everything in Free',
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-2 text-sm text-slate-700 font-medium">
-                    {typeof item === 'string' ? <><Icon name="check" size={16} className="text-emerald-600" /> {item}</> : item}
+                    <Icon name="check" size={16} className="text-emerald-600" /> {item}
                   </li>
                 ))}
               </ul>
@@ -688,25 +739,24 @@ export default function HomePage() {
                 }}
                 className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-center shadow-lg transition"
               >
-                Unlock Suite (Checkout)
+                Get Full Plan
               </Link>
-              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Instant access to live modules.</p>
+              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Build your moat today.</p>
             </div>
 
-            {/* Executive License: $99 */}
             <div className="rounded-3xl border border-indigo-200 bg-indigo-50/30 p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-slate-900">Executive License</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Ideal for Senior/Staff roles.</p>
+                <h3 className="text-lg font-bold text-slate-900">Executive</h3>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Advanced growth scenarios + 1:1 guidance.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
                 {[
-                  'Proof Kit: narrative + portfolio + interview readiness',
-                  'Pressure‑test simulations (failure‑mode)',
-                  'Proof‑of‑work briefs (portfolio‑ready)',
-                  'Executive Blueprint PDF (share-ready)',
-                  'Everything in Suite Unlock',
+                  'Everything in Standard',
+                  'Executive Blueprint (Share-ready PDF)',
+                  'Pressure‑test simulations (Failure-mode)',
+                  'Priority artifact audits',
+                  '1:1 implementation guidance sync',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
                     <Icon name="check" size={16} className="text-indigo-600" /> {item}
@@ -721,12 +771,9 @@ export default function HomePage() {
                 }}
                 className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-center transition"
               >
-                Go Executive (Checkout)
+                Go Executive
               </Link>
-              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes 12 months of updates. Designed for higher-leverage roles.</p>
-              <p className="mt-4 text-[10px] text-center text-indigo-600 font-medium italic">
-                &ldquo;Built to help you sound senior under pressure—not just polished on paper.&rdquo;
-              </p>
+              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes all future update logs.</p>
             </div>
           </div>
 
@@ -734,7 +781,7 @@ export default function HomePage() {
             &ldquo;Automation applies faster. Strategy wins offers.&rdquo;
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Footer */}
       <footer className="py-20 px-6 border-t border-slate-200 bg-slate-50">

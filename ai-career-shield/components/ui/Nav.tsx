@@ -33,7 +33,7 @@ export function Nav() {
                         href="/start"
                         className="rounded-xl bg-[hsl(var(--cta))] px-5 py-2.5 font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 transition-all shadow-sm shadow-emerald-500/20"
                     >
-                        Generate My Plan
+                        Create My Plan Now
                     </Link>
                 </nav>
 
@@ -42,7 +42,7 @@ export function Nav() {
                         href="/start"
                         className="rounded-xl bg-[hsl(var(--cta))] px-4 py-2 text-sm font-bold text-[hsl(var(--cta-foreground))]"
                     >
-                        Start
+                        Create
                     </Link>
                 </div>
             </div>

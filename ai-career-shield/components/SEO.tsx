@@ -7,11 +7,11 @@ interface SEOProps {
 }
 
 export default function SEO({
-    description = "Stay valuable in the AI-era with a definitive execution sequence and strategic resilience roadmap.",
-    url = "https://villains-data.vercel.app", // Added default for url
+    description = "Create a personalized AI-Life Plan with measurable outcomes, templates, and a tailored roadmap to grow your career or project.",
+    url = "https://captori.com", // Updated default URL
 }: { description?: string; url?: string }) {
 
-    const siteName = "AI Career Portal";
+    const siteName = "Captori";
 
     const schemaData = {
         "@context": "https://schema.org",
