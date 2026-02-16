@@ -48,7 +48,7 @@ export default function HomePage() {
                 className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Create My Plan Now — It Only Takes 2 Minutes
+                  Generate My AI-Life Plan Now — It Only Takes 2 Minutes
                   <Icon name="arrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
@@ -56,9 +56,13 @@ export default function HomePage() {
                 href="/example"
                 className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/50 px-8 py-4 text-lg font-bold text-slate-600 backdrop-blur-sm transition-all hover:bg-white hover:border-slate-300"
               >
-                See Sample Plan
+                See a Sample Plan
               </Link>
             </div>
+            <p className="mt-4 text-sm text-slate-500 flex items-center gap-2">
+              <Icon name="locked" size={16} className="text-slate-400" />
+              Build your plan. No credit card required.
+            </p>
 
             <div className="mt-12 space-y-4">
               <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">What You’ll Get With Captori</h3>
@@ -687,8 +691,8 @@ export default function HomePage() {
             {/* The Audit: FREE */}
             <div className="rounded-3xl border border-slate-200 bg-white p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-slate-900">Free</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-slate-600 italic">AI resilience basics, score & priorities.</p>
+                <h3 className="text-lg font-bold text-slate-900">Free Starter</h3>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-slate-600 italic">Resilience basics + priority scoring.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$0</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -703,9 +707,9 @@ export default function HomePage() {
                 onClick={() => trackEvent('pricing_plan_click', { tier: 'free', location: 'landing_page' })}
                 className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-xl text-center transition"
               >
-                Start Free
+                Start for Free
               </Link>
-              <p className="mt-4 text-[10px] text-center text-slate-400 italic">Diagnose your risk in 2 minutes.</p>
+              <p className="mt-4 text-[10px] text-center text-slate-400 italic">No credit card required. Diagnose in 2 minutes.</p>
             </div>
 
             {/* AI-Life Plan (Standard): $39 */}
@@ -714,8 +718,8 @@ export default function HomePage() {
                 Most Popular
               </div>
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-slate-900">Standard</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 italic">Full personalized AI-Life Plan + exports.</p>
+                <h3 className="text-lg font-bold text-slate-900">Growth Plan</h3>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 italic">Full custom 30/60/90 plan + templates.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -739,15 +743,15 @@ export default function HomePage() {
                 }}
                 className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-center shadow-lg transition"
               >
-                Get Full Plan
+                Unlock Full AI-Life Plan
               </Link>
               <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Build your moat today.</p>
             </div>
 
             <div className="rounded-3xl border border-indigo-200 bg-indigo-50/30 p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
-                <h3 className="text-lg font-bold text-slate-900">Executive</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Advanced growth scenarios + 1:1 guidance.</p>
+                <h3 className="text-lg font-bold text-slate-900">Executive Plan</h3>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Advanced strategy + deeper insights.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -771,7 +775,7 @@ export default function HomePage() {
                 }}
                 className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-center transition"
               >
-                Go Executive
+                Get Executive Plan
               </Link>
               <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes all future update logs.</p>
             </div>
