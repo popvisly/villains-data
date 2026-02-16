@@ -60,8 +60,8 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="mt-4 text-sm text-slate-500 flex items-center gap-2">
-              <Icon name="locked" size={16} className="text-slate-400" />
-              Build your plan. No credit card required.
+              <Icon name="zap" size={16} className="text-amber-500" />
+              Instant access after signup. No credit card required.
             </p>
 
             <div className="mt-12 space-y-4">
@@ -751,7 +751,7 @@ export default function HomePage() {
             <div className="rounded-3xl border border-indigo-200 bg-indigo-50/30 p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Executive Plan</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Advanced strategy + deeper insights.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Advanced strategy with deeper insights.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -775,7 +775,7 @@ export default function HomePage() {
                 }}
                 className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-center transition"
               >
-                Get Executive Plan
+                Get Executive Strategy
               </Link>
               <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes all future update logs.</p>
             </div>
