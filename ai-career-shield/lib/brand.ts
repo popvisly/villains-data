@@ -5,7 +5,7 @@
 
 export const APP_NAME = 'AI-Life Plan';
 export const APP_TAGLINE = 'Work, attention, identity, and capacity.';
-export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://captori.com';
 
 export const BRAND_CONFIG = {
     name: APP_NAME,
@@ -13,8 +13,8 @@ export const BRAND_CONFIG = {
     url: APP_URL,
     differentiator: 'Not interview prep. This is a build plan.',
     philosophy: 'Build signal. Then log off.',
-    supportEmail: 'support@peopleplan.app',
-    twitterHandle: '@peopleplan_app',
+    supportEmail: 'support@captori.com',
+    twitterHandle: '@captori_app',
 };
 
 export const ROUTES = {
