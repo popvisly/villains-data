@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ai-career-portal.vercel.app/</loc>
-    <lastmod>2026-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://ai-career-portal.vercel.app/assessment</loc>
-    <lastmod>2026-02-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <url><loc>https://captori.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://captori.com/start</loc><priority>0.9</priority></url>
+  <url><loc>https://captori.com/example</loc><priority>0.9</priority></url>
+  <url><loc>https://captori.com/blog</loc><priority>0.8</priority></url>
+  <url><loc>https://captori.com/faq</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/privacy</loc><priority>0.3</priority></url>
+  <url><loc>https://captori.com/terms</loc><priority>0.3</priority></url>
+  <url><loc>https://captori.com/blog/will-ai-replace-product-managers</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/how-to-stay-relevant-in-the-ai-era</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/career-development-plan-template</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/building-your-career-proof-portfolio</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/ai-job-risk-assessment</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/strategic-career-planning-vs-coaching</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/product-manager-leverage-map</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/strategic-judgment-interview</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/future-proof-career-checklist</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/grounded-ai-protocol</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/career-operating-plan</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/career-resilience-for-consultants</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/ai-proofing-senior-ic</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/from-doing-to-deciding</loc><priority>0.7</priority></url>
+  <url><loc>https://captori.com/blog/captori-vs-traditional-tools</loc><priority>0.7</priority></url>
 </urlset>
