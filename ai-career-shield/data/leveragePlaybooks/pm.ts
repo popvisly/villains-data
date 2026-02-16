@@ -61,6 +61,25 @@ Timeline: [When is this due?]`,
                 'Comms plan (who hears what and when).'
             ],
             nextAction: 'Draft the Stakeholder Memo and send as a pre-read 24 hours before your alignment meeting.'
+        },
+        {
+            id: 'expertise-barrier-audit',
+            title: 'Expertise Barrier Audit',
+            description: 'Identify the cognitive moats in your role that AI cannot easily bridge.',
+            whenToUse: 'Use during performance reviews or when justifying head-count/budget for complex initiatives.',
+            mode: 'Review',
+            inputTemplate: `Core Task: [e.g., Quarterly Roadmap Planning]
+AI Baseline: [What can GPT-4 do for this task today?]
+Human Delta: [What specific judgment/context did YOU add to make it work?]
+Expertise Barrier: [Why couldn't a junior with AI do this yet?]`,
+            outputArtifact: '30/60/90 Leverage Roadmap (Focus on cognitive moats)',
+            verificationChecklist: [
+                'Identify where "Judgment" overrides "Automation".',
+                'List 3 tasks that require deep domain context.',
+                'Quantify the value of error-prevention (High Stakes).',
+                'Map 90-day trajectory for "Human-in-the-loop" superiority.'
+            ],
+            nextAction: 'Present the Leverage Roadmap to your manager to redefine your role around cognitive moats rather than volume.'
         }
     ],
     logOffReminder: 'Workflows complete. Proof over promise—then log off.'

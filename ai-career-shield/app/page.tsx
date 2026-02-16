@@ -22,11 +22,11 @@ function Nav() {
         </div>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-          <Link href="#how" className="hover:text-[hsl(var(--primary))] transition-colors">
+          <Link href="/start" className="hover:text-[hsl(var(--primary))] transition-colors">
             How it works
           </Link>
-          <Link href="/start" className="hover:text-[hsl(var(--primary))] transition-colors font-bold text-slate-900 border-b-2 border-indigo-500">
-            Plans
+          <Link href="/example" className="hover:text-[hsl(var(--primary))] transition-colors">
+            Example
           </Link>
           <Link href="#pricing" className="hover:text-[hsl(var(--primary))] transition-colors">
             Pricing
@@ -93,7 +93,7 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6 [text-wrap:balance]">
-              The AI‑Life Plan for professionals
+              AI is changing your role faster than your title.
             </h1>
             <div className="mb-10 flex flex-wrap gap-3">
               {[
@@ -107,11 +107,11 @@ export default function HomePage() {
                 </span>
               ))}
             </div>
-            <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
-              Your role is changing faster than your title. We give you a plan you can execute <strong>without quitting your job.</strong>
+            <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-bold italic">
+              Stop guessing. Start building your moat.
             </p>
-            <p className="mt-6 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl">
-              Get a <strong>30/60/90 plan</strong> you can execute <strong>alongside a full‑time job.</strong>
+            <p className="mt-6 text-pretty text-lg leading-relaxed text-slate-500 md:text-xl">
+              Get an operational <strong>30/60/90 plan</strong> you can execute <strong>alongside a full‑time job.</strong>
             </p>
             <ul className="mt-10 space-y-4 text-base text-slate-700">
               {[
@@ -134,10 +134,10 @@ export default function HomePage() {
               Strategic operating plan. Built for leverage.
             </div>
 
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-start gap-4">
               <Link
                 href={ROUTES.START}
-                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-8 text-base font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
+                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Generate My AI‑Life Plan
@@ -145,10 +145,10 @@ export default function HomePage() {
                 </span>
               </Link>
               <Link
-                href="#how"
-                className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-8 py-4 text-lg font-bold text-slate-700 transition-all hover:bg-slate-50"
+                href="/example"
+                className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/50 px-8 py-4 text-lg font-bold text-slate-600 backdrop-blur-sm transition-all hover:bg-white hover:border-slate-300"
               >
-                How it works
+                See Example
               </Link>
             </div>
 
@@ -164,20 +164,20 @@ export default function HomePage() {
             <div className="absolute top-1/2 left-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-tr from-indigo-50 via-white to-emerald-50/50 rounded-full blur-3xl opacity-80"></div>
 
             {/* Main AI-Life Plan Briefing - Single Focus */}
-            <div className="relative z-20 peer hover:-translate-y-2 transition-transform duration-500 max-w-lg">
+            <Link href="/example" className="relative z-20 peer hover:-translate-y-2 transition-transform duration-500 max-w-lg block">
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-indigo-500/20 to-emerald-500/20 blur-lg opacity-40"></div>
               <AILifePlanBriefing />
-            </div>
 
-            {/* Floating Badge */}
-            <div className="absolute -top-6 -right-6 z-30 animate-bounce duration-[3000ms]">
-              <div className="glass-panel rounded-2xl px-4 py-2 flex items-center gap-2 border-indigo-200/50 shadow-xl">
-                <div className="p-1 rounded-full bg-indigo-500 text-white">
-                  <Icon name="professional" size={14} />
+              {/* Floating Badge */}
+              <div className="absolute -top-6 -right-6 z-30 animate-bounce duration-[3000ms]">
+                <div className="glass-panel rounded-2xl px-4 py-2 flex items-center gap-2 border-indigo-200/50 shadow-xl">
+                  <div className="p-1 rounded-full bg-indigo-500 text-white">
+                    <Icon name="professional" size={14} />
+                  </div>
+                  <span className="text-xs font-bold text-slate-900">Example Plan</span>
                 </div>
-                <span className="text-xs font-bold text-slate-900">Example Plan</span>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -188,7 +188,7 @@ export default function HomePage() {
           <SectionTitle
             eyebrow="Market Reality"
             title="What’s changing in the AI job market"
-            subtitle="Automation made volume meaningless. Differentiation has moved upstream."
+            subtitle="AI doesn’t erase jobs first—it erases the expertise barrier for newcomers. Your goal is to move your barrier upstream."
           />
 
           <div className="mt-16 grid gap-8 md:grid-cols-3">
@@ -214,9 +214,23 @@ export default function HomePage() {
                   {card.icon}
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 font-serif mb-4">{card.title}</h3>
-                <p className="text-base text-slate-600 leading-relaxed">{card.desc}</p>
+                <p className="text-base text-slate-600 leading-relaxed mb-4">{card.desc}</p>
+                {i === 1 && (
+                  <p className="text-xs font-bold text-slate-900 border-t border-slate-200 pt-4 mt-auto italic">
+                    AI doesn’t erase jobs first—it erases the parts of jobs that used to prove expertise.
+                  </p>
+                )}
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 mx-auto max-w-2xl p-6 rounded-2xl border border-slate-200 bg-white/50 backdrop-blur-sm text-center">
+            <h4 className="text-sm font-bold text-slate-900 mb-2">No hopium. No doom.</h4>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              We don’t predict outcomes. We build leverage.<br />
+              You can’t control macro incentives—but you can control your <strong>discretion</strong>, your <strong>proof</strong>, and your <strong>next 90 days.</strong>
+            </p>
+            <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Proof over promise—then log off.</p>
           </div>
         </div>
       </section>
@@ -281,12 +295,12 @@ export default function HomePage() {
       </section>
 
       {/* STRATEGIC PROOF: Visual artifact preview */}
-      <section className="px-6 py-24 md:py-32 overflow-hidden bg-white">
+      <section className="px-6 py-24 md:py-32 overflow-hidden bg-white" id="proof">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="The Output"
             title="Proof‑ready outputs"
-            subtitle="Generic advice is slop. AI‑Life Plan gives you artifacts you can use immediately—on the job, in performance conversations, and in high‑stakes interviews."
+            subtitle="Generic advice is slop. Captori gives you specific artifacts—Risk Registers, Stakeholder Memos, and Build Plans—ready to paste into Jira, Notion, or Slack."
           />
 
           <div className="mt-16 grid gap-10 lg:grid-cols-3">
@@ -299,13 +313,25 @@ export default function HomePage() {
             </div>
 
             {/* Artifact 1: Resilience Index */}
-            <div className="rounded-[2rem] bg-slate-50 p-8 ring-1 ring-slate-200 shadow-sm flex flex-col">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-8 font-sans">A. RESILIENCE INDEX</p>
+            <div className="rounded-[2rem] bg-slate-50 p-8 ring-1 ring-slate-200 shadow-sm flex flex-col relative group">
+              <div className="absolute top-8 right-8">
+                <details className="relative">
+                  <summary className="list-none cursor-pointer text-[9px] font-bold text-slate-400 hover:text-indigo-600 transition-colors uppercase tracking-widest border border-slate-200 px-2 py-0.5 rounded-full bg-white">
+                    Methodology
+                  </summary>
+                  <div className="absolute right-0 mt-2 w-48 p-3 rounded-xl bg-white border border-slate-200 shadow-xl text-[10px] text-slate-500 leading-relaxed z-30">
+                    <p className="font-bold text-slate-900 mb-1">How we calculate:</p>
+                    We weigh <span className="text-indigo-600 font-bold">Discretion</span> (accountable decisions) vs <span className="text-slate-900 font-bold">Volume</span> (repeatable task surface) against current LLM benchmarks.
+                  </div>
+                </details>
+              </div>
+
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-8 font-sans">A. RESILIENCE INDEX (THE DATA)</p>
               <div className="flex items-center justify-between mb-8">
                 <div className="text-7xl font-bold text-slate-900 font-serif leading-none tracking-tight">74%</div>
                 <div className="text-right">
-                  <div className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">RESILIENT</div>
-                  <div className="text-[10px] text-slate-500 font-medium italic">(above average)</div>
+                  <div className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">74% RESILIENT</div>
+                  <div className="text-[10px] text-slate-500 font-medium italic">relative strength</div>
                 </div>
               </div>
               <div className="space-y-4 flex-1">
@@ -319,12 +345,26 @@ export default function HomePage() {
                   <span className="text-slate-300">|</span>
                   <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-slate-400"></span> Repetition <span className="text-slate-900">4/10</span></span>
                 </div>
-                <p className="text-[10px] text-slate-400 italic px-1">Drivers show why the score moved—so you can sanity‑check it.</p>
+
+                {/* Pattern Matching Section */}
+                <div className="mt-6 pt-6 border-t border-slate-200/60">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3">Typical Benchmarks:</p>
+                  <div className="grid grid-cols-2 gap-2 text-[10px]">
+                    <div className="flex justify-between px-2 py-1.5 rounded bg-white border border-slate-100">
+                      <span className="text-slate-500">Ops / Coordinator</span>
+                      <span className="font-bold text-amber-600">30-40%</span>
+                    </div>
+                    <div className="flex justify-between px-2 py-1.5 rounded bg-white border border-slate-100">
+                      <span className="text-slate-500">Staff / Principal</span>
+                      <span className="font-bold text-emerald-600">85-95%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Artifact 2: Leverage Map */}
-            <div className="rounded-[2rem] bg-[#f8faff] p-8 ring-1 ring-indigo-50 shadow-sm">
+            <div className="rounded-[2rem] bg-[#f8faff] p-8 ring-1 ring-indigo-50 shadow-sm relative overflow-hidden">
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-400 mb-8 font-sans">B. LEVERAGE MAP</p>
 
               <div className="space-y-4">
@@ -349,6 +389,20 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
+
+              {/* David Autor Insights Callout */}
+              <div className="mt-8 p-4 rounded-xl bg-indigo-600 text-white shadow-lg overflow-hidden relative group">
+                <div className="absolute top-0 right-0 -mr-4 -mt-4 h-16 w-16 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform" />
+                <h4 className="text-[10px] font-bold uppercase tracking-widest mb-1 text-indigo-100">Market Insight</h4>
+                <p className="text-[11px] font-bold leading-tight mb-3">
+                  &ldquo;Good vs. Bad Exposure&rdquo;: AI replaces tasks that lower the barrier for entrants, but compounds tasks that require elite judgment.
+                </p>
+                <div className="border-t border-indigo-400 pt-3">
+                  <p className="text-[10px] font-medium leading-relaxed italic text-indigo-100">
+                    <strong>Aim for good exposure:</strong> AI removes overhead and amplifies your judgment. <strong>Avoid bad exposure:</strong> you become the operator of a workflow that gets standardized.
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Artifact 3: Pressure Test */}
@@ -356,15 +410,15 @@ export default function HomePage() {
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600 mb-8 font-sans">C. PRESSURE-TEST PROMPTS (FAILURE-MODE)</p>
               <div className="space-y-6 flex-1">
                 <div className="text-[15px] font-bold text-slate-800 leading-snug">
-                  &ldquo;Tell me about a time you ignored the data to make a better call.&rdquo;
+                  &ldquo;Explain a high-stakes decision where you intentionally overrode the model&rsquo;s recommendation.&rdquo;
                 </div>
                 <div className="p-6 rounded-2xl bg-white border border-emerald-100 shadow-sm">
-                  <p className="text-[12px] text-emerald-900 font-bold mb-4 leading-tight">We generate prompts that screen for senior judgment:</p>
+                  <p className="text-[12px] text-emerald-900 font-bold mb-4 leading-tight">Senior-alignment follow-ups:</p>
                   <ul className="space-y-3">
                     {[
-                      'Explain the model&rsquo;s logic gap',
-                      'Name the stakeholder trade‑off',
-                      'Quantify the risk you averted'
+                      'What was the context the model lacked?',
+                      'How did you verify your choice?',
+                      'What was the outcome delta?'
                     ].map((item, i) => (
                       <li key={i} className="flex gap-3 text-[11px] text-emerald-800 font-medium leading-tight">
                         <div className="h-4 w-4 shrink-0 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center">
@@ -381,6 +435,49 @@ export default function HomePage() {
                   &ldquo;These are designed to help you sound senior under pressure—not just polished on paper.&rdquo;
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* Sanitized Plan Preview - Solving the "Proof Problem" */}
+          <div className="mt-16 mx-auto max-w-4xl p-1 rounded-[2.5rem] bg-slate-100/50 ring-1 ring-slate-200">
+            <Link href="/example" className="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-slate-200 block hover:border-indigo-300 transition-colors">
+              <div className="bg-slate-50 border-b border-slate-200 px-8 py-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-slate-300"></div>
+                  <div className="h-2 w-2 rounded-full bg-slate-300"></div>
+                  <div className="h-2 w-2 rounded-full bg-slate-300"></div>
+                  <span className="ml-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Sanitized_Output_v1.pdf</span>
+                </div>
+                <div className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest hidden md:block">
+                  View full example →
+                </div>
+              </div>
+              <div className="p-10 space-y-8 font-mono text-[11px] text-slate-500 leading-relaxed">
+                <div className="space-y-2">
+                  <p className="text-slate-900 font-bold text-xs font-serif italic"># 1. THE 30-DAY INITIATIVE: EXPOSURE REVERSAL</p>
+                  <p>Target: Standardize &ldquo;Drafting RFPs&rdquo; workflow using AI-grounded protocol.</p>
+                  <p>Artifact: [Vendor Selection Matrix Template] + [Judgment Log].</p>
+                </div>
+                <div className="h-px bg-slate-100" />
+                <div className="space-y-4">
+                  <p className="text-slate-900 font-bold text-xs font-serif italic"># 2. THE 60-DAY PROOF: STAKEHOLDER MEMO</p>
+                  <div className="bg-slate-50 p-4 rounded-lg border-l-2 border-indigo-500 text-slate-600 italic">
+                    &ldquo;Context: CTO requested 10% infra cut. Trade-offs: High-latency edge cases vs maintenance cost...&rdquo;
+                  </div>
+                  <p className="text-indigo-600 font-bold uppercase tracking-tighter">[Unlocked] 1-page executive brief layout included.</p>
+                </div>
+                <div className="h-px bg-slate-100" />
+                <div className="space-y-2">
+                  <p className="text-slate-900 font-bold text-xs font-serif italic"># 3. THE 90-DAY TRAJECTORY: DISCRETION LADDER</p>
+                  <p>Outcome: Transition 40% of rote tasks to system-of-record. Reallocate 10 hours/week to Risk Mitigation.</p>
+                </div>
+              </div>
+            </Link>
+            <div className="mt-8 text-center p-8 bg-slate-50/50 rounded-3xl border border-slate-200/50 backdrop-blur-sm">
+              <p className="text-xs font-bold text-slate-500 mb-4 uppercase tracking-[0.2em]">Built by professionals for professionals.</p>
+              <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+                Captori is built by <strong>Villains At Large</strong>, a product strategy collective specializing in AI operational capability. We build tools that help senior leaders stay grounded in high-stakes environments.
+              </p>
             </div>
           </div>
         </div>
@@ -402,7 +499,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Module 1: Career</h3>
                 <p className="text-sm text-slate-500 mb-6">(Throughput) Plan your workflow for AI-leveraged resilience.</p>
-                <Link href="/assessment" className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:gap-3 transition-all">
+                <Link href="/assessment" onClick={() => trackEvent('module_selected', { module: 'career' })} className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:gap-3 transition-all">
                   Start <Icon name="arrowRight" size={14} />
                 </Link>
               </div>
@@ -419,7 +516,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Module 2: Attention</h3>
                 <p className="text-sm text-slate-500 mb-6">(Input) A personal protocol to filter slop and protect clean thought.</p>
-                <Link href="/attention" className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:gap-3 transition-all">
+                <Link href="/attention" onClick={() => trackEvent('module_selected', { module: 'attention' })} className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:gap-3 transition-all">
                   Start <Icon name="arrowRight" size={14} />
                 </Link>
               </div>
@@ -436,14 +533,14 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Module 3: Identity</h3>
                 <p className="text-sm text-slate-500 mb-6">(Output) Turn results into a verifiable proof archive.</p>
-                <Link href="/identity" className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:gap-3 transition-all">
+                <Link href="/identity" onClick={() => trackEvent('module_selected', { module: 'identity' })} className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:gap-3 transition-all">
                   Start <Icon name="arrowRight" size={14} />
                 </Link>
               </div>
             </div>
 
-            {/* Module 4 (New) */}
-            <div className="glass-panel p-8 rounded-3xl border-amber-200 bg-amber-50/20 relative overflow-hidden group col-span-1 md:col-span-3">
+            {/* Module 4 (New) - Hidden until launch per review */}
+            {/* <div className="glass-panel p-8 rounded-3xl border-amber-200 bg-amber-50/20 relative overflow-hidden group col-span-1 md:col-span-3">
               <div className="absolute top-4 right-6">
                 <span className="bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Capacity (Sustain layer)</span>
               </div>
@@ -456,7 +553,7 @@ export default function HomePage() {
                   Notify me <Icon name="locked" size={14} />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -468,6 +565,22 @@ export default function HomePage() {
 
           <div className="mt-16 space-y-4">
             {[
+              {
+                q: 'Is this a “feel-good” AI career tool?',
+                a: 'No. Captori produces task-level diagnosis (Resilience Index + drivers) and a 30/60/90 build plan with proof artifacts you can ship alongside a full-time job.',
+              },
+              {
+                q: 'What if competition explodes and wages drop?',
+                a: 'That’s exactly why the plan focuses on moving you up the discretion ladder: judgment, verification, ownership, and accountable decisions—work that doesn’t commoditize as easily as volume output.',
+              },
+              {
+                q: 'Will AI replace my job?',
+                a: 'Wrong question. The useful question is: which parts of your role become cheap, and which become more valuable? We map that split and give you a plan to reposition.',
+              },
+              {
+                q: 'Is this a calendar optimizer / habit tracker / AI life coach?',
+                a: 'No. Captori is a leverage plan: inputs → decisions → shippable outputs → proof. No infinite chat loops.',
+              },
               {
                 q: 'How accurate is the Resilience Index?',
                 a: 'Treat it as a strategic analysis, not a prophecy. We evaluate the architecture of your workflow (repeatability, cognitive surface area, stakeholder complexity) against current AI capabilities—and we expose the drivers for professional validation.',
@@ -601,7 +714,7 @@ export default function HomePage() {
               </div>
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">AI‑Life Plan (Suite Unlock)</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 italic">Full plan + shippable sequence.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 italic">Full plan + shippable sequence (One-time purchase).</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -620,7 +733,10 @@ export default function HomePage() {
               </ul>
               <Link
                 href="/start"
-                onClick={() => trackEvent('pricing_plan_click', { tier: 'execution', location: 'landing_page' })}
+                onClick={() => {
+                  trackEvent('pricing_plan_click', { tier: 'execution', location: 'landing_page' });
+                  trackEvent('checkout_started', { tier: 'execution' });
+                }}
                 className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-center shadow-lg transition"
               >
                 Unlock Suite (Checkout)
@@ -632,7 +748,7 @@ export default function HomePage() {
             <div className="rounded-3xl border border-indigo-200 bg-indigo-50/30 p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Executive License</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Proof kit + pressure‑testing for senior roles.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Ideal for Senior/Staff roles.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -650,7 +766,10 @@ export default function HomePage() {
               </ul>
               <Link
                 href="/start"
-                onClick={() => trackEvent('pricing_plan_click', { tier: 'executive', location: 'landing_page' })}
+                onClick={() => {
+                  trackEvent('pricing_plan_click', { tier: 'executive', location: 'landing_page' });
+                  trackEvent('checkout_started', { tier: 'executive' });
+                }}
                 className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-center transition"
               >
                 Go Executive (Checkout)
@@ -676,11 +795,11 @@ export default function HomePage() {
             AI‑Life Plan
           </div>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-slate-900 transition font-medium">Privacy</a>
-            <a href="#" className="hover:text-slate-900 transition font-medium">Terms</a>
-            <a href="#" className="hover:text-slate-900 transition font-medium">Support</a>
+            <Link href="/privacy" className="hover:text-slate-900 transition font-medium">Privacy</Link>
+            <Link href="/terms" className="hover:text-slate-900 transition font-medium">Terms</Link>
+            <a href="mailto:support@captori.com" className="hover:text-slate-900 transition font-medium">Support</a>
           </div>
-          <p>© 2026 peopleplan.app. Built for strategic resilient professionals.</p>
+          <p>© 2026 Captori. Built for strategic resilient professionals.</p>
         </div>
       </footer>
     </main >

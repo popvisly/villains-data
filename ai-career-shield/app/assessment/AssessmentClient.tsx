@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { APP_NAME, ROUTES } from '@/lib/brand';
+import { ROUTES } from '@/lib/brand';
 import { generateExecutionPack } from '@/app/actions/assessment';
 import type { AssessmentInput, AssessmentResult } from '@/types';
 import { ShareBriefCard } from '@/components/ShareBriefCard';
@@ -20,6 +20,7 @@ import { experimental_useObject as useObject } from 'ai/react';
 import { useExperiment } from '@/hooks/useExperiment';
 import { z } from 'zod';
 import { Icon, type IconName } from '@/components/ui/Icon';
+import { PostPurchaseSurvey } from '@/components/PostPurchaseSurvey';
 
 
 
@@ -317,6 +318,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
 
     const copyAsMarkdown = () => {
         if (!result) return;
+        trackEvent('export_used', { type: 'copy_markdown' });
         let md = `# Resilience Executive Brief: ${formData.jobTitle}\n\n`;
         md += `**Resilience Index**: ${result.riskScore}%\n`;
         md += `**Confidence**: ${result.confidence}\n\n`;
@@ -669,7 +671,10 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                         )}
 
                         {result.heatmap && result.heatmap.length > 0 && (
-                            <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+                            <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 space-y-8">
+                                {hasAccess && (
+                                    <PostPurchaseSurvey assessmentId={assessmentId} />
+                                )}
                                 <LeverageHeatmap cells={result.heatmap} />
                             </section>
                         )}
@@ -686,7 +691,13 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             <p className="text-sm text-slate-700">Start here to build readiness through real outputs</p>
                                         </div>
                                     </div>
-                                    <button onClick={copyAsMarkdown} className="px-4 py-2 rounded-lg text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2">
+                                    <button
+                                        onClick={() => {
+                                            copyAsMarkdown();
+                                            trackEvent('export_used', { type: 'copy_brief' });
+                                        }}
+                                        className="px-4 py-2 rounded-lg text-xs font-semibold border border-slate-200 bg-white hover:bg-slate-50 text-slate-900 flex items-center gap-2"
+                                    >
                                         <Icon name="copy" size={14} />
                                         <span>Copy brief</span>
                                     </button>
@@ -727,13 +738,17 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
 
                                 <div className="md:col-span-2 space-y-4">
                                     {result.factors.slice(0, 3).map((factor, i) => (
-                                        <div key={i} className="space-y-1.5">
+                                        <div
+                                            key={i}
+                                            className="space-y-1.5 cursor-pointer group/factor"
+                                            onClick={() => trackEvent('module_selected', { module: 'resilience_factor', factor: factor.name })}
+                                        >
                                             <div className="flex justify-between text-sm font-semibold">
-                                                <span className="text-slate-900">{factor.name}</span>
+                                                <span className="text-slate-900 group-hover/factor:text-blue-600 transition-colors">{factor.name}</span>
                                                 <span className="text-slate-600">{factor.score}%</span>
                                             </div>
                                             <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                                                <div className="h-full bg-[hsl(var(--cta))]/80 rounded-full transition-all duration-1000" style={{ width: `${factor.score}%`, transitionDelay: `${i * 150}ms` }} />
+                                                <div className="h-full bg-[hsl(var(--cta))]/80 rounded-full transition-all duration-1000 group-hover/factor:bg-blue-500" style={{ width: `${factor.score}%`, transitionDelay: `${i * 150}ms` }} />
                                             </div>
                                         </div>
                                     ))}
@@ -743,8 +758,12 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
 
                         <div className="grid md:grid-cols-2 gap-6">
                             {result.roleAdjacencies?.map((adj, i) => (
-                                <div key={i} className="rounded-2xl border border-slate-200 bg-white p-6 hover:shadow-md transition">
-                                    <h4 className="text-lg font-bold text-slate-950 mb-2">{adj.detail?.title}</h4>
+                                <div
+                                    key={i}
+                                    className="rounded-2xl border border-slate-200 bg-white p-6 hover:shadow-md transition cursor-pointer group/adj"
+                                    onClick={() => trackEvent('module_selected', { module: 'role_adjacency', roleId: adj.roleId })}
+                                >
+                                    <h4 className="text-lg font-bold text-slate-950 mb-2 group-hover/adj:text-blue-600 transition-colors">{adj.detail?.title}</h4>
                                     <p className="text-sm text-slate-700 leading-relaxed mb-4">{adj.rationale}</p>
                                     <div className="flex gap-2">
                                         {adj.transferableSkills.slice(0, 2).map(s => <span key={s} className="px-2 py-1 bg-slate-100 rounded text-[10px] font-bold uppercase text-slate-600">{s}</span>)}
@@ -811,9 +830,12 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             </div>
                         </div>
 
-                        {ENABLE_EXECUTION_PACK && (
+                        {ENABLE_EXECUTION_PACK && !hasAccess && (
                             <UpsellCard
-                                onUnlock={() => router.push('/assessment#pricing')}
+                                onUnlock={() => {
+                                    trackEvent('checkout_started', { tier: 'execution', location: 'assessment_upsell' });
+                                    router.push('/assessment#pricing');
+                                }}
                                 isLoading={isUnlocking}
                             />
                         )}
@@ -827,7 +849,10 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                         )}
 
                         {hasAccess && (
-                            <div className="rounded-2xl border border-slate-200 bg-white p-8">
+                            <div
+                                className="rounded-2xl border border-slate-200 bg-white p-8"
+                                onClickCapture={() => trackEvent('module_selected', { module: 'interview_simulator' })}
+                            >
                                 <InterviewSimulator
                                     role={result.roleAdjacencies?.[0]?.detail?.title || formData.jobTitle}
                                     isPaid={hasAccess}

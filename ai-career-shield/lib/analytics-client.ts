@@ -28,7 +28,11 @@ type EventName =
     | 'persona_toggle_click'
     | 'linkedin_copy_click'
     | 'playbook_template_copy'
-    | 'playbook_pdf_export';
+    | 'playbook_pdf_export'
+    | 'module_selected'
+    | 'export_used'
+    | 'example_viewed'
+    | 'post_purchase_survey_submitted';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 

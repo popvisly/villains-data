@@ -28,6 +28,7 @@ export default function AILeveragePlaybook({
     const handleDownloadPDF = () => {
         if (!hasAccess) return;
         trackEvent('playbook_pdf_export', { role: data.role });
+        trackEvent('export_used', { role: data.role });
         window.print();
     };
 
