@@ -9,6 +9,7 @@ export interface Workflow {
     mode: WorkflowMode;
     outputArtifact: string;
     verificationChecklist: string[];
+    nextAction: string;
 }
 
 export interface PlaybookData {

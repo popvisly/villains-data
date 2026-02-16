@@ -20,7 +20,8 @@ Top Risks: [e.g., Dependency on Platform team]`,
                 'Dependency risks are identified.',
                 'Counterfactual (what if we don\'t do this) is stated.',
                 'Metric alignment with broader company goals.'
-            ]
+            ],
+            nextAction: 'Paste the completed brief into your project doc and schedule a 15‑min review with your triad (Eng/Design leads).'
         },
         {
             id: 'prd-risk-check',
@@ -39,7 +40,8 @@ SLAs: [Required uptime/performance]`,
                 'Ops load and maintenance budget.',
                 'Rollback plan for failure.',
                 'Alerting and observability strategy.'
-            ]
+            ],
+            nextAction: 'Attach the Risk Register to your PRD and tag the Lead Engineer to reconcile mitigation tasks.'
         },
         {
             id: 'stakeholder-brief',
@@ -57,8 +59,9 @@ Timeline: [When is this due?]`,
                 'Accountability owner is named.',
                 'Tradeoffs are stated explicitly.',
                 'Comms plan (who hears what and when).'
-            ]
+            ],
+            nextAction: 'Draft the Stakeholder Memo and send as a pre-read 24 hours before your alignment meeting.'
         }
     ],
-    logOffReminder: 'Workflows complete. Review your artifacts for senior judgment, then log off. Strategy wins offers.'
+    logOffReminder: 'Workflows complete. Proof over promise—then log off.'
 };

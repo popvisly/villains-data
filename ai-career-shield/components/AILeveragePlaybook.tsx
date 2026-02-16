@@ -97,7 +97,7 @@ export default function AILeveragePlaybook({
                                         <div className="text-center p-6 rounded-2xl bg-white shadow-xl border border-slate-200 max-w-xs">
                                             <Icon name="locked" size={24} className="text-slate-400 mx-auto mb-3" />
                                             <p className="text-sm font-bold text-slate-900 mb-1">Workflow Locked</p>
-                                            <p className="text-xs text-slate-500 mb-4">Complete the Suite Unlock to access all workflows and templates.</p>
+                                            <p className="text-xs text-slate-500 mb-4">Unlock the Full Suite to access all PM templates and checklists.</p>
                                         </div>
                                     </div>
                                 )}
@@ -116,37 +116,53 @@ export default function AILeveragePlaybook({
                                                 }`}
                                         >
                                             <Icon name={copiedId === wf.id ? 'check' : 'copy'} size={12} />
-                                            {copiedId === wf.id ? 'Copied' : 'Copy Template'}
+                                            {copiedId === wf.id ? 'Copied' : 'Copy Input Template'}
                                         </button>
                                     </div>
                                     <div className={`p-6 rounded-2xl bg-slate-900 text-slate-100 text-[13px] font-mono leading-relaxed overflow-hidden relative ${!hasAccess && 'max-h-24 opacity-50'}`}>
                                         <pre className="whitespace-pre-wrap">{wf.inputTemplate}</pre>
                                         {!hasAccess && (
-                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent flex items-bottom justify-center pb-4">
-                                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">(Gated Preview)</span>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent flex items-end justify-center pb-4">
+                                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Preview (Suite Unlock)</span>
                                             </div>
                                         )}
                                     </div>
                                 </div>
 
-                                <div>
-                                    <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">Verification Checklist</h4>
-                                    <div className="grid sm:grid-cols-2 gap-4">
-                                        {(hasAccess ? wf.verificationChecklist : [wf.verificationChecklist[0]]).map((item, i) => (
-                                            <div key={i} className="flex gap-3 items-start p-4 rounded-xl bg-slate-50 border border-slate-100 group hover:border-indigo-100 transition-colors">
-                                                <div className="h-5 w-5 shrink-0 rounded-md border-2 border-slate-200 flex items-center justify-center bg-white group-hover:border-indigo-300 transition-colors">
-                                                    <Icon name="check" size={10} className="text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div className="space-y-6">
+                                    <div>
+                                        <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">Verification Checklist</h4>
+                                        <div className="grid sm:grid-cols-2 gap-4">
+                                            {(hasAccess ? wf.verificationChecklist : [wf.verificationChecklist[0]]).map((item, i) => (
+                                                <div key={i} className="flex gap-3 items-start p-4 rounded-xl bg-slate-50 border border-slate-100 group hover:border-indigo-100 transition-colors">
+                                                    <div className="h-5 w-5 shrink-0 rounded-md border-2 border-slate-200 flex items-center justify-center bg-white group-hover:border-indigo-300 transition-colors">
+                                                        <Icon name="check" size={10} className="text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                    </div>
+                                                    <span className="text-[13px] text-slate-700 font-medium leading-tight">{item}</span>
                                                 </div>
-                                                <span className="text-[13px] text-slate-700 font-medium leading-tight">{item}</span>
-                                            </div>
-                                        ))}
-                                        {!hasAccess && (
-                                            <div className="flex gap-3 items-center p-4 rounded-xl bg-slate-50/50 border border-dashed border-slate-200 text-slate-400">
-                                                <Icon name="locked" size={12} />
-                                                <span className="text-[11px] font-medium">+ {wf.verificationChecklist.length - 1} more items...</span>
-                                            </div>
-                                        )}
+                                            ))}
+                                            {!hasAccess && (
+                                                <div className="flex gap-3 items-center p-4 rounded-xl bg-slate-50/50 border border-dashed border-slate-200 text-slate-400">
+                                                    <Icon name="locked" size={12} />
+                                                    <span className="text-[11px] font-medium">+ {wf.verificationChecklist.length - 1} more items...</span>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
+
+                                    {(hasAccess || idx === 0) && (
+                                        <div className={`p-5 rounded-2xl border-2 border-slate-100 bg-white shadow-sm flex items-start gap-4 ${!hasAccess && 'opacity-50 grayscale'}`}>
+                                            <div className="h-10 w-10 shrink-0 rounded-xl bg-slate-100 flex items-center justify-center text-slate-900">
+                                                <Icon name="arrowRight" size={18} />
+                                            </div>
+                                            <div>
+                                                <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Next Action</h4>
+                                                <p className="text-[13px] text-slate-900 font-bold leading-relaxed">
+                                                    {wf.nextAction}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </section>
