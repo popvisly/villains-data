@@ -105,7 +105,7 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: ProjectBrief[], isPaid: 
         return (
             <LockedFeature
                 title="Portfolio Briefs Locked"
-                description="Unlock professional-grade project briefs designed to close your skill gaps and prove your value."
+                description="Upgrade to the Executive License ($99) to unlock the full People Plan Suite (Briefs, Simulations, and Attention Plan)."
             />
         );
     }
@@ -166,7 +166,7 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
         return (
             <LockedFeature
                 title="Career Assets Locked"
-                description="Get tailored resume bullets and LinkedIn summaries optimized for your target role."
+                description="Tailored resume bullets and LinkedIn summaries are available in the People Plan Suite."
             />
         );
     }
@@ -336,7 +336,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                         ? <ProjectBriefsTab briefs={data.projectBriefs} isPaid={isPaid} />
                         : <LockedFeature
                             title="Project Briefs Locked"
-                            description="Upgrade to the Executive License to unlock professional-grade project briefs you can use as proof of AI value."
+                            description="The Executive License ($99) unlocks professional-grade project briefs, the Interview Simulator, and the full People Plan Suite."
                         />
                 )}
 

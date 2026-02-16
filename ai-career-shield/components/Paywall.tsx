@@ -89,9 +89,9 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, planId, type, child
                     {/* Tier 1: Execution Pack */}
                     <div className="rounded-3xl border border-slate-200 bg-white/95 backdrop-blur-sm p-8 shadow-xl relative overflow-hidden flex flex-col">
                         <div className="mb-6">
-                            <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider">Most Popular</span>
-                            <h3 className="text-2xl font-bold text-slate-950 mt-3">Execution Pack</h3>
-                            <p className="text-sm text-emerald-700 mt-1 font-medium">Instant 7‑day resilience roadmap.</p>
+                            <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider">Suite Unlock</span>
+                            <h3 className="text-2xl font-bold text-slate-950 mt-3">People Plan Suite</h3>
+                            <p className="text-sm text-emerald-700 mt-1 font-medium italic">Buy once. Unlock Career + Attention plans.</p>
                         </div>
 
                         <div className="flex-1 space-y-4 mb-8">
@@ -134,9 +134,9 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, planId, type, child
                             Elite Authority
                         </div>
                         <div className="mb-6">
-                            <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider">Full Access</span>
+                            <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider">Full Suite Access</span>
                             <h3 className="text-2xl font-bold text-slate-950 mt-3">Executive License</h3>
-                            <p className="text-sm text-slate-500 mt-1">For senior professionals & leaders.</p>
+                            <p className="text-sm text-slate-500 mt-1">Unlock Career + Attention + Identity (coming soon).</p>
                         </div>
 
                         <div className="flex-1 space-y-4 mb-8">

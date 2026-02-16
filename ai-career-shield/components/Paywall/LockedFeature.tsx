@@ -9,7 +9,7 @@ type LockedFeatureProps = {
 
 export function LockedFeature({
   title = 'Locked',
-  description = 'Available in the Execution Pack.',
+  description = 'Available in the People Plan Suite.',
 }: LockedFeatureProps) {
   return (
     <div className="relative rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 shadow-sm">
