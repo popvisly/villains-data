@@ -678,21 +678,24 @@ export default function HomePage() {
 
       <section id="pricing" className="py-24 px-6 border-t border-slate-200">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 px-4">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-serif">
-              Simple, outcome-based pricing
+              Choose the Plan That Fits Your AI-Life Growth
             </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              One-time purchase. Instantly generate your strategy and begin your build.
+            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+              Simple, transparent pricing designed for professionals who want measurable progress — not just reports.
+            </p>
+            <p className="mt-2 text-sm text-slate-500 max-w-2xl mx-auto font-medium">
+              Find your fit — from essential resilience insights to a full strategic action plan with templates and measurable outcomes.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* The Audit: FREE */}
+            {/* The Audit: FREE STARTER */}
             <div className="rounded-3xl border border-slate-200 bg-white p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Free Starter</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-slate-600 italic">Resilience basics + priority scoring.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-slate-600 italic">Perfect for testing your AI leverage baseline. Includes Resilience Score & priority drivers report.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$0</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -712,14 +715,14 @@ export default function HomePage() {
               <p className="mt-4 text-[10px] text-center text-slate-400 italic">No credit card required. Diagnose in 2 minutes.</p>
             </div>
 
-            {/* AI-Life Plan (Standard): $39 */}
+            {/* AI-Life Plan (Growth): $39 */}
             <div className="rounded-3xl border-2 border-[hsl(var(--primary))] bg-white p-8 flex flex-col shadow-xl scale-105 relative z-10">
               <div className="absolute top-0 right-0 px-3 py-1 bg-[hsl(var(--primary))] text-white text-[10px] font-bold uppercase tracking-wider rounded-bl-xl">
                 Most Popular
               </div>
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Growth Plan</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 italic">Full custom 30/60/90 plan + templates.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-emerald-700 italic">Your full AI-Life strategy with outcomes you can implement now. Includes 30/60/90 plan, export templates, and success metrics.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$39</div>
               <ul className="space-y-3 mb-8 flex-1">
@@ -745,18 +748,19 @@ export default function HomePage() {
               >
                 Unlock Full AI-Life Plan
               </Link>
-              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Build your moat today.</p>
+              <p className="mt-4 text-[10px] text-center text-slate-400 font-medium">Instant access after signup. Build your moat today.</p>
             </div>
 
+            {/* Executive Plan: $99 */}
             <div className="rounded-3xl border border-indigo-200 bg-indigo-50/30 p-8 flex flex-col hover:shadow-lg transition">
               <div className="mb-6">
                 <h3 className="text-lg font-bold text-slate-900">Executive Plan</h3>
-                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Advanced strategy with deeper insights.</p>
+                <p className="text-sm text-slate-500 mt-1 font-medium text-indigo-700 italic">Advanced strategy for leaders & high-impact professionals. Includes deep insights, scenario modeling, and growth playbooks.</p>
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-6">$99</div>
               <ul className="space-y-3 mb-8 flex-1">
                 {[
-                  'Everything in Standard',
+                  'Everything in Growth',
                   'Executive Blueprint (Share-ready PDF)',
                   'Pressure‑test simulations (Failure-mode)',
                   'Priority artifact audits',
@@ -777,7 +781,7 @@ export default function HomePage() {
               >
                 Get Executive Strategy
               </Link>
-              <p className="mt-4 text-[10px] text-center text-slate-400">One-time purchase. Includes all future update logs.</p>
+              <p className="mt-4 text-[10px] text-center text-slate-400 font-medium whitespace-nowrap overflow-hidden">Instant access. Includes all future update logs.</p>
             </div>
           </div>
 
