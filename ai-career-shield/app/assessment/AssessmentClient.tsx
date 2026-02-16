@@ -180,21 +180,24 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
     }, [isLoading, startTime, streamedObject, hasEmittedFirstToken, hasEmittedFirstFactor, hasEmittedFirstInsight, shareTimingVariant]);
 
     useEffect(() => {
-        if (!streamedObject?.factors) {
-            setDisplayedFactors([]);
+        const incoming = streamedObject?.factors as AssessmentResult['factors'] | undefined;
+
+        // During streaming, 'streamedObject' can exist before 'factors' is populated.
+        // Avoid setting a fresh [] every render (which can cause an update loop).
+        if (!incoming || incoming.length === 0) {
+            setDisplayedFactors((prev) => (prev.length === 0 ? prev : []));
             return;
         }
-        const targetFactors = streamedObject.factors as AssessmentResult['factors'];
 
         // Adaptive speed: If we have many new factors, type faster.
-        const diff = targetFactors.length - displayedFactors.length;
+        const diff = incoming.length - displayedFactors.length;
         if (diff > 0) {
             const timer = setTimeout(() => {
-                setDisplayedFactors(targetFactors.slice(0, displayedFactors.length + 1));
+                setDisplayedFactors(incoming.slice(0, displayedFactors.length + 1));
             }, diff > 2 ? 50 : 200); // 50ms if burst, 200ms if steady
             return () => clearTimeout(timer);
         }
-    }, [streamedObject?.factors, displayedFactors]);
+    }, [streamedObject?.factors, displayedFactors.length]);
 
     useEffect(() => {
         trackEvent('assessment_start');
