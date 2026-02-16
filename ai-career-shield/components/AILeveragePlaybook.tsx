@@ -28,8 +28,7 @@ export default function AILeveragePlaybook({
     const handleDownloadPDF = () => {
         if (!hasAccess) return;
         trackEvent('playbook_pdf_export', { role: data.role });
-        alert('Generating your AI Leverage Playbook PDF... (This is a paid perk)');
-        // In a real implementation, this would trigger a PDF generation service or download a pre-rendered PDF
+        window.print();
     };
 
     return (
@@ -185,7 +184,7 @@ export default function AILeveragePlaybook({
             )}
 
             {!hasAccess && (
-                <div className="p-12 rounded-[3rem] bg-indigo-600 text-white text-center shadow-2xl shadow-indigo-200 mt-12">
+                <div className="p-12 rounded-[3rem] bg-indigo-600 text-white text-center shadow-2xl shadow-indigo-200 mt-12 no-print">
                     <h3 className="text-2xl font-bold mb-4">Unlock the Full Playbook</h3>
                     <p className="text-indigo-100 max-w-xl mx-auto mb-8 font-medium">
                         The Suite Unlock includes all {data.workflows.length} workflows, interactive checklists,
