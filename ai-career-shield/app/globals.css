@@ -80,6 +80,9 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -89,6 +92,8 @@
   h5,
   h6 {
     font-family: var(--font-lora), serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 }
 

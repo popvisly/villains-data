@@ -35,10 +35,10 @@ export default function HomePage() {
               <span className="text-slate-600">no login</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6 [text-wrap:balance]">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 mb-6 [text-wrap:balance]">
               AI-Life Plan — Get Your Personalized Career Growth & Resilience Blueprint in Minutes.
             </h1>
-            <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-bold">
+            <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
               Generate a 30/60/90 actionable strategy with measurable milestones, templates you can export, and a skill-proof pathway — no fluff.
             </p>
 
@@ -54,7 +54,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/example"
-                className="inline-flex h-14 items-center justify-center rounded-2xl border border-slate-200 bg-white/50 px-8 text-lg font-bold text-slate-600 backdrop-blur-sm transition-all hover:bg-white hover:border-slate-300"
+                className="inline-flex h-14 items-center justify-center rounded-2xl border border-slate-200 bg-white/50 px-8 text-lg font-semibold text-slate-600 backdrop-blur-sm transition-all hover:bg-white hover:border-slate-300"
               >
                 See a Sample Plan
               </Link>
@@ -777,7 +777,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="py-24 px-6 border-t border-slate-200 bg-slate-50">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
-          <div className="flex items-center gap-2 font-bold text-slate-900">
+          <div className="flex items-center gap-2 font-semibold text-slate-900">
             <Icon name="sparkles" size={20} className="text-[hsl(var(--primary))]" />
             AI‑Life Plan
           </div>
