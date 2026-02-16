@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local-only research / disabled skills
+_disabled_skills/claude-seo/
+awesome_skills_research/
+superpowers_research/
