@@ -6,49 +6,34 @@ import { Icon } from '@/components/ui/Icon';
 
 export default function InfographicPage() {
     useEffect(() => {
-        // Aggressive UI Cleaning for Capture
-        const cleanUI = () => {
-            const allElements = document.querySelectorAll('*');
-            allElements.forEach((el) => {
-                const htmlEl = el as HTMLElement;
-
-                // Safety check for className (SVGs use SVGAnimatedString)
-                const className = typeof htmlEl.className === 'string' ? htmlEl.className : '';
-
-                // Hide anything that isn't the frame or its parents
-                if (
-                    htmlEl.innerText &&
-                    (htmlEl.innerText.includes('Invalid') || htmlEl.innerText.includes('website')) &&
-                    !htmlEl.closest('#infographic-frame')
-                ) {
-                    htmlEl.style.display = 'none';
-                    htmlEl.style.opacity = '0';
-                    htmlEl.style.pointerEvents = 'none';
-                }
-
-                // Hide Next.js / Vercel badges
-                if (htmlEl.id?.includes('nextjs') || className.includes('badge')) {
-                    if (!htmlEl.closest('#infographic-frame')) {
-                        htmlEl.style.display = 'none';
-                    }
-                }
-            });
-
-            // Hide common chat widgets & Crisp
-            const chatWidgets = document.querySelectorAll('[class*="chat"], [id*="chat"], [class*="bubble"], #crisp-chat-box, .crisp-client');
-            chatWidgets.forEach(w => {
-                const widget = w as HTMLElement;
-                if (!widget.closest('#infographic-frame')) {
-                    widget.style.display = 'none';
-                    widget.style.opacity = '0';
-                    widget.style.visibility = 'hidden';
-                }
+        // Lightweight UI cleaning for capture.
+        // IMPORTANT: never hide <body>/<html> based on text matching (it can match JSON-LD / metadata and blank the page).
+        const hide = (sel: string) => {
+            document.querySelectorAll(sel).forEach((node) => {
+                const el = node as HTMLElement;
+                if (el.closest('#infographic-frame')) return;
+                el.style.display = 'none';
+                el.style.opacity = '0';
+                el.style.visibility = 'hidden';
+                el.style.pointerEvents = 'none';
             });
         };
 
-        cleanUI();
-        const interval = setInterval(cleanUI, 500); // Keep cleaning during hydration
-        return () => clearInterval(interval);
+        // Ensure the document remains visible even if a previous script mutated it.
+        document.body.style.display = '';
+
+        // Hide Next/Vercel overlays / portals (best-effort; selectors vary by version)
+        hide('nextjs-portal');
+        hide('[data-nextjs-dialog-overlay]');
+        hide('[data-nextjs-toast]');
+        hide('[id*="vercel" i]');
+
+        // Hide chat widgets (Crisp etc.)
+        hide('#crisp-chat-box');
+        hide('.crisp-client');
+        hide('[class*="chat" i]');
+        hide('[id*="chat" i]');
+        hide('[class*="bubble" i]');
     }, []);
 
     return (
