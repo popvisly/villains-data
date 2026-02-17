@@ -192,7 +192,13 @@ export default function AILeveragePlaybook({
                         and your personalized Playbook PDF for professional distribution.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
-                        <button className="px-8 py-4 bg-white text-indigo-600 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-lg">
+                        <button
+                            className="px-8 py-4 bg-white text-indigo-600 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-lg"
+                            onClick={() => {
+                                trackEvent('artifact_action', { artifact: 'playbook', action: 'unlock_click' });
+                                window.location.href = '/#pricing';
+                            }}
+                        >
                             Unlock Full Suite ($39)
                         </button>
                     </div>

@@ -86,6 +86,8 @@ export default function IdentityClient({ initialHasAccess }: IdentityClientProps
 
     const handleExport = async () => {
         try {
+            trackEvent('artifact_action', { artifact: 'identity', action: 'executive_pdf_export' });
+            trackEvent('export_used', { type: 'identity_executive_pdf' });
             const res = await fetch('/api/export/pdf');
             const data = await res.json();
             alert(data.message);
@@ -331,7 +333,10 @@ export default function IdentityClient({ initialHasAccess }: IdentityClientProps
                                                     <div className="p-4 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-900 group relative">
                                                         {currentVariant.linkedinHeadline}
                                                         <button
-                                                            onClick={() => navigator.clipboard.writeText(currentVariant.linkedinHeadline)}
+                                                            onClick={() => {
+                                                                navigator.clipboard.writeText(currentVariant.linkedinHeadline);
+                                                                trackEvent('artifact_action', { artifact: 'identity', action: 'linkedin_headline_copy' });
+                                                            }}
                                                             className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all text-slate-400 hover:text-indigo-600"
                                                         >
                                                             <Icon name="copy" size={14} />
