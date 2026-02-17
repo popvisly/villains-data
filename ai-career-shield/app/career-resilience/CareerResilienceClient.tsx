@@ -4,6 +4,7 @@ import { useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
+import { Nav } from '@/components/ui/Nav';
 import { ROUTES, APP_NAME } from '@/lib/brand';
 import { trackEvent } from '@/lib/analytics-client';
 
@@ -48,19 +49,11 @@ function CareerResilienceContent() {
 
     return (
         <div className="min-h-screen bg-white selection:bg-indigo-100">
-            {/* Minimal Header */}
-            <header className="absolute top-0 left-0 w-full p-8 z-10">
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white font-bold text-sm group-hover:scale-105 transition-transform">
-                        C
-                    </div>
-                    <span className="font-serif font-bold text-xl text-slate-900 tracking-tight">{APP_NAME}</span>
-                </Link>
-            </header>
+            <Nav />
 
             <main>
                 {/* Hero Section */}
-                <section className="relative pt-48 pb-24 px-6 overflow-hidden">
+                <section className="relative pt-24 md:pt-32 pb-24 px-6 overflow-hidden">
                     {/* Background Gradients */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 overflow-hidden">
                         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[60%] bg-indigo-50/50 blur-[120px] rounded-full animate-pulse" />
