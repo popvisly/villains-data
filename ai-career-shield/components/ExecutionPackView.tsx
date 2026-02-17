@@ -144,7 +144,10 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: ProjectBrief[], isPaid: 
                                 <h4 className="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-3 flex items-center justify-between">
                                     <span>Project README Template</span>
                                     <button
-                                        onClick={() => navigator.clipboard.writeText(brief.readme || '')}
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(brief.readme || '');
+                                            trackEvent('artifact_action', { artifact: 'execution_pack', action: 'brief_readme_copy', briefId: brief.id });
+                                        }}
                                         className="text-xs text-emerald-600 hover:text-emerald-700 transition"
                                     >
                                         Copy Markdown
@@ -185,7 +188,10 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
                                 <div key={i} className="group relative p-4 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-emerald-200 transition">
                                     <p className="text-sm text-slate-700 pr-8">{bullet}</p>
                                     <button
-                                        onClick={() => navigator.clipboard.writeText(bullet)}
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(bullet);
+                                            trackEvent('artifact_action', { artifact: 'execution_pack', action: 'resume_bullet_copy' });
+                                        }}
                                         className="absolute top-4 right-4 text-slate-400 hover:text-emerald-600 opacity-0 group-hover:opacity-100 transition"
                                         title="Copy to clipboard"
                                     >
@@ -213,7 +219,10 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
                                     {assets.linkedIn.aboutSection}
                                 </p>
                                 <button
-                                    onClick={() => navigator.clipboard.writeText(assets.linkedIn.aboutSection || '')}
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(assets.linkedIn.aboutSection || '');
+                                        trackEvent('artifact_action', { artifact: 'execution_pack', action: 'linkedin_about_copy' });
+                                    }}
                                     className="absolute top-4 right-4 text-slate-400 hover:text-emerald-600 opacity-0 group-hover:opacity-100 transition"
                                 >
                                     <Icon name="copy" size={16} />

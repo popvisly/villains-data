@@ -42,7 +42,8 @@ type EventName =
     | 'execution_pack_pdf_downloaded'
     | 'interview_sim_started'
     | 'interview_sim_turn'
-    | 'interview_sim_completed';
+    | 'interview_sim_completed'
+    | 'artifact_action';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 
