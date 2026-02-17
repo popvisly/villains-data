@@ -64,8 +64,6 @@ export default function HomePage() {
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Instant Result</span>
                 </div>
               </div>
-
-              {/* Removed duplicate briefing preview (it already appears in the right column) */}
             </div>
             <p className="mt-4 text-sm text-slate-500 flex items-center gap-2">
               <Icon name="zap" size={16} className="text-amber-500" />
