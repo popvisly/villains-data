@@ -1,7 +1,7 @@
 'use client';
 
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/brand';
@@ -219,11 +219,20 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
         } catch { /* ignore */ }
     }, [hasAccess]);
 
+    const hasTrackedArtifactViewed = useRef(false);
+
     useEffect(() => {
         if (hasAccess) {
             trackEvent('payment_success_view');
         }
     }, [hasAccess]);
+
+    useEffect(() => {
+        if (!hasAccess) return;
+        if (hasTrackedArtifactViewed.current) return;
+        hasTrackedArtifactViewed.current = true;
+        trackEvent('artifact_viewed', { artifact: 'assessment', tier: tier || 'unknown' });
+    }, [hasAccess, tier]);
 
     useEffect(() => {
         if (!hasAccess) return;

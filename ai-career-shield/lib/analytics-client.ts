@@ -36,7 +36,9 @@ type EventName =
     | 'page_view_career_resilience'
     | 'cta_clicked_start_assessment'
     | 'cta_clicked_skip_briefing'
-    | 'artifact_signed';
+    | 'artifact_signed'
+    | 'post_purchase_land'
+    | 'artifact_viewed';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 

@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
 import { APP_NAME, ROUTES } from '@/lib/brand';
 import Link from 'next/link';
 import AILeveragePlaybook from '@/components/AILeveragePlaybook';
+import { trackEvent } from '@/lib/analytics-client';
 
 interface PlaybookClientProps {
     initialHasAccess: boolean;
@@ -12,6 +13,14 @@ interface PlaybookClientProps {
 
 export default function PlaybookClient({ initialHasAccess }: PlaybookClientProps) {
     const [hasAccess] = useState(initialHasAccess);
+    const hasTrackedArtifactViewed = useRef(false);
+
+    useEffect(() => {
+        if (!hasAccess) return;
+        if (hasTrackedArtifactViewed.current) return;
+        hasTrackedArtifactViewed.current = true;
+        trackEvent('artifact_viewed', { artifact: 'playbook' });
+    }, [hasAccess]);
 
     return (
         <main className="min-h-screen bg-slate-50/50 subtle-noise">
