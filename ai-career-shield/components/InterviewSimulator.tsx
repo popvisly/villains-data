@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/ui/Icon';
 import { getInterviewAllowance, consumeInterviewTurn } from '@/app/actions/interview';
+import { trackEvent } from '@/lib/analytics-client';
 
 interface InterviewSimulatorProps {
   role: string;
@@ -18,6 +19,8 @@ interface AllowanceState {
 }
 
 export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: InterviewSimulatorProps) {
+  const hasTrackedStart = useRef(false);
+  const hasTrackedComplete = useRef(false);
   const [allowance, setAllowance] = useState<AllowanceState>({
     used: 0,
     limit: initialIsPaid ? 10 : 3,
@@ -40,6 +43,11 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
             isPaid: data.isPaid,
             loading: false,
           });
+
+          if (!hasTrackedStart.current) {
+            hasTrackedStart.current = true;
+            trackEvent('interview_sim_started', { role, isPaid: data.isPaid, limit: data.limit });
+          }
         }
       })
       .catch((err) => {
@@ -48,7 +56,7 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
       });
 
     return () => { mounted = false; };
-  }, []);
+  }, [role]);
 
   const sampleQuestions = [
     `Walk me through a recent project relevant to ${role}.`,
@@ -78,6 +86,25 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
           isPaid: result.getAllowance.isPaid,
           loading: false,
         });
+
+        trackEvent('interview_sim_turn', {
+          role,
+          used: result.getAllowance.used,
+          limit: result.getAllowance.limit,
+          isPaid: result.getAllowance.isPaid,
+        });
+
+        // If this turn consumed the last available slot, mark session complete.
+        if (!hasTrackedComplete.current && result.getAllowance.used >= result.getAllowance.limit) {
+          hasTrackedComplete.current = true;
+          trackEvent('interview_sim_completed', {
+            role,
+            used: result.getAllowance.used,
+            limit: result.getAllowance.limit,
+            isPaid: result.getAllowance.isPaid,
+          });
+        }
+
         setCurrentQuestionIndex(prev => (prev + 1) % sampleQuestions.length);
       }
     } catch (err) {
@@ -98,6 +125,20 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
   };
 
   const isLocked = !allowance.loading && allowance.used >= allowance.limit;
+
+  // If we render locked state and haven't tracked completion, record it.
+  useEffect(() => {
+    if (allowance.loading) return;
+    if (!isLocked) return;
+    if (hasTrackedComplete.current) return;
+    hasTrackedComplete.current = true;
+    trackEvent('interview_sim_completed', {
+      role,
+      used: allowance.used,
+      limit: allowance.limit,
+      isPaid: allowance.isPaid,
+    });
+  }, [allowance.loading, allowance.used, allowance.limit, allowance.isPaid, isLocked, role]);
   const remaining = Math.max(0, allowance.limit - allowance.used);
 
   if (allowance.loading) {

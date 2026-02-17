@@ -38,7 +38,11 @@ type EventName =
     | 'cta_clicked_skip_briefing'
     | 'artifact_signed'
     | 'post_purchase_land'
-    | 'artifact_viewed';
+    | 'artifact_viewed'
+    | 'execution_pack_pdf_downloaded'
+    | 'interview_sim_started'
+    | 'interview_sim_turn'
+    | 'interview_sim_completed';
 
 type EventProperties = Record<string, string | number | boolean | null>;
 

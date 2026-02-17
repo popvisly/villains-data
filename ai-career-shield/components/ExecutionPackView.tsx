@@ -9,6 +9,7 @@ import { Icon } from '@/components/ui/Icon';
 import { LockedFeature } from '@/components/Paywall/LockedFeature';
 import { InterviewSimulator } from '@/components/InterviewSimulator';
 import { ResumeMatcher } from '@/components/ResumeMatcher';
+import { trackEvent } from '@/lib/analytics-client';
 
 // --- Sub-components (extracted for clarity) ---
 
@@ -317,6 +318,11 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
                                 type="button"
                                 className="mb-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition font-bold text-xs flex items-center gap-2"
                                 disabled={loading}
+                                onClick={() => {
+                                    if (loading) return;
+                                    trackEvent('execution_pack_pdf_downloaded', { tier: tier || 'unknown' });
+                                    trackEvent('export_used', { type: 'execution_pack_pdf', tier: tier || 'unknown' });
+                                }}
                             >
                                 {loading ? 'Preparing PDF…' : 'Download PDF Pack'}
                             </button>
