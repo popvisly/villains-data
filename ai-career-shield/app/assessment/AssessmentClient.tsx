@@ -438,7 +438,10 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                 {/* Instant Mode Toggle */}
                                 <div className="flex justify-center mt-2">
                                     <button
-                                        onClick={() => setStep(2)}
+                                        onClick={() => {
+                                            trackEvent('cta_clicked_skip_briefing');
+                                            setStep(2);
+                                        }}
                                         className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-emerald-600 transition flex items-center gap-1.5"
                                     >
                                         <Icon name="zap" size={10} />
@@ -802,9 +805,8 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             <ProofKitTeaser
                                 narrative={result.teaserNarrative}
                                 onUpgrade={() => {
-                                    const el = document.getElementById('pricing');
-                                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                                    else router.push('/assessment#pricing');
+                                    trackEvent('view_pricing', { location: 'proof_kit_teaser' });
+                                    router.push('/#pricing');
                                 }}
                             />
                         )}
@@ -834,7 +836,8 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             <UpsellCard
                                 onUnlock={() => {
                                     trackEvent('checkout_started', { tier: 'execution', location: 'assessment_upsell' });
-                                    router.push('/assessment#pricing');
+                                    trackEvent('view_pricing', { location: 'upsell_card' });
+                                    router.push('/#pricing');
                                 }}
                                 isLoading={isUnlocking}
                             />

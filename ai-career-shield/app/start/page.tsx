@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 import { ROUTES } from '@/lib/brand';
+import { trackEvent } from '@/lib/analytics-client';
 
 const PLANS = [
     {
@@ -167,6 +168,7 @@ export default function StartPage() {
                             {plan.status === 'active' ? (
                                 <Link
                                     href={plan.href}
+                                    onClick={() => trackEvent('module_selected', { module: plan.id, title: plan.title })}
                                     className="w-full py-4 rounded-xl bg-slate-900 text-white font-bold text-center hover:bg-slate-800 transition-all shadow-lg shadow-slate-200"
                                 >
                                     {plan.cta}
@@ -188,7 +190,10 @@ export default function StartPage() {
                 <div className="mt-24 max-w-2xl mx-auto text-center">
                     {quizIndex === -1 ? (
                         <button
-                            onClick={() => setQuizIndex(0)}
+                            onClick={() => {
+                                setQuizIndex(0);
+                                trackEvent('cta_clicked_start_assessment', { location: 'quiz_intro', module: 'selector' });
+                            }}
                             className="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors"
                         >
                             <Icon name="professional" size={16} />

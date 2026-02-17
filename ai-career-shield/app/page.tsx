@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { CareerOperatingPlanBriefing } from '@/components/CareerOperatingPlanBriefing';
 import { Icon } from '@/components/ui/Icon';
 import { trackEvent } from '@/lib/analytics-client';
-import { ROUTES } from '@/lib/brand';
 import { Nav } from '@/components/ui/Nav';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Tooltip } from '@/components/ui/Tooltip';
@@ -36,32 +35,37 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 mb-6 [text-wrap:balance]">
-              AI is changing your role faster than your title.
+              AI isn&rsquo;t coming for your job&mdash;it&rsquo;s coming for your <span className="text-indigo-600">expertise gap</span>.
             </h1>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
-              Not interview prep. Stop shipping Jira tickets and start building your <strong>Judgment Moat</strong>. Get your <strong>Career Operating Plan</strong> + Resilience Index in 2 minutes.
+              Not interview prep. Stop shipping Jira tickets and start building your <strong>Judgment Moat</strong>. Get your <strong>Career Operating Plan</strong> + Resilience Index in ~2 minutes.
             </p>
 
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-start gap-8">
               <div className="flex-1 max-w-sm w-full">
                 <Link
                   href="/career-resilience"
-                  className="group relative inline-flex h-14 w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
+                  onClick={() => trackEvent('cta_clicked_start_assessment', { location: 'hero' })}
+                  className="group relative inline-flex h-15 w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white shadow-[0_20px_40px_-15px_rgba(15,23,42,0.3)] transition-all hover:bg-slate-800 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/20 active:scale-[0.98]"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     Calculate My Resilience Index
                     <Icon name="arrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
                   </span>
                 </Link>
-                <div className="mt-4 flex items-center justify-center gap-4">
+                <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                   <Link
                     href="/example"
+                    onClick={() => trackEvent('example_viewed', { location: 'hero' })}
                     className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors underline decoration-slate-200 underline-offset-4"
                   >
                     See a Sample Plan
                   </Link>
-                  <span className="text-slate-300">|</span>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Instant Result</span>
+                  <span className="hidden sm:inline text-slate-300">|</span>
+                  <div className="flex items-center gap-2">
+                    <Icon name="zap" size={14} className="text-amber-500" />
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Instant Result</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -114,39 +118,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SOCIAL PROOF: Trusted by */}
-      <section className="border-y border-slate-200 bg-white/50 py-10">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-4">
-              <div className="flex -space-x-3 overflow-hidden">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="inline-block h-10 w-10 rounded-full ring-2 ring-white bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-400 border border-slate-200 font-sans">
-                    U{i}
-                  </div>
-                ))}
-              </div>
-              <div className="text-sm">
-                <div className="flex items-center gap-0.5 text-amber-500">
-                  {[1, 2, 3, 4, 5].map((i) => <Icon key={i} name="sparkles" size={12} />)}
-                </div>
-                <p className="font-bold text-slate-900">78% of users shipped within 30 days</p>
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-              <span className="text-sm font-bold tracking-tight text-slate-400">USED BY LEADERSHIP IN:</span>
-              <div className="flex items-center gap-6">
-                <div className="font-bold text-slate-400">PRODUCT COLLECTIVE</div>
-                <div className="font-bold text-slate-400 uppercase tracking-tighter">LENNY&rsquo;S COHORTS</div>
-                <div className="font-bold text-slate-400">REFORGE</div>
-              </div>
+      {/* MARKET SHIFT: Reddit-inspired insights */}
+      <section className="px-6 py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 mb-20">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 border-t border-slate-200 pt-16">
+            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Trusted By Leadership In:</span>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+              <div className="text-sm font-black text-slate-500 uppercase">Product Collective</div>
+              <div className="text-sm font-black text-slate-500 uppercase tracking-tighter">Lenny&rsquo;s Cohorts</div>
+              <div className="text-sm font-black text-slate-500 uppercase tracking-widest">Reforge</div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* MARKET SHIFT: Reddit-inspired insights */}
-      <section className="px-6 py-32 md:py-48 bg-slate-50 border-y border-slate-200/60 relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="Market Reality"
@@ -683,12 +666,12 @@ export default function HomePage() {
             {/* The Audit: FREE STARTER */}
             <div className="rounded-[2.5rem] border border-slate-200 bg-white p-10 flex flex-col hover:shadow-xl transition-all duration-300">
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-slate-900 font-serif italic mb-2">Free Starter</h3>
+                <h3 className="text-xl font-bold text-slate-900 font-serif italic mb-2">Resilience Audit</h3>
                 <p className="text-base text-slate-500 font-medium italic leading-relaxed">Perfect for testing your AI leverage baseline. Includes Resilience Score & priority drivers report.</p>
               </div>
               <div className="text-5xl font-bold text-slate-900 mb-10 font-serif tracking-tight">$0</div>
               <ul className="space-y-4 mb-10 flex-1">
-                {['Resilience Index score', 'Top 3 automation drivers', 'Immediate 7-day moves'].map((item) => (
+                {['Personalized Resilience Index', 'Top 3 automation/expertise drivers', 'Immediate 7-day tactical moves'].map((item) => (
                   <li key={item} className="flex items-center gap-4 text-base text-slate-600">
                     <Icon name="check" size={18} className="text-emerald-600" /> {item}
                   </li>
@@ -699,7 +682,7 @@ export default function HomePage() {
                 onClick={() => trackEvent('pricing_plan_click', { tier: 'free', location: 'landing_page' })}
                 className="w-full h-14 inline-flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-2xl transition-all"
               >
-                Start for Free
+                Start Resilience Audit
               </Link>
               <p className="mt-6 text-[11px] text-center text-slate-400 font-bold uppercase tracking-widest italic">No credit card required.</p>
             </div>
@@ -710,17 +693,17 @@ export default function HomePage() {
                 Most Popular
               </div>
               <div className="mb-8 pt-4">
-                <h3 className="text-xl font-bold text-slate-900 font-serif italic mb-2">Strategic Operating Plan</h3>
-                <p className="text-base text-emerald-700 font-medium italic leading-relaxed">The complete 30/60/90 leverage protocol for modern professionals.</p>
+                <h3 className="text-xl font-bold text-slate-900 font-serif italic mb-2">Strategic Operator Protocol</h3>
+                <p className="text-base text-emerald-700 font-medium italic leading-relaxed">The complete 30/60/90 leverage protocol for senior professionals.</p>
               </div>
               <div className="text-5xl font-bold text-slate-900 mb-10 font-serif tracking-tight">$39</div>
               <ul className="space-y-4 mb-10 flex-1">
                 {[
-                  'Career: Resilience Index + 90-Day Build Sequence',
+                  'Career: 90-Day Build Sequence',
                   'Attention: Anti-slop filters & Deep Work protocols',
                   'Identity: Proof Portfolio setup & positioning thesis',
-                  'Capacity: Burnout-proof recovery (Early Access)',
-                  'Everything in Free',
+                  'Selective Disclosure: Secure W3C proof of work',
+                  'APP 2025: Full Australian Privacy Compliance',
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-4 text-base text-slate-700 font-bold">
                     <Icon name="check" size={18} className="text-emerald-600" /> {item}
@@ -735,7 +718,7 @@ export default function HomePage() {
                 }}
                 className="w-full h-14 inline-flex items-center justify-center bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl shadow-xl shadow-indigo-500/20 transition-all hover:translate-y-[-2px]"
               >
-                Build My Operating Plan
+                Build My Protocol
               </Link>
               <p className="mt-6 text-[11px] text-center text-slate-400 font-bold uppercase tracking-widest italic">Instant access after signup.</p>
             </div>
@@ -797,6 +780,6 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
-    </main>
+    </main >
   );
 }

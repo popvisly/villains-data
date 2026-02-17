@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { APP_NAME, APP_PRODUCT } from '@/lib/brand';
+import { trackEvent } from '@/lib/analytics-client';
 
 export function Nav() {
     return (
@@ -31,9 +32,10 @@ export function Nav() {
                     </Link>
                     <Link
                         href="/start"
+                        onClick={() => trackEvent('cta_clicked_start_assessment', { location: 'nav' })}
                         className="inline-flex h-12 items-center justify-center rounded-xl bg-[hsl(var(--cta))] px-6 font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 transition-all shadow-xl shadow-emerald-500/20 active:scale-[0.98]"
                     >
-                        Generate My Plan
+                        Calculate My Resilience Index
                     </Link>
                 </nav>
 
@@ -42,7 +44,7 @@ export function Nav() {
                         href="/start"
                         className="inline-flex h-10 items-center justify-center rounded-xl bg-[hsl(var(--cta))] px-4 text-sm font-bold text-[hsl(var(--cta-foreground))]"
                     >
-                        Create
+                        Index
                     </Link>
                 </div>
             </div>

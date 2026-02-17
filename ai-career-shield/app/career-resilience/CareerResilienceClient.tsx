@@ -131,7 +131,10 @@ function CareerResilienceContent() {
                         <div className="mt-5 flex items-center justify-center gap-4 text-sm font-semibold">
                             <Link
                                 href="/example"
-                                onClick={() => trackCTA('example')}
+                                onClick={() => {
+                                    trackCTA('example');
+                                    trackEvent('example_viewed', { location: 'career_resilience' });
+                                }}
                                 className="text-slate-600 hover:text-slate-900 underline decoration-slate-200 underline-offset-4"
                             >
                                 See a real example output (no email)
