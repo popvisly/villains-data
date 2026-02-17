@@ -38,12 +38,13 @@ function CareerResilienceContent() {
         }
     }, [searchParams]);
 
-    const handleCTAClick = () => {
+    const trackCTA = (cta: string) => {
         const now = Date.now();
         const timeOnPage = startTimeRef.current ? Math.round((now - startTimeRef.current) / 1000) : 0;
         trackEvent('cta_clicked_start_assessment', {
             source_page: 'career-resilience',
-            time_on_page_seconds: timeOnPage
+            cta,
+            time_on_page_seconds: timeOnPage,
         });
     };
 
@@ -121,13 +122,32 @@ function CareerResilienceContent() {
                     <div className="max-w-xl mx-auto text-center">
                         <Link
                             href={ROUTES.CAREER}
-                            onClick={handleCTAClick}
+                            onClick={() => trackCTA('primary')}
                             className="inline-flex items-center justify-center w-full min-h-[72px] bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold text-xl transition-all shadow-lg shadow-indigo-100 active:scale-[0.98]"
                         >
-                            Build My Resilience Index →
+                            Start the 2‑minute audit →
                         </Link>
+
+                        <div className="mt-5 flex items-center justify-center gap-4 text-sm font-semibold">
+                            <Link
+                                href="/example"
+                                onClick={() => trackCTA('example')}
+                                className="text-slate-600 hover:text-slate-900 underline decoration-slate-200 underline-offset-4"
+                            >
+                                See a real example output (no email)
+                            </Link>
+                            <span className="text-slate-300">|</span>
+                            <Link
+                                href="/#pricing"
+                                onClick={() => trackCTA('pricing')}
+                                className="text-slate-600 hover:text-slate-900 underline decoration-slate-200 underline-offset-4"
+                            >
+                                Pricing
+                            </Link>
+                        </div>
+
                         <p className="mt-6 text-slate-500 font-medium tracking-tight">
-                            No credit card required • 2 minutes • No sign-up
+                            No credit card required • ~2 minutes • No sign-up
                         </p>
                     </div>
                 </section>
