@@ -5,8 +5,8 @@
  * follow the defined 'Decision-First' vision.
  */
 
-import { assessResilience } from '../skills/resilience-index/scripts/triage.ts';
-import { generateProofCredential } from '../lib/verifiable-proof.ts';
+import { assessResilience } from '../skills/resilience-index/scripts/triage';
+import { generateProofCredential } from '../lib/verifiable-proof';
 
 async function runSimulation() {
     console.log('--- Starting Mission Control QA Simulation ---');

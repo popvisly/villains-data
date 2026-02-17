@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { stripe } from '@/lib/stripe';
-import { resend } from '@/lib/resend';
+import { getResendClient } from '@/lib/resend';
 import { getEmailTemplates } from '@/lib/email-templates';
 import { supabaseAdmin } from '@/lib/supabase';
 
@@ -44,6 +44,8 @@ export async function POST(req: Request) {
             });
 
             try {
+                const resend = getResendClient();
+
                 // EMAIL 1: IMMEDIATE
                 await resend.emails.send({
                     from: 'Captori <support@captori.com>',
