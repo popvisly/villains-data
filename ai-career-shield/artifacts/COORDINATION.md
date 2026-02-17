@@ -35,6 +35,10 @@ Purpose: machine-readable handover between agents (Ray ↔ Antigravity).
 ### Events added (Phase 23)
 - `post_purchase_land` (Stripe success verified)
 - `artifact_viewed` (paid artifact surfaced; properties include `artifact` and optional `tier`)
+- `execution_pack_pdf_downloaded` (Execution Pack PDF download click)
+- `interview_sim_started` (Interview simulator loaded)
+- `interview_sim_turn` (each consumed turn)
+- `interview_sim_completed` (limit reached / session complete)
 
 ## Blockers / Resolved
 
