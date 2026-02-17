@@ -27,10 +27,14 @@ Purpose: machine-readable handover between agents (Ray ↔ Antigravity).
 - app/career-resilience/CareerResilienceClient.tsx
 - lib/analytics-client.ts
 
-## Next priority: Phase 23 — Post-Purchase Interaction
+## Phase 23 — Post-Purchase Interaction (IN PROGRESS)
 
-- **Goal**: Track specific interactions with the unlocked artifacts (Interview Sim, Playbook usage).
+- **Goal**: Track specific interactions with the unlocked artifacts (Assessment unlock, Playbook usage).
 - **Metric**: Retention and utility score.
+
+### Events added (Phase 23)
+- `post_purchase_land` (Stripe success verified)
+- `artifact_viewed` (paid artifact surfaced; properties include `artifact` and optional `tier`)
 
 ## Blockers / Resolved
 
