@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Nav } from '@/components/ui/Nav';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { Icon } from '@/components/ui/Icon';
+import { CtaBlock } from '@/components/blog/CtaBlock';
 
 export default function BlogPost() {
     return (
@@ -33,6 +34,8 @@ export default function BlogPost() {
                         <div className="my-10 p-8 rounded-3xl bg-indigo-50 border border-indigo-100 italic text-indigo-900 font-medium">
                             &ldquo;AI removes the overhead. But in doing so, it exposes the lack of judgment.&rdquo;
                         </div>
+
+                        <CtaBlock />
 
                         <h3 className="text-2xl font-bold text-slate-900 mt-12 mb-6 font-serif">The Judgment Moat</h3>
                         <p>
@@ -67,7 +70,7 @@ export default function BlogPost() {
                             <div className="mt-8 border-t border-slate-700 pt-8">
                                 <p className="mb-6 font-bold text-lg">Want to see exactly where your role stands?</p>
                                 <Link
-                                    href="/start"
+                                    href="/career-resilience"
                                     className="inline-flex h-12 items-center justify-center rounded-xl bg-[hsl(var(--cta))] px-8 font-bold text-[hsl(var(--cta-foreground))] hover:scale-[1.02] transition-all shadow-lg shadow-emerald-500/20"
                                 >
                                     Get Your Resilience Index
@@ -78,14 +81,40 @@ export default function BlogPost() {
                 </div>
 
                 {/* RELATED CONTENT / CTA */}
-                <div className="mt-16 text-center">
-                    <p className="text-slate-500 font-medium mb-6">See how a Senior PM uses Captori to build a moat.</p>
-                    <Link
-                        href="/example"
-                        className="inline-flex items-center gap-2 text-indigo-600 font-bold hover:underline"
-                    >
-                        Check out the Example Plan <Icon name="arrowRight" size={16} />
-                    </Link>
+                <div className="mt-16">
+                    <div className="text-center">
+                        <p className="text-slate-500 font-medium mb-6">Want more of the Captori POV?</p>
+                        <Link
+                            href="/example"
+                            className="inline-flex items-center gap-2 text-indigo-600 font-bold hover:underline"
+                        >
+                            Check out the Example Plan <Icon name="arrowRight" size={16} />
+                        </Link>
+                    </div>
+
+                    <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                        {[{
+                            title: 'How to stay relevant in the AI era',
+                            href: '/blog/how-to-stay-relevant-in-the-ai-era',
+                        }, {
+                            title: 'Product Manager Leverage Map',
+                            href: '/blog/product-manager-leverage-map',
+                        }, {
+                            title: 'AI Job Risk Assessment (2-minute audit)',
+                            href: '/blog/ai-job-risk-assessment',
+                        }].map((item) => (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className="glass-panel rounded-3xl p-6 hover:shadow-xl transition-all"
+                            >
+                                <div className="text-sm font-bold text-slate-900">{item.title}</div>
+                                <div className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-slate-600">
+                                    Read <Icon name="arrowRight" size={14} />
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </article>
 
