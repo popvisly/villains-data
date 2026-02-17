@@ -1,10 +1,10 @@
-# RolePilot - Brand Voice Guide
+# Captori — Brand Voice Guide
 
-> **North Star:** We turn uncertainty into a next step.
+> **North Star:** Turn uncertainty into a next step.
 
 ## Positioning
 
-A professional planning tool that helps people understand how AI might reshape their work — and gives them a clear, evidence-based roadmap to build resilience.
+Captori is a professional planning tool that turns role uncertainty into a practical plan: a Resilience Index plus a Career Operating Plan built around judgment, proof, and a 30/60/90 execution sequence.
 
 ---
 
@@ -86,13 +86,13 @@ A professional planning tool that helps people understand how AI might reshape t
 
 ### Hero Section
 
-**Badge:** "Includes a 30/60/90-day roadmap" (blue signal, not red alarm)
+**Badge:** "Free plan • ~2 minutes • no login" (blue signal, not red alarm)
 
-**Title:** "Build Your Career Shield"
+**Title:** "AI is changing your role faster than your title."
 
-**Subtitle:** "Know your AI risk in 2 minutes — and get a practical 30/60/90‑day plan to improve your resilience."
+**Subtitle:** "Not interview prep. Get your Career Operating Plan + Resilience Index in ~2 minutes."
 
-**Student Link:** "Student? Use this to choose a major →"
+**Secondary link:** "See a real example output (no email) →"
 
 ---
 

@@ -57,9 +57,9 @@ This document serves as the definitive visual and tonal reference for Captori. N
 
 ### Call to Action (CTA)
 
-- **Primary Labels:** "Calculate Your Resilience Index" or "Generate Your 90-Day Plan."
+- **Primary Labels:** "Calculate Your Resilience Index" or "Start the 2-minute audit."
 - **Button Style:** Rounded, Primary Blue (`#6366F1`) or Indigo-600 background with white text.
-- **Link Requirement:** Always include `captori.ai/start` or `captori.com` in the footer.
+- **Link Requirement:** Always include `captori.com/career-resilience` (preferred) or `captori.com` in the footer.
 
 ---
 

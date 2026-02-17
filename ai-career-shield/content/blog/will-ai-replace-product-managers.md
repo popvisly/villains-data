@@ -5,7 +5,7 @@ related_keywords: product manager career, ai job risk, judgment vs volume
 meta_description: Analysis of how AI impacts product management tasks and why PMs must shift from being volume owners to judgment owners to stay relevant.
 published_date: 2025-02-16
 word_count: 500
-internal_links: /example, /start
+internal_links: /example, /career-resilience
 
 # Will AI Replace Product Managers?
 
@@ -36,7 +36,7 @@ To survive the shift, PMs must move from *“outputs”* to *“proof of judgmen
 - **Reposition**: Move toward roles with higher ambiguity and higher consequence.
 
 ---
-**CTA**: [Get Your Resilience Index](/start) | [Check out the Example Plan](/example)
+**CTA**: [Get Your Resilience Index](/career-resilience) | [Check out the Example Plan](/example)
 
 SEO Notes:
 
