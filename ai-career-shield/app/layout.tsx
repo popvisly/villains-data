@@ -41,6 +41,7 @@ export const metadata: Metadata = {
 };
 
 import SEO from '@/components/SEO';
+import { GA4 } from '@/components/GA4';
 
 export default function RootLayout({
   children,
@@ -50,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${lora.variable} ${raleway.variable} font-sans`}>
+        <GA4 />
         <SEO />
         {children}
       </body>

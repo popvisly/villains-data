@@ -52,6 +52,19 @@ export function trackEvent(name: EventName, properties?: EventProperties) {
         console.log(`[Analytics] ${name}`, properties);
     }
 
+    // Send to GA4 if configured
+    // NOTE: Do not send PII. Keep properties high-level.
+    if (typeof window !== 'undefined') {
+        const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+        if (gtag && process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID) {
+            try {
+                gtag('event', name, properties || {});
+            } catch {
+                // ignore
+            }
+        }
+    }
+
     // Send to Supabase via Server Action
     // We fire and forget to not block the UI
     const url = typeof window !== 'undefined' ? window.location.href : undefined;
