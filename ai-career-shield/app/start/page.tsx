@@ -65,8 +65,8 @@ const PLANS = [
             'Minimum viable day',
         ],
         cta: 'Generate Capacity Plan',
-        href: '/capacity',
-        status: 'upcoming',
+        href: ROUTES.CAPACITY,
+        status: 'active',
         icon: 'zap',
         color: 'amber'
     }
@@ -142,7 +142,7 @@ export default function StartPage() {
                         >
                             <div className="flex items-center gap-3 mb-6">
                                 <div className={`p-3 rounded-2xl bg-${plan.color === 'emerald' ? 'emerald' : plan.color === 'indigo' ? 'indigo' : 'slate'}-50 text-${plan.color === 'emerald' ? 'emerald' : plan.color === 'indigo' ? 'indigo' : 'slate'}-600`}>
-                                    <Icon name={plan.icon as "professional" | "eyeOff" | "shield"} size={24} />
+                                    <Icon name={plan.icon as any} size={24} />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-slate-900 text-xl">{plan.title}</h3>

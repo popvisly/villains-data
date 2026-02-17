@@ -26,5 +26,6 @@ export const ROUTES = {
     CAREER: '/assessment',
     ATTENTION: '/attention',
     IDENTITY: '/identity',
+    CAPACITY: '/capacity',
     PLAYBOOK: '/playbook',
 };
