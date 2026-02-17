@@ -2,6 +2,7 @@
 // Force re-compile v2
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 
 export default function InfographicPage() {
@@ -153,12 +154,16 @@ export default function InfographicPage() {
                 <div className="h-[200px] bg-indigo-600 flex flex-col items-center justify-center text-center relative z-10 px-16">
                     <h3 className="text-4xl font-bold text-white mb-4 italic font-serif tracking-tight">Stop Guessing. Measure Your Moat.</h3>
                     <div className="flex flex-col items-center gap-4">
-                        <div className="px-10 py-5 bg-white text-indigo-900 text-3xl font-black rounded-3xl shadow-2xl flex items-center gap-4 hover:scale-105 transition-transform cursor-pointer">
+                        <Link
+                            href="/career-resilience"
+                            className="px-10 py-5 bg-white text-indigo-900 text-3xl font-black rounded-3xl shadow-2xl flex items-center gap-4 hover:scale-105 transition-transform"
+                            aria-label="Calculate your Resilience Index"
+                        >
                             Calculate My Resilience Index <Icon name="arrowRight" size={32} />
-                        </div>
+                        </Link>
                         <div className="flex items-center gap-3">
                             <div className="h-4 w-4 rounded-full bg-white/20"></div>
-                            <span className="text-white text-2xl font-bold tracking-widest uppercase opacity-80">captori.ai/start</span>
+                            <span className="text-white text-2xl font-bold tracking-widest uppercase opacity-80">captori.com/career-resilience</span>
                             <div className="h-4 w-4 rounded-full bg-white/20"></div>
                         </div>
                     </div>
