@@ -7,7 +7,7 @@ interface SEOProps {
 }
 
 export default function SEO({
-    description = "Create a personalized AI-Life Plan with measurable outcomes, templates, and a tailored roadmap to grow your career or project.",
+    description = "Create a personalized Career Operating Plan with measurable outcomes, templates, and a tailored roadmap to grow your career or project.",
     url = "https://captori.com", // Updated default URL
 }: { description?: string; url?: string }) {
 

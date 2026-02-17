@@ -26,7 +26,7 @@ export default function TermsPage() {
                     <p>You agree to use the service for personal or professional growth and not for any unlawful purposes. You are responsible for any decisions made based on the plans generated.</p>
 
                     <h2 className="text-xl font-bold text-slate-900">3. Payments and Refunds</h2>
-                    <p>The AI-Life Plan Suite Unlock is a one-time purchase. Due to the digital nature of the product, refunds are generally not provided once the plan is generated, but we handle cases on a case-by-case basis via support.</p>
+                    <p>The Career Operating Plan Suite Unlock is a one-time purchase. Due to the digital nature of the product, refunds are generally not provided once the plan is generated, but we handle cases on a case-by-case basis via support.</p>
 
                     <h2 className="text-xl font-bold text-slate-900">4. Limitation of Liability</h2>
                     <p>{APP_NAME} and Villains At Large are not liable for any career outcomes, financial losses, or decisions made based on the use of this tool.</p>

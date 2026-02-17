@@ -5,7 +5,7 @@
 
 export const APP_NAME = 'Captori';
 // Product descriptor (working title). Keep separate from brand name for flexibility.
-export const APP_PRODUCT = 'AI‑Life Plan';
+export const APP_PRODUCT = 'Career Operating Plan';
 export const APP_TAGLINE = 'Work, attention, identity, and capacity.';
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://captori.com';
 

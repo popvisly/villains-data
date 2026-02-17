@@ -36,10 +36,10 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 mb-6 [text-wrap:balance]">
-              AI-Life Plan — Get Your Personalized Career Growth & Resilience Blueprint in Minutes.
+              AI is changing your role faster than your title.
             </h1>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
-              Generate a 30/60/90 actionable strategy with measurable milestones, templates you can export, and a skill-proof pathway — no fluff.
+              Not interview prep. Not a calendar optimizer. Get your <strong>Career Operating Plan</strong> to ship proof of value—no fluff.
             </p>
 
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-start gap-4">
@@ -48,7 +48,7 @@ export default function HomePage() {
                 className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Generate My AI-Life Plan Now — It Only Takes 2 Minutes
+                  Calculate My Resilience Index
                   <Icon name="arrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
@@ -89,7 +89,7 @@ export default function HomePage() {
             {/* Background Decor */}
             <div className="absolute top-1/2 left-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-tr from-indigo-50 via-white to-emerald-50/50 rounded-full blur-3xl opacity-80"></div>
 
-            {/* Main AI-Life Plan Briefing - Single Focus */}
+            {/* Main Career Operating Plan Briefing - Single Focus */}
             <Link href="/example" className="relative z-20 peer hover:-translate-y-2 transition-transform duration-500 max-w-lg block">
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-indigo-500/20 to-emerald-500/20 blur-lg opacity-40"></div>
               <AILifePlanBriefing />
@@ -200,7 +200,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             title="How it works"
-            subtitle="Most AI tools optimize schedules or help you sound polished. AI‑Life Plan is different: it’s a leverage plan—built for employed professionals who need a plan they can execute."
+            subtitle="Most AI tools optimize schedules or help you sound polished. Captori is different: it’s a leverage plan built to help you ship proof of value."
           />
 
           <div className="mx-auto mt-24 grid max-w-5xl gap-8">
@@ -245,7 +245,7 @@ export default function HomePage() {
               href="/start"
               className="inline-flex h-16 items-center justify-center rounded-2xl bg-[hsl(var(--cta))] px-10 text-xl font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 shadow-xl shadow-emerald-500/20 transition-all hover:translate-y-[-2px] active:scale-[0.98]"
             >
-              Generate My AI‑Life Plan
+              Build My Resilience Index
             </Link>
           </div>
         </div>
@@ -448,7 +448,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             title="A Modular Operating System"
-            subtitle="Your AI‑Life Plan has four modules."
+            subtitle="Your Career Operating Plan has four modules."
           />
 
           <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -616,7 +616,7 @@ export default function HomePage() {
                   See Grounded Protocol
                 </Link>
                 <Link href="/start" className="w-full h-16 inline-flex items-center justify-center border-2 border-slate-700 text-white rounded-2xl font-bold hover:bg-white/5 transition-all text-xl">
-                  Generate My AI‑Life Plan
+                  Build My Resilience Index
                 </Link>
               </div>
             </div>
@@ -668,7 +668,7 @@ export default function HomePage() {
       <section id="pricing" className="py-32 md:py-48 px-6 border-t border-slate-200">
         <div className="max-w-7xl mx-auto">
           <SectionTitle
-            title="Choose the Plan That Fits Your AI-Life Growth"
+            title="Choose the Plan That Fits Your Career Growth"
             subtitle="Simple, transparent pricing designed for professionals who want measurable progress — not just reports."
             eyebrow="Pricing"
           />
@@ -698,22 +698,22 @@ export default function HomePage() {
               <p className="mt-6 text-[11px] text-center text-slate-400 font-bold uppercase tracking-widest italic">No credit card required.</p>
             </div>
 
-            {/* AI-Life Plan (Growth): $39 */}
+            {/* Strategic Operating Plan ($39) */}
             <div className="rounded-[2.5rem] border-2 border-[hsl(var(--primary))] bg-white p-10 flex flex-col shadow-2xl scale-105 relative z-10 transition-transform hover:scale-[1.07]">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-[hsl(var(--primary))] text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-full shadow-lg">
                 Most Popular
               </div>
               <div className="mb-8 pt-4">
-                <h3 className="text-xl font-bold text-slate-900 font-serif italic mb-2">Growth Plan</h3>
-                <p className="text-base text-emerald-700 font-medium italic leading-relaxed">Your full AI-Life strategy with outcomes you can implement now. Includes 30/60/90 plan, export templates, and success metrics.</p>
+                <h3 className="text-xl font-bold text-slate-900 font-serif italic mb-2">Strategic Operating Plan</h3>
+                <p className="text-base text-emerald-700 font-medium italic leading-relaxed">The complete 30/60/90 leverage protocol for modern professionals.</p>
               </div>
               <div className="text-5xl font-bold text-slate-900 mb-10 font-serif tracking-tight">$39</div>
               <ul className="space-y-4 mb-10 flex-1">
                 {[
-                  'Full 30/60/90 Career Build Plan',
-                  'Grounded Protocol (Attention & Recovery)',
-                  'Exportable templates (Notion/Jira)',
-                  'Identity Proofing Kit',
+                  'Career: Resilience Index + 90-Day Build Sequence',
+                  'Attention: Anti-slop filters & Deep Work protocols',
+                  'Identity: Proof Portfolio setup & positioning thesis',
+                  'Capacity: Burnout-proof recovery (Early Access)',
                   'Everything in Free',
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-4 text-base text-slate-700 font-bold">
@@ -729,25 +729,25 @@ export default function HomePage() {
                 }}
                 className="w-full h-14 inline-flex items-center justify-center bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl shadow-xl shadow-indigo-500/20 transition-all hover:translate-y-[-2px]"
               >
-                Unlock Full AI-Life Plan
+                Build My Operating Plan
               </Link>
               <p className="mt-6 text-[11px] text-center text-slate-400 font-bold uppercase tracking-widest italic">Instant access after signup.</p>
             </div>
 
-            {/* Executive Plan: $99 */}
+            {/* Executive Proof Suite ($99) */}
             <div className="rounded-[2.5rem] border border-indigo-200 bg-indigo-50/30 p-10 flex flex-col hover:shadow-xl transition-all duration-300">
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-slate-900 font-serif italic mb-2">Executive Plan</h3>
-                <p className="text-base text-indigo-700 font-medium italic leading-relaxed">Advanced strategy for leaders & high-impact professionals. Includes deep insights, scenario modeling, and growth playbooks.</p>
+                <h3 className="text-xl font-bold text-slate-900 font-serif italic mb-2">Executive Proof Suite</h3>
+                <p className="text-base text-indigo-700 font-medium italic leading-relaxed">For Senior/Staff roles facing high-stakes reviews or career pivots.</p>
               </div>
               <div className="text-5xl font-bold text-slate-900 mb-10 font-serif tracking-tight">$99</div>
               <ul className="space-y-4 mb-10 flex-1">
                 {[
-                  'Everything in Growth',
-                  'Executive Blueprint (Share-ready PDF)',
-                  'Pressure‑test simulations (Failure-mode)',
-                  'Priority artifact audits',
-                  '1:1 implementation guidance sync',
+                  'Failure-Mode Simulations: "Board-Ready" answers',
+                  'The Proof Kit: Narrative architecture + templates',
+                  'Interview Defense: Logic maps for high pressure',
+                  'Executive Blueprint: Shareable PDF strategy',
+                  'Everything in Strategic Operating Plan',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-4 text-base text-slate-600">
                     <Icon name="check" size={18} className="text-indigo-600" /> {item}
@@ -762,7 +762,7 @@ export default function HomePage() {
                 }}
                 className="w-full h-14 inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl transition-all hover:translate-y-[-2px]"
               >
-                Get Executive Strategy
+                Unlock Executive Suite
               </Link>
               <p className="mt-6 text-[11px] text-center text-slate-400 font-bold uppercase tracking-widest italic">Includes all future update logs.</p>
             </div>
@@ -779,7 +779,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
           <div className="flex items-center gap-2 font-semibold text-slate-900">
             <Icon name="sparkles" size={20} className="text-[hsl(var(--primary))]" />
-            AI‑Life Plan
+            Operating Plan
           </div>
           <div className="flex items-center gap-6">
             <Link href="/start" className="hover:text-[hsl(var(--primary))] transition-colors">How it works</Link>

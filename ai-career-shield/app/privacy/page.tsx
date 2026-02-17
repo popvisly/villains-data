@@ -20,7 +20,7 @@ export default function PrivacyPage() {
                     <p>At {APP_NAME}, we take your privacy seriously. This policy outlines how we handle your data.</p>
 
                     <h2 className="text-xl font-bold text-slate-900">1. Data Collection</h2>
-                    <p>We do not store your assessment inputs by default. Your inputs are used in-session to generate your AI-Life Plan and are not persisted to our database unless you explicitly save them to your account (future feature).</p>
+                    <p>We do not store your assessment inputs by default. Your inputs are used in-session to generate your Career Operating Plan and are not persisted to our database unless you explicitly save them to your account (future feature).</p>
 
                     <h2 className="text-xl font-bold text-slate-900">2. Cookies and Tracking</h2>
                     <p>We use lightweight analytics to understand how users interact with our site. This helps us improve our modules and user experience. We do not use invasive tracking or sell your data to third parties.</p>

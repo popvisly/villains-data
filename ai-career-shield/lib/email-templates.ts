@@ -1,18 +1,18 @@
 export const getEmailTemplates = (data: {
-    userName: string;
-    resilienceScore: number;
-    topDriver: string;
-    planTier: string;
+  userName: string;
+  resilienceScore: number;
+  topDriver: string;
+  planTier: string;
 }) => {
-    const { userName, resilienceScore, topDriver, planTier } = data;
+  const { userName, resilienceScore, topDriver, planTier } = data;
 
-    return {
-        day0: {
-            subject: "Your AI-Life Plan is Ready 🎯",
-            html: `
+  return {
+    day0: {
+      subject: "Your Career Operating Plan is Ready 🎯",
+      html: `
         <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
           <p>Hi ${userName},</p>
-          <p>Your AI-Life Plan is attached to this email.</p>
+          <p>Your Career Operating Plan is attached to this email.</p>
           <p><strong>Here's what to do first:</strong></p>
           <ol>
             <li>Open your plan (PDF attached)</li>
@@ -36,13 +36,13 @@ export const getEmailTemplates = (data: {
           </p>
         </div>
       `,
-        },
-        day7: {
-            subject: "Week 1 Check-in: Did You Start? ⚡",
-            html: `
+    },
+    day7: {
+      subject: "Week 1 Check-in: Did You Start? ⚡",
+      html: `
         <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
           <p>Hi ${userName},</p>
-          <p>Quick check-in on your AI-Life Plan.</p>
+          <p>Quick check-in on your Career Operating Plan.</p>
           <p><strong>DID YOU START BUILDING?</strong></p>
           <p>✅ If yes &rarr; Reply and tell me what you're working on<br/>
           ❌ If not &rarr; What's blocking you?</p>
@@ -57,10 +57,10 @@ export const getEmailTemplates = (data: {
           </p>
         </div>
       `,
-        },
-        day30: {
-            subject: "30-Day Checkpoint: What Have You Shipped? 📦",
-            html: `
+    },
+    day30: {
+      subject: "30-Day Checkpoint: What Have You Shipped? 📦",
+      html: `
         <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
           <p>Hi ${userName},</p>
           <p>You're 1/3 through your 90-day plan.</p>
@@ -82,13 +82,13 @@ export const getEmailTemplates = (data: {
           <p>Best,<br/>The Captori Team</p>
         </div>
       `,
-        },
-        day90: {
-            subject: "90-Day Results: What Changed? 🚀",
-            html: `
+    },
+    day90: {
+      subject: "90-Day Results: What Changed? 🚀",
+      html: `
         <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
           <p>Hi ${userName},</p>
-          <p>Final check-in on your AI-Life Plan.</p>
+          <p>Final check-in on your Career Operating Plan.</p>
           <p>It's been 90 days since you got your Resilience Index (${resilienceScore}%).</p>
           <p><strong>WHAT CHANGED?</strong></p>
           <p>If Captori helped you build leverage, would you be willing to share a 2-sentence testimonial?</p>
@@ -99,6 +99,6 @@ export const getEmailTemplates = (data: {
           </p>
         </div>
       `,
-        },
-    };
+    },
+  };
 };

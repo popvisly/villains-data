@@ -18,12 +18,12 @@ These emails are triggered via Stripe webhooks and sent via Resend.
 
 ## Email 1: Immediate (Day 0)
 
-**Subject**: Your AI-Life Plan is Ready 🎯
+**Subject**: Your Career Operating Plan is Ready 🎯
 
 **Body**:
 Hi {{user_name}},
 
-Your AI-Life Plan is attached to this email.
+Your Career Operating Plan is attached to this email.
 
 **Here's what to do first:**
 
@@ -53,7 +53,7 @@ P.S. - Your plan only works if you execute. Block 90 minutes this week to start.
 **Body**:
 Hi {{user_name}},
 
-Quick check-in on your AI-Life Plan.
+Quick check-in on your Career Operating Plan.
 
 **DID YOU START BUILDING?**
 ✅ If yes -> Reply and tell me what you're working on
@@ -106,7 +106,7 @@ Reply with your progress!
 **Body**:
 Hi {{user_name}},
 
-Final check-in on your AI-Life Plan.
+Final check-in on your Career Operating Plan.
 
 It's been 90 days since you got your Resilience Index ({{resilience_score}}%).
 

@@ -11,24 +11,24 @@ import { APP_NAME, APP_PRODUCT, APP_TAGLINE, APP_URL } from '@/lib/brand';
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
-  title: 'Captori – AI-Driven Career Action Plan | Personalized 30/60/90 Strategy',
+  title: 'Captori – Career Operating Plan | Personalized 30/60/90 Strategy',
   description:
-    'Create a personalized AI-Life Plan with measurable outcomes, templates, and a tailored roadmap to grow your career or project.',
+    'Create a personalized Career Operating Plan with measurable outcomes, templates, and a tailored roadmap to grow your career or project.',
   keywords: [
     'career resilience',
     'career planning',
     'AI career strategy',
     '30/60/90 plan AI',
     'future-ready career',
-    'AI job risk assessment',
+    'AI job resilience assessment',
     'professional growth roadmap',
   ],
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Captori – AI-Driven Career Action Plan',
-    description: 'Create a personalized AI-Life Plan with measurable outcomes, templates, and a tailored roadmap.',
+    title: 'Captori – Career Operating Plan',
+    description: 'Create a personalized Career Operating Plan with measurable outcomes, templates, and a tailored roadmap.',
     url: APP_URL,
     siteName: APP_NAME,
     locale: 'en_US',
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Captori – AI-Driven Career Action Plan',
-    description: 'Create a personalized AI-Life Plan with measurable outcomes and templates.',
+    title: 'Captori – Career Operating Plan',
+    description: 'Create a personalized Career Operating Plan with measurable outcomes and templates.',
   },
 };
 

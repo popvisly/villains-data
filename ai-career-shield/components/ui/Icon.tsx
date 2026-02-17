@@ -38,7 +38,9 @@ import {
     HelpCircle,
     Loader2,
     EyeOff,
-    Radio
+    Radio,
+    Gauge,
+    ListChecks
 } from 'lucide-react';
 
 const iconMap = {
@@ -80,6 +82,8 @@ const iconMap = {
     loader: Loader2,
     eyeOff: EyeOff,
     signal: Radio,
+    gauge: Gauge,
+    listChecks: ListChecks,
 } as const;
 
 export type IconName = keyof typeof iconMap;

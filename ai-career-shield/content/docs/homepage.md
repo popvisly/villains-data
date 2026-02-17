@@ -8,9 +8,9 @@ last_updated: 2026-02-17
 
 ## Hero Section
 
-- **Headline**: AI-Life Plan — Get Your Personalized Career Growth & Resilience Blueprint in Minutes.
-- **Subheadline**: Generate a 30/60/90 actionable strategy with measurable milestones, templates you can export, and a skill-proof pathway — no fluff.
-- **Primary CTA**: Generate My AI-Life Plan Now — It Only Takes 2 Minutes
+- **Headline**: AI is changing your role faster than your title.
+- **Subheadline**: Not interview prep. Not a calendar optimizer. Get your Career Operating Plan to ship proof of value—no fluff.
+- **Primary CTA**: Calculate My Resilience Index
 - **Secondary CTA**: See a Sample Plan
 - **Micro-copy**: Instant access after signup. No credit card required.
 
@@ -60,8 +60,8 @@ last_updated: 2026-02-17
 
 ## CTAs Observed
 
-- "Generate My AI‑Life Plan"
+- "Build My Resilience Index"
 - "See Grounded Protocol"
 - "Start for Free"
-- "Unlock Full AI-Life Plan"
+- "Unlock Full Operating Plan"
 - "Get Executive Strategy"

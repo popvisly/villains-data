@@ -19,8 +19,8 @@ export async function createCheckoutSession(
 
     // Dynamic Product Details
     const productName = type === 'career'
-        ? (tier === 'executive' ? 'AI-Life Plan - Executive License' : 'AI-Life Plan - Suite Unlock')
-        : (type === 'attention' ? 'AI-Life Plan - Attention Protocol Unlock' : 'AI-Life Plan - Identity Hub Unlock');
+        ? (tier === 'executive' ? 'Executive Operating Plan' : 'Career Operating Plan')
+        : (type === 'attention' ? 'Attention Protocol Operating Plan' : 'Identity Hub Operating Plan');
 
     const productDesc = type === 'career'
         ? (tier === 'executive'
