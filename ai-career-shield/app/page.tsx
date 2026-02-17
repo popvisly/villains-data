@@ -45,7 +45,7 @@ export default function HomePage() {
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-start gap-8">
               <div className="flex-1 max-w-sm w-full">
                 <Link
-                  href={ROUTES.START}
+                  href="/career-resilience"
                   className="group relative inline-flex h-14 w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
                 >
                   <span className="relative z-10 flex items-center gap-2">
