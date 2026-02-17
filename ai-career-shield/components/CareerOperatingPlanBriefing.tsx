@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Icon } from '@/components/ui/Icon';
 import { ROUTES } from '@/lib/brand';
 
-export function AILifePlanBriefing() {
+export function CareerOperatingPlanBriefing() {
     return (
         <div className="w-full max-w-lg mx-auto md:mx-0 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
             <div className="relative group overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-xl shadow-indigo-500/5 transition-all duration-300">
@@ -16,7 +16,7 @@ export function AILifePlanBriefing() {
                             <div className="p-1.5 rounded-md bg-indigo-600 text-white shadow-sm shadow-indigo-200">
                                 <Icon name="sparkles" size={14} />
                             </div>
-                            <span className="text-[13px] font-bold uppercase tracking-wider text-slate-900">AI‑Life Plan Briefing (Example): <span className="text-indigo-600">Leverage Climber</span></span>
+                            <span className="text-[13px] font-bold uppercase tracking-wider text-slate-900">Career Operating Plan (Example): <span className="text-indigo-600">Leverage Climber</span></span>
                         </div>
                     </div>
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Built from constraints • Not a prediction</span>
@@ -81,15 +81,15 @@ export function AILifePlanBriefing() {
                         href={ROUTES.START}
                         className="flex items-center justify-center w-full py-3.5 rounded-2xl bg-slate-900 text-white text-sm font-bold hover:bg-indigo-600 transition-all shadow-lg shadow-slate-200"
                     >
-                        Generate My AI‑Life Plan
+                        Generate My Operating Plan
                         <Icon name="arrowRight" size={16} className="ml-2 opacity-80" />
                     </Link>
                     <div className="mt-4 text-center">
                         <Link
-                            href={ROUTES.CAREER}
+                            href={ROUTES.IDENTITY}
                             className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 hover:text-indigo-600 transition-all uppercase tracking-widest hover:underline decoration-2 underline-offset-4"
                         >
-                            Start with Career instead
+                            Build Decision Moat instead
                             <Icon name="arrowRight" size={12} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                         </Link>
                     </div>

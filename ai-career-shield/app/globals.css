@@ -131,6 +131,39 @@
     background-image: radial-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+
+  .neumorphic {
+    background: hsl(var(--background));
+    box-shadow:
+      8px 8px 16px rgba(15, 23, 42, 0.05),
+      -8px -8px 16px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .neumorphic-inset {
+    background: hsl(var(--background));
+    box-shadow:
+      inset 4px 4px 8px rgba(15, 23, 42, 0.05),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Soft UI 2.0: Higher Contrast & Tactile Definition */
+  .neumorphic-2-0 {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    box-shadow:
+      6px 6px 12px rgba(15, 23, 42, 0.1),
+      -6px -6px 12px rgba(255, 255, 255, 1);
+    border: 0.5px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .neumorphic-inset-2-0 {
+    background: #f8fafc;
+    box-shadow:
+      inset 4px 4px 8px rgba(15, 23, 42, 0.08),
+      inset -4px -4px 8px rgba(255, 255, 255, 1);
+    border: 0.5px solid rgba(15, 23, 42, 0.02);
+  }
 }
 
 /* Playbook Print Styles */

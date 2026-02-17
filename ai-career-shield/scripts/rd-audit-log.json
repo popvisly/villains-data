@@ -1,0 +1,38 @@
+{
+    "project": "Captori",
+    "fiscalYear": "2025-2026",
+    "activities": [
+        {
+            "id": "RD-001",
+            "title": "Resilience Index Algorithm Development",
+            "description": "Developing a novel algorithm to quantify professional resilience by measuring 'Absorptive' and 'Transformative' capacity against AI substitution risks.",
+            "uncertainties": [
+                "Determining the mathematical weight of 'Contextual Understanding' vs. 'Technical Complexity'.",
+                "Correlating the 'Judgment Moat' with historical job displacement data from the GLRI 2025."
+            ],
+            "status": "In Progress"
+        },
+        {
+            "id": "RD-002",
+            "title": "W3C Verifiable Credentials Bridge with Selective Disclosure",
+            "description": "Implementing a tamper-evident digital archive for professional deliverables using decentralized identifiers (DIDs) and selective disclosure protocols.",
+            "uncertainties": [
+                "Optimizing selective disclosure performance for high-stakes decision logs.",
+                "Ensuring cross-platform interoperability with existing digital wallets while maintaining strict APP compliance."
+            ],
+            "status": "In Progress"
+        }
+    ],
+    "logs": [
+        {
+            "timestamp": "2026-02-17T13:30:00Z",
+            "activityId": "RD-001",
+            "log": "Updated assessJobRisk prompt to utilize GLRI 2025 scoring principles. Initial testing shows improved differentiation between routine and strategic tasks."
+        },
+        {
+            "timestamp": "2026-02-17T13:35:00Z",
+            "activityId": "RD-002",
+            "log": "Established verifiable-proof.ts bridge. Initializing support for individual artifact signatures to enable selective disclosure."
+        }
+    ]
+}

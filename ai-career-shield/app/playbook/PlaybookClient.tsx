@@ -20,23 +20,25 @@ export default function PlaybookClient({ initialHasAccess }: PlaybookClientProps
                 <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
                     <div className="flex items-center gap-3">
                         <Link href="/" className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 shadow-lg">
-                            <Icon name="sparkles" size={18} className="text-white" />
+                            <Icon name="professional" size={18} className="text-white" />
                         </Link>
                         <div>
                             <span className="text-lg font-bold tracking-tight text-slate-900">{APP_NAME} | Playbook</span>
-                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mt-0.5">Operational Leverage</p>
+                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mt-0.5">Operational Playbook</p>
                         </div>
                     </div>
                     <nav className="flex items-center gap-6">
-                        <Link href={ROUTES.CAREER} className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider">Career Audit</Link>
-                        <Link href={ROUTES.ATTENTION} className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider">Attention Plan</Link>
-                        <Link href={ROUTES.IDENTITY} className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider">Identity Hub</Link>
+                        <Link href={ROUTES.CAREER} className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider">Resilience Audit</Link>
+                        <Link href={ROUTES.ATTENTION} className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider">Attention Protocol</Link>
+                        <Link href={ROUTES.IDENTITY} className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors uppercase tracking-wider">Artifacts Hub</Link>
                     </nav>
                 </div>
             </header>
 
             <div className="max-w-7xl mx-auto px-6 py-12">
-                <AILeveragePlaybook hasAccess={hasAccess} />
+                <div className="neumorphic-2-0 rounded-[40px] p-8 md:p-12">
+                    <AILeveragePlaybook hasAccess={hasAccess} />
+                </div>
             </div>
         </main>
     );

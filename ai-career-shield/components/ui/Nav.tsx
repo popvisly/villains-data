@@ -20,11 +20,11 @@ export function Nav() {
                 </div>
 
                 <nav className="hidden items-center gap-8 text-sm font-bold text-slate-600 md:flex">
-                    <Link href="/start" className="hover:text-[hsl(var(--primary))] transition-colors">
-                        How it works
-                    </Link>
                     <Link href="/example" className="hover:text-[hsl(var(--primary))] transition-colors">
-                        Example
+                        The Operating Plan
+                    </Link>
+                    <Link href="/career-resilience" className="hover:text-[hsl(var(--primary))] transition-colors">
+                        Resilience Index
                     </Link>
                     <Link href="/#pricing" className="hover:text-[hsl(var(--primary))] transition-colors">
                         Pricing

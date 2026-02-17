@@ -30,17 +30,24 @@ Analyze the following person/job for AI automation risk and resilience:
 - Skills: ${data.skills.join(', ')}
 ${data.yearsExperience ? `- Years of Experience: ${data.yearsExperience}` : ''}
 
+SCORING PRINCIPLES (Global Labour Resilience Index 2025):
+- **Resilience Index**: This is the INVERSE of risk. A score of 80+ Resilience means the role is highly defensible.
+- **Contextual Understanding**: Reward roles that require navigating ambiguous human systems and unwritten rules.
+- **Emotional Intelligence & Negotiation**: Reward roles requiring high-stakes interpersonal accountability.
+- **Strategic Constraint Mapping**: Reward the ability to balance technical debt, budget, and regulatory constraints.
+- **Labour Market Adaptability**: Consider that 60% of advanced economy roles are exposed to AI—focus on the "Judgment Moat" where humans still outperform AI-only systems.
+
 CONTEXT: AVAILABLE FUTURE PATHS
 You MUST select 2-3 role adjacencies exclusively from the following list of candidates. Do NOT invent new roles.
 ${JSON.stringify(candidatesContext, null, 2)}
 
 Return ONLY valid JSON that matches this schema exactly:
 {
-  "riskScore": number (0-100),
+  "riskScore": number (0-100), // This will be used to calculate Resilience Index as (100 - riskScore)
   "confidence": "low" | "medium" | "high",
   "factors": [
     {
-      "name": string,
+      "name": string, // Use categories like "Contextual Complexity", "Interpersonal Accountability", "Constraint Mastery"
       "score": number (0-100),
       "evidence": string (tie to inputs + typical tasks; avoid generic fluff),
       "whyItMatters": string (1 sentence),

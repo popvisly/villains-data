@@ -79,11 +79,16 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, planId, type, child
                                 </div>
                             </div>
 
-                            <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-3">
-                                <Icon name="zap" size={16} className="text-[hsl(var(--primary))]" />
-                                <p className="text-xs font-bold text-[hsl(var(--primary))] uppercase tracking-tight">
-                                    Unlock the 30/60/90 roadmap + assets to operationalize this shift.
-                                </p>
+                            <div className="mt-8 pt-6 border-t border-slate-100">
+                                <div
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-100 bg-indigo-50/50 text-indigo-600 transition-all hover:bg-indigo-50 cursor-pointer"
+                                    onClick={() => handleUnlock('execution')}
+                                >
+                                    <Icon name="zap" size={14} className="animate-pulse" />
+                                    <span className="text-[10px] font-bold uppercase tracking-widest">
+                                        Unlock the 30/60/90 roadmap + assets
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -93,7 +98,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, planId, type, child
                         <div className="rounded-3xl border border-slate-200 bg-white/95 backdrop-blur-sm p-8 shadow-xl relative overflow-hidden flex flex-col">
                             <div className="mb-6">
                                 <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-wider">Suite Unlock</span>
-                                <h3 className="text-2xl font-bold text-slate-950 mt-3">AI‑Life Plan Suite</h3>
+                                <h3 className="text-2xl font-bold text-slate-950 mt-3">Strategic Operating Plan</h3>
                                 <p className="text-sm text-indigo-600 mt-1 font-medium italic">Buy once. Unlock Career + Attention + Identity Hub.</p>
                             </div>
 
@@ -138,7 +143,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, planId, type, child
                         <div className="rounded-3xl border-2 border-indigo-100 bg-white/95 backdrop-blur-sm p-8 shadow-2xl shadow-indigo-500/10 relative overflow-hidden flex flex-col ring-4 ring-indigo-50/30">
                             <div className="mb-6">
                                 <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider">Full Suite Access</span>
-                                <h3 className="text-2xl font-bold text-slate-950 mt-3">Executive License</h3>
+                                <h3 className="text-2xl font-bold text-slate-950 mt-3">Executive Proof Suite</h3>
                                 <p className="text-sm text-slate-500 mt-1">Unlock Career + Attention + Identity Suite.</p>
                             </div>
 
@@ -172,7 +177,7 @@ export const Paywall: React.FC<PaywallProps> = ({ hasAccess, planId, type, child
                                     disabled={isLoading}
                                     className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
-                                    {isLoading ? 'Processing...' : 'Unlock Executive License'}
+                                    {isLoading ? 'Processing...' : 'Unlock Executive Suite'}
                                 </button>
                                 <p className="mt-3 text-[10px] text-center text-slate-500 font-bold uppercase tracking-tight">One-time purchase. Execute alongside a full-time job.</p>
                             </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { AILifePlanBriefing } from '@/components/AILifePlanBriefing';
+import { CareerOperatingPlanBriefing } from '@/components/CareerOperatingPlanBriefing';
 import { Icon } from '@/components/ui/Icon';
 import { trackEvent } from '@/lib/analytics-client';
 import { ROUTES } from '@/lib/brand';
@@ -39,25 +39,35 @@ export default function HomePage() {
               AI is changing your role faster than your title.
             </h1>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
-              Not interview prep. Not a calendar optimizer. Get your <strong>Career Operating Plan</strong> to ship proof of value—no fluff.
+              Not interview prep. Stop shipping Jira tickets and start building your <strong>Judgment Moat</strong>. Get your <strong>Career Operating Plan</strong> + Resilience Index in 2 minutes.
             </p>
 
-            <div className="mt-12 flex flex-col sm:flex-row items-center justify-start gap-4">
-              <Link
-                href={ROUTES.START}
-                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Calculate My Resilience Index
-                  <Icon name="arrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
-              <Link
-                href="/example"
-                className="inline-flex h-14 items-center justify-center rounded-2xl border border-slate-200 bg-white/50 px-8 text-lg font-semibold text-slate-600 backdrop-blur-sm transition-all hover:bg-white hover:border-slate-300"
-              >
-                See a Sample Plan
-              </Link>
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-start gap-8">
+              <div className="flex-1 max-w-sm w-full">
+                <Link
+                  href={ROUTES.START}
+                  className="group relative inline-flex h-14 w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-900 px-10 text-lg font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-indigo-500/10 active:scale-[0.98]"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Calculate My Resilience Index
+                    <Icon name="arrowRight" size={18} className="transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+                <div className="mt-4 flex items-center justify-center gap-4">
+                  <Link
+                    href="/example"
+                    className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors underline decoration-slate-200 underline-offset-4"
+                  >
+                    See a Sample Plan
+                  </Link>
+                  <span className="text-slate-300">|</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Instant Result</span>
+                </div>
+              </div>
+
+              <div className="hidden lg:block rotate-3 hover:rotate-0 transition-transform duration-500">
+                <CareerOperatingPlanBriefing />
+              </div>
             </div>
             <p className="mt-4 text-sm text-slate-500 flex items-center gap-2">
               <Icon name="zap" size={16} className="text-amber-500" />
@@ -92,7 +102,7 @@ export default function HomePage() {
             {/* Main Career Operating Plan Briefing - Single Focus */}
             <Link href="/example" className="relative z-20 peer hover:-translate-y-2 transition-transform duration-500 max-w-lg block">
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-indigo-500/20 to-emerald-500/20 blur-lg opacity-40"></div>
-              <AILifePlanBriefing />
+              <CareerOperatingPlanBriefing />
 
               {/* Floating Badge */}
               <div className="absolute -top-6 -right-6 z-30 animate-bounce duration-[3000ms]">
@@ -779,7 +789,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
           <div className="flex items-center gap-2 font-semibold text-slate-900">
             <Icon name="sparkles" size={20} className="text-[hsl(var(--primary))]" />
-            Operating Plan
+            Career Operating Plan
           </div>
           <div className="flex items-center gap-6">
             <Link href="/start" className="hover:text-[hsl(var(--primary))] transition-colors">How it works</Link>
