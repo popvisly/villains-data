@@ -39,7 +39,7 @@ Purpose: machine-readable handover between agents (Ray ↔ Antigravity).
 - `interview_sim_started` (Interview simulator loaded)
 - `interview_sim_turn` (each consumed turn)
 - `interview_sim_completed` (limit reached / session complete)
-- `artifact_action` (generic value-action event; used for Execution Pack copy actions)
+- `artifact_action` (generic value-action event; used for Execution Pack + Identity + Playbook actions)
 
 ## Blockers / Resolved
 
