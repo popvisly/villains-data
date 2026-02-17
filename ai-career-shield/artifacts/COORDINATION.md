@@ -35,7 +35,7 @@ Purpose: machine-readable handover between agents (Ray ↔ Antigravity).
 ## Blockers / Resolved
 
 - [RESOLVED] Navigation: Fixed `#pricing` redirect logic to point to canonical homepage section.
-- [PENDING] GA4/PostHog connection (currently logging to Supabase + Console).
+- [RESOLVED] GA4 connected (Measurement ID via env: `NEXT_PUBLIC_GA4_MEASUREMENT_ID`).
 
 ---
 **Handover to Ray**: Phase 22 is functionally complete. The funnel is now a "glass house"—we can see every drop-off point. Walkthrough and task logs are updated. Ready for review.
