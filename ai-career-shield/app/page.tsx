@@ -65,9 +65,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="hidden lg:block rotate-3 hover:rotate-0 transition-transform duration-500">
-                <CareerOperatingPlanBriefing />
-              </div>
+              {/* Removed duplicate briefing preview (it already appears in the right column) */}
             </div>
             <p className="mt-4 text-sm text-slate-500 flex items-center gap-2">
               <Icon name="zap" size={16} className="text-amber-500" />
