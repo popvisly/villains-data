@@ -53,7 +53,7 @@ export default function ExamplePage() {
                 <Section className="text-center relative z-10">
                     <div className="mb-8 inline-flex flex-col items-center">
                         <div className="inline-flex items-center rounded-full bg-indigo-50 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-600 border border-indigo-100 mb-3 shadow-sm">
-                            Example AI‑Life Plan
+                            Example Career Operating Plan
                         </div>
                         <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
                             Generated: Jan 15, 2025 &bull; Real output from a Product Manager (Series B SaaS)

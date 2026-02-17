@@ -125,8 +125,8 @@ export default function StartPage() {
                 {/* Header */}
                 <div className="text-center mb-20">
                     <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Choose your module</h1>
-                    <p className="text-lg text-slate-600 mb-2">Your AI‑Life Plan is made of 4 modules. Start with the one that hurts most.</p>
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">An AI‑Life Plan is a leverage plan, not a schedule.</p>
+                    <p className="text-lg text-slate-600 mb-2">Your Career Operating Plan is made of 4 modules. Start with the one that hurts most.</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">A Career Operating Plan is a leverage plan, not a schedule.</p>
                 </div>
 
                 {/* Plans Grid */}
