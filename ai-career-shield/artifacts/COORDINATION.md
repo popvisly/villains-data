@@ -41,8 +41,16 @@ Purpose: machine-readable handover between agents (Ray ↔ Antigravity).
 - `interview_sim_completed` (limit reached / session complete)
 - `artifact_action` (generic value-action event; used for Execution Pack + Identity + Playbook actions)
 
+## Phase 24 — /intel Role Radar (PM + Designer)
+
+- **Goal:** Make `/intel` a real, continuously-updated feed (not placeholders).
+- **Status:** DB table created + initial seed content inserted.
+- **Supabase:** ran migration `supabase/migrations/005_intel_items.sql` to create `public.intel_items` (RLS enabled; no public policies).
+- **Seed:** inserted 6 initial items (3 PM, 3 Designer) with `week_key=2026-W08` and `hash`-based dedupe.
+
 ## Blockers / Resolved
 
+- [RESOLVED] Supabase SQL editor auth gate (GitHub login) — user logged in; SQL executed successfully.
 - [RESOLVED] Navigation: Fixed `#pricing` redirect logic to point to canonical homepage section.
 - [RESOLVED] GA4 connected (Measurement ID via env: `NEXT_PUBLIC_GA4_MEASUREMENT_ID`).
 
