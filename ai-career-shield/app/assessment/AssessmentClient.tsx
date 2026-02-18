@@ -1204,7 +1204,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             />
                         )}
 
-                        {hasAccess && (
+                        {result && (
                             <div className="mt-12 grid gap-6">
                                 <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
                                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
@@ -1212,7 +1212,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             <h3 className="text-2xl font-bold text-slate-950">Do: Proof project brief + README</h3>
                                             <p className="text-sm text-slate-600">Generate a portfolio-ready project you can actually ship.</p>
                                         </div>
-                                        <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Suite unlocked</div>
+                                        <div className={`text-xs font-bold uppercase tracking-widest ${hasAccess ? 'text-emerald-600' : 'text-slate-400'}`}>{hasAccess ? 'Suite unlocked' : 'Locked (Suite)'}</div>
                                     </div>
 
                                 <div className="grid md:grid-cols-2 gap-4">
@@ -1222,7 +1222,8 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             value={doProofTheme}
                                             onChange={(e) => setDoProofTheme(e.target.value)}
                                             placeholder="e.g., Decision memo + verification checklist for X"
-                                            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+                                            disabled={!hasAccess}
+                                            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 disabled:opacity-60"
                                         />
                                         <p className="mt-2 text-xs text-slate-500">Leave blank and we’ll auto-pick based on your top driver.</p>
                                     </div>
@@ -1241,6 +1242,11 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                     <button
                                         type="button"
                                         onClick={() => {
+                                            if (!hasAccess) {
+                                                trackEvent('view_pricing', { location: 'do_proof_project' });
+                                                router.push('/#pricing');
+                                                return;
+                                            }
                                             const brief = buildProofProjectBrief();
                                             setDoProofGenerated(brief);
                                             trackEvent('artifact_action', { artifact: 'do', action: 'proof_project_generate' });
@@ -1254,6 +1260,11 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                         type="button"
                                         disabled={!doProofGenerated}
                                         onClick={() => {
+                                            if (!hasAccess) {
+                                                trackEvent('view_pricing', { location: 'do_proof_project' });
+                                                router.push('/#pricing');
+                                                return;
+                                            }
                                             navigator.clipboard.writeText(doProofGenerated);
                                             trackEvent('artifact_action', { artifact: 'do', action: 'proof_project_copy' });
                                         }}
@@ -1281,13 +1292,18 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             <h3 className="text-2xl font-bold text-slate-950">Do: Jira/Notion task list</h3>
                                             <p className="text-sm text-slate-600">Turn your plan into a week-by-week checklist.</p>
                                         </div>
-                                        <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Suite unlocked</div>
+                                        <div className={`text-xs font-bold uppercase tracking-widest ${hasAccess ? 'text-emerald-600' : 'text-slate-400'}`}>{hasAccess ? 'Suite unlocked' : 'Locked (Suite)'}</div>
                                     </div>
 
                                     <div className="flex flex-col sm:flex-row gap-3">
                                         <button
                                             type="button"
                                             onClick={() => {
+                                                if (!hasAccess) {
+                                                    trackEvent('view_pricing', { location: 'do_task_list' });
+                                                    router.push('/#pricing');
+                                                    return;
+                                                }
                                                 const tasks = buildTaskList();
                                                 setDoTasksGenerated(tasks);
                                                 trackEvent('artifact_action', { artifact: 'do', action: 'task_list_generate' });
@@ -1301,6 +1317,11 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             type="button"
                                             disabled={!doTasksGenerated}
                                             onClick={() => {
+                                                if (!hasAccess) {
+                                                    trackEvent('view_pricing', { location: 'do_task_list' });
+                                                    router.push('/#pricing');
+                                                    return;
+                                                }
                                                 navigator.clipboard.writeText(doTasksGenerated);
                                                 trackEvent('artifact_action', { artifact: 'do', action: 'task_list_copy' });
                                             }}
@@ -1328,13 +1349,18 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             <h3 className="text-2xl font-bold text-slate-950">Do: Interview story pack</h3>
                                             <p className="text-sm text-slate-600">3 stories + failure‑mode prompts you can practice today.</p>
                                         </div>
-                                        <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Suite unlocked</div>
+                                        <div className={`text-xs font-bold uppercase tracking-widest ${hasAccess ? 'text-emerald-600' : 'text-slate-400'}`}>{hasAccess ? 'Suite unlocked' : 'Locked (Suite)'}</div>
                                     </div>
 
                                     <div className="flex flex-col sm:flex-row gap-3">
                                         <button
                                             type="button"
                                             onClick={() => {
+                                                if (!hasAccess) {
+                                                    trackEvent('view_pricing', { location: 'do_story_pack' });
+                                                    router.push('/#pricing');
+                                                    return;
+                                                }
                                                 const stories = buildInterviewStoryPack();
                                                 setDoStoriesGenerated(stories);
                                                 trackEvent('artifact_action', { artifact: 'do', action: 'story_pack_generate' });
@@ -1348,6 +1374,11 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             type="button"
                                             disabled={!doStoriesGenerated}
                                             onClick={() => {
+                                                if (!hasAccess) {
+                                                    trackEvent('view_pricing', { location: 'do_story_pack' });
+                                                    router.push('/#pricing');
+                                                    return;
+                                                }
                                                 navigator.clipboard.writeText(doStoriesGenerated);
                                                 trackEvent('artifact_action', { artifact: 'do', action: 'story_pack_copy' });
                                             }}
@@ -1371,7 +1402,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                             </div>
                         )}
 
-                        {hasAccess && executionPack && (
+                        {executionPack && hasAccess && (
                             <ExecutionPackView
                                 data={executionPack}
                                 isPaid={hasAccess}
