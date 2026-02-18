@@ -438,7 +438,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                 <div className="grid gap-4 md:grid-cols-2">
                                     {displayedFactors.map((f, i) => (
                                         <div key={i} className="p-4 rounded-xl bg-white border border-[hsl(var(--success-border))] animate-in slide-in-from-left-2 fade-in duration-300">
-                                            <p className="text-[10px] font-bold text-[hsl(var(--success-foreground))] uppercase mb-1">{f?.name || 'Analyzing Factor...'}</p>
+                                            <p className="text-xs font-bold text-[hsl(var(--success-foreground))] uppercase mb-1">{f?.name || 'Analyzing Factor...'}</p>
                                             <p className="text-sm text-slate-800 line-clamp-2 italic">&quot;{f?.evidence || 'Identifying technical dependencies...'}&quot;</p>
                                         </div>
                                     ))}
@@ -451,7 +451,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             trackEvent('cta_clicked_skip_briefing');
                                             setStep(2);
                                         }}
-                                        className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-emerald-600 transition flex items-center gap-1.5"
+                                        className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-emerald-600 transition flex items-center gap-1.5"
                                     >
                                         <Icon name="zap" size={10} />
                                         Skip to Full Summary
@@ -778,7 +778,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                     <h4 className="text-lg font-bold text-slate-950 mb-2 group-hover/adj:text-blue-600 transition-colors">{adj.detail?.title}</h4>
                                     <p className="text-sm text-slate-700 leading-relaxed mb-4">{adj.rationale}</p>
                                     <div className="flex gap-2">
-                                        {adj.transferableSkills.slice(0, 2).map(s => <span key={s} className="px-2 py-1 bg-slate-100 rounded text-[10px] font-bold uppercase text-slate-600">{s}</span>)}
+                                        {adj.transferableSkills.slice(0, 2).map(s => <span key={s} className="px-2 py-1 bg-slate-100 rounded text-xs font-bold uppercase text-slate-600">{s}</span>)}
                                     </div>
                                 </div>
                             ))}
@@ -829,7 +829,7 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                 <div className="flex-1 text-center md:text-left">
                                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
                                         <h3 className="text-xl font-bold text-slate-950">AI Leverage Playbook (PM)</h3>
-                                        <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider border border-indigo-100">Suite Perk</span>
+                                        <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider border border-indigo-100">Suite Perk</span>
                                     </div>
                                     <p className="text-sm text-slate-600 leading-relaxed mb-4">
                                         Operationalize your audit. Use role-specific AI workflows to turn your strategy into shippable proofs.

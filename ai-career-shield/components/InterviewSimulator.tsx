@@ -201,7 +201,7 @@ export function InterviewSimulator({ role, resumeText, isPaid: initialIsPaid }: 
       <div className="space-y-6">
         {/* Interviewer Prompt - Indigo Accent */}
         <div className="rounded-xl bg-indigo-50/50 border border-indigo-100 p-5 relative">
-          <div className="absolute -top-3 left-4 bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+          <div className="absolute -top-3 left-4 bg-indigo-100 text-indigo-700 text-xs font-bold px-2 py-0.5 rounded uppercase tracking-wider">
             Interviewer
           </div>
           <p className="text-base font-medium text-slate-800 leading-relaxed">

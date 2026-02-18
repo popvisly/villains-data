@@ -66,7 +66,7 @@ export default function AILeveragePlaybook({
                             {/* Left: Metadata & Mode */}
                             <div className="md:w-72 p-8 bg-slate-50 border-r border-slate-100 flex flex-col">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${wf.mode === 'Research' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
+                                    <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${wf.mode === 'Research' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
                                         wf.mode === 'Review' ? 'bg-red-50 text-red-600 border border-red-100' :
                                             wf.mode === 'Think' ? 'bg-amber-50 text-amber-600 border border-amber-100' :
                                                 'bg-indigo-50 text-indigo-600 border border-indigo-100'
@@ -78,12 +78,12 @@ export default function AILeveragePlaybook({
                                 <p className="text-sm text-slate-500 leading-relaxed mb-6">{wf.description}</p>
 
                                 <div className="mt-6 mb-8">
-                                    <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">When to use</h4>
-                                    <p className="text-[11px] text-slate-600 italic leading-snug">{wf.whenToUse}</p>
+                                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">When to use</h4>
+                                    <p className="text-sm text-slate-600 italic leading-snug">{wf.whenToUse}</p>
                                 </div>
 
                                 <div className="mt-auto">
-                                    <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Output Artifact</h4>
+                                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Output Artifact</h4>
                                     <div className="text-xs font-bold text-slate-900 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
                                         {wf.outputArtifact}
                                     </div>
@@ -104,11 +104,11 @@ export default function AILeveragePlaybook({
 
                                 <div>
                                     <div className="flex items-center justify-between mb-4">
-                                        <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Input Template</h4>
+                                        <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Input Template</h4>
                                         <button
                                             onClick={() => handleCopy(wf.id, wf.inputTemplate)}
                                             disabled={!hasAccess}
-                                            className={`flex items-center gap-2 text-[10px] font-bold px-3 py-1.5 rounded-lg transition-all ${!hasAccess
+                                            className={`flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-lg transition-all ${!hasAccess
                                                 ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
                                                 : copiedId === wf.id
                                                     ? 'bg-emerald-500 text-white shadow-emerald-200 shadow-lg'
@@ -123,7 +123,7 @@ export default function AILeveragePlaybook({
                                         <pre className="whitespace-pre-wrap">{wf.inputTemplate}</pre>
                                         {!hasAccess && (
                                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent flex items-end justify-center pb-4">
-                                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Preview (Suite Unlock)</span>
+                                                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Preview (Suite Unlock)</span>
                                             </div>
                                         )}
                                     </div>
@@ -131,20 +131,20 @@ export default function AILeveragePlaybook({
 
                                 <div className="space-y-6">
                                     <div>
-                                        <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">Verification Checklist</h4>
+                                        <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Verification Checklist</h4>
                                         <div className="grid sm:grid-cols-2 gap-4">
                                             {(hasAccess ? wf.verificationChecklist : [wf.verificationChecklist[0]]).map((item, i) => (
                                                 <div key={i} className="flex gap-3 items-start p-4 rounded-xl bg-slate-50 border border-slate-100 group hover:border-indigo-100 transition-colors">
                                                     <div className="h-5 w-5 shrink-0 rounded-md border-2 border-slate-200 flex items-center justify-center bg-white group-hover:border-indigo-300 transition-colors">
                                                         <Icon name="check" size={10} className="text-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                                                     </div>
-                                                    <span className="text-[13px] text-slate-700 font-medium leading-tight">{item}</span>
+                                                    <span className="text-sm text-slate-700 font-medium leading-tight">{item}</span>
                                                 </div>
                                             ))}
                                             {!hasAccess && (
                                                 <div className="flex gap-3 items-center p-4 rounded-xl bg-slate-50/50 border border-dashed border-slate-200 text-slate-400">
                                                     <Icon name="locked" size={12} />
-                                                    <span className="text-[11px] font-medium">+ {wf.verificationChecklist.length - 1} more items...</span>
+                                                    <span className="text-sm font-medium">+ {wf.verificationChecklist.length - 1} more items...</span>
                                                 </div>
                                             )}
                                         </div>
@@ -156,8 +156,8 @@ export default function AILeveragePlaybook({
                                                 <Icon name="arrowRight" size={18} />
                                             </div>
                                             <div>
-                                                <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Next Action</h4>
-                                                <p className="text-[13px] text-slate-900 font-bold leading-relaxed">
+                                                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Next Action</h4>
+                                                <p className="text-sm text-slate-900 font-bold leading-relaxed">
                                                     {wf.nextAction}
                                                 </p>
                                             </div>

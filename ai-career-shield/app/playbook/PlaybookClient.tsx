@@ -33,7 +33,7 @@ export default function PlaybookClient({ initialHasAccess }: PlaybookClientProps
                         </Link>
                         <div>
                             <span className="text-lg font-bold tracking-tight text-slate-900">{APP_NAME} | Playbook</span>
-                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mt-0.5">Operational Playbook</p>
+                            <p className="text-xs font-bold text-slate-500 uppercase tracking-widest leading-none mt-0.5">Operational Playbook</p>
                         </div>
                     </div>
                     <nav className="flex items-center gap-6">
