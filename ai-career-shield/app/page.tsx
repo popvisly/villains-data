@@ -182,7 +182,7 @@ export default function HomePage() {
       </section>
 
       {/* HOW IT WORKS: timeline */}
-      <section className="px-6 py-32 md:py-48 relative overflow-hidden" id="how">
+      <section className="px-6 py-20 md:py-28 relative overflow-hidden border-t border-slate-100" id="how">
         {/* Ambient Background */}
         <div className="absolute top-1/2 left-1/4 -z-10 h-96 w-96 rounded-full bg-[hsl(var(--primary))]/5 blur-3xl opacity-50 mix-blend-multiply"></div>
         <div className="absolute bottom-0 right-1/4 -z-10 h-72 w-72 rounded-full bg-[hsl(var(--cta))]/5 blur-3xl opacity-50 mix-blend-multiply"></div>
@@ -241,7 +241,7 @@ export default function HomePage() {
       </section>
 
       {/* STRATEGIC PROOF: Visual artifact preview */}
-      <section className="px-6 py-32 md:py-48 overflow-hidden bg-white" id="proof">
+      <section className="px-6 py-20 md:py-28 overflow-hidden bg-white" id="proof">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="The Output"
@@ -433,7 +433,7 @@ export default function HomePage() {
 
 
       {/* Modular System Overview */}
-      <section className="px-6 py-32 md:py-48 bg-slate-50 border-y border-slate-200">
+      <section className="px-6 py-24 md:py-32 bg-slate-50 border-y border-slate-200">
         <div className="mx-auto max-w-6xl">
           <SectionTitle
             title="A Modular Operating System"
@@ -494,7 +494,7 @@ export default function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="px-6 py-32 md:py-48 bg-slate-50/50" id="faq">
+      <section className="px-6 py-24 md:py-32 bg-slate-50/50" id="faq">
         <div className="mx-auto max-w-4xl">
           <SectionTitle title="FAQ" subtitle="Direct answers. Clear constraints." />
 
@@ -571,7 +571,7 @@ export default function HomePage() {
       </section >
 
       {/* Grounded Section */}
-      <section className="px-6 py-32 md:py-48 bg-[#0a1024] text-white overflow-hidden relative">
+      <section className="px-6 py-24 md:py-32 bg-[#0a1024] text-white overflow-hidden relative">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_40%,rgba(79,70,229,0.15),transparent)]" />
         <div className="mx-auto max-w-5xl relative">
           <SectionTitle
@@ -614,7 +614,7 @@ export default function HomePage() {
       </section >
 
       {/* TESTIMONIALS */}
-      <section className="px-6 py-32 md:py-48 bg-white relative overflow-hidden">
+      <section className="px-6 py-24 md:py-32 bg-white relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             eyebrow="User Feedback"
@@ -654,7 +654,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="pricing" className="py-32 md:py-48 px-6 border-t border-slate-200">
+      <section id="pricing" className="py-28 md:py-40 px-6 border-t border-slate-200">
         <div className="max-w-7xl mx-auto">
           <SectionTitle
             title="Choose the Plan That Fits Your Career Growth"
