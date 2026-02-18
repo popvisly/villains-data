@@ -27,7 +27,7 @@ function SkillGapTab({ data }: { data: SkillGapMap }) {
                 </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
                 {/* Left: Matched & Gaps */}
                 <div className="lg:col-span-2 space-y-8">
                     <div>
@@ -36,7 +36,7 @@ function SkillGapTab({ data }: { data: SkillGapMap }) {
                             {data.matchedSkills.map((s, i) => (
                                 <div key={i} className="p-3 rounded-xl bg-[hsl(var(--success-subtle))] border border-[hsl(var(--success-border))]">
                                     <div className="text-sm font-medium text-slate-900">{s.skill}</div>
-                                    <div className="text-[10px] text-slate-600 mt-1">{s.evidence}</div>
+                                    <div className="text-xs text-slate-600 mt-1">{s.evidence}</div>
                                 </div>
                             ))}
                         </div>
@@ -49,12 +49,12 @@ function SkillGapTab({ data }: { data: SkillGapMap }) {
                                 <div key={i} className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-200 transition-colors group shadow-sm">
                                     <div className="flex items-start justify-between mb-2">
                                         <div className="text-sm font-bold text-slate-900">{s.skill}</div>
-                                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-[hsl(var(--info-subtle))] text-[hsl(var(--info-foreground))] border border-[hsl(var(--info-border))] uppercase font-bold tracking-tighter">New Skill</span>
+                                        <span className="text-xs px-2 py-0.5 rounded bg-[hsl(var(--info-subtle))] text-[hsl(var(--info-foreground))] border border-[hsl(var(--info-border))] uppercase font-bold tracking-tighter">New Skill</span>
                                     </div>
                                     <p className="text-xs text-slate-600 mb-3 leading-relaxed">{s.whyItMatters}</p>
                                     <div className="flex flex-wrap gap-2">
                                         {s.howToBuild.map((step: string, si: number) => (
-                                            <span key={si} className="text-[10px] text-slate-500 flex items-center gap-1.5">
+                                            <span key={si} className="text-xs text-slate-500 flex items-center gap-1.5">
                                                 <span className="w-1 h-1 rounded-full bg-slate-400"></span>
                                                 {step}
                                             </span>
@@ -74,11 +74,11 @@ function SkillGapTab({ data }: { data: SkillGapMap }) {
                             {data.recommendedSequence.map((seq, i) => (
                                 <div key={i} className="relative pb-6 last:pb-0">
                                     <div className="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-slate-900 border-2 border-white"></div>
-                                    <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">{seq.weekRange}</div>
+                                    <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">{seq.weekRange}</div>
                                     <div className="text-xs font-semibold text-slate-900 mb-2">{seq.focus.join(' & ')}</div>
                                     <div className="space-y-1.5">
                                         {seq.outputs.map((out: string, oi: number) => (
-                                            <div key={oi} className="flex items-center gap-2 text-[10px] text-slate-600 bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                                            <div key={oi} className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100">
                                                 <Icon name="paperclip" size={12} className="text-slate-400" />
                                                 {out}
                                             </div>
@@ -88,9 +88,9 @@ function SkillGapTab({ data }: { data: SkillGapMap }) {
                             ))}
                         </div>
 
-                        <div className="mt-8 p-4 rounded-2xl bg-[hsl(var(--primary))/5] border border-[hsl(var(--primary))/20]">
-                            <h5 className="text-[10px] font-bold text-[hsl(var(--primary))] uppercase tracking-widest mb-2">Coach&apos;s Notes</h5>
-                            <ul className="text-[11px] text-[hsl(var(--primary))/80] space-y-2 italic">
+                        <div className="mt-6 p-4 rounded-2xl bg-[hsl(var(--primary))/5] border border-[hsl(var(--primary))/20]">
+                            <h5 className="text-xs font-bold text-[hsl(var(--primary))] uppercase tracking-widest mb-2">Coach&apos;s Notes</h5>
+                            <ul className="text-sm text-[hsl(var(--primary))/80] space-y-2 italic">
                                 {data.notes.map((n: string, i: number) => <li key={i}>&ldquo;{n}&rdquo;</li>)}
                             </ul>
                         </div>
@@ -113,15 +113,15 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: ProjectBrief[], isPaid: 
     return (
         <div className="grid lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {briefs.map((brief) => (
-                <div key={brief.id} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-emerald-300 transition-all flex flex-col h-full">
+                <div key={brief.id} className="bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-emerald-300 transition-all flex flex-col h-full">
                     <div className="flex justify-between items-start mb-4">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${brief.difficulty === 'easy' ? 'bg-[hsl(var(--success-subtle))] text-[hsl(var(--success-foreground))] border-[hsl(var(--success-border))]' :
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-bold uppercase tracking-widest border ${brief.difficulty === 'easy' ? 'bg-[hsl(var(--success-subtle))] text-[hsl(var(--success-foreground))] border-[hsl(var(--success-border))]' :
                             brief.difficulty === 'medium' ? 'bg-[hsl(var(--warning-subtle))] text-[hsl(var(--warning-foreground))] border-[hsl(var(--warning-border))]' :
                                 'bg-red-50 text-red-700 border-red-100'
                             }`}>
                             {brief.difficulty}
                         </span>
-                        <span className="text-[11px] text-slate-500 font-medium">Est. Time: {brief.estimatedTime}</span>
+                        <span className="text-sm text-slate-500 font-medium">Est. Time: {brief.estimatedTime}</span>
                     </div>
 
                     <h3 className="text-xl font-bold mb-2 text-slate-900">{brief.title}</h3>
@@ -129,7 +129,7 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: ProjectBrief[], isPaid: 
 
                     <div className="space-y-6">
                         <div>
-                            <h4 className="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-3">Key Deliverables</h4>
+                            <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Key Deliverables</h4>
                             <div className="flex flex-wrap gap-2">
                                 {brief.deliverables.map((d: string, i: number) => (
                                     <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-100 text-slate-700">
@@ -141,7 +141,7 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: ProjectBrief[], isPaid: 
 
                         {brief.readme && (
                             <div>
-                                <h4 className="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-3 flex items-center justify-between">
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3 flex items-center justify-between">
                                     <span>Project README Template</span>
                                     <button
                                         onClick={() => {
@@ -153,7 +153,7 @@ function ProjectBriefsTab({ briefs, isPaid }: { briefs: ProjectBrief[], isPaid: 
                                         Copy Markdown
                                     </button>
                                 </h4>
-                                <div className="h-32 overflow-y-auto p-3 rounded-lg bg-slate-50 border border-slate-200 text-[10px] text-slate-600 font-mono whitespace-pre-wrap">
+                                <div className="h-32 overflow-y-auto p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 font-mono whitespace-pre-wrap">
                                     {brief.readme}
                                 </div>
                             </div>
@@ -176,7 +176,7 @@ function AssetsTab({ assets, isPaid }: { assets: CareerAssets | undefined, isPai
     }
     return (
         assets ? (
-            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <div className="grid md:grid-cols-2 gap-8">
                     {/* Resume */}
                     <div className="space-y-4">
@@ -255,7 +255,7 @@ export function ExecutionPackView({ data, isPaid, tier }: ExecutionPackViewProps
     `;
 
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="space-y-6 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header & Tabs */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-200 pb-0">
                 <div className="flex gap-8 overflow-x-auto no-scrollbar">
