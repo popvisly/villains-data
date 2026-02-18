@@ -19,7 +19,7 @@ export default function HomePage() {
         <div className="absolute -top-40 -right-40 -z-10 h-96 w-96 rounded-full bg-[hsl(var(--primary))]/10 blur-3xl opacity-60 mix-blend-multiply filter"></div>
         <div className="absolute top-20 right-20 -z-10 h-72 w-72 rounded-full bg-[hsl(var(--cta))]/10 blur-3xl opacity-60 mix-blend-multiply filter"></div>
 
-        <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-2 md:items-center">
+        <div className="mx-auto grid max-w-[90rem] gap-12 md:grid-cols-[1.15fr_0.85fr] md:items-center">
           <div className="relative z-10">
             {/* Social Proof Badge - Premium Glass Style */}
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-4 py-1.5 text-sm font-medium text-slate-600 shadow-sm backdrop-blur-md ring-1 ring-slate-900/5 transition-all hover:bg-white/60">
@@ -95,12 +95,12 @@ export default function HomePage() {
           </div>
 
           {/* Right: Floating Stack Layout */}
-          <div className="relative isolate mt-10 md:mt-0">
+          <div className="relative isolate mt-10 md:mt-0 md:justify-self-end">
             {/* Background Decor */}
             <div className="absolute top-1/2 left-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-tr from-indigo-50 via-white to-emerald-50/50 rounded-full blur-3xl opacity-80"></div>
 
             {/* Main Career Operating Plan Briefing - Single Focus */}
-            <Link href="/example" className="relative z-20 peer hover:-translate-y-2 transition-transform duration-500 max-w-lg block">
+            <Link href="/example" className="relative z-20 peer hover:-translate-y-2 transition-transform duration-500 max-w-xl block">
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-indigo-500/20 to-emerald-500/20 blur-lg opacity-40"></div>
               <CareerOperatingPlanBriefing />
 
