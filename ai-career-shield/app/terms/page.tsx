@@ -29,7 +29,7 @@ export default function TermsPage() {
                     <p>The Career Operating Plan Suite Unlock is a one-time purchase. Due to the digital nature of the product, refunds are generally not provided once the plan is generated, but we handle cases on a case-by-case basis via support.</p>
 
                     <h2 className="text-xl font-bold text-slate-900">4. Limitation of Liability</h2>
-                    <p>{APP_NAME} and Villains At Large are not liable for any career outcomes, financial losses, or decisions made based on the use of this tool.</p>
+                    <p>{APP_NAME} is not liable for any career outcomes, financial losses, or decisions made based on the use of this tool.</p>
                 </div>
             </div>
         </main>

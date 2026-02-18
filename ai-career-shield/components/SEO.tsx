@@ -23,7 +23,7 @@ export default function SEO({
         "operatingSystem": "All",
         "author": {
             "@type": "Organization",
-            "name": "Villains At Large"
+            "name": "Captori"
         },
         "offers": {
             "@type": "Offer",
