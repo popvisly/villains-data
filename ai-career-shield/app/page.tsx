@@ -34,7 +34,7 @@ export default function HomePage() {
               <span className="text-slate-600">no login</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 mb-6 [text-wrap:balance]">
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-slate-900 mb-6 [text-wrap:balance]">
               AI isn&rsquo;t coming for your job&mdash;it&rsquo;s coming for your <span className="text-indigo-600">expertise gap</span>.
             </h1>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
@@ -64,7 +64,7 @@ export default function HomePage() {
                   <span className="hidden sm:inline text-slate-300">|</span>
                   <div className="flex items-center gap-2">
                     <Icon name="zap" size={14} className="text-amber-500" />
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Instant Result</span>
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-none">Instant Result</span>
                   </div>
                 </div>
               </div>
@@ -176,7 +176,7 @@ export default function HomePage() {
               We don’t predict outcomes. We build leverage.<br />
               You can’t control macro incentives—but you can control your <strong>discretion</strong>, your <strong>proof</strong>, and your <strong>next 90 days.</strong>
             </p>
-            <p className="inline-flex px-4 py-1.5 rounded-full bg-slate-900 text-[10px] font-bold uppercase tracking-[0.2em] text-white">Proof over promise—then log off.</p>
+            <p className="inline-flex px-4 py-1.5 rounded-full bg-slate-900 text-xs font-bold uppercase tracking-[0.2em] text-white">Proof over promise—then log off.</p>
           </div>
         </div>
       </section>
@@ -262,17 +262,17 @@ export default function HomePage() {
             <div className="rounded-[2.5rem] bg-slate-50 p-10 ring-1 ring-slate-200 shadow-sm flex flex-col relative group">
               <div className="absolute top-10 right-10">
                 <details className="relative">
-                  <summary className="list-none cursor-pointer text-[10px] font-bold text-slate-400 hover:text-indigo-600 transition-colors uppercase tracking-[0.2em] border border-slate-200 px-3 py-1 rounded-full bg-white">
+                  <summary className="list-none cursor-pointer text-xs font-bold text-slate-400 hover:text-indigo-600 transition-colors uppercase tracking-[0.2em] border border-slate-200 px-3 py-1 rounded-full bg-white">
                     Methodology
                   </summary>
-                  <div className="absolute right-0 mt-3 w-64 p-5 rounded-2xl bg-white border border-slate-200 shadow-2xl text-[11px] text-slate-500 leading-relaxed z-30">
+                  <div className="absolute right-0 mt-3 w-64 p-5 rounded-2xl bg-white border border-slate-200 shadow-2xl text-sm text-slate-500 leading-relaxed z-30">
                     <p className="font-bold text-slate-900 mb-2">How we calculate:</p>
                     We weigh <span className="text-indigo-600 font-bold">Discretion</span> (accountable decisions) vs <span className="text-slate-900 font-bold">Volume</span> (repeatable task surface) against current LLM benchmarks.
                   </div>
                 </details>
               </div>
 
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-10 font-sans">A. RESILIENCE INDEX (THE DATA)</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-10 font-sans">A. RESILIENCE INDEX (THE DATA)</p>
               <div className="flex items-center justify-between mb-10">
                 <div className="text-8xl font-bold text-slate-900 font-serif leading-none tracking-tight italic">74%</div>
                 <div className="text-right">
