@@ -90,9 +90,6 @@ export default function BlogPost() {
             </article>
 
             {/* FOOTER */}
-            <footer className="py-20 text-center font-sans text-sm text-slate-400">
-                &copy; {new Date().getFullYear()} Captori. Career Operations for the AI Era.
-            </footer>
         </main>
     );
 }

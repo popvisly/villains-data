@@ -119,19 +119,6 @@ export default function BlogPost() {
             </article>
 
             {/* FOOTER SAME AS MAIN */}
-            <footer className="border-t border-slate-200 bg-white px-6 py-12 md:py-20">
-                <div className="mx-auto max-w-7xl text-center">
-                    <div className="flex items-center justify-center gap-3 mb-6 opacity-50 grayscale">
-                        <div className="h-8 w-8 rounded-lg bg-slate-900 flex items-center justify-center">
-                            <img src="/icon.svg" alt="Captori" className="h-4 w-4" style={{ filter: 'invert(1)' }} />
-                        </div>
-                        <div className="text-lg font-bold tracking-tighter text-slate-900">Captori</div>
-                    </div>
-                    <p className="text-sm text-slate-500">
-                        &copy; {new Date().getFullYear()} Captori. Built for the AI Era.
-                    </p>
-                </div>
-            </footer>
         </main>
     );
 }

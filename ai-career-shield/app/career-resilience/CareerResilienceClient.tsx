@@ -181,11 +181,6 @@ function CareerResilienceContent() {
             </main>
 
             {/* Simple Footer */}
-            <footer className="py-12 border-t border-slate-100">
-                <div className="max-w-6xl mx-auto px-6 text-center">
-                    <p className="text-sm text-slate-400">© {new Date().getFullYear()} {APP_NAME}. Built for the AI era.</p>
-                </div>
-            </footer>
         </div>
     );
 }

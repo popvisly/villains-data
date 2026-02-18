@@ -151,12 +151,6 @@ export default function BlogIndex() {
                     ))}
                 </div>
             </section>
-
-            <footer className="border-t border-slate-200 bg-white px-6 py-20 text-center">
-                <p className="text-sm text-slate-500 font-sans">
-                    &copy; {new Date().getFullYear()} Captori. Built for the AI Era.
-                </p>
-            </footer>
         </main>
     );
 }

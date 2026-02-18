@@ -764,22 +764,6 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-24 px-6 border-t border-slate-200 bg-slate-50">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
-          <div className="flex items-center gap-2 font-semibold text-slate-900">
-            <Icon name="sparkles" size={20} className="text-[hsl(var(--primary))]" />
-            Career Operating Plan
-          </div>
-          <div className="flex items-center gap-6">
-            <Link href="/start" className="hover:text-[hsl(var(--primary))] transition-colors">How it works</Link>
-            <Link href="/example" className="hover:text-[hsl(var(--primary))] transition-colors">Example</Link>
-            <Link href="/#pricing" className="hover:text-[hsl(var(--primary))] transition-colors">Pricing</Link>
-          </div>
-          <div>
-            © {new Date().getFullYear()} Captori. All rights reserved.
-          </div>
-        </div>
-      </footer>
     </main >
   );
 }

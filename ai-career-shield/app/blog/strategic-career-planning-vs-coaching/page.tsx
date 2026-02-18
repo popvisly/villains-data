@@ -108,11 +108,6 @@ export default function BlogPost() {
             </article>
 
             {/* FOOTER */}
-            <footer className="border-t border-slate-200 bg-white px-6 py-12 md:py-20">
-                <div className="mx-auto max-w-7xl text-center font-sans text-sm text-slate-500">
-                    &copy; {new Date().getFullYear()} Captori. Precision career planning.
-                </div>
-            </footer>
         </main>
     );
 }

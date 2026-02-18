@@ -42,6 +42,7 @@ export const metadata: Metadata = {
 
 import SEO from '@/components/SEO';
 import { GA4 } from '@/components/GA4';
+import { Footer } from '@/components/Footer';
 
 export default function RootLayout({
   children,
@@ -54,6 +55,7 @@ export default function RootLayout({
         <GA4 />
         <SEO />
         {children}
+        <Footer />
       </body>
     </html>
   );

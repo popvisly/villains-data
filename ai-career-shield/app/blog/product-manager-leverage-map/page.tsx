@@ -75,9 +75,6 @@ export default function BlogPost() {
             </article>
 
             {/* FOOTER */}
-            <footer className="py-20 text-center font-sans text-sm text-slate-400">
-                &copy; {new Date().getFullYear()} Captori. Built for Product Leaders.
-            </footer>
         </main>
     );
 }

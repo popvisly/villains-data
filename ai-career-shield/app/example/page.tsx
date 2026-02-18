@@ -417,20 +417,6 @@ export default function ExamplePage() {
                     </div>
                 </Section>
             </section>
-
-            <footer className="bg-slate-950 py-16 text-center border-t border-white/5 relative z-10">
-                <div className="flex flex-col items-center gap-6">
-                    <div className="flex items-center gap-3">
-                        <div className="h-6 w-6 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-                            <img src="/icon.svg" alt="Captori" className="h-3 w-3" style={{ filter: 'invert(1)' }} />
-                        </div>
-                        <span className="text-sm font-bold tracking-tighter text-white uppercase tracking-[0.2em]">{APP_NAME}</span>
-                    </div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-600">
-                        &copy; {new Date().getFullYear()} &bull; {APP_NAME} &bull; Built for High Stakes
-                    </p>
-                </div>
-            </footer>
         </main>
     );
 }
