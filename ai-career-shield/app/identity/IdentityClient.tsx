@@ -269,9 +269,9 @@ export default function IdentityClient({ initialHasAccess }: IdentityClientProps
                         </div>
 
                         <Paywall hasAccess={hasAccess} planId="suite_v1" type="identity">
-                            <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden p-8 md:p-12 relative">
+                            <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden p-6 md:p-10 relative">
                                 <div className="absolute top-0 right-0 p-6">
-                                    <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-widest">
+                                    <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-widest">
                                         {result?.unifyingTheme || 'Analyzing Signals...'}
                                     </span>
                                 </div>
@@ -329,7 +329,7 @@ export default function IdentityClient({ initialHasAccess }: IdentityClientProps
 
                                             <div className="grid md:grid-cols-2 gap-8">
                                                 <div>
-                                                    <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">Core LinkedIn Headline</h4>
+                                                    <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Core LinkedIn Headline</h4>
                                                     <div className="p-4 rounded-xl bg-white border border-slate-200 text-sm font-bold text-slate-900 group relative">
                                                         {currentVariant.linkedinHeadline}
                                                         <button
@@ -344,7 +344,7 @@ export default function IdentityClient({ initialHasAccess }: IdentityClientProps
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">Required Proof</h4>
+                                                    <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Required Proof</h4>
                                                     <ul className="space-y-2">
                                                         {currentVariant.keyEvidence.map((e, idx) => (
                                                             <li key={idx} className="flex items-center gap-2 text-xs text-slate-600">
@@ -359,12 +359,12 @@ export default function IdentityClient({ initialHasAccess }: IdentityClientProps
                                             {/* Proof Posts Section */}
                                             {result && result.proofPosts && result.proofPosts.length > 0 && (
                                                 <div className="mt-12 pt-8 border-t border-slate-100">
-                                                    <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6">Artifact-Derived Proof Posts</h4>
+                                                    <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Artifact-Derived Proof Posts</h4>
                                                     <div className="grid md:grid-cols-3 gap-6">
                                                         {result.proofPosts.map((post, idx) => (
                                                             <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex flex-col h-full">
                                                                 <div className="flex items-center justify-between mb-3">
-                                                                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tight">{post.platform}</span>
+                                                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-tight">{post.platform}</span>
                                                                     <button
                                                                         onClick={() => {
                                                                             navigator.clipboard.writeText(post.content);
@@ -375,12 +375,12 @@ export default function IdentityClient({ initialHasAccess }: IdentityClientProps
                                                                         <Icon name="copy" size={12} />
                                                                     </button>
                                                                 </div>
-                                                                <h5 className="text-[11px] font-bold text-slate-900 mb-2">{post.title}</h5>
-                                                                <p className="text-[11px] text-slate-600 leading-relaxed font-serif flex-1">
+                                                                <h5 className="text-sm font-bold text-slate-900 mb-2">{post.title}</h5>
+                                                                <p className="text-sm text-slate-600 leading-relaxed font-serif flex-1">
                                                                     &ldquo;{post.content.length > 120 ? post.content.substring(0, 117) + '...' : post.content}&rdquo;
                                                                 </p>
                                                                 <div className="mt-3 pt-3 border-t border-slate-200">
-                                                                    <p className="text-[9px] text-slate-400 italic">Derived from: {post.derivedFrom}</p>
+                                                                    <p className="text-xs text-slate-400 italic">Derived from: {post.derivedFrom}</p>
                                                                 </div>
                                                             </div>
                                                         ))}
@@ -431,7 +431,7 @@ export default function IdentityClient({ initialHasAccess }: IdentityClientProps
                             <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-xl">
                                 <div className="flex items-center justify-between mb-2">
                                     <h3 className="text-xl font-bold text-slate-900">Executive PDF</h3>
-                                    <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 text-[9px] font-bold uppercase tracking-wider border border-indigo-100">$99 Tier</span>
+                                    <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider border border-indigo-100">$99 Tier</span>
                                 </div>
                                 <p className="text-sm text-slate-500 mb-6 leading-relaxed">Download your consolidated People Plan: Career Audit, Attention Protocol, and Positioning Archive.</p>
                                 <button
