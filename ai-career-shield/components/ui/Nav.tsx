@@ -31,7 +31,7 @@ export function Nav() {
                         Pricing
                     </Link>
                     <Link
-                        href="/start"
+                        href="/career-resilience"
                         onClick={() => trackEvent('cta_clicked_start_assessment', { location: 'nav' })}
                         className="inline-flex h-12 items-center justify-center rounded-xl bg-[hsl(var(--cta))] px-6 font-bold text-[hsl(var(--cta-foreground))] hover:opacity-90 transition-all shadow-xl shadow-emerald-500/20 active:scale-[0.98]"
                     >
@@ -41,7 +41,7 @@ export function Nav() {
 
                 <div className="md:hidden">
                     <Link
-                        href="/start"
+                        href="/career-resilience"
                         className="inline-flex h-10 items-center justify-center rounded-xl bg-[hsl(var(--cta))] px-4 text-sm font-bold text-[hsl(var(--cta-foreground))]"
                     >
                         Index

@@ -77,7 +77,7 @@ function CareerResilienceContent() {
                         {/* Make the primary action visible without requiring scroll */}
                         <div className="mb-10 flex flex-col items-center gap-3 text-center">
                             <Link
-                                href={ROUTES.CAREER}
+                                href="/assessment"
                                 onClick={() => trackCTA('features_primary')}
                                 className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-8 py-4 text-base font-bold text-white shadow-lg shadow-slate-900/10 hover:bg-slate-900 transition active:scale-[0.98]"
                             >
@@ -89,7 +89,7 @@ function CareerResilienceContent() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {/* Card 1 */}
                             <Link
-                                href={ROUTES.CAREER}
+                                href="/assessment"
                                 onClick={() => trackCTA('card_resilience_score')}
                                 className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
                             >
@@ -103,7 +103,7 @@ function CareerResilienceContent() {
 
                             {/* Card 2 */}
                             <Link
-                                href={ROUTES.CAREER}
+                                href="/assessment"
                                 onClick={() => trackCTA('card_driver_breakdown')}
                                 className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
                             >
@@ -117,7 +117,7 @@ function CareerResilienceContent() {
 
                             {/* Card 3 */}
                             <Link
-                                href={ROUTES.CAREER}
+                                href="/assessment"
                                 onClick={() => trackCTA('card_immediate_actions')}
                                 className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group focus:outline-none focus:ring-2 focus:ring-slate-900/20"
                             >
@@ -145,7 +145,7 @@ function CareerResilienceContent() {
                 <section className="pb-32 px-6">
                     <div className="max-w-xl mx-auto text-center">
                         <Link
-                            href={ROUTES.CAREER}
+                            href="/assessment"
                             onClick={() => trackCTA('primary')}
                             className="inline-flex items-center justify-center w-full min-h-[72px] bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold text-xl transition-all shadow-lg shadow-indigo-100 active:scale-[0.98]"
                         >
