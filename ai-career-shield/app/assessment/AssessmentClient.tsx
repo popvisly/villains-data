@@ -125,6 +125,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
     // Paid "Do" artifact: Proof Project Brief + README
     const [doProofTheme, setDoProofTheme] = useState('');
     const [doProofGenerated, setDoProofGenerated] = useState<string>('');
+
+    // Paid "Do" artifact: Jira/Notion task list
+    const [doTasksGenerated, setDoTasksGenerated] = useState<string>('');
     const [isUnlocking, setIsUnlocking] = useState(false);
     const [assessmentId, setAssessmentId] = useState<string>('');
     const hasAccess = initialHasAccess;
@@ -242,6 +245,38 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
             readme,
             '```',
         ].join('\n');
+    }
+
+    function buildTaskList(): string {
+        if (!result) return '';
+        const role = formData.jobTitle || 'my role';
+        const industry = formData.industry || 'my industry';
+        const score = result.riskScore;
+
+        const windows = result.plan30_60_90 || [];
+        const lines: string[] = [];
+
+        lines.push(`# Jira/Notion Task List`);
+        lines.push('');
+        lines.push(`**Role:** ${role}`);
+        lines.push(`**Industry:** ${industry}`);
+        lines.push(`**Resilience Index:** ${score}%`);
+        lines.push('');
+        lines.push('## This week');
+        (result.immediateActions || []).slice(0, 5).forEach((a) => lines.push(`- [ ] ${a}`));
+        lines.push('');
+
+        for (const win of windows) {
+            const label = win.window.replace('_', ' ');
+            lines.push(`## ${label}`);
+            (win.goals || []).slice(0, 2).forEach((g) => lines.push(`- [ ] Goal: ${g}`));
+            (win.tasks || []).slice(0, 10).forEach((t) => lines.push(`- [ ] ${t}`));
+            lines.push('');
+        }
+
+        lines.push('---');
+        lines.push('Tip: paste this into Notion (checkbox list) or convert into Jira subtasks.');
+        return lines.join('\n');
     }
 
     // A/B Test Bucketing
@@ -1097,14 +1132,15 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                         )}
 
                         {hasAccess && (
-                            <section className="mt-12 rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
-                                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-slate-950">Do: Proof project brief + README</h3>
-                                        <p className="text-sm text-slate-600">Generate a portfolio-ready project you can actually ship.</p>
+                            <div className="mt-12 grid gap-6">
+                                <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+                                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                                        <div>
+                                            <h3 className="text-2xl font-bold text-slate-950">Do: Proof project brief + README</h3>
+                                            <p className="text-sm text-slate-600">Generate a portfolio-ready project you can actually ship.</p>
+                                        </div>
+                                        <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Suite unlocked</div>
                                     </div>
-                                    <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Suite unlocked</div>
-                                </div>
 
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
@@ -1164,7 +1200,55 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                         <pre className="whitespace-pre-wrap text-sm text-slate-700 leading-relaxed font-mono">{doProofGenerated}</pre>
                                     </div>
                                 )}
-                            </section>
+                                </section>
+
+                                <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+                                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                                        <div>
+                                            <h3 className="text-2xl font-bold text-slate-950">Do: Jira/Notion task list</h3>
+                                            <p className="text-sm text-slate-600">Turn your plan into a week-by-week checklist.</p>
+                                        </div>
+                                        <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Suite unlocked</div>
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-3">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const tasks = buildTaskList();
+                                                setDoTasksGenerated(tasks);
+                                                trackEvent('artifact_action', { artifact: 'do', action: 'task_list_generate' });
+                                            }}
+                                            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 text-sm font-bold text-white hover:bg-slate-800 transition"
+                                        >
+                                            Generate Task List
+                                            <Icon name="arrowRight" size={16} />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            disabled={!doTasksGenerated}
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(doTasksGenerated);
+                                                trackEvent('artifact_action', { artifact: 'do', action: 'task_list_copy' });
+                                            }}
+                                            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-900 hover:bg-slate-50 transition disabled:opacity-50"
+                                        >
+                                            <Icon name="copy" size={14} />
+                                            Copy
+                                        </button>
+                                    </div>
+
+                                    {doTasksGenerated && (
+                                        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
+                                            <div className="mb-3 flex items-center justify-between">
+                                                <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Task list (copy/paste)</p>
+                                                <span className="text-xs font-semibold text-slate-400">Markdown</span>
+                                            </div>
+                                            <pre className="whitespace-pre-wrap text-sm text-slate-700 leading-relaxed font-mono">{doTasksGenerated}</pre>
+                                        </div>
+                                    )}
+                                </section>
+                            </div>
                         )}
 
                         {hasAccess && executionPack && (
