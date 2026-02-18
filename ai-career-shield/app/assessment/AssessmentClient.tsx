@@ -121,6 +121,10 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
     const [doMemoAudience, setDoMemoAudience] = useState<'manager' | 'team' | 'recruiter'>('manager');
     const [doMemoAsk, setDoMemoAsk] = useState('');
     const [doMemoGenerated, setDoMemoGenerated] = useState<string>('');
+
+    // Paid "Do" artifact: Proof Project Brief + README
+    const [doProofTheme, setDoProofTheme] = useState('');
+    const [doProofGenerated, setDoProofGenerated] = useState<string>('');
     const [isUnlocking, setIsUnlocking] = useState(false);
     const [assessmentId, setAssessmentId] = useState<string>('');
     const hasAccess = initialHasAccess;
@@ -169,6 +173,74 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
             ``,
             `**Next step (today)**`,
             `- 15-minute alignment: confirm the artifact to ship first and what “good” looks like.`,
+        ].join('\n');
+    }
+
+    function buildProofProjectBrief(): string {
+        if (!result) return '';
+
+        const role = formData.jobTitle || 'my role';
+        const industry = formData.industry || 'my industry';
+        const score = result.riskScore;
+        const driver = result.factors?.[0]?.name || 'Resilience driver';
+        const theme = (doProofTheme || '').trim() || `${driver} proof project`;
+
+        const immediate = (result.immediateActions || []).slice(0, 3).map((a) => `- ${a}`);
+        const day30 = result.plan30_60_90?.find((w) => w.window === '30_days');
+        const deliverables = [
+            '1-page decision memo (problem → options → tradeoffs → decision)',
+            'Artifact bundle: doc + checklist + example output',
+            'Before/after metrics (time saved, error rate, cycle time, quality proxy)',
+        ];
+
+        const readme = [
+            `# ${theme}`,
+            ``,
+            `## What this proves`,
+            `- I can own a high-discretion workstream in ${industry} as a ${role}.`,
+            `- I can design a system that reduces first-pass work and increases decision quality.`,
+            ``,
+            `## Problem`,
+            `Describe the bottleneck this solves (scope, stakeholders, constraints).`,
+            ``,
+            `## Approach`,
+            `- Inputs: (data/sources)`,
+            `- Decision rules: (how choices are made)`,
+            `- Verification: (how we know it's correct)`,
+            ``,
+            `## Deliverables`,
+            ...deliverables.map((d) => `- ${d}`),
+            ``,
+            `## Results`,
+            `Add measurable outcomes (even small).`,
+        ].join('\n');
+
+        return [
+            `# Proof Project Brief`,
+            ``,
+            `**Theme:** ${theme}`,
+            `**Role:** ${role}`,
+            `**Industry:** ${industry}`,
+            `**Resilience Index:** ${score}%`,
+            ``,
+            `## Why this project`,
+            `This project is designed to strengthen the driver **${driver}** by producing a verifiable, shareable artifact — not just “work output”.`,
+            ``,
+            `## Success criteria (pick 1–2)`,
+            `- Reduce cycle time for a repeated decision by 20–40%`,
+            `- Improve quality via a verification checklist and examples`,
+            `- Create a template others can reuse`,
+            ``,
+            `## This week (start here)`,
+            ...(immediate.length ? immediate : ['- (no immediate actions available)']),
+            ``,
+            `## 30‑day plan (first milestone)`,
+            day30?.tasks?.length ? day30.tasks.slice(0, 6).map((t) => `- ${t}`) : ['- Draft the decision memo template and run it once.'],
+            ``,
+            `## README (copy/paste)`,
+            '```',
+            readme,
+            '```',
         ].join('\n');
     }
 
@@ -1022,6 +1094,77 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                 }}
                                 isLoading={isUnlocking}
                             />
+                        )}
+
+                        {hasAccess && (
+                            <section className="mt-12 rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+                                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-slate-950">Do: Proof project brief + README</h3>
+                                        <p className="text-sm text-slate-600">Generate a portfolio-ready project you can actually ship.</p>
+                                    </div>
+                                    <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Suite unlocked</div>
+                                </div>
+
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
+                                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Project theme (optional)</label>
+                                        <input
+                                            value={doProofTheme}
+                                            onChange={(e) => setDoProofTheme(e.target.value)}
+                                            placeholder="e.g., Decision memo + verification checklist for X"
+                                            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+                                        />
+                                        <p className="mt-2 text-xs text-slate-500">Leave blank and we’ll auto-pick based on your top driver.</p>
+                                    </div>
+
+                                    <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
+                                        <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">What you’ll get</p>
+                                        <ul className="text-sm text-slate-600 space-y-2">
+                                            <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />A one-page project brief</li>
+                                            <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />A README template you can paste into GitHub</li>
+                                            <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Success criteria + first milestone</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            const brief = buildProofProjectBrief();
+                                            setDoProofGenerated(brief);
+                                            trackEvent('artifact_action', { artifact: 'do', action: 'proof_project_generate' });
+                                        }}
+                                        className="inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-bold text-white hover:bg-emerald-700 transition"
+                                    >
+                                        Generate Proof Project Brief
+                                        <Icon name="arrowRight" size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        disabled={!doProofGenerated}
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(doProofGenerated);
+                                            trackEvent('artifact_action', { artifact: 'do', action: 'proof_project_copy' });
+                                        }}
+                                        className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-900 hover:bg-slate-50 transition disabled:opacity-50"
+                                    >
+                                        <Icon name="copy" size={14} />
+                                        Copy
+                                    </button>
+                                </div>
+
+                                {doProofGenerated && (
+                                    <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
+                                        <div className="mb-3 flex items-center justify-between">
+                                            <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Proof project brief (copy/paste)</p>
+                                            <span className="text-xs font-semibold text-slate-400">Markdown</span>
+                                        </div>
+                                        <pre className="whitespace-pre-wrap text-sm text-slate-700 leading-relaxed font-mono">{doProofGenerated}</pre>
+                                    </div>
+                                )}
+                            </section>
                         )}
 
                         {hasAccess && executionPack && (
