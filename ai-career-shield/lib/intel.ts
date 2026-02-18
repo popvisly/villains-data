@@ -11,12 +11,13 @@ export interface IntelItem {
   source_name: string | null;
   source_url: string | null;
   published_at: string | null;
+  week_key: string | null;
 }
 
 export async function fetchIntelItems(role: IntelRole, limit = 20): Promise<IntelItem[]> {
   const { data, error } = await supabaseAdmin
     .from('intel_items')
-    .select('id, role, title, summary, impact_tags, source_name, source_url, published_at')
+    .select('id, role, title, summary, impact_tags, source_name, source_url, published_at, week_key')
     .eq('role', role)
     .order('published_at', { ascending: false })
     .limit(limit);
