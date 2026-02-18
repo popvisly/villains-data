@@ -180,13 +180,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-12 mx-auto max-w-3xl p-8 rounded-3xl border border-slate-200 bg-white/50 backdrop-blur-sm text-center">
-            <h4 className="text-lg font-bold text-slate-900 mb-2 font-serif italic">No hopium. No doom.</h4>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              We don’t predict outcomes. We build leverage.
-              Control your <strong>discretion</strong>, your <strong>proof</strong>, and your <strong>next 90 days</strong>.
-            </p>
-          </div>
+
         </div>
       </section>
 
@@ -201,7 +195,7 @@ export default function HomePage() {
             subtitle="Most AI tools optimize schedules or help you sound polished. Captori is different: it’s a leverage plan built to help you ship proof of value."
           />
 
-          <div className="mx-auto mt-24 grid max-w-5xl gap-8">
+          <div className="mx-auto mt-16 grid max-w-5xl gap-8">
             {[
               {
                 step: '1',
