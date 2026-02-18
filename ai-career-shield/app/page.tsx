@@ -424,12 +424,6 @@ export default function HomePage() {
                 </div>
               </div>
             </Link>
-            <div className="mt-8 text-center p-8 bg-slate-50/50 rounded-3xl border border-slate-200/50 backdrop-blur-sm">
-              <p className="text-xs font-bold text-slate-500 mb-4 uppercase tracking-[0.2em]">Built by professionals for professionals.</p>
-              <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-                Captori is built by <strong>Villains At Large</strong>, a product strategy collective specializing in AI operational capability. We build tools that help senior leaders stay grounded in high-stakes environments.
-              </p>
-            </div>
           </div>
         </div>
       </section>
