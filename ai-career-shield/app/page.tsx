@@ -38,8 +38,14 @@ export default function HomePage() {
               AI isn&rsquo;t coming for your job&mdash;it&rsquo;s coming for your <span className="text-indigo-600">expertise gap</span>.
             </h1>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
-              Not interview prep. Stop shipping Jira tickets and start building your <strong>Judgment Moat</strong>. Get your <strong>Career Operating Plan</strong> + Resilience Index in ~2 minutes.
+              Get a Resilience Index + a 30/60/90 plan you can execute alongside your day job.
             </p>
+
+            <ul className="mt-6 space-y-2 text-sm text-slate-600">
+              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Resilience Index + driver breakdown</li>
+              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />This week: 3 high‑leverage moves</li>
+              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Exportable artifacts (Jira/Notion/Docs)</li>
+            </ul>
 
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-start gap-8">
               <div className="flex-1 max-w-sm w-full">
@@ -74,8 +80,8 @@ export default function HomePage() {
               Instant access after signup. No credit card required.
             </p>
 
-            <div className="mt-16 space-y-6">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">What You’ll Get With Captori</h3>
+            <div className="mt-12 space-y-6">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">What you get</h3>
               <ul className="grid gap-4 sm:grid-cols-2">
                 {[
                   { label: 'Personalized 30/60/90 Career Action Plan', tooltip: 'A structured plan that builds strength in your role and future opportunities.' },
@@ -142,17 +148,17 @@ export default function HomePage() {
               {
                 icon: <Icon name="zap" size={24} className="text-amber-500" />,
                 title: "Applications are cheap",
-                desc: "Generic volume is at an all-time high. If anyone can apply to 100 jobs in a click, the value of an application drops to zero. You win by being the candidate who understands the strategy, not just the tools."
+                desc: "AI makes applying cheap. You win with proof and judgment — not volume."
               },
               {
                 icon: <Icon name="audit" size={24} className="text-[hsl(var(--primary))]" />,
                 title: "Work is being compressed",
-                desc: "AI handles the first-pass 'slop'—the reports, the tickets, the rote labor. Humans are being judged on higher-leverage discretion: judgment, domain ownership, and systems thinking."
+                desc: "First‑pass work is getting automated. Your leverage is discretion and decision quality."
               },
               {
                 icon: <Icon name="locked" size={24} className="text-indigo-500" />,
                 title: "Interviews got stricter",
-                desc: "Hiring teams are spotting GPT-polished answers instantly. Interviews are shifting toward 'failure-mode' probing: what went wrong, what trade-offs did you make, and why was your judgment better than the model?"
+                desc: "Interviews probe tradeoffs and failure modes. Generic answers get filtered."
               }
             ].map((card, i) => (
               <div key={i} className="glass-panel rounded-3xl p-10 hover:shadow-xl transition-all duration-300">
@@ -170,13 +176,12 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-16 mx-auto max-w-3xl p-10 rounded-3xl border border-slate-200 bg-white/50 backdrop-blur-sm text-center">
-            <h4 className="text-lg font-bold text-slate-900 mb-3 font-serif italic">No hopium. No doom.</h4>
-            <p className="text-base text-slate-600 leading-relaxed mb-6">
-              We don’t predict outcomes. We build leverage.<br />
-              You can’t control macro incentives—but you can control your <strong>discretion</strong>, your <strong>proof</strong>, and your <strong>next 90 days.</strong>
+          <div className="mt-12 mx-auto max-w-3xl p-8 rounded-3xl border border-slate-200 bg-white/50 backdrop-blur-sm text-center">
+            <h4 className="text-lg font-bold text-slate-900 mb-2 font-serif italic">No hopium. No doom.</h4>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              We don’t predict outcomes. We build leverage.
+              Control your <strong>discretion</strong>, your <strong>proof</strong>, and your <strong>next 90 days</strong>.
             </p>
-            <p className="inline-flex px-4 py-1.5 rounded-full bg-slate-900 text-xs font-bold uppercase tracking-[0.2em] text-white">Proof over promise—then log off.</p>
           </div>
         </div>
       </section>
@@ -548,11 +553,11 @@ export default function HomePage() {
                   { q: 'Why no productivity features?', a: 'Intentional. You already have productivity tools. We focus on WHAT to build (strategic plan), not HOW to track it (Notion/Todoist).' },
                 ]
               }
-            ].map((section: { title: string; questions: { q: string; a: string }[] }) => (
+            ].slice(0, 3).map((section: { title: string; questions: { q: string; a: string }[] }) => (
               <div key={section.title} className="mb-12">
                 <h3 className="text-xl font-bold text-slate-900 mb-6 px-4">{section.title}</h3>
                 <div className="space-y-4">
-                  {section.questions.map((item) => (
+                  {section.questions.slice(0, 3).map((item) => (
                     <details key={item.q} className="group glass-panel rounded-2xl p-6 open:ring-1 open:ring-indigo-500/20">
                       <summary className="cursor-pointer list-none flex items-center justify-between text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
                         {item.q}
