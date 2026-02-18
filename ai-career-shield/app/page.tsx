@@ -571,6 +571,16 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+
+            <div className="mt-10 flex items-center justify-center">
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-900 shadow-sm ring-1 ring-slate-900/5 hover:bg-slate-50 transition"
+                onClick={() => trackEvent('module_selected', { module: 'faq_more' })}
+              >
+                View more answers <Icon name="arrowRight" size={16} />
+              </Link>
+            </div>
           </div>
         </div>
       </section >
