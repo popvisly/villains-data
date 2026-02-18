@@ -74,36 +74,60 @@ function CareerResilienceContent() {
                 {/* Features Section */}
                 <section className="py-24 px-6 bg-slate-50/50 border-y border-slate-100">
                     <div className="max-w-6xl mx-auto">
+                        {/* Make the primary action visible without requiring scroll */}
+                        <div className="mb-10 flex flex-col items-center gap-3 text-center">
+                            <Link
+                                href={ROUTES.CAREER}
+                                onClick={() => trackCTA('features_primary')}
+                                className="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-8 py-4 text-base font-bold text-white shadow-lg shadow-slate-900/10 hover:bg-slate-900 transition active:scale-[0.98]"
+                            >
+                                Start the 2‑minute audit <span className="ml-2">→</span>
+                            </Link>
+                            <p className="text-xs font-semibold text-slate-500">Tip: click any card to start.</p>
+                        </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {/* Card 1 */}
-                            <div className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group">
+                            <Link
+                                href={ROUTES.CAREER}
+                                onClick={() => trackCTA('card_resilience_score')}
+                                className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                            >
                                 <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-6 group-hover:scale-110 transition-transform">
                                     <Icon name="gauge" size={28} strokeWidth={1.5} />
                                 </div>
                                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Your Resilience Score</h3>
                                 <p className="text-slate-600 mb-4 leading-relaxed">0-100% score showing AI resistance</p>
                                 <p className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Generated in 2 minutes</p>
-                            </div>
+                            </Link>
 
                             {/* Card 2 */}
-                            <div className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group">
+                            <Link
+                                href={ROUTES.CAREER}
+                                onClick={() => trackCTA('card_driver_breakdown')}
+                                className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                            >
                                 <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-110 transition-transform">
                                     <Icon name="chart" size={28} strokeWidth={1.5} />
                                 </div>
                                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Driver Breakdown</h3>
                                 <p className="text-slate-600 mb-4 leading-relaxed">See what makes you resilient vs. at-risk</p>
                                 <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Discretion, Stakes, Ambiguity</p>
-                            </div>
+                            </Link>
 
                             {/* Card 3 */}
-                            <div className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group">
+                            <Link
+                                href={ROUTES.CAREER}
+                                onClick={() => trackCTA('card_immediate_actions')}
+                                className="bg-white/40 backdrop-blur-md border border-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 group focus:outline-none focus:ring-2 focus:ring-slate-900/20"
+                            >
                                 <div className="w-14 h-14 bg-slate-950 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
                                     <Icon name="listChecks" size={28} strokeWidth={1.5} />
                                 </div>
                                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Immediate Actions</h3>
                                 <p className="text-slate-600 mb-4 leading-relaxed">Top 3 leverage moves you can start today</p>
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Free tier included</p>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </section>
