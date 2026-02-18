@@ -116,6 +116,11 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
     const [skillInput, setSkillInput] = useState('');
     const [result, setResult] = useState<AssessmentResult | null>(null);
     const [executionPack, setExecutionPack] = useState<ExecutionPack | null>(null);
+
+    // "Do" (free preview) artifact: Stakeholder memo
+    const [doMemoAudience, setDoMemoAudience] = useState<'manager' | 'team' | 'recruiter'>('manager');
+    const [doMemoAsk, setDoMemoAsk] = useState('');
+    const [doMemoGenerated, setDoMemoGenerated] = useState<string>('');
     const [isUnlocking, setIsUnlocking] = useState(false);
     const [assessmentId, setAssessmentId] = useState<string>('');
     const hasAccess = initialHasAccess;
@@ -131,6 +136,41 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
     const [hasEmittedFirstFactor, setHasEmittedFirstFactor] = useState(false);
     const [displayedFactors, setDisplayedFactors] = useState<AssessmentResult['factors']>([]);
     const [hasEmittedFirstInsight, setHasEmittedFirstInsight] = useState(false);
+
+    function buildStakeholderMemo(): string {
+        if (!result) return '';
+        const title = formData.jobTitle || 'my role';
+        const score = result.riskScore;
+        const topDrivers = (result.factors || []).slice(0, 3).map((f) => `- ${f.name}: ${f.whyItMatters || f.evidence || ''}`.trim());
+        const actions = (result.immediateActions || []).slice(0, 3).map((a) => `- ${a}`);
+        const ask = (doMemoAsk || '').trim();
+
+        const audienceLabel = doMemoAudience === 'manager' ? 'Manager' : doMemoAudience === 'team' ? 'Team' : 'Recruiter';
+
+        return [
+            `# Stakeholder Memo (${audienceLabel})`,
+            ``,
+            `**Context**`,
+            `I ran a 2-minute AI resilience audit for **${title}**. Current Resilience Index: **${score}%**.`,
+            ``,
+            `**Key drivers**`,
+            ...(topDrivers.length ? topDrivers : ['- (drivers unavailable)']),
+            ``,
+            `**This week (immediate actions)**`,
+            ...(actions.length ? actions : ['- (actions unavailable)']),
+            ``,
+            `**30/60/90 plan (headline)**`,
+            `- 30 days: ship 1 proof artifact tied to business outcomes.`,
+            `- 60 days: templatize decision-making + reduce first-pass execution load.`,
+            `- 90 days: own a higher-discretion workstream with measurable impact.`,
+            ``,
+            `**Ask / decision needed**`,
+            ask ? `- ${ask}` : `- (Fill this in: what do you want approved / supported?)`,
+            ``,
+            `**Next step (today)**`,
+            `- 15-minute alignment: confirm the artifact to ship first and what “good” looks like.`,
+        ].join('\n');
+    }
 
     // A/B Test Bucketing
     const shareTimingVariant = useExperiment('share_timing_v1', ['immediate', 'delayed']);
@@ -806,6 +846,114 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                             </div>
                                         </div>
                                     ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {/* DO (Free preview): generate 1 shippable artifact */}
+                        {!hasAccess && (
+                            <section className="mt-12 rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+                                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-slate-950">Do: generate 1 proof artifact (free)</h3>
+                                        <p className="text-sm text-slate-600">Not a PDF. A copy/paste deliverable you can ship today.</p>
+                                    </div>
+                                    <div className="text-xs font-bold uppercase tracking-widest text-slate-400">Preview</div>
+                                </div>
+
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
+                                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Who is this for?</label>
+                                        <div className="flex flex-wrap gap-2">
+                                            {([
+                                                { id: 'manager', label: 'My manager' },
+                                                { id: 'team', label: 'My team' },
+                                                { id: 'recruiter', label: 'Recruiter' },
+                                            ] as const).map((opt) => (
+                                                <button
+                                                    key={opt.id}
+                                                    type="button"
+                                                    onClick={() => setDoMemoAudience(opt.id)}
+                                                    className={`px-3 py-2 rounded-full text-xs font-bold transition border ${doMemoAudience === opt.id
+                                                        ? 'bg-slate-900 text-white border-slate-900'
+                                                        : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                                                        }`}
+                                                >
+                                                    {opt.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
+                                        <label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">What do you want approved/support for?</label>
+                                        <input
+                                            value={doMemoAsk}
+                                            onChange={(e) => setDoMemoAsk(e.target.value)}
+                                            placeholder="e.g., approve 4 hrs/week to ship the first proof artifact"
+                                            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            const memo = buildStakeholderMemo();
+                                            setDoMemoGenerated(memo);
+                                            trackEvent('artifact_action', { artifact: 'do', action: 'stakeholder_memo_generate', audience: doMemoAudience });
+                                        }}
+                                        className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 text-sm font-bold text-white hover:bg-slate-800 transition"
+                                    >
+                                        Generate Stakeholder Memo
+                                        <Icon name="arrowRight" size={16} />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        disabled={!doMemoGenerated}
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(doMemoGenerated);
+                                            trackEvent('artifact_action', { artifact: 'do', action: 'stakeholder_memo_copy', audience: doMemoAudience });
+                                        }}
+                                        className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-900 hover:bg-slate-50 transition disabled:opacity-50"
+                                    >
+                                        <Icon name="copy" size={14} />
+                                        Copy
+                                    </button>
+                                </div>
+
+                                {doMemoGenerated && (
+                                    <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
+                                        <div className="mb-3 flex items-center justify-between">
+                                            <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Stakeholder memo (copy/paste)</p>
+                                            <span className="text-xs font-semibold text-slate-400">Markdown</span>
+                                        </div>
+                                        <pre className="whitespace-pre-wrap text-sm text-slate-700 leading-relaxed font-mono">{doMemoGenerated}</pre>
+                                    </div>
+                                )}
+
+                                <div className="mt-6 rounded-2xl border border-dashed border-slate-200 bg-slate-50/30 p-4">
+                                    <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Unlock more “Do” artifacts</p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {['Proof project brief + README', 'Jira/Notion task list', 'Interview story pack'].map((label) => (
+                                            <span key={label} className="px-3 py-1.5 rounded-full text-xs font-bold bg-white border border-slate-200 text-slate-500">
+                                                {label}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <div className="mt-3">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                trackEvent('view_pricing', { location: 'do_artifacts' });
+                                                router.push('/#pricing');
+                                            }}
+                                            className="text-sm font-bold text-indigo-600 hover:text-indigo-700 underline decoration-slate-200 underline-offset-4"
+                                        >
+                                            See pricing
+                                        </button>
+                                    </div>
                                 </div>
                             </section>
                         )}
