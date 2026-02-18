@@ -935,14 +935,38 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
 
                                 <div className="mt-6 rounded-2xl border border-dashed border-slate-200 bg-slate-50/30 p-4">
                                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Unlock more “Do” artifacts</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {['Proof project brief + README', 'Jira/Notion task list', 'Interview story pack'].map((label) => (
-                                            <span key={label} className="px-3 py-1.5 rounded-full text-xs font-bold bg-white border border-slate-200 text-slate-500">
-                                                {label}
-                                            </span>
+
+                                    <div className="grid gap-3 md:grid-cols-3">
+                                        {[
+                                            { key: 'proof_brief', title: 'Proof project brief + README', desc: 'A portfolio-ready project you can actually ship.' },
+                                            { key: 'task_list', title: 'Jira/Notion task list', desc: 'Turn the plan into a week-by-week checklist.' },
+                                            { key: 'interview_pack', title: 'Interview story pack', desc: '3 stories + failure-mode prompts.' },
+                                        ].map((card) => (
+                                            <button
+                                                key={card.key}
+                                                type="button"
+                                                onClick={() => {
+                                                    trackEvent('view_pricing', { location: 'do_suite_card', card: card.key });
+                                                    trackEvent('artifact_action', { artifact: 'do', action: 'locked_click', card: card.key });
+                                                    router.push('/#pricing');
+                                                }}
+                                                className="text-left rounded-2xl border border-slate-200 bg-white p-4 hover:border-indigo-200 hover:shadow-sm transition"
+                                            >
+                                                <div className="flex items-start justify-between gap-3">
+                                                    <div>
+                                                        <p className="text-sm font-bold text-slate-900">{card.title}</p>
+                                                        <p className="mt-1 text-xs text-slate-600">{card.desc}</p>
+                                                    </div>
+                                                    <div className="mt-0.5 shrink-0 text-slate-400">
+                                                        <Icon name="locked" size={16} />
+                                                    </div>
+                                                </div>
+                                                <p className="mt-3 text-xs font-bold text-indigo-600">Unlock to generate →</p>
+                                            </button>
                                         ))}
                                     </div>
-                                    <div className="mt-3">
+
+                                    <div className="mt-4">
                                         <button
                                             type="button"
                                             onClick={() => {
