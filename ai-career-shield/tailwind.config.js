@@ -15,7 +15,7 @@ module.exports = {
                 }
             },
             fontFamily: {
-                sans: ['var(--font-inter)', 'var(--font-raleway)', 'sans-serif'],
+                sans: ['var(--font-inter)', 'sans-serif'],
                 serif: ['var(--font-lora)', 'serif'],
             },
         },
