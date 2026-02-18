@@ -38,13 +38,13 @@ export default function HomePage() {
               AI isn&rsquo;t coming for your job&mdash;it&rsquo;s coming for your <span className="text-indigo-600">expertise gap</span>.
             </h1>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
-              In ~2 minutes: assess your <strong>AI job risk</strong> and get a <strong>30/60/90</strong> plan to stay valuable.
+              In ~2 minutes: assess your <strong>AI job risk</strong> and get <strong>3 next steps for this week</strong>.
             </p>
 
             <ul className="mt-6 space-y-2 text-sm text-slate-600">
               <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Resilience Index + driver breakdown</li>
-              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />This week: 3 actions you can start immediately</li>
-              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Exportable templates (Notion/Jira/Docs)</li>
+              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Copy/paste artifacts (memo, project brief, task list)</li>
+              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Optional: 30/60/90 roadmap when you want it</li>
             </ul>
 
             <p className="mt-4 text-sm font-semibold text-slate-500">
@@ -88,10 +88,10 @@ export default function HomePage() {
               <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">What you get (free preview)</h3>
               <ul className="grid gap-4 sm:grid-cols-2">
                 {[
-                  { label: 'Personalized 30/60/90 Career Action Plan', tooltip: 'A structured plan that builds strength in your role and future opportunities.' },
-                  { label: 'Exportable templates (Notion/Jira/Docs)', tooltip: 'Ready-to-use documents to help you start executing immediately.' },
-                  { label: 'Success metrics & growth milestones', tooltip: 'Measurable targets to track your progress over the next 90 days.' },
-                  { label: 'Priority skills and artifact map', tooltip: 'A prioritized list of actions that give you the greatest professional leverage.' },
+                  { label: 'Resilience Index + driver breakdown', tooltip: 'See what makes you resilient vs. at-risk.' },
+                  { label: 'This week: 3 next steps', tooltip: 'A short list of actions you can start immediately.' },
+                  { label: 'Copy/paste artifacts (memo, brief, task list)', tooltip: 'Generate practical artifacts you can paste into your workflow.' },
+                  { label: 'Optional: 30/60/90 roadmap', tooltip: 'A longer roadmap when you want the full plan.' },
                 ].map((item) => (
                   <li key={item.label} className="flex items-center gap-3 text-sm font-medium text-slate-600">
                     <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
