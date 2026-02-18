@@ -128,6 +128,9 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
 
     // Paid "Do" artifact: Jira/Notion task list
     const [doTasksGenerated, setDoTasksGenerated] = useState<string>('');
+
+    // Paid "Do" artifact: Interview story pack
+    const [doStoriesGenerated, setDoStoriesGenerated] = useState<string>('');
     const [isUnlocking, setIsUnlocking] = useState(false);
     const [assessmentId, setAssessmentId] = useState<string>('');
     const hasAccess = initialHasAccess;
@@ -277,6 +280,76 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
         lines.push('---');
         lines.push('Tip: paste this into Notion (checkbox list) or convert into Jira subtasks.');
         return lines.join('\n');
+    }
+
+    function buildInterviewStoryPack(): string {
+        if (!result) return '';
+        const role = formData.jobTitle || 'my role';
+        const industry = formData.industry || 'my industry';
+        const driver = result.factors?.[0]?.name || 'Decision quality';
+        const actions = (result.immediateActions || []).slice(0, 3);
+
+        const stories = [
+            {
+                title: 'Story 1 — High-stakes tradeoff',
+                prompt: `Tell me about a time you made a difficult tradeoff in ${role}.`,
+                outline: [
+                    'Situation: the context + stakes',
+                    'Task: what you owned / needed to decide',
+                    'Action: what options you considered + why',
+                    'Result: what happened + what you learned',
+                ],
+            },
+            {
+                title: 'Story 2 — Automation failure mode',
+                prompt: `Tell me about a time an AI/automation output was wrong — what did you do?`,
+                outline: [
+                    'Signal: how you detected it was wrong',
+                    'Decision rule: what you trusted vs verified',
+                    'Mitigation: rollback / guardrail / monitoring',
+                    'Outcome: measurable impact',
+                ],
+            },
+            {
+                title: 'Story 3 — Proof artifact shipped',
+                prompt: `Tell me about a time you shipped a reusable artifact (template, framework, checklist).`,
+                outline: [
+                    'Problem: what kept repeating',
+                    'Artifact: what you built (and why it works)',
+                    'Adoption: who used it / how you rolled it out',
+                    'Result: time saved / quality improved',
+                ],
+            },
+        ];
+
+        const failureModePrompts = [
+            `What would you do if a stakeholder disagrees with your recommendation?`,
+            `What does “good” look like for this role in 90 days?`,
+            `How do you verify quality when AI makes drafting cheap?`,
+            `What is your decision framework when information is incomplete?`,
+            `Which workstream would you drop first — and why?`,
+        ];
+
+        return [
+            `# Interview Story Pack (3 stories + prompts)`,
+            ``,
+            `**Role:** ${role}`,
+            `**Industry:** ${industry}`,
+            `**Primary driver to emphasize:** ${driver}`,
+            ``,
+            `## This week — proof you can reference`,
+            ...(actions.length ? actions.map((a) => `- ${a}`) : ['- (no immediate actions available)']),
+            ``,
+            ...stories.flatMap((s) => [
+                `## ${s.title}`,
+                `**Interview question:** ${s.prompt}`,
+                `**STAR outline:**`,
+                ...s.outline.map((l) => `- ${l}`),
+                ``,
+            ]),
+            `## Failure-mode prompts (practice)`,
+            ...failureModePrompts.map((p) => `- ${p}`),
+        ].join('\n');
     }
 
     // A/B Test Bucketing
@@ -1245,6 +1318,53 @@ export default function AssessmentPage({ initialHasAccess = false, initialTier }
                                                 <span className="text-xs font-semibold text-slate-400">Markdown</span>
                                             </div>
                                             <pre className="whitespace-pre-wrap text-sm text-slate-700 leading-relaxed font-mono">{doTasksGenerated}</pre>
+                                        </div>
+                                    )}
+                                </section>
+
+                                <section className="rounded-2xl border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
+                                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                                        <div>
+                                            <h3 className="text-2xl font-bold text-slate-950">Do: Interview story pack</h3>
+                                            <p className="text-sm text-slate-600">3 stories + failure‑mode prompts you can practice today.</p>
+                                        </div>
+                                        <div className="text-xs font-bold uppercase tracking-widest text-emerald-600">Suite unlocked</div>
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-3">
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const stories = buildInterviewStoryPack();
+                                                setDoStoriesGenerated(stories);
+                                                trackEvent('artifact_action', { artifact: 'do', action: 'story_pack_generate' });
+                                            }}
+                                            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white hover:bg-indigo-700 transition"
+                                        >
+                                            Generate Story Pack
+                                            <Icon name="arrowRight" size={16} />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            disabled={!doStoriesGenerated}
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(doStoriesGenerated);
+                                                trackEvent('artifact_action', { artifact: 'do', action: 'story_pack_copy' });
+                                            }}
+                                            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-900 hover:bg-slate-50 transition disabled:opacity-50"
+                                        >
+                                            <Icon name="copy" size={14} />
+                                            Copy
+                                        </button>
+                                    </div>
+
+                                    {doStoriesGenerated && (
+                                        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
+                                            <div className="mb-3 flex items-center justify-between">
+                                                <p className="text-xs font-bold uppercase tracking-widest text-slate-500">Story pack (copy/paste)</p>
+                                                <span className="text-xs font-semibold text-slate-400">Markdown</span>
+                                            </div>
+                                            <pre className="whitespace-pre-wrap text-sm text-slate-700 leading-relaxed font-mono">{doStoriesGenerated}</pre>
                                         </div>
                                     )}
                                 </section>
