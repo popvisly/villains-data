@@ -38,14 +38,18 @@ export default function HomePage() {
               AI isn&rsquo;t coming for your job&mdash;it&rsquo;s coming for your <span className="text-indigo-600">expertise gap</span>.
             </h1>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600 md:text-xl font-medium">
-              Get a Resilience Index + a 30/60/90 plan you can execute alongside your day job.
+              In ~2 minutes: assess your <strong>AI job risk</strong> and get a <strong>30/60/90</strong> plan to stay valuable.
             </p>
 
             <ul className="mt-6 space-y-2 text-sm text-slate-600">
               <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Resilience Index + driver breakdown</li>
-              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />This week: 3 high‑leverage moves</li>
-              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Exportable artifacts (Jira/Notion/Docs)</li>
+              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />This week: 3 actions you can start immediately</li>
+              <li className="flex items-start gap-2"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500" />Exportable templates (Notion/Jira/Docs)</li>
             </ul>
+
+            <p className="mt-4 text-sm font-semibold text-slate-500">
+              Built for mid‑career professionals (PM, Design, Ops, Consulting).
+            </p>
 
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-start gap-8">
               <div className="flex-1 max-w-sm w-full">
@@ -81,7 +85,7 @@ export default function HomePage() {
             </p>
 
             <div className="mt-12 space-y-6">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">What you get</h3>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400">What you get (free preview)</h3>
               <ul className="grid gap-4 sm:grid-cols-2">
                 {[
                   { label: 'Personalized 30/60/90 Career Action Plan', tooltip: 'A structured plan that builds strength in your role and future opportunities.' },

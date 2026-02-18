@@ -66,7 +66,10 @@ function CareerResilienceContent() {
                             Calculate Your Career <br className="hidden md:block" /> Resilience Index
                         </h1>
                         <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
-                            Not interview prep. Get your <strong>Career Operating Plan</strong> + immediate leverage points in 2 minutes.
+                            In ~2 minutes: assess your <strong>AI job risk</strong> and get a <strong>30/60/90</strong> plan to stay valuable.
+                        </p>
+                        <p className="mt-4 text-sm font-semibold text-slate-500">
+                            Built for mid‑career professionals (PM, Design, Ops, Consulting).
                         </p>
                     </div>
                 </section>
